@@ -1,0 +1,2409 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<xobject>
+<ID>project</ID>
+<x0>0</x0>
+<y0>0</y0>
+<width>200</width>
+<height>100</height>
+<ID_maker>31</ID_maker>
+<objectname>XMLエディタ</objectname>
+<description>新規のアプリケーション</description>
+<codeclip>
+<ID>_CSTART</ID>
+<x0>5</x0>
+<y0>23</y0>
+<width>80</width>
+<height>24</height>
+<codetext> String[] ARGS;
+</codetext>
+</codeclip>
+<pin>
+<ID>_PSTART</ID>
+<x0>26</x0>
+<y0>69</y0>
+<width>55</width>
+<height>24</height>
+<text>Start()</text>
+<px>50</px>
+<py>50</py>
+</pin>
+<codeclip>
+<ID>_C28</ID>
+<x0>89</x0>
+<y0>83</y0>
+<width>132</width>
+<height>22</height>
+<codetext>// XML パーサ
+class Nxml{
+  NxmlElement root;
+
+  // コンストラクタ(ルート要素を生成)
+  Nxml(){
+    root = new NxmlElement( null, &quot;ROOT&quot; );
+    new NxmlAttribute( root, &quot;ID&quot;, &quot;ROOT&quot; );
+  }
+
+  // ルート要素を返す
+  public Object   ルート要素(){
+                    return( root );
+                  }
+
+  //親要素を返す
+  public Object   親要素( Object 要素 ){
+                    if( 要素 instanceof NxmlElement ) return( ( (NxmlElement)要素 ).parent );
+                    return( null );
+                  }
+
+  // 新しい要素を作って返す
+  public Object   新しい要素( Object 親要素, Object obj, String ID ){
+                    NxmlElement e;
+                    if( obj == null ) return( null );
+                    if( 親要素 instanceof NxmlElement ){
+                      if( 子要素( 親要素, ID ) != null ) return( null );
+                      if( obj instanceof NxmlElement ) e = new NxmlElement( (NxmlElement)親要素, (NxmlElement)obj );
+                      else if( obj instanceof String ) e = new NxmlElement( (NxmlElement)親要素, (String)obj );
+                      else if( ( obj instanceof File ) &amp;&amp; ( (File)obj ).isFile() ){
+                        e = new NxmlElement( (NxmlElement)親要素, (File)obj );
+                      }
+                      else return( null );
+                      if( 属性値( e, &quot;ID&quot; ) == null ) new NxmlAttribute( e, &quot;ID&quot;, ID );
+                      else XsetAttributeValue( e, &quot;ID&quot;, ID );
+                      return( e );
+                    }
+                    return( null );
+                  }
+
+  // 子要素のリストを返す
+  public Vector   子要素のリスト( Object 親要素 ){
+                    if( 親要素 instanceof NxmlElement ){
+                      Vector v = new Vector();
+                      for( int i = 0; i &lt; ( (NxmlElement)親要素 ).child.size(); i++ ){
+                        Object n = ( (NxmlElement)親要素 ).child.get(i);
+                        if( n instanceof NxmlElement ) v.add( n );
+                      }
+                      return( v );
+                    }
+                    return( null );
+                  }
+
+  // 特定の名前を持つ子要素のリストを返す
+  public Vector   子要素のリスト( Object 親要素, String 要素名 ){
+                    if( 親要素 instanceof NxmlElement ){
+                      Vector v = new Vector();
+                      for( int i = 0; i &lt; ( (NxmlElement)親要素 ).child.size(); i++ ){
+                        Object n = ( (NxmlElement)親要素 ).child.get(i);
+                        if( ( n instanceof NxmlElement ) &amp;&amp; 要素の名前( n ).equals( 要素名 ) ) v.add( n );
+                      }
+                      return( v );
+                    }
+                    return( null );
+                  }
+
+  // 特定のIDを持つ子要素を返す
+  public Object   子要素( Object 親要素, String ID ){
+                    if( 親要素 instanceof NxmlElement ){
+                      for( int i = 0; i &lt; ( (NxmlElement)親要素 ).child.size(); i++ ){
+                        Object n = ( (NxmlElement)親要素 ).child.get(i);
+                        if( ( n instanceof NxmlElement ) &amp;&amp; 要素のID( n ).equals( ID ) ) return( n );
+                      }
+                    }
+                    return( null );
+                  }
+
+  // 要素の名前を返す
+  public String   要素の名前( Object 要素 ){
+                    if( 要素 instanceof NxmlElement ) return( ( (NxmlElement)要素 ).name );
+                    return( null );
+                  }
+
+  // 要素のＩＤを返す
+  public String   要素のID( Object 要素 ){
+                    if( 要素 instanceof NxmlElement ) return( 属性値( 要素, &quot;ID&quot; ) );
+                    else return( null );
+                  }
+
+  // 要素をXML形式でファイルに保存する
+  public boolean  要素を保存( Object 要素, File ファイル ){
+                    if( 要素 instanceof NxmlElement ){
+                      ( (NxmlElement)要素 ).save( ファイル );
+                      return( true );
+                    }
+                    return( false );
+                  }
+
+  // 要素を削除する
+  public boolean  要素を削除( Object 要素 ){
+                    if( ( 要素 instanceof NxmlElement) &amp;&amp; !要素.equals(root) ){
+                      ( (NxmlElement)要素 ).suicide();
+                      return( true );
+                    }
+                    return( false );
+                  }
+
+  // 属性の名前のリストを返す
+  public Vector   属性名のリスト( Object 要素 ){
+                    if( 要素 instanceof NxmlElement ){
+                      Vector v = new Vector();
+                      Vector c = ( (NxmlElement)要素 ).child;
+                      for( int i = 0; i &lt; c.size(); i++ ){
+                        if( c.get(i) instanceof NxmlAttribute ) v.add( ( (NxmlAttribute)( c.get(i) ) ).name );
+                      }
+                      return ( v );
+                    }
+                    return( null );
+                  }
+
+  // 属性の値を返す
+  public String   属性値( Object 要素, String 属性名 ){
+                    if( 要素 instanceof NxmlElement ){
+                      Vector c = ( (NxmlElement)要素 ).child;
+                      for( int i = 0; i &lt; c.size(); i++ ){
+                        if( ( c.get(i) instanceof NxmlAttribute ) &amp;&amp; ( (NxmlAttribute)( c.get(i) ) ).name.equals( 属性名 ) ){
+                          return( ( (NxmlAttribute)( c.get(i) ) ).value );
+                        }
+                      }
+                      return ( null );
+                    }
+                    return( null );
+                  }
+
+
+  // 属性の値をセットする
+  public boolean  属性値をセット( Object 要素, String 属性名, String 属性値 ){
+                    if( 属性名.equals(&quot;ID&quot;) || !( 要素 instanceof NxmlElement ) ) return( false );
+                    if( 属性値( 要素, 属性名 ) == null ) {
+                      new NxmlAttribute( (NxmlElement)要素, 属性名, 属性値 );
+                      return( true );
+                    }
+                    else return( XsetAttributeValue( (NxmlElement)要素, 属性名, 属性値 ) );
+                  }
+
+
+  // 属性を削除する
+  public boolean  属性を削除( Object 要素, String 属性名 ){
+                    if( ( 要素 instanceof NxmlElement )  &amp;&amp; !属性名.equals(&quot;ID&quot;) ){
+                      Vector c = ( (NxmlElement)要素 ).child;
+                      for( int i = 0; i &lt; c.size(); i++ ){
+                        if( ( c.get(i) instanceof NxmlAttribute ) &amp;&amp; ( (NxmlAttribute)( c.get(i) ) ).name.equals( 属性名 ) ){
+                          ( (NxmlAttribute)( c.get(i) ) ).suicide();
+                          return( true );
+                        }
+                      }
+                      return ( false );
+                    }
+                    return( false );
+                  }
+
+
+
+  // 属性の値をセットする(外部での使用不可)
+  private boolean XsetAttributeValue( NxmlElement element, String name, String val ){
+                    if( element instanceof NxmlElement ){
+                      Vector c = ( (NxmlElement)element ).child;
+                      for( int i = 0; i &lt; c.size(); i++ ){
+                        if( ( c.get(i) instanceof NxmlAttribute ) &amp;&amp; ( (NxmlAttribute)( c.get(i) ) ).name.equals( name ) ){
+                          ( (NxmlAttribute)( c.get(i) ) ).value = val;
+                          return( true );
+                        }
+                      }
+                      return ( false );
+                    }
+                    return( false );
+                  }
+
+
+  // NxmlDocumentのデータの基本単位クラス
+  class NxmlNode{
+    NxmlElement parent;                   // 親ノード
+    String name;                                // 名前
+    String value;                               // 値
+    public void save( BufferedWriter dout ){}    // ストリームにXML文書を出力
+    public void suicide(){}                      // データを消去してメモリを開放する
+  }//~NxmlNode
+
+  // NxmlNodeの実装クラス
+  class NxmlElement extends NxmlNode{
+    Vector      child;
+
+    //コンストラクタ ( 既存の要素をコピー )
+    NxmlElement( NxmlElement pnt,  NxmlElement e ){
+      parent = pnt;
+      child = new Vector();
+      name = e.name;
+      value = null;
+      for( int i = 0; i &lt; e.child.size(); i++ ){
+        Object o = e.child.get(i);
+        if( o instanceof NxmlAttribute ) new NxmlAttribute( this, ((NxmlAttribute)o).name, ((NxmlAttribute)o).value );
+        else if( o instanceof NxmlElement ) new NxmlElement( this, (NxmlElement)o );
+      }
+      if( parent != null) parent.child.add( this );
+    }
+
+    //コンストラクタ ( 名前から新しく作る )
+    NxmlElement( NxmlElement pnt,  String nam ){
+      parent = pnt;
+      child = new Vector();
+      name = nam;
+      value = null;
+      if( parent != null) parent.child.add( this );
+    }
+
+    //コンストラクタ ( ファイルからXML文書を読み込んでデータを構成する )
+    NxmlElement( NxmlElement pnt,  File fil ){
+      char c;
+      parent = pnt;
+      child = new Vector();
+      try{
+      BufferedReader din = new BufferedReader( new FileReader( fil ) );
+      if( din.markSupported() ){
+        din.readLine();
+        din.readLine();
+        while( ( ( c = getchar( din ) ) != &apos;\0&apos; ) &amp;&amp; ( c != &apos;&lt;&apos; ) ) { }
+        if(  c != &apos;\0&apos; ) Parse( din );
+      }
+      if( parent != null) parent.child.add( this );
+      din.close();
+      } catch( IOException ie ){}
+    }
+
+    //コンストラクタ ( 入力ストリームからXML文書を読み込んでデータを構成する )
+    NxmlElement( NxmlElement pnt, BufferedReader din ){
+      parent = pnt;
+      child = new Vector();
+      Parse( din );
+      if( parent != null) parent.child.add( this );
+    }
+
+    //ファイルにXML文書を出力
+    public void save( File fil ){
+      try{
+      BufferedWriter dout = new BufferedWriter( new FileWriter( fil ) );
+      dout.write(&quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;Shift_JIS\&quot; ?&gt;\n&quot;);
+      dout.write(&quot;&lt;!-- なんちゃってXML version 0.1( ObjectEditor専用 ) --&gt;\n&quot; );
+      save( dout );
+      dout.close();
+      } catch( IOException ie ){ return; }
+    }
+
+    //ストリームにXML文書を出力
+    public void save( BufferedWriter dout ){
+      int i;
+      char c;
+
+      try{
+      dout.write( &quot;&lt;&quot; + name + &quot;&gt;\n&quot; );
+      for( i = 0; i &lt; child.size(); i++ ){
+        ( (NxmlNode)child.get(i) ).save( dout );
+      }
+      dout.write( &quot;&lt;/&quot; + name + &quot;&gt;\n&quot; );
+      } catch( IOException ie ){ return; }
+    }
+
+    // データを消去してメモリを開放する
+    public void suicide(){
+      name = null;
+      for( int i = 0; i &lt; child.size(); i++ ){
+        ((NxmlNode)child .get(i)).suicide();
+      }
+      child.clear();
+      child = null;
+      if( parent != null ) parent.child.remove( this );
+      parent = null;
+    }
+
+    //子を持っていなければ要素を縮退させて属性にする
+    public NxmlNode validate(){
+      if( child.size() == 0 ) return( new NxmlAttribute( this ) );
+      else{
+        value = null;
+        return( this );
+      }
+    }
+
+    // ストリームからXML文書を読み込む
+    private void Parse( BufferedReader din ){
+      char c;
+      String s;
+
+      try{
+      if( ( ( c = getchar( din ) ) == &apos;\0&apos; ) || ( c == &apos;/&apos; ) ) return;
+      name = String.valueOf( c );
+      while( ( c = getchar( din ) ) != &apos;\0&apos; &amp;&amp; ( c != &apos;&gt;&apos; ) ) name = name + String.valueOf( c );
+      if( c == &apos;\0&apos; ) return;
+      value = &quot;&quot;;
+      while( true ){
+        while( ( ( c = getchar( din ) ) != &apos;\0&apos; ) &amp;&amp; ( c != &apos;&lt;&apos; ) ){
+          if( c == &apos;&amp;&apos; ){
+            char b;
+            String enty = &quot;&quot;;
+            while( ( ( b = getchar( din ) ) != &apos;\0&apos; ) &amp;&amp; ( b != &apos;;&apos; ) ){
+              enty = enty + String.valueOf( b );
+            }
+            if( b == &apos;\0&apos; ) return;
+            if( enty.equals( &quot;amp&quot; ) )       c = &apos;&amp;&apos;;
+            else if( enty.equals( &quot;lt&quot; ) )   c = &apos;&lt;&apos;;
+            else if( enty.equals( &quot;gt&quot; ) )   c = &apos;&gt;&apos;;
+            else if( enty.equals( &quot;quot&quot; ) ) c = &apos;\&quot;&apos;;
+            else if( enty.equals( &quot;apos&quot; ) ) c = &apos;\&apos;&apos;;
+          }
+          value = value + String.valueOf( c );
+        }
+        if( c == &apos;\0&apos; ) return;
+        din.mark(4);
+        if( ( c = getchar( din ) ) == &apos;\0&apos; ) return;
+        else if( c == &apos;/&apos; ){
+          while( ( ( c = getchar( din ) ) != &apos;\0&apos; ) &amp;&amp; ( c != &apos;&gt;&apos; ) ) {}
+          return;
+        }
+        else{
+          din.reset();
+          ( new NxmlElement( this, din ) ).validate();
+        }
+      }
+      } catch( IOException ie ){}
+    }
+
+    // ストリームから１文字読み込む
+    private char getchar( BufferedReader din ){
+      int c;
+      try{
+      if( ( c = din.read() ) != -1 ) return( (char)c ); else return( &apos;\0&apos; );
+      } catch( IOException ie ){  return(&apos;\0&apos;); }
+    }
+
+  } //~NxmlElement
+
+// NxmElementの属性クラス
+  class NxmlAttribute extends NxmlNode{
+
+    //コンストラクタ ( データを新規作成する )
+    NxmlAttribute( NxmlElement prnt, String nam, String val ){
+      parent = prnt;
+      name = nam;
+      value = val;
+      if( parent != null ) parent.child.add( this );
+    }
+
+    //コンストラクタ ( 要素のデータをコピーして縮退させる )
+    NxmlAttribute( NxmlElement alas ){
+      parent = alas.parent;
+      name = alas.name;
+      value = alas.value;
+      alas.suicide();
+      if( parent != null ) parent.child.add( this );
+    }
+
+    //ストリームにXML文書を出力
+    public void save( BufferedWriter dout ){
+      int i;
+      char c;
+
+      try{
+      dout.write( &quot;&lt;&quot; + name + &quot;&gt;&quot; );
+      for( i = 0; i &lt; value.length(); i++ ){
+        c = value.charAt( i );
+        if( c ==&apos;&lt;&apos; )        dout.write( &quot;&amp;lt;&quot; );
+        else if( c == &apos;&gt;&apos; )  dout.write( &quot;&amp;gt;&quot; );
+        else if( c == &apos;\&quot;&apos; ) dout.write( &quot;&amp;quot;&quot; );
+        else if( c == &apos;\&apos;&apos; ) dout.write( &quot;&amp;apos;&quot; );
+        else if( c == &apos;&amp;&apos; ) dout.write( &quot;&amp;amp;&quot; );
+        else dout.write( c );
+      } 
+      dout.write( &quot;&lt;/&quot; + name + &quot;&gt;\n&quot; );
+      } catch( IOException ie ){}
+    }
+
+    // データを消去してメモリを開放する
+    public void suicide(){
+      if( parent != null ) parent.child.remove( this );
+      parent = null;
+      name = null;
+      value = null;
+    }
+
+  }//~NxmlAttribute
+
+}// ~Nxml
+
+</codetext>
+</codeclip>
+<aobject>
+<ID>_A20</ID>
+<x0>69</x0>
+<y0>110</y0>
+<width>220</width>
+<objectname>GUI</objectname>
+<description>GUIオブジェクト
+</description>
+<state>
+<ID>_SINIT</ID>
+<x0>0</x0>
+<y0>40</y0>
+<width>70</width>
+<height>40</height>
+<text>  InitState</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_Pstart</ID>
+<x0>400</x0>
+<y0>100</y0>
+<width>80</width>
+<height>26</height>
+<text>Start()</text>
+<px>0</px>
+<py>36</py>
+</pin>
+<pin>
+<ID>_PGUIout</ID>
+<x0>0</x0>
+<y0>84</y0>
+<width>180</width>
+<height>26</height>
+<text>GUI_created(JFrame f)</text>
+<px>0</px>
+<py>68</py>
+</pin>
+<pin>
+<ID>_PGUIclosed</ID>
+<x0>310</x0>
+<y0>0</y0>
+<width>180</width>
+<height>26</height>
+<text>GUI_closed()</text>
+<px>100</px>
+<py>6</py>
+</pin>
+<action>
+<ID>_Astart</ID>
+<comp1name>_Pstart</comp1name>
+<comp2name>_Ocreate</comp2name>
+</action>
+<operation>
+<ID>_Ocreate</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>220</x0>
+<y0>40</y0>
+<width>130</width>
+<height>64</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>43</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>GUIを作成する
+</description>
+<codetext>XGUI x = new XGUI();
+
+</codetext>
+</operation>
+<pin>
+<ID>_P_ファイル_開く</ID>
+<x0>0</x0>
+<y0>110</y0>
+<width>200</width>
+<height>26</height>
+<text>_ファイル_開く_selected()</text>
+<px>0</px>
+<py>105</py>
+</pin>
+<pin>
+<ID>_P_ファイル_保存</ID>
+<x0>0</x0>
+<y0>138</y0>
+<width>200</width>
+<height>26</height>
+<text>_ファイル_保存_selected()</text>
+<px>0</px>
+<py>123</py>
+</pin>
+<pin>
+<ID>_P属性を削除</ID>
+<x0>0</x0>
+<y0>166</y0>
+<width>200</width>
+<height>26</height>
+<text>属性を削除_created(JButton b)</text>
+<px>461</px>
+<py>65</py>
+</pin>
+<pin>
+<ID>_PA属性を削除</ID>
+<x0>0</x0>
+<y0>194</y0>
+<width>200</width>
+<height>26</height>
+<text>属性を削除_clicked()</text>
+<px>0</px>
+<py>197</py>
+</pin>
+<pin>
+<ID>_P要素を削除</ID>
+<x0>0</x0>
+<y0>222</y0>
+<width>200</width>
+<height>26</height>
+<text>要素を削除_created(JButton b)</text>
+<px>419</px>
+<py>121</py>
+</pin>
+<pin>
+<ID>_PA要素を削除</ID>
+<x0>0</x0>
+<y0>250</y0>
+<width>200</width>
+<height>26</height>
+<text>要素を削除_clicked()</text>
+<px>0</px>
+<py>141</py>
+</pin>
+<pin>
+<ID>_PBUTTON16</ID>
+<x0>0</x0>
+<y0>278</y0>
+<width>200</width>
+<height>26</height>
+<text>BUTTON16_created(JButton b)</text>
+<px>482</px>
+<py>86</py>
+</pin>
+<pin>
+<ID>_PABUTTON16</ID>
+<x0>0</x0>
+<y0>306</y0>
+<width>200</width>
+<height>26</height>
+<text>BUTTON16_clicked()</text>
+<px>400</px>
+<py>158</py>
+</pin>
+<pin>
+<ID>_Pブラウザで表示</ID>
+<x0>0</x0>
+<y0>334</y0>
+<width>200</width>
+<height>26</height>
+<text>ブラウザで表示_created(JButton b)</text>
+<px>443</px>
+<py>218</py>
+</pin>
+<pin>
+<ID>_PAブラウザで表示</ID>
+<x0>0</x0>
+<y0>362</y0>
+<width>200</width>
+<height>26</height>
+<text>ブラウザで表示_clicked()</text>
+<px>64</px>
+<py>22</py>
+</pin>
+<pin>
+<ID>_P属性値をセット</ID>
+<x0>0</x0>
+<y0>390</y0>
+<width>200</width>
+<height>26</height>
+<text>属性値をセット_created(JButton b)</text>
+<px>481</px>
+<py>171</py>
+</pin>
+<pin>
+<ID>_PA属性値をセット</ID>
+<x0>0</x0>
+<y0>418</y0>
+<width>200</width>
+<height>26</height>
+<text>属性値をセット_clicked()</text>
+<px>0</px>
+<py>179</py>
+</pin>
+<pin>
+<ID>_P新しい要素をつくる</ID>
+<x0>0</x0>
+<y0>446</y0>
+<width>200</width>
+<height>26</height>
+<text>新しい要素をつくる_created(JButton b)</text>
+<px>436</px>
+<py>309</py>
+</pin>
+<pin>
+<ID>_PA新しい要素をつくる</ID>
+<x0>0</x0>
+<y0>474</y0>
+<width>200</width>
+<height>26</height>
+<text>新しい要素をつくる_clicked()</text>
+<px>0</px>
+<py>87</py>
+</pin>
+<pin>
+<ID>_PLABEL12</ID>
+<x0>0</x0>
+<y0>502</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL12_created(JLabel l)</text>
+<px>459</px>
+<py>271</py>
+</pin>
+<pin>
+<ID>_PLABEL11</ID>
+<x0>0</x0>
+<y0>530</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL11_created(JLabel l)</text>
+<px>459</px>
+<py>232</py>
+</pin>
+<pin>
+<ID>_PLABEL10</ID>
+<x0>0</x0>
+<y0>558</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL10_created(JLabel l)</text>
+<px>396</px>
+<py>332</py>
+</pin>
+<pin>
+<ID>_P要素のコンテナ</ID>
+<x0>0</x0>
+<y0>586</y0>
+<width>200</width>
+<height>26</height>
+<text>要素のコンテナ_created(JLabel l)</text>
+<px>0</px>
+<py>233</py>
+</pin>
+<pin>
+<ID>_PLABEL1</ID>
+<x0>0</x0>
+<y0>614</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL1_created(JLabel l)</text>
+<px>475</px>
+<py>412</py>
+</pin>
+<pin>
+<ID>_PLABEL2</ID>
+<x0>0</x0>
+<y0>642</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL2_created(JLabel l)</text>
+<px>493</px>
+<py>426</py>
+</pin>
+<pin>
+<ID>_P属性名のリスト</ID>
+<x0>0</x0>
+<y0>670</y0>
+<width>200</width>
+<height>26</height>
+<text>属性名のリスト_created(JList l)</text>
+<px>0</px>
+<py>323</py>
+</pin>
+<pin>
+<ID>_PA属性名のリスト</ID>
+<x0>0</x0>
+<y0>698</y0>
+<width>200</width>
+<height>26</height>
+<text>属性名のリスト_selected(Object o)</text>
+<px>0</px>
+<py>216</py>
+</pin>
+<pin>
+<ID>_P要素名</ID>
+<x0>0</x0>
+<y0>726</y0>
+<width>200</width>
+<height>26</height>
+<text>要素名_created(JTextField t)</text>
+<px>0</px>
+<py>289</py>
+</pin>
+<pin>
+<ID>_PA要素名</ID>
+<x0>0</x0>
+<y0>754</y0>
+<width>200</width>
+<height>26</height>
+<text>要素名_input(String s)</text>
+<px>394</px>
+<py>359</py>
+</pin>
+<pin>
+<ID>_PID</ID>
+<x0>0</x0>
+<y0>782</y0>
+<width>200</width>
+<height>26</height>
+<text>ID_created(JTextField t)</text>
+<px>0</px>
+<py>305</py>
+</pin>
+<pin>
+<ID>_PAID</ID>
+<x0>0</x0>
+<y0>810</y0>
+<width>200</width>
+<height>26</height>
+<text>ID_input(String s)</text>
+<px>406</px>
+<py>465</py>
+</pin>
+<pin>
+<ID>_PLABEL6</ID>
+<x0>0</x0>
+<y0>838</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL6_created(JLabel l)</text>
+<px>422</px>
+<py>522</py>
+</pin>
+<pin>
+<ID>_PLABEL7</ID>
+<x0>0</x0>
+<y0>866</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL7_created(JLabel l)</text>
+<px>407</px>
+<py>536</py>
+</pin>
+<pin>
+<ID>_P属性名</ID>
+<x0>0</x0>
+<y0>894</y0>
+<width>200</width>
+<height>26</height>
+<text>属性名_created(JTextField t)</text>
+<px>0</px>
+<py>342</py>
+</pin>
+<pin>
+<ID>_PA属性名</ID>
+<x0>0</x0>
+<y0>922</y0>
+<width>200</width>
+<height>26</height>
+<text>属性名_input(String s)</text>
+<px>385</px>
+<py>580</py>
+</pin>
+<pin>
+<ID>_P属性値</ID>
+<x0>0</x0>
+<y0>950</y0>
+<width>200</width>
+<height>26</height>
+<text>属性値_created(JTextArea t)</text>
+<px>0</px>
+<py>361</py>
+</pin>
+<codeclip>
+<ID>_CXSTART</ID>
+<x0>0</x0>
+<y0>0</y0>
+<width>300</width>
+<height>26</height>
+<codetext> class XGUI extends JFrame implements WindowListener{
+ JPanel cnt;
+JMenuBar menubar;
+ class _ファイル extends JMenu{
+   _ファイル(){
+    setText( &quot;ファイル(F)&quot; );
+    setMnemonic( 70 );
+    add( new _ファイル_開く() );
+    add( new _ファイル_保存() );
+ }
+ class _ファイル_開く extends JMenuItem implements ActionListener{
+   _ファイル_開く(){
+    setText( &quot;開く(O)&quot; );
+    setMnemonic( 79 );
+    addActionListener( this );
+  }
+  public void actionPerformed( ActionEvent e ){
+    _ファイル_開く_selected();
+  }
+}
+ class _ファイル_保存 extends JMenuItem implements ActionListener{
+   _ファイル_保存(){
+    setText( &quot;保存(S)&quot; );
+    setMnemonic( 83 );
+    addActionListener( this );
+  }
+  public void actionPerformed( ActionEvent e ){
+    _ファイル_保存_selected();
+  }
+}
+}
+属性を削除 I属性を削除;
+ class 属性を削除 extends JButton implements ActionListener{
+  属性を削除(){
+ setOpaque( true );
+ setName(  &quot;属性を削除&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 1, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;属性を削除&quot; );
+ addActionListener( this );
+ 属性を削除_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ 属性を削除_clicked(); }
+}
+要素を削除 I要素を削除;
+ class 要素を削除 extends JButton implements ActionListener{
+  要素を削除(){
+ setOpaque( true );
+ setName(  &quot;要素を削除&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 1, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;要素を削除&quot; );
+ addActionListener( this );
+ 要素を削除_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ 要素を削除_clicked(); }
+}
+BUTTON16 IBUTTON16;
+ class BUTTON16 extends JButton implements ActionListener{
+  BUTTON16(){
+ setOpaque( true );
+ setName(  &quot;BUTTON16&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 1, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;BUTTON&quot; );
+ addActionListener( this );
+ BUTTON16_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ BUTTON16_clicked(); }
+}
+ブラウザで表示 Iブラウザで表示;
+ class ブラウザで表示 extends JButton implements ActionListener{
+  ブラウザで表示(){
+ setOpaque( true );
+ setName(  &quot;ブラウザで表示&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;ブラウザで表示&quot; );
+ addActionListener( this );
+ ブラウザで表示_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ ブラウザで表示_clicked(); }
+}
+属性値をセット I属性値をセット;
+ class 属性値をセット extends JButton implements ActionListener{
+  属性値をセット(){
+ setOpaque( true );
+ setName(  &quot;属性値をセット&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;属性値をセット&quot; );
+ addActionListener( this );
+ 属性値をセット_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ 属性値をセット_clicked(); }
+}
+新しい要素をつくる I新しい要素をつくる;
+ class 新しい要素をつくる extends JButton implements ActionListener{
+  新しい要素をつくる(){
+ setOpaque( true );
+ setName(  &quot;新しい要素をつくる&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;新しい要素をつくる&quot; );
+ addActionListener( this );
+ 新しい要素をつくる_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ 新しい要素をつくる_clicked(); }
+}
+LABEL12 ILABEL12;
+ class LABEL12 extends JLabel{
+  LABEL12(){
+ setOpaque( true );
+ setName(  &quot;LABEL12&quot; );
+ setFont( new Font( &quot;ＭＳ ゴシック&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;要素のツリー図&quot; );
+ LABEL12_created( this );
+}
+}
+LABEL11 ILABEL11;
+ class LABEL11 extends JLabel{
+  LABEL11(){
+ setOpaque( true );
+ setName(  &quot;LABEL11&quot; );
+ setFont( new Font( &quot;ＭＳ ゴシック&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;属性のリスト&quot; );
+ LABEL11_created( this );
+}
+}
+LABEL10 ILABEL10;
+ class LABEL10 extends JLabel{
+  LABEL10(){
+ setOpaque( true );
+ setName(  &quot;LABEL10&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  102, 102, 153 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 4 );
+ setVerticalAlignment( 0 );
+ setText( &quot;LABEL&quot; );
+ LABEL10_created( this );
+}
+}
+要素のコンテナ I要素のコンテナ;
+ class 要素のコンテナ extends JLabel{
+  要素のコンテナ(){
+ setOpaque( true );
+ setName(  &quot;要素のコンテナ&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  102, 102, 153 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;&quot; );
+ 要素のコンテナ_created( this );
+}
+}
+LABEL1 ILABEL1;
+ class LABEL1 extends JLabel{
+  LABEL1(){
+ setOpaque( true );
+ setName(  &quot;LABEL1&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;要素名&quot; );
+ LABEL1_created( this );
+}
+}
+LABEL2 ILABEL2;
+ class LABEL2 extends JLabel{
+  LABEL2(){
+ setOpaque( true );
+ setName(  &quot;LABEL2&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;要素のID&quot; );
+ LABEL2_created( this );
+}
+}
+属性名のリスト I属性名のリスト;
+ class 属性名のリスト extends JList implements ListSelectionListener{
+ JScrollPane scrl;
+  属性名のリスト(){
+ setOpaque( true );
+ setName(  &quot;属性名のリスト&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ scrl = new JScrollPane( this );
+ addListSelectionListener( this );
+ 属性名のリスト_created( this );
+}
+ public void valueChanged( ListSelectionEvent e ){ 属性名のリスト_selected( getSelectedValue() ); }
+}
+要素名 I要素名;
+ class 要素名 extends JTextField implements ActionListener{
+  要素名(){
+ setOpaque( true );
+ setName(  &quot;要素名&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setText( &quot;&quot; );
+ addActionListener( this );
+ 要素名_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ 要素名_input( getText() ); }
+}
+ID IID;
+ class ID extends JTextField implements ActionListener{
+  ID(){
+ setOpaque( true );
+ setName(  &quot;ID&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setText( &quot;&quot; );
+ addActionListener( this );
+ ID_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ ID_input( getText() ); }
+}
+LABEL6 ILABEL6;
+ class LABEL6 extends JLabel{
+  LABEL6(){
+ setOpaque( true );
+ setName(  &quot;LABEL6&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;属性名&quot; );
+ LABEL6_created( this );
+}
+}
+LABEL7 ILABEL7;
+ class LABEL7 extends JLabel{
+  LABEL7(){
+ setOpaque( true );
+ setName(  &quot;LABEL7&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;属性値&quot; );
+ LABEL7_created( this );
+}
+}
+属性名 I属性名;
+ class 属性名 extends JTextField implements ActionListener{
+  属性名(){
+ setOpaque( true );
+ setName(  &quot;属性名&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setText( &quot;&quot; );
+ addActionListener( this );
+ 属性名_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ 属性名_input( getText() ); }
+}
+属性値 I属性値;
+ class 属性値 extends JTextArea{
+ JScrollPane scrl;
+  属性値(){
+ setOpaque( true );
+ setName(  &quot;属性値&quot; );
+ setFont( new Font( &quot;ＭＳ ゴシック&quot;, 0, 10 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setText( &quot;&quot; );
+ scrl = new JScrollPane( this );
+ 属性値_created( this );
+}
+}
+ XGUI(){
+ setTitle(&quot;XMLエディタ&quot;);
+ cnt = new JPanel( new BorderLayout() );
+ cnt.setPreferredSize(  new  Dimension( 595, 423 ) );
+ ((Component)cnt).setBackground( new Color( 204, 204, 204 ) );
+menubar = new JMenuBar();
+setJMenuBar( menubar );
+menubar.add( new  _ファイル() );
+ I属性を削除 = new 属性を削除();
+ cnt.add( I属性を削除, 0 );
+ cnt.getLayout().removeLayoutComponent( I属性を削除 );
+ I属性を削除.setBounds( 488, 354, 103, 32 );
+ I要素を削除 = new 要素を削除();
+ cnt.add( I要素を削除, 0 );
+ cnt.getLayout().removeLayoutComponent( I要素を削除 );
+ I要素を削除.setBounds( 207, 387, 99, 32 );
+ IBUTTON16 = new BUTTON16();
+ cnt.add( IBUTTON16, 0 );
+ cnt.getLayout().removeLayoutComponent( IBUTTON16 );
+ IBUTTON16.setBounds( 0, 0, 0, 0 );
+ Iブラウザで表示 = new ブラウザで表示();
+ cnt.add( Iブラウザで表示, 0 );
+ cnt.getLayout().removeLayoutComponent( Iブラウザで表示 );
+ Iブラウザで表示.setBounds( 365, 387, 227, 32 );
+ I属性値をセット = new 属性値をセット();
+ cnt.add( I属性値をセット, 0 );
+ cnt.getLayout().removeLayoutComponent( I属性値をセット );
+ I属性値をセット.setBounds( 365, 354, 121, 32 );
+ I新しい要素をつくる = new 新しい要素をつくる();
+ cnt.add( I新しい要素をつくる, 0 );
+ cnt.getLayout().removeLayoutComponent( I新しい要素をつくる );
+ I新しい要素をつくる.setBounds( 64, 387, 143, 32 );
+ ILABEL12 = new LABEL12();
+ cnt.add( ILABEL12, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL12 );
+ ILABEL12.setBounds( 49, 3, 109, 23 );
+ ILABEL11 = new LABEL11();
+ cnt.add( ILABEL11, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL11 );
+ ILABEL11.setBounds( 262, 3, 88, 23 );
+ ILABEL10 = new LABEL10();
+ cnt.add( ILABEL10, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL10 );
+ ILABEL10.setBounds( 0, 0, 0, 0 );
+ I要素のコンテナ = new 要素のコンテナ();
+ cnt.add( I要素のコンテナ, 0 );
+ cnt.getLayout().removeLayoutComponent( I要素のコンテナ );
+ I要素のコンテナ.setBounds( 3, 31, 216, 289 );
+ ILABEL1 = new LABEL1();
+ cnt.add( ILABEL1, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL1 );
+ ILABEL1.setBounds( 0, 325, 58, 27 );
+ ILABEL2 = new LABEL2();
+ cnt.add( ILABEL2, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL2 );
+ ILABEL2.setBounds( 1, 356, 57, 27 );
+ I属性名のリスト = new 属性名のリスト();
+ cnt.add( I属性名のリスト.scrl, 0 );
+ cnt.getLayout().removeLayoutComponent( I属性名のリスト.scrl );
+ ( I属性名のリスト.scrl ).setBounds( 223, 31, 175, 290 );
+ I要素名 = new 要素名();
+ cnt.add( I要素名, 0 );
+ cnt.getLayout().removeLayoutComponent( I要素名 );
+ I要素名.setBounds( 63, 324, 243, 29 );
+ IID = new ID();
+ cnt.add( IID, 0 );
+ cnt.getLayout().removeLayoutComponent( IID );
+ IID.setBounds( 63, 357, 242, 27 );
+ ILABEL6 = new LABEL6();
+ cnt.add( ILABEL6, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL6 );
+ ILABEL6.setBounds( 314, 326, 43, 27 );
+ ILABEL7 = new LABEL7();
+ cnt.add( ILABEL7, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL7 );
+ ILABEL7.setBounds( 460, 4, 49, 22 );
+ I属性名 = new 属性名();
+ cnt.add( I属性名, 0 );
+ cnt.getLayout().removeLayoutComponent( I属性名 );
+ I属性名.setBounds( 365, 325, 226, 28 );
+ I属性値 = new 属性値();
+ cnt.add( I属性値.scrl, 0 );
+ cnt.getLayout().removeLayoutComponent( I属性値.scrl );
+ (  I属性値.scrl ).setBounds( 400, 30, 192, 292 );
+ setContentPane( cnt );
+ pack();
+ addWindowListener( this );
+ setVisible( true );
+ GUI_created( this );
+}
+ public void windowActivated( WindowEvent e ){}
+ public void windowClosed( WindowEvent e ){}
+ public void windowClosing( WindowEvent e ){ GUI_closed(); }
+ public void windowDeactivated( WindowEvent e ){}
+ public void windowDeiconified( WindowEvent e ){}
+ public void windowIconified( WindowEvent e ){}
+ public void windowOpened( WindowEvent e ){}
+}
+</codetext>
+</codeclip>
+<ID_maker>51</ID_maker>
+<height>384</height>
+<レイアウト>XMLエディタ
+595
+423
+204
+204
+204
+BUTTON;属性を削除;属性を削除;488;354;103;32;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;要素を削除;要素を削除;207;387;99;32;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;BUTTON16;BUTTON;0;0;0;0;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;ブラウザで表示;ブラウザで表示;365;387;227;32;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;属性値をセット;属性値をセット;365;354;121;32;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;新しい要素をつくる;新しい要素をつくる;64;387;143;32;0;0;0;192;192;192;Dialog;12;null;0;0;
+LABEL;LABEL12;要素のツリー図;49;3;109;23;0;0;0;192;192;192;ＭＳ ゴシック;12;null;0;0;
+LABEL;LABEL11;属性のリスト;262;3;88;23;0;0;0;192;192;192;ＭＳ ゴシック;12;null;0;0;
+LABEL;LABEL10;LABEL;0;0;0;0;102;102;153;192;192;192;Dialog;12;null;4;0;
+LABEL;要素のコンテナ;null;3;31;216;289;102;102;153;255;255;255;Dialog;12;null;0;0;
+LABEL;LABEL1;要素名;0;325;58;27;0;0;0;192;192;192;Dialog;12;null;0;0;
+LABEL;LABEL2;要素のID;1;356;57;27;0;0;0;192;192;192;Dialog;12;null;0;0;
+LIST;属性名のリスト;223;31;175;290;0;0;0;255;255;255;Dialog;12;
+TEXTFIELD;要素名;null;63;324;243;29;0;0;0;255;255;255;Dialog;12;
+TEXTFIELD;ID;null;63;357;242;27;0;0;0;255;255;255;Dialog;12;
+LABEL;LABEL6;属性名;314;326;43;27;0;0;0;192;192;192;Dialog;12;null;0;0;
+LABEL;LABEL7;属性値;460;4;49;22;0;0;0;192;192;192;Dialog;12;null;0;0;
+TEXTFIELD;属性名;null;365;325;226;28;0;0;0;255;255;255;Dialog;12;
+TEXTAREA;属性値;null;400;30;192;292;0;0;0;255;255;255;ＭＳ ゴシック;10;
+Menu;ファイル(F);70;Menu;開く(O);79;/Menu;Menu;保存(S);83;/Menu;/Menu;END;
+</レイアウト>
+</aobject>
+<operation>
+<ID>_O18</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>524</x0>
+<y0>60</y0>
+<width>128</width>
+<height>90</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>70</inpiny0>
+<inpinwidth>33</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// ブラウザを起動して
+// XMLファイルを見る
+x.要素を保存( x.ルート要素(), new File(&quot;out.xml&quot;) );
+try{
+Runtime.getRuntime().exec(&quot;Start out.xml&quot;);
+} catch( IOException ie ) {}
+</codetext>
+</operation>
+<codeclip>
+<ID>_C17</ID>
+<x0>88</x0>
+<y0>18</y0>
+<width>610</width>
+<height>36</height>
+<codetext>//このエディタは一般のXMLドキュメントを読むことはできませんが、
+//一般のXML対応アプリケーションでこのエディタの出力するXMLドキュメントを読むことは可能です。
+</codetext>
+</codeclip>
+<xobject>
+<ID>_X15</ID>
+<x0>372</x0>
+<y0>152</y0>
+<width>172</width>
+<height>213</height>
+<ID_maker>36</ID_maker>
+<objectname>メインコントロール</objectname>
+<description>新しいオブジェクト</description>
+<pin>
+<ID>_P0</ID>
+<x0>37</x0>
+<y0>232</y0>
+<width>104</width>
+<height>30</height>
+<text>要素の新規作成()</text>
+<px>0</px>
+<py>45</py>
+</pin>
+<pin>
+<ID>_P1</ID>
+<x0>379</x0>
+<y0>305</y0>
+<width>99</width>
+<height>32</height>
+<text>要素の読み込み()</text>
+<px>0</px>
+<py>63</py>
+</pin>
+<pin>
+<ID>_P2</ID>
+<x0>39</x0>
+<y0>152</y0>
+<width>86</width>
+<height>30</height>
+<text>要素の保存()</text>
+<px>0</px>
+<py>81</py>
+</pin>
+<pin>
+<ID>_P3</ID>
+<x0>408</x0>
+<y0>232</y0>
+<width>83</width>
+<height>31</height>
+<text>要素の削除()</text>
+<px>0</px>
+<py>99</py>
+</pin>
+<pin>
+<ID>_P5</ID>
+<x0>46</x0>
+<y0>383</y0>
+<width>104</width>
+<height>30</height>
+<text>属性値をセット()</text>
+<px>0</px>
+<py>137</py>
+</pin>
+<pin>
+<ID>_P6</ID>
+<x0>403</x0>
+<y0>171</y0>
+<width>82</width>
+<height>29</height>
+<text>属性の削除()</text>
+<px>0</px>
+<py>155</py>
+</pin>
+<pin>
+<ID>_P7</ID>
+<x0>19</x0>
+<y0>303</y0>
+<width>134</width>
+<height>33</height>
+<text>属性名を選択(Object o)</text>
+<px>0</px>
+<py>174</py>
+</pin>
+<pin>
+<ID>_P8</ID>
+<x0>0</x0>
+<y0>97</y0>
+<width>164</width>
+<height>29</height>
+<text>要素のコンテナ(Container c)</text>
+<px>0</px>
+<py>191</py>
+</pin>
+<operation>
+<ID>_O13</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>192</x0>
+<y0>154</y0>
+<width>129</width>
+<height>65</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>46</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>カレントノードを
+ファイルへ保存する
+</description>
+<codetext>JFileChooser fc = new JFileChooser( new File(&quot;.&quot;) );
+if( fc.showSaveDialog( null ) == JFileChooser.APPROVE_OPTION ){
+  x.要素を保存(カレントノード.要素, fc.getSelectedFile() );
+}
+</codetext>
+</operation>
+<operation>
+<ID>_O28</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>488</x0>
+<y0>388</y0>
+<width>154</width>
+<height>68</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JFrame f)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>49</inpiny0>
+<inpinwidth>80</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>XMLデータを初期化して
+コンテナにツリーを設定
+</description>
+<codetext>x= new Nxml();
+ルートノード = new ツリーノード( x.ルート要素() );
+ツリーモデル = new DefaultTreeModel(  ルートノード );
+ツリー =  new JTree( ツリーモデル  );
+ツリー.getSelectionModel().setSelectionMode( TreeSelectionModel.SINGLE_TREE_SELECTION );
+ツリー.addTreeSelectionListener( new TreeSelectionListener() {
+  public void valueChanged( TreeSelectionEvent e ){
+       カレントノード =  (ツリーノード)ツリー.getLastSelectedPathComponent();
+       if(カレントノード != null ){
+         カレントノードを選択();
+        }
+   }
+} );
+コンテナ.setLayout(new FlowLayout(FlowLayout.LEFT) );
+JScrollPane sc = new JScrollPane( ツリー );
+sc.setPreferredSize( コンテナ.getSize() );
+コンテナ.removeAll();
+コンテナ.add(sc);
+コンテナ.validate();
+コンテナ.repaint();
+カレントノード = ルートノード;
+ツリー.setSelectionPath(new TreePath( カレントノード.getPath() ) );
+</codetext>
+</operation>
+<pin>
+<ID>_P29</ID>
+<x0>369</x0>
+<y0>421</y0>
+<width>89</width>
+<height>26</height>
+<text>start(JFrame f)</text>
+<px>1</px>
+<py>26</py>
+</pin>
+<codeclip>
+<ID>_C12</ID>
+<x0>183</x0>
+<y0>4</y0>
+<width>127</width>
+<height>21</height>
+<codetext>JTree ツリー;
+DefaultTreeModel ツリーモデル;
+ツリーノード  ルートノード;
+ツリーノード  カレントノード;
+Container コンテナ;
+class ツリーノード extends DefaultMutableTreeNode{
+  Object 要素;
+  ツリーノード( Object o ){
+    要素 = o;
+    setUserObject( x.要素の名前( 要素 ) +&quot;  ID:&quot; + x.要素のID( 要素 ) );
+    Vector v = x.子要素のリスト( 要素 );
+    for( int i = 0; i &lt; v.size(); i++ ){
+        ツリーモデル.insertNodeInto( new ツリーノード( v.get(i) ), this, i );
+    }
+  }
+}
+</codetext>
+</codeclip>
+<relation>
+<ID>_R14</ID>
+<pin1name>_P2</pin1name>
+<pin2name>_O13</pin2name>
+</relation>
+<operation>
+<ID>_O15</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>192</x0>
+<y0>232</y0>
+<width>140</width>
+<height>67</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>47</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>要素の名前とIDから
+新しい要素を作成する
+</description>
+<codetext>Object o =  x.新しい要素( カレントノード.要素, 要素名.getText(), 要素のID.getText() );
+if( o != null ){
+  ツリーノード t =  new ツリーノード( o );
+  ツリーモデル.insertNodeInto( t, カレントノード, x.子要素のリスト(カレントノード.要素 ).size()-1 );
+  ツリー.scrollPathToVisible( new TreePath( t.getPath() ));
+  ツリー.validate();
+  ツリー.repaint();
+}
+カレントノードを選択();
+</codetext>
+</operation>
+<relation>
+<ID>_R16</ID>
+<pin1name>_P0</pin1name>
+<pin2name>_O15</pin2name>
+</relation>
+<operation>
+<ID>_O17</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>190</x0>
+<y0>303</y0>
+<width>141</width>
+<height>54</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(Object o)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>33</inpiny0>
+<inpinwidth>69</inpinwidth>
+<inpinheight>21</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>属性名と属性値を表示
+</description>
+<codetext>属性名.setText( (String)o );
+属性値.setText( x.属性値( カレントノード.要素, (String)o ) );
+</codetext>
+</operation>
+<relation>
+<ID>_R18</ID>
+<pin1name>_P7</pin1name>
+<pin2name>_O17</pin2name>
+</relation>
+<operation>
+<ID>_O19</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>193</x0>
+<y0>374</y0>
+<width>128</width>
+<height>66</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>45</inpiny0>
+<inpinwidth>31</inpinwidth>
+<inpinheight>21</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>属性値をセットする
+</description>
+<codetext>x.属性値をセット( カレントノード.要素,  属性名.getText(), 属性値.getText() );
+カレントノードを選択();
+</codetext>
+</operation>
+<relation>
+<ID>_R20</ID>
+<pin1name>_P5</pin1name>
+<pin2name>_O19</pin2name>
+</relation>
+<operation>
+<ID>_O23</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>526</x0>
+<y0>141</y0>
+<width>130</width>
+<height>57</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>37</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>属性を削除する</description>
+<codetext>x.属性を削除( カレントノード.要素, 属性名.getText() );
+ツリー.setSelectionPath(new TreePath( カレントノード.getPath() ) );
+カレントノードを選択();
+</codetext>
+</operation>
+<operation>
+<ID>_O26</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>529</x0>
+<y0>219</y0>
+<width>122</width>
+<height>52</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>32</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>要素を削除する
+</description>
+<codetext>if( !カレントノード.equals(ルートノード) ){
+x.要素を削除( カレントノード.要素 );
+ツリーモデル.removeNodeFromParent( カレントノード );
+}
+カレントノード = ルートノード;
+カレントノードを選択();
+</codetext>
+</operation>
+<relation>
+<ID>_R25</ID>
+<pin1name>_P6</pin1name>
+<pin2name>_O23</pin2name>
+</relation>
+<relation>
+<ID>_R27</ID>
+<pin1name>_P3</pin1name>
+<pin2name>_O26</pin2name>
+</relation>
+<relation>
+<ID>_R30</ID>
+<pin1name>_P29</pin1name>
+<pin2name>_O28</pin2name>
+</relation>
+<operation>
+<ID>_O31</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>190</x0>
+<y0>80</y0>
+<width>133</width>
+<height>65</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(Container c)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>43</inpiny0>
+<inpinwidth>90</inpinwidth>
+<inpinheight>23</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>コンテナを設定
+</description>
+<codetext>コンテナ = c;
+</codetext>
+</operation>
+<relation>
+<ID>_R32</ID>
+<pin1name>_P8</pin1name>
+<pin2name>_O31</pin2name>
+</relation>
+<codeclip>
+<ID>_C33</ID>
+<x0>350</x0>
+<y0>5</y0>
+<width>219</width>
+<height>21</height>
+<codetext>private void カレントノードを選択(){
+    要素名.setText( x.要素の名前( カレントノード.要素 ) );
+    要素のID.setText( x.要素のID( カレントノード.要素 ) );
+    Vector v =  x.属性名のリスト( カレントノード.要素 );
+    属性名のリスト.setListData( v );
+    if( v.size() &gt; 0 ) 属性名のリスト.setSelectedIndex(v.size()-1);
+}
+</codetext>
+</codeclip>
+<operation>
+<ID>_O34</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>522</x0>
+<y0>286</y0>
+<width>140</width>
+<height>67</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>47</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>XMLファイルから
+新しい要素を作成する
+</description>
+<codetext>JFileChooser fc = new JFileChooser( new File(&quot;.&quot;) );
+if( fc.showOpenDialog( null ) == JFileChooser.APPROVE_OPTION ){
+  Object o =  x.新しい要素( カレントノード.要素, fc.getSelectedFile(), 要素のID.getText() );
+  if( o != null ){
+    ツリーノード t =  new ツリーノード( o );
+    ツリーモデル.insertNodeInto( t, カレントノード, x.子要素のリスト(カレントノード.要素 ).size()-1 );
+    ツリー.scrollPathToVisible( new TreePath( t.getPath() ));
+    ツリー.validate();
+    ツリー.repaint();
+  }
+  カレントノードを選択();
+}</codetext>
+</operation>
+<relation>
+<ID>_R35</ID>
+<pin1name>_P1</pin1name>
+<pin2name>_O34</pin2name>
+</relation>
+</xobject>
+<xobject>
+<ID>_X8</ID>
+<x0>373</x0>
+<y0>371</y0>
+<width>139</width>
+<height>123</height>
+<ID_maker>18</ID_maker>
+<objectname>変数設定</objectname>
+<description>新しいオブジェクト</description>
+<pin>
+<ID>_P1</ID>
+<x0>106</x0>
+<y0>121</y0>
+<width>121</width>
+<height>28</height>
+<text>要素名(JTextField t)</text>
+<px>0</px>
+<py>28</py>
+</pin>
+<pin>
+<ID>_P2</ID>
+<x0>95</x0>
+<y0>203</y0>
+<width>120</width>
+<height>31</height>
+<text>要素のID(JTextField t)</text>
+<px>0</px>
+<py>44</py>
+</pin>
+<pin>
+<ID>_P3</ID>
+<x0>99</x0>
+<y0>277</y0>
+<width>129</width>
+<height>30</height>
+<text>属性名のリスト(JList l)</text>
+<px>0</px>
+<py>62</py>
+</pin>
+<pin>
+<ID>_P4</ID>
+<x0>102</x0>
+<y0>347</y0>
+<width>112</width>
+<height>28</height>
+<text>属性名(JTextField t)</text>
+<px>0</px>
+<py>81</py>
+</pin>
+<pin>
+<ID>_P5</ID>
+<x0>107</x0>
+<y0>436</y0>
+<width>108</width>
+<height>27</height>
+<text>属性値(JTextArea t)</text>
+<px>0</px>
+<py>100</py>
+</pin>
+<operation>
+<ID>_O8</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>317</x0>
+<y0>90</y0>
+<width>128</width>
+<height>65</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JTextField t)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>41</inpiny0>
+<inpinwidth>89</inpinwidth>
+<inpinheight>24</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>設定
+</description>
+<codetext>要素名 = t;
+</codetext>
+</operation>
+<operation>
+<ID>_O9</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>318</x0>
+<y0>172</y0>
+<width>128</width>
+<height>65</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JTextField t)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>41</inpiny0>
+<inpinwidth>89</inpinwidth>
+<inpinheight>24</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>設定
+</description>
+<codetext>要素のID = t;
+</codetext>
+</operation>
+<operation>
+<ID>_O10</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>325</x0>
+<y0>250</y0>
+<width>128</width>
+<height>65</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JList l)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>41</inpiny0>
+<inpinwidth>89</inpinwidth>
+<inpinheight>24</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>設定
+</description>
+<codetext>属性名のリスト = l;
+</codetext>
+</operation>
+<operation>
+<ID>_O11</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>325</x0>
+<y0>324</y0>
+<width>128</width>
+<height>65</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JTextField t)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>41</inpiny0>
+<inpinwidth>89</inpinwidth>
+<inpinheight>24</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>設定
+</description>
+<codetext>属性名 = t;
+</codetext>
+</operation>
+<operation>
+<ID>_O12</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>321</x0>
+<y0>403</y0>
+<width>128</width>
+<height>65</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JTextArea t)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>41</inpiny0>
+<inpinwidth>89</inpinwidth>
+<inpinheight>24</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>設定
+</description>
+<codetext>属性値 = t;
+</codetext>
+</operation>
+<relation>
+<ID>_R13</ID>
+<pin1name>_P1</pin1name>
+<pin2name>_O8</pin2name>
+</relation>
+<relation>
+<ID>_R14</ID>
+<pin1name>_P2</pin1name>
+<pin2name>_O9</pin2name>
+</relation>
+<relation>
+<ID>_R15</ID>
+<pin1name>_P3</pin1name>
+<pin2name>_O10</pin2name>
+</relation>
+<relation>
+<ID>_R16</ID>
+<pin1name>_P4</pin1name>
+<pin2name>_O11</pin2name>
+</relation>
+<relation>
+<ID>_R17</ID>
+<pin1name>_P5</pin1name>
+<pin2name>_O12</pin2name>
+</relation>
+</xobject>
+<codeclip>
+<ID>_C7</ID>
+<x0>518</x0>
+<y0>373</y0>
+<width>146</width>
+<height>121</height>
+<codetext>//  &lt;       変数        &gt;
+JTextField 要素名;
+JTextField 要素のID;
+JList 属性名のリスト;
+JTextField 属性名;
+JTextArea 属性値;
+Nxml x;
+</codetext>
+</codeclip>
+<operation>
+<ID>_O5</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>375</x0>
+<y0>60</y0>
+<width>129</width>
+<height>73</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>54</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// プログラム終了
+System.exit(0);
+</codetext>
+</operation>
+<relation>
+<ID>_R27</ID>
+<pin1name>_A20(_PAブラウザで表示)</pin1name>
+<pin2name>_O18</pin2name>
+</relation>
+<relation>
+<ID>_R26</ID>
+<pin1name>_A20(_P_ファイル_保存)</pin1name>
+<pin2name>_X15(_P2)</pin2name>
+</relation>
+<relation>
+<ID>_R25</ID>
+<pin1name>_A20(_P_ファイル_開く)</pin1name>
+<pin2name>_X15(_P1)</pin2name>
+</relation>
+<relation>
+<ID>_R24</ID>
+<pin1name>_A20(_PA新しい要素をつくる)</pin1name>
+<pin2name>_X15(_P0)</pin2name>
+</relation>
+<relation>
+<ID>_R23</ID>
+<pin1name>_A20(_PA要素を削除)</pin1name>
+<pin2name>_X15(_P3)</pin2name>
+</relation>
+<relation>
+<ID>_R22</ID>
+<pin1name>_A20(_PA属性値をセット)</pin1name>
+<pin2name>_X15(_P5)</pin2name>
+</relation>
+<relation>
+<ID>_R21</ID>
+<pin1name>_A20(_PA属性を削除)</pin1name>
+<pin2name>_X15(_P6)</pin2name>
+</relation>
+<relation>
+<ID>_R19</ID>
+<pin1name>_A20(_PGUIout)</pin1name>
+<pin2name>_X15(_P29)</pin2name>
+</relation>
+<relation>
+<ID>_R16</ID>
+<pin1name>_A20(_PA属性名のリスト)</pin1name>
+<pin2name>_X15(_P7)</pin2name>
+</relation>
+<relation>
+<ID>_R14</ID>
+<pin1name>_A20(_P属性値)</pin1name>
+<pin2name>_X8(_P5)</pin2name>
+</relation>
+<relation>
+<ID>_R13</ID>
+<pin1name>_A20(_P属性名)</pin1name>
+<pin2name>_X8(_P4)</pin2name>
+</relation>
+<relation>
+<ID>_R12</ID>
+<pin1name>_A20(_P属性名のリスト)</pin1name>
+<pin2name>_X8(_P3)</pin2name>
+</relation>
+<relation>
+<ID>_R11</ID>
+<pin1name>_A20(_PID)</pin1name>
+<pin2name>_X8(_P2)</pin2name>
+</relation>
+<relation>
+<ID>_R10</ID>
+<pin1name>_A20(_P要素名)</pin1name>
+<pin2name>_X8(_P1)</pin2name>
+</relation>
+<relation>
+<ID>_R9</ID>
+<pin1name>_A20(_P要素のコンテナ)</pin1name>
+<pin2name>_X15(_P8)</pin2name>
+</relation>
+<relation>
+<ID>_R6</ID>
+<pin1name>_A20(_PGUIclosed)</pin1name>
+<pin2name>_O5</pin2name>
+</relation>
+<relation>
+<ID>_R30</ID>
+<pin1name>_PSTART</pin1name>
+<pin2name>_A20(_Pstart)</pin2name>
+</relation>
+<プロパティ>
+<ID>properties</ID>
+<LookandFeel>javax.swing.plaf.metal.MetalLookAndFeel</LookandFeel>
+<MainWinx0>0</MainWinx0>
+<MainWiny0>0</MainWiny0>
+<MainWinWidth>1024</MainWinWidth>
+<MainWinHeight>740</MainWinHeight>
+<MesgWinx0>0</MesgWinx0>
+<MesgWiny0>0</MesgWiny0>
+<MesgWinWidth>1032</MesgWinWidth>
+<MesgWinHeight>745</MesgWinHeight>
+<FileWinx0>36</FileWinx0>
+<FileWiny0>478</FileWiny0>
+<FileWinWidth>578</FileWinWidth>
+<FileWinHeight>262</FileWinHeight>
+<EditWinx0>347</EditWinx0>
+<EditWiny0>0</EditWiny0>
+<EditWinWidth>676</EditWinWidth>
+<EditWinHeight>541</EditWinHeight>
+<PropWinx0>1</PropWinx0>
+<PropWiny0>1</PropWiny0>
+<PropWinWidth>615</PropWinWidth>
+<PropWinHeight>448</PropWinHeight>
+<DividerLocation1>2</DividerLocation1>
+<DividerLocation2>2</DividerLocation2>
+<ToolBarVisible>1</ToolBarVisible>
+<ViewSourceAtCompile>0</ViewSourceAtCompile>
+<NoSourceCreate>0</NoSourceCreate>
+<JavaEditCommand>leafpad</JavaEditCommand>
+<JavaViewCommand></JavaViewCommand>
+<HelpCommand>xdg-open ./help/manual.html</HelpCommand>
+<ApplicationType>0</ApplicationType>
+<CompileCommand0>./compile_java</CompileCommand0>
+<RunCommand0>./run_java</RunCommand0>
+<GUIDesignerCommand0>java -jar guidsin.jar -java</GUIDesignerCommand0>
+<ImportFiles0> import java.awt.*;
+ import java.awt.event.*;
+ import javax.swing.*;
+ import javax.swing.event.*;
+ import javax.swing.tree.*;
+ import java.io.*;
+ import java.net.*;
+ import java.util.*;
+import java.awt.geom.*;
+import java.awt.print.*;
+import javax.swing.border.*;
+import javax.swing.filechooser.*;
+ import javax.swing.*;
+ import javax.swing.event.*;
+ import javax.swing.tree.*;
+ import java.io.*;
+ import java.net.*;
+ import java.util.*;
+import java.awt.image.BufferedImage;
+import javax.sound.sampled.*;
+
+class Starter{
+  public static void main( String args[] ){
+    %AppName% ap = new %AppName%();
+    ap.ARGS = args;
+    ap.Start();
+  }
+}
+</ImportFiles0>
+<ProgramStartupCode0> String[] ARGS;
+</ProgramStartupCode0>
+<NativeHelpCommand0></NativeHelpCommand0>
+<CompileCommand1></CompileCommand1>
+<RunCommand1></RunCommand1>
+<GUIDesignerCommand1>java -jar guidsin.jar -applet</GUIDesignerCommand1>
+<ImportFiles1> import java.awt.*;
+ import java.awt.event.*;
+ import java.applet.*;
+ import javax.swing.*;
+ import javax.swing.event.*;
+ import javax.swing.tree.*;
+ import java.io.*;
+ import java.net.*;
+ import java.util.*;
+ public class javatext extends Applet {
+   %AppName% ap;
+   public void init() {
+     ap = new %AppName%();
+     ap.APPLET = this;
+     ap.Start();
+   }
+ }
+</ImportFiles1>
+<ProgramStartupCode1> Applet APPLET;
+</ProgramStartupCode1>
+<NativeHelpCommand1></NativeHelpCommand1>
+<CompileCommand2></CompileCommand2>
+<RunCommand2></RunCommand2>
+<GUIDesignerCommand2></GUIDesignerCommand2>
+<ImportFiles2>#include &lt;stdio.h&gt;
+
+void Startup();
+</ImportFiles2>
+<ProgramStartupCode2>int main(){
+ Startup();
+ %AppName%::Start();
+ }
+</ProgramStartupCode2>
+<NativeHelpCommand2></NativeHelpCommand2>
+<CompileCommand3></CompileCommand3>
+<RunCommand3></RunCommand3>
+<GUIDesignerCommand3>java -jar guidsin.jar -cpp</GUIDesignerCommand3>
+<ImportFiles3>#include &lt;stdio.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;math.h&gt;
+#include &quot;Ekagen.h&quot;
+void Startup();
+</ImportFiles3>
+<ProgramStartupCode3>void Emain(){
+Startup();
+%AppName%::Start();
+}
+</ProgramStartupCode3>
+<NativeHelpCommand3></NativeHelpCommand3>
+<MoveStep>8</MoveStep>
+<ImageEditCommand></ImageEditCommand>
+<CompilerFileName>javac.exe</CompilerFileName>
+<CompileCommand4>./compile_android Test com example test</CompileCommand4>
+<RunCommand4>./run_android Test com example test</RunCommand4>
+<GUIDesignerCommand4>java -jar guidsin.jar -android</GUIDesignerCommand4>
+<ImportFiles4>package com.example.test;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.View;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.widget.Button;
+import android.view.SurfaceHolder;
+import android.view.SurfaceHolder.Callback;
+import android.view.SurfaceView;
+import android.widget.EditText;
+import android.text.SpannableStringBuilder;
+import android.text.TextWatcher;
+import android.text.Editable;
+import android.graphics.Matrix;
+import android.graphics.Typeface;
+import android.graphics.RectF;
+import android.graphics.BitmapFactory;
+import java.io.*;
+ import java.net.*;
+import java.util.*;
+import java.text.SimpleDateFormat;
+import android.media.MediaPlayer;
+import android.os.Handler;
+import android.content.res.Configuration;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.app.Activity;
+import android.graphics.Color;
+
+import android.widget.AbsoluteLayout;
+import android.widget.*;
+import android.view.Gravity;
+import android.view.View.OnClickListener;
+
+import android.hardware.Camera;
+
+public class HelloWorld extends Activity {
+  public void onCreate(Bundle bundle) {
+    super.onCreate(bundle);
+    %AppName% ap = new %AppName%();
+    ap.ACTIVITY = this;
+    ap.Start();
+  }
+}
+</ImportFiles4>
+<ProgramStartupCode4>Activity ACTIVITY;
+</ProgramStartupCode4>
+<NativeHelpCommand4>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    package=&quot;com.example.test&quot;
+    android:versionCode=&quot;1&quot;
+    android:versionName=&quot;1.0&quot; &gt;
+
+    
+    
+  &lt;uses-permission android:name=&quot;android.permission.CAMERA&quot; /&gt; 
+  &lt;uses-feature android:name=&quot;android.hardware.camera&quot; /&gt; 
+  &lt;uses-feature android:name=&quot;android.hardware.usb.host&quot; /&gt; 
+  &lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot;/&gt;
+  &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt; 
+  &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;
+
+  &lt;uses-sdk android:minSdkVersion=&quot;3&quot; android:targetSdkVersion=&quot;21&quot;/&gt;
+  
+ 
+    &lt;application android:label=&quot;@string/app_name&quot; &gt;
+        &lt;activity
+            android:name=&quot;HelloWorld&quot;
+            android:label=&quot;@string/app_name&quot; &gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+
+                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+            &lt;/intent-filter&gt;
+        &lt;/activity&gt;
+    &lt;/application&gt;
+
+&lt;/manifest&gt;
+</NativeHelpCommand4>
+<HtmlEditCommand></HtmlEditCommand>
+<CompileCommand5></CompileCommand5>
+<RunCommand5></RunCommand5>
+<GUIDesignerCommand5></GUIDesignerCommand5>
+<ImportFiles5></ImportFiles5>
+<ProgramStartupCode5>gosub @_PSTART
+end
+</ProgramStartupCode5>
+<NativeHelpCommand5></NativeHelpCommand5>
+<NoOptimizePin>0</NoOptimizePin>
+<CompileCommand6>./compile_c</CompileCommand6>
+<RunCommand6>./run_c</RunCommand6>
+<GUIDesignerCommand6></GUIDesignerCommand6>
+<ImportFiles6>#include &lt;setjmp.h&gt;
+#include &lt;pthread.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdarg.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;math.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netdb.h&gt;
+
+#include &lt;X11/Xlib.h&gt;
+#include &lt;X11/Xutil.h&gt;
+#include &lt;X11/Xlocale.h&gt; /* ロケール用ヘッダーファイル */
+#include &lt;X11/xpm.h&gt;
+#include &lt;sys/time.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;termios.h&gt;
+#include &lt;errno.h&gt;
+</ImportFiles6>
+<ProgramStartupCode6>int ARGC; char** ARGV;
+int main( int argc, char** argv ){
+  ARGC=argc;
+  ARGV=argv;
+  _PSTART();
+}
+</ProgramStartupCode6>
+<NativeHelpCommand6></NativeHelpCommand6>
+</プロパティ>
+</xobject>

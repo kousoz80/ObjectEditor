@@ -1,0 +1,47 @@
+RACDシミュレータ
+413
+583
+238
+238
+238
+BUTTON;asm_button;assemble;3;3;102;27;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;1;JButton;
+BUTTON;run_button;run;113;4;68;27;51;51;51;192;192;192;Dialog;12;null;0;0;1;1;1;JButton;
+LABEL;LABEL2;R:;167;33;36;17;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;0;JLabel;
+LABEL;LABEL3;A:;206;33;40;18;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;0;JLabel;
+LABEL;LABEL4;C:;250;34;35;17;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;0;JLabel;
+BUTTON;load_button;load;186;3;74;28;51;51;51;192;192;192;DejaVu Sans;12;null;0;0;1;0;1;JButton;
+BUTTON;save_button;save;267;3;68;29;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;1;JButton;
+BUTTON;edit_button;edit;340;2;64;29;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;1;JButton;
+LABEL;LABEL8;D:;289;35;38;18;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;0;JLabel;
+TEXTFIELD;r_field;000;166;54;35;18;51;51;51;255;255;255;Dialog;12;1;1;0;JTextField;
+TEXTFIELD;a_field;000;207;54;37;17;51;51;51;255;255;255;Dialog;12;1;1;0;JTextField;
+TEXTFIELD;c_field;00;252;55;30;18;51;51;51;255;255;255;Dialog;12;1;1;0;JTextField;
+TEXTFIELD;d_field;0;294;56;25;17;51;51;51;255;255;255;Dialog;12;1;1;0;JTextField;
+LABEL;pointer_label;POINTER;7;75;61;30;51;51;51;192;192;192;Dialog;12;null;0;0;1;1;0;JLabel;
+LABEL;ret_label;RET;71;75;33;28;51;51;51;192;192;192;Dialog;12;null;0;0;1;1;0;JLabel;
+LABEL;st_label;ST;110;76;35;27;51;51;51;192;192;192;Dialog;12;null;0;0;1;1;0;JLabel;
+LABEL;ld_label;LD;149;75;32;29;51;51;51;192;192;192;Dialog;12;null;0;0;1;1;0;JLabel;
+LABEL;ldh_label;LDH;185;75;38;30;51;51;51;192;192;192;Dialog;12;null;0;0;1;1;0;JLabel;
+LABEL;ldm_label;LDM;228;75;37;29;51;51;51;192;192;192;Dialog;12;null;0;0;1;1;0;JLabel;
+LABEL;ldl_label;LDL;271;77;35;28;51;51;51;192;192;192;Dialog;12;null;0;0;1;1;0;JLabel;
+TEXTAREA;message_area;null;7;141;404;432;51;51;51;255;255;255;Dialog;12;1;1;1;JTextArea;
+BUTTON;add_button;add;330;33;78;19;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;1;JButton;
+BUTTON;remove_button;remove;330;55;80;21;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;1;JButton;
+BUTTON;single_button;1step;128;108;73;28;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;1;JButton;
+LABEL;LABEL24;CLOCK:;8;109;53;26;51;51;51;192;192;192;Dialog;12;null;2;0;1;0;0;JLabel;
+TEXTFIELD;clock_field;0;66;108;58;30;51;51;51;255;255;255;Dialog;12;1;1;0;JTextField;
+LABEL;LABEL26;Memory Window;311;77;101;17;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;0;JLabel;
+LABEL;LABEL27;No.;312;95;30;13;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;0;JLabel;
+LABEL;LABEL28;Start;342;93;38;16;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;0;JLabel;
+LABEL;LABEL29;End;379;94;33;15;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;0;JLabel;
+TEXTFIELD;no_field;0;316;111;32;23;51;51;51;255;255;255;Dialog;12;1;1;1;JTextField;
+TEXTFIELD;start_field;0;350;111;30;24;51;51;51;255;255;255;Dialog;12;1;1;0;JTextField;
+TEXTFIELD;end_field;0;380;111;30;23;51;51;51;255;255;255;Dialog;12;1;1;0;JTextField;
+LABEL;LABEL33;interval time;204;107;94;15;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;0;JLabel;
+LABEL;LABEL34;ms;275;123;26;12;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;0;JLabel;
+TEXTFIELD;interval_field;1000;208;123;67;15;51;51;51;255;255;255;Dialog;8;1;1;0;JTextField;
+LABEL;LABEL36;ADDR;122;35;41;17;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;0;JLabel;
+TEXTFIELD;address_field;000;121;54;43;17;51;51;51;255;255;255;Dialog;12;1;1;1;JTextField;
+BUTTON;inc_addr;+;3;32;47;19;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;1;JButton;
+BUTTON;dec_addr;-;3;54;47;18;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;1;JButton;
+BUTTON;mem_set;WRT;53;33;64;39;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;1;JButton;

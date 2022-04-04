@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C23</ID>
+<x0>344</x0>
+<y0>146</y0>
+<width>244</width>
+<height>20</height>
+<codetext>public int parseInt( JTextField txt ){
+  return( ( new Integer( 0 )).parseInt( txt.getText() ) );
+}
+</codetext>
+</codeclip>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<operation>
+<ID>~プログラム終了</ID>
+<state1>null</state1>
+<state2>null</state2>
+<x0>534</x0>
+<y0>81</y0>
+<width>129</width>
+<height>73</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>0</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>0</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>54</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>プログラム終了
+</description>
+<codetext>System.exit(0);
+</codetext>
+</operation>

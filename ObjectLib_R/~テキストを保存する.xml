@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C22</ID>
+<x0>352</x0>
+<y0>372</y0>
+<width>317</width>
+<height>191</height>
+<codetext>// テキストを保存する
+file_save:
+  char outfile$(FILE_SIZE)
+  pp#=
+  pp#, outfile, wopen tt#=
+  if tt#=ERROR then end
+  textarea, -&gt;TextArea.text# pp#= strlen tt#=
+  tt#, pp#, outfile, _write
+  outfile, wclose
+  end
+</codetext>
+</codeclip>

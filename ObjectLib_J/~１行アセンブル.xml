@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C8</ID>
+<x0>113</x0>
+<y0>16</y0>
+<width>300</width>
+<height>34</height>
+<codetext>/* １行アセンブル */
+public int asm_1line( String xbuf, int pass ){
+
+  line++;
+  ins_type = NONE;
+  address = location;
+  word_length = 0;
+  label = null;
+
+  String buf = xbuf, ref, statement, arg, term;
+  int operand[] = new int[8];
+  int state = 0, ref_pos, st_pos, value, operand_p, term_val, bit_width, bit_pos, i;
+  char op, op2=&apos;\0&apos;;
+
+if( debug) System.out.println(&quot;line&quot;+line+&quot;:&quot;+xbuf);
+
+  if(  buf.length()&lt;=0 ) return 0; // 空の場合は戻る
+
+  /* コメントをすてる */
+  if( ( i = buf.indexOf(&quot;//&quot;)) &gt;= 0 ) buf = buf.substring( 0,i );
+  if( ( i = buf.indexOf(&quot;/*&quot;)) &gt;= 0 ) buf = buf.substring( 0,i );
+
+  if(  buf.length()&lt;=0 ) return 0; // 空の場合は戻る
+
+  /* 末尾の不要なスペースをすてる */
+  for( i = buf.length() - 1; i &gt;= 0 &amp;&amp; buf.charAt(i) == &apos; &apos;; i-- ) ;
+  buf= buf.substring(0, i+1);
+
+  if(  buf.length()&lt;=0 ) return 0; // 空の場合は戻る
+
+  /* ラベルがあれば格納する */
+  if( buf.charAt(0) != &apos; &apos; ){
+    for( i = 0; i &lt; buf.length() &amp;&amp; buf.charAt(i) != &apos; &apos; &amp;&amp; buf.charAt(i) != &apos;:&apos;; i++) ;
+    label = buf.substring(0,i);
+    buf = buf.substring(i);
+  }
+
+  /* ステートメントを格納する */
+  if(  buf.length()&lt;=0 ) return 0; // 空の場合は戻る
+  for( i = 0; i &lt; buf.length() &amp;&amp; (buf.charAt(i) == &apos; &apos; || buf.charAt(i) == &apos;:&apos;); i++) ;
+  if( i &gt;= buf.length() ) return 0; // 空の場合は戻る
+  statement = buf.substring(i);
+
+  /* 命令定義データをよみこむ */
+  restore();
+  while( read_p &lt; ins_data.length ){
+    state = 0;
+    ref = read();
+    ins_type = read_int();
+    word_length = read_int();
+if(debug) System.out.println(&quot;ref=&quot;+ref);
+if(debug)System.out.println(&quot;ins_type=&quot;+ins_type);
+if(debug)System.out.println(&quot;word_length=&quot;+word_length);
+
+    /* 命令コードのよみこみ */
+    for( i = 0; i &lt; word_length * 4; i++ ) ins[ i ] = read_int();
+
+    /* オペランドのクリア */
+    for( i = 0; i &lt; 8; i++ ) operand[ i ] = 0;
+    operand[0] = location + word_length;
+    operand[1] = location + word_length;
+    operand_p = 2;
+
+    /* 文字パターンの比較 */
+    ref_pos = 0;
+    st_pos = 0;
+    while( ref_pos&lt; ref.length() ){
+
+      /* スペースのとき */
+      if( ref.charAt(ref_pos) == &apos; &apos; ){
+if(debug) System.out.println(&quot;case spase&quot;);
+        ref_pos++;
+        if( statement.charAt(st_pos) != &apos; &apos; ) { state = NEXT_INS; break;}
+        while( st_pos &lt; statement.length() &amp;&amp; statement.charAt(st_pos) == &apos; &apos; ){ st_pos++;}
+        if( st_pos &gt;= statement.length() &amp;&amp; ref_pos &lt; ref.length() ) { state = NEXT_INS; break;}
+	  }
+
+      /* \ : 引数のとき */
+      else if( ref.charAt(ref_pos) == &apos;\\&apos; ){
+if(debug) System.out.println(&quot;case argument&quot;);
+        ref_pos++;
+
+        /* 引数を格納する */
+        if( ref_pos &gt;= ref.length() ){ arg = statement.substring(st_pos); st_pos = statement.length();}
+        else{
+          arg = &quot;&quot;;
+          while( st_pos &lt; statement.length() &amp;&amp; statement.charAt(st_pos) != ref.charAt(ref_pos) ){
+            arg = arg + statement.charAt(st_pos++);
+          }
+          if( st_pos &gt;= statement.length() &amp;&amp; ref_pos &lt; ref.length() ) { state = NEXT_INS; break;}
+        }
+
+if(debug) System.out.println(&quot;argument=&quot;+arg);
+
+        /* 引数を評価する */
+        if( arg.length() == 0 ) { state = NEXT_INS; break;}
+
+        /* 通常の数式として評価 */
+        else{
+          op   = &apos;+&apos;;
+          value = 0;
+          while( op != &apos;\0&apos; ){
+
+            /* &apos;+&apos;, &apos;-&apos;, &apos;.&apos;演算子を探す */
+            for( i = 0; i &lt; arg.length() &amp;&amp; ( op2 = arg.charAt(i) ) != &apos;+&apos; &amp;&amp; op2 != &apos;-&apos; &amp;&amp; op2 != &apos;.&apos;; i++ ) ;
+            if( i &gt;= arg.length()) op2 = &apos;\0&apos;;
+            if( op2== &apos;.&apos; ){
+              if( i+1 &gt;= arg.length() ){ state = NEXT_INS; break; }
+              if( arg.charAt(i+1) == &apos;h&apos; ) op2 = &apos;h&apos;;
+              if( arg.charAt(i+1) == &apos;m&apos; ) op2 = &apos;m&apos;;
+              if( arg.charAt(i+1) == &apos;l&apos; ) op2 = &apos;l&apos;;
+                 } 
+            term_val = 0;
+		 term = arg.substring(0,i);
+            if( op2 == &apos;h&apos; || op2 == &apos;m&apos; || op2 == &apos;l&apos; ) i++;
+		 if( i+1 &gt;= arg.length() ) arg = &quot;&quot;; else  arg = arg.substring(i+1);
+
+if(debug) System.out.println(&quot;term=&quot;+term);
+
+            if( term.length() == 0){ 
+              if( op2 == &apos;\0&apos; &amp;&amp;( op == &apos;+&apos; || op == &apos;-&apos; ) ){ // 最後が&apos;+&apos;か&apos;-&apos;で終わるようならエラー
+                state = NEXT_INS;
+                break;
+                    }
+                 }
+            else{
+              switch( term.charAt(0) ){
+
+              /* 先頭に&apos;0&apos; があるとき */
+              case &apos;0&apos;:
+                if( term.length() == 1 ) term_val =0;
+                else{
+                  switch( term.charAt(1) ){
+                  case &apos;b&apos;: case &apos;B&apos;:
+                    term_val = xatoi( term.substring(2), 2 );
+                    break;
+                  case &apos;0&apos;: case &apos;1&apos;: case &apos;2&apos;: case &apos;3&apos;: case &apos;4&apos;: case &apos;5&apos;: case &apos;6&apos;: case &apos;7&apos;: case &apos;8&apos;: case &apos;9&apos;:
+                    term_val = xatoi( term.substring(1), 8 );
+                    break;
+                  case &apos;x&apos;: case &apos;X&apos;:
+
+if(debug) System.out.println(&quot;case hex-decimal&quot;);
+
+                    term_val = xatoi( term.substring(2), 16 );
+                    break;
+                  default:
+                    term_val = 0;
+                    break;
+                  }
+                }
+                break;
+
+              /* &apos;1&apos;から&apos;9&apos;のときは10進数とみなす */
+              case &apos;1&apos;: case &apos;2&apos;: case &apos;3&apos;: case &apos;4&apos;: case &apos;5&apos;: case &apos;6&apos;: case &apos;7&apos;: case &apos;8&apos;: case &apos;9&apos;:
+                term_val = xatoi( term, 10 );
+                break;
+
+              /* それ以外の文字が出てきたら現在のロケーションかラベルとみなす */
+              default:
+                if( term.equals(&quot;$&quot;)) term_val = location;
+                else if( (term_val = serch_label( term )) == NO_LABEL &amp;&amp; pass == 2 ) { state = NEXT_INS; break;}
+                break;
+              }
+              if( state == NEXT_INS ) break;
+            }
+
+            /* 演算処理 */
+            switch( op ){
+            case &apos;+&apos;: value += term_val; break;
+            case &apos;-&apos;: value -= term_val; break;
+            case &apos;h&apos;: value = (value&gt;&gt;8) &amp; 0x0f; break;
+            case &apos;m&apos;: value = (value&gt;&gt;4) &amp; 0x0f; break;
+            case &apos;l&apos;: value = value &amp; 0x0f; break;
+            }
+            op = op2;
+          }
+          if( state == NEXT_INS ) break;
+        }
+
+        /* 評価した引数の値をビット列に変換する */
+        operand[operand_p++] = value;
+      }
+
+      /* その他の文字のとき */
+      else{
+
+        if( ( ref_pos &gt;= ref.length() ) != ( st_pos &gt;= statement.length() ) || ref.charAt(ref_pos++) != statement.charAt(st_pos++) ) { state = NEXT_INS; break;}
+      }
+
+    }
+    if( state == NEXT_INS ){
+
+if(debug) System.out.println(&quot;next_ins1&quot;);
+
+     next_ins();
+     continue;
+      }
+
+    /* 正常終了 */
+    if( st_pos &gt;= statement.length() ){
+
+      /* 命令コードの生成 */
+      for( i = 0; ( bit_width = read_int() ) &gt;= 0; i++ ){
+        bit_pos = read_int();
+
+if(debug) System.out.println(&quot;bit_width=&quot;+bit_width+&quot;,bit_pos=&quot;+bit_pos);
+
+        bit_copy( operand, i, ins, bit_width, bit_pos );
+      }
+
+      switch( ins_type ){
+
+      case NORMAL:
+        location += word_length;
+        break;
+
+      case ORG:
+        location = operand[2];
+        break;
+
+      case EQU:
+        address = operand[2];
+        break;
+
+      case ALIGN16:
+        if( location % 16 &gt; 0 ) location = (location / 16) * 16 + 16;
+        break;
+
+      case ALIGN256:
+        if( location % 256 &gt; 0 ) location = (location / 256) *256  + 256;
+        break;
+
+      }        
+      return 0;
+    }
+
+if(debug) System.out.println(&quot;statement=&quot;+statement);
+if(debug) System.out.println(&quot;st_pos=&quot;+st_pos);
+if(debug) System.out.println(&quot;字余り&quot;);
+if(debug) System.out.println(&quot;next_ins2&quot;);
+    next_ins();
+    state = 0;
+  }
+
+  /* エラー終了 */
+  word_length = 0;
+  ins_type = NONE;
+  return 1;
+}
+</codetext>
+</codeclip>

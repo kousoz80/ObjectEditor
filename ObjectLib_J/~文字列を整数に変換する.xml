@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C25</ID>
+<x0>742</x0>
+<y0>82</y0>
+<width>168</width>
+<height>35</height>
+<codetext>// 文字列を整数に変換する
+int xparseInt( String s ){
+ int n;
+ for( n = 0; n &lt; s.length() &amp;&amp; s.charAt(n)&gt;=&apos;0&apos; &amp;&amp; s.charAt(n)&lt;=&apos;9&apos;; n++ ) ;
+ if( n &lt; 1 ) return 0;
+ return Integer.parseInt( s.substring(0,n) );
+}
+</codetext>
+</codeclip>

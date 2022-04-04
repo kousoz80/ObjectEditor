@@ -1,0 +1,6931 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<xobject>
+<ID>project</ID>
+<x0>0</x0>
+<y0>0</y0>
+<width>200</width>
+<height>100</height>
+<ID_maker>8</ID_maker>
+<objectname>銀河シミュレータ</objectname>
+<description>新規のアプリケーション</description>
+<codeclip>
+<ID>_CSTART</ID>
+<x0>10</x0>
+<y0>10</y0>
+<width>80</width>
+<height>24</height>
+<codetext> String[] ARGS;
+</codetext>
+</codeclip>
+<pin>
+<ID>_PSTART</ID>
+<x0>10</x0>
+<y0>40</y0>
+<width>55</width>
+<height>24</height>
+<text>Start()</text>
+<px>50</px>
+<py>50</py>
+</pin>
+<xobject>
+<ID>_X4</ID>
+<x0>105</x0>
+<y0>37</y0>
+<width>137</width>
+<height>55</height>
+<ID_maker>13</ID_maker>
+<objectname>Galaxy_Symulator</objectname>
+<description>多体質点シュミレータ
+(コンパイルはNewApplicationオブジェクトを開いてからして下さい)
+</description>
+<xobject>
+<ID>_X0</ID>
+<x0>380</x0>
+<y0>47</y0>
+<width>180</width>
+<height>77</height>
+<ID_maker>56</ID_maker>
+<objectname>Symulator</objectname>
+<description>新規のアプリケーション</description>
+<xobject>
+<ID>_X1</ID>
+<x0>489</x0>
+<y0>2</y0>
+<width>226</width>
+<height>197</height>
+<ID_maker>42</ID_maker>
+<objectname>_3D_Plotter</objectname>
+<description>新しいオブジェクト</description>
+<pin>
+<ID>_P0</ID>
+<x0>0</x0>
+<y0>89</y0>
+<width>44</width>
+<height>27</height>
+<text>plot()</text>
+<px>165</px>
+<py>171</py>
+</pin>
+<pin>
+<ID>_P1</ID>
+<x0>0</x0>
+<y0>24</y0>
+<width>123</width>
+<height>29</height>
+<text>Screen_is(JLabel l)</text>
+<px>0</px>
+<py>29</py>
+</pin>
+<pin>
+<ID>_P2</ID>
+<x0>0</x0>
+<y0>206</y0>
+<width>95</width>
+<height>30</height>
+<text>HomePosition()</text>
+<px>1</px>
+<py>48</py>
+</pin>
+<pin>
+<ID>_P3</ID>
+<x0>344</x0>
+<y0>205</y0>
+<width>60</width>
+<height>30</height>
+<text>GO()</text>
+<px>0</px>
+<py>66</py>
+</pin>
+<pin>
+<ID>_P4</ID>
+<x0>348</x0>
+<y0>278</y0>
+<width>60</width>
+<height>30</height>
+<text>BACK()</text>
+<px>0</px>
+<py>85</py>
+</pin>
+<pin>
+<ID>_P5</ID>
+<x0>0</x0>
+<y0>447</y0>
+<width>76</width>
+<height>29</height>
+<text>turnLeft()</text>
+<px>0</px>
+<py>102</py>
+</pin>
+<pin>
+<ID>_P6</ID>
+<x0>0</x0>
+<y0>383</y0>
+<width>79</width>
+<height>30</height>
+<text>turnRight()</text>
+<px>0</px>
+<py>121</py>
+</pin>
+<pin>
+<ID>_P7</ID>
+<x0>2</x0>
+<y0>329</y0>
+<width>70</width>
+<height>30</height>
+<text>turnAbove()</text>
+<px>0</px>
+<py>138</py>
+</pin>
+<pin>
+<ID>_P8</ID>
+<x0>0</x0>
+<y0>269</y0>
+<width>79</width>
+<height>33</height>
+<text>turnBelow()</text>
+<px>0</px>
+<py>157</py>
+</pin>
+<pin>
+<ID>_P9</ID>
+<x0>324</x0>
+<y0>369</y0>
+<width>90</width>
+<height>29</height>
+<text>turnOpposite()</text>
+<px>3</px>
+<py>178</py>
+</pin>
+<pin>
+<ID>_P13</ID>
+<x0>0</x0>
+<y0>147</y0>
+<width>105</width>
+<height>30</height>
+<text>paint(Graphics g)</text>
+<px>120</px>
+<py>4</py>
+</pin>
+<operation>
+<ID>_O15</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>146</x0>
+<y0>1</y0>
+<width>150</width>
+<height>62</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JLabel l)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>43</inpiny0>
+<inpinwidth>76</inpinwidth>
+<inpinheight>19</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>スクリーンを取得する</description>
+<codetext>screen = l;
+move_step = 20.;
+rot_step = 3.1416/40.;
+rot_sin = Math.sin(rot_step);
+rot_cos = Math.cos(rot_step);
+HomePosition();
+</codetext>
+</operation>
+<relation>
+<ID>_R16</ID>
+<pin1name>_P1</pin1name>
+<pin2name>_O15</pin2name>
+</relation>
+<codeclip>
+<ID>_C17</ID>
+<x0>336</x0>
+<y0>2</y0>
+<width>224</width>
+<height>160</height>
+<codetext>double site1x=1.,site1y=0.,site1z=0.;
+double site2x=0.,site2y=1.,site2z=0.;
+double site0x=0.,site0y=0.,site0z=1.;
+double o1=100.,o2=100.;
+double ox=0.,oy=0.,oz=-1000.;
+double move_step=20.,rot_step;
+double rot_sin,rot_cos;
+ 
+JLabel screen;
+</codetext>
+</codeclip>
+<operation>
+<ID>_O19</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>147</x0>
+<y0>67</y0>
+<width>148</width>
+<height>58</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>34</inpiny0>
+<inpinwidth>30</inpinwidth>
+<inpinheight>24</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>星を表示する</description>
+<codetext>if( screen != null ) screen.repaint();
+</codetext>
+</operation>
+<relation>
+<ID>_R20</ID>
+<pin1name>_P0</pin1name>
+<pin2name>_O19</pin2name>
+</relation>
+<operation>
+<ID>_O21</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>148</x0>
+<y0>128</y0>
+<width>147</width>
+<height>58</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(Graphics g)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>38</inpiny0>
+<inpinwidth>86</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>スクリーンを表示する</description>
+<codetext>double rx,ry,rz;
+double disp1,disp2,disp0,disp;
+int i;
+
+if( ( screen == null ) || ( px == null ) ) return;
+o1 = screen.getWidth() / 2.;
+o2 = screen.getHeight() / 2.;
+g.setColor( Color.white );
+for( i = 0; i &lt; NumberOfStars; i++){
+  rx = px[i] - ox;
+  ry = py[i] - oy;
+  rz = pz[i] - oz;
+  disp1 = site1x * rx + site1y * ry + site1z * rz;
+  disp2 = site2x * rx + site2y * ry + site2z * rz;
+  disp0 = site0x * rx + site0y * ry + site0z * rz;
+  disp = Math.sqrt( disp1*disp1 + disp2*disp2 + disp0*disp0 );
+  if( disp0 &gt; 0 ) g.drawOval( (int)( o1 * ( 1 +  disp1/disp ) ), (int)( o2 * ( 1 - disp2/disp ) ), 1, 1 );
+}
+ 
+</codetext>
+</operation>
+<relation>
+<ID>_R22</ID>
+<pin1name>_P13</pin1name>
+<pin2name>_O21</pin2name>
+</relation>
+<operation>
+<ID>_O23</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>147</x0>
+<y0>189</y0>
+<width>146</width>
+<height>55</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>35</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>視点を原点に戻す</description>
+<codetext>ox = 0.;
+oy = 0.;
+oz = -1000;
+site1x = 1.; site1y = 0.; site1z = 0.;
+site2x = 0.; site2y = 1.; site2z = 0.;
+site0x = 0.; site0y = 0.; site0z = 1.;
+screen.repaint();
+
+</codetext>
+</operation>
+<relation>
+<ID>_R24</ID>
+<pin1name>_P2</pin1name>
+<pin2name>_O23</pin2name>
+</relation>
+<operation>
+<ID>_O25</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>147</x0>
+<y0>249</y0>
+<width>148</width>
+<height>55</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>35</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>視点を下方に移す</description>
+<codetext>site0x = rot_cos * site0x - rot_sin * site2x;
+site0y = rot_cos * site0y - rot_sin * site2y;
+site0z = rot_cos * site0z - rot_sin * site2z;
+site2x = rot_sin * site0x + rot_cos * site2x;
+site2y = rot_sin * site0y + rot_cos * site2y;
+site2z = rot_sin * site0z + rot_cos * site2z;
+screen.repaint();
+ 
+</codetext>
+</operation>
+<relation>
+<ID>_R26</ID>
+<pin1name>_P8</pin1name>
+<pin2name>_O25</pin2name>
+</relation>
+<operation>
+<ID>_O29</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>148</x0>
+<y0>309</y0>
+<width>145</width>
+<height>55</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>35</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>視点を上方に移す</description>
+<codetext>site0x =  rot_cos * site0x + rot_sin * site2x;
+site0y =  rot_cos * site0y + rot_sin * site2y;
+site0z =  rot_cos * site0z + rot_sin * site2z;
+site2x = -rot_sin * site0x + rot_cos * site2x;
+site2y = -rot_sin * site0y + rot_cos * site2y;
+site2z = -rot_sin * site0z + rot_cos * site2z;
+screen.repaint();
+ 
+</codetext>
+</operation>
+<operation>
+<ID>_O30</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>151</x0>
+<y0>370</y0>
+<width>145</width>
+<height>55</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>35</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>視点を右に移す</description>
+<codetext>site0x =  rot_cos * site0x + rot_sin * site1x;
+site0y =  rot_cos * site0y + rot_sin * site1y;
+site0z =  rot_cos * site0z + rot_sin * site1z;
+site1x = -rot_sin * site0x + rot_cos * site1x;
+site1y = -rot_sin * site0y + rot_cos * site1y;
+site1z = -rot_sin * site0z + rot_cos * site1z;
+screen.repaint();
+ 
+</codetext>
+</operation>
+<operation>
+<ID>_O31</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>152</x0>
+<y0>433</y0>
+<width>145</width>
+<height>55</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>35</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>視点を左に移す</description>
+<codetext>site0x = rot_cos * site0x - rot_sin * site1x;
+site0y = rot_cos * site0y - rot_sin * site1y;
+site0z = rot_cos * site0z - rot_sin * site1z;
+site1x = rot_sin * site0x + rot_cos * site1x;
+site1y = rot_sin * site0y + rot_cos * site1y;
+site1z = rot_sin * site0z + rot_cos * site1z;
+screen.repaint();
+ 
+</codetext>
+</operation>
+<relation>
+<ID>_R32</ID>
+<pin1name>_P7</pin1name>
+<pin2name>_O29</pin2name>
+</relation>
+<relation>
+<ID>_R33</ID>
+<pin1name>_P6</pin1name>
+<pin2name>_O30</pin2name>
+</relation>
+<relation>
+<ID>_R34</ID>
+<pin1name>_P5</pin1name>
+<pin2name>_O31</pin2name>
+</relation>
+<operation>
+<ID>_O35</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>454</x0>
+<y0>193</y0>
+<width>131</width>
+<height>54</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>34</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>視点を前方に移動</description>
+<codetext>ox = ox + site0x * move_step;
+oy = oy + site0y * move_step;
+oz = oz + site0z * move_step;
+screen.repaint();
+</codetext>
+</operation>
+<relation>
+<ID>_R36</ID>
+<pin1name>_P3</pin1name>
+<pin2name>_O35</pin2name>
+</relation>
+<operation>
+<ID>_O38</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>453</x0>
+<y0>268</y0>
+<width>131</width>
+<height>54</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>34</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>視点を後方に移動</description>
+<codetext>ox = ox - site0x * move_step;
+oy = oy - site0y * move_step;
+oz = oz - site0z * move_step;
+screen.repaint();
+</codetext>
+</operation>
+<relation>
+<ID>_R39</ID>
+<pin1name>_P4</pin1name>
+<pin2name>_O38</pin2name>
+</relation>
+<operation>
+<ID>_O40</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>459</x0>
+<y0>356</y0>
+<width>127</width>
+<height>53</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>33</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>視点を反転する</description>
+<codetext>site1z = -site1z;
+site2z = -site2z;
+site0z = -site0z;
+screen.repaint();
+</codetext>
+</operation>
+<relation>
+<ID>_R41</ID>
+<pin1name>_P9</pin1name>
+<pin2name>_O40</pin2name>
+</relation>
+</xobject>
+<xobject>
+<ID>_X2</ID>
+<x0>490</x0>
+<y0>205</y0>
+<width>226</width>
+<height>136</height>
+<ID_maker>44</ID_maker>
+<objectname>Recorder</objectname>
+<description>新しいオブジェクト</description>
+<pin>
+<ID>_P0</ID>
+<x0>23</x0>
+<y0>414</y0>
+<width>91</width>
+<height>27</height>
+<text>Play_Pause()</text>
+<px>0</px>
+<py>46</py>
+</pin>
+<pin>
+<ID>_P1</ID>
+<x0>14</x0>
+<y0>380</y0>
+<width>126</width>
+<height>26</height>
+<text>Button_is(JButton b)</text>
+<px>2</px>
+<py>29</py>
+</pin>
+<pin>
+<ID>_P2</ID>
+<x0>546</x0>
+<y0>175</y0>
+<width>38</width>
+<height>28</height>
+<text>FF()</text>
+<px>0</px>
+<py>65</py>
+</pin>
+<pin>
+<ID>_P3</ID>
+<x0>27</x0>
+<y0>297</y0>
+<width>60</width>
+<height>30</height>
+<text>Rew()</text>
+<px>0</px>
+<py>80</py>
+</pin>
+<pin>
+<ID>_P4</ID>
+<x0>16</x0>
+<y0>99</y0>
+<width>118</width>
+<height>28</height>
+<text>Slider_is(JSlider s)</text>
+<px>0</px>
+<py>97</py>
+</pin>
+<pin>
+<ID>_P5</ID>
+<x0>21</x0>
+<y0>204</y0>
+<width>89</width>
+<height>32</height>
+<text>read( int n)</text>
+<px>0</px>
+<py>116</py>
+</pin>
+<pin>
+<ID>_P6</ID>
+<x0>728</x0>
+<y0>136</y0>
+<width>33</width>
+<height>24</height>
+<text>in()</text>
+<px>125</px>
+<py>116</py>
+</pin>
+<pin>
+<ID>_P7</ID>
+<x0>360</x0>
+<y0>256</y0>
+<width>77</width>
+<height>25</height>
+<text>out()</text>
+<px>120</px>
+<py>9</py>
+</pin>
+<codeclip>
+<ID>_C8</ID>
+<x0>349</x0>
+<y0>0</y0>
+<width>162</width>
+<height>57</height>
+<codetext>JSlider slider=null;
+int counter=0;
+int max=0;
+</codetext>
+</codeclip>
+<aobject>
+<ID>_A10</ID>
+<x0>365</x0>
+<y0>351</y0>
+<width>147</width>
+<height>71</height>
+<ID_maker>11</ID_maker>
+<objectname>Interval_Timer</objectname>
+<description>新しいオブジェクト</description>
+<state>
+<ID>_SINIT</ID>
+<x0>188</x0>
+<y0>270</y0>
+<width>70</width>
+<height>40</height>
+<text>  初期状態</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_P0</ID>
+<x0>688</x0>
+<y0>258</y0>
+<width>60</width>
+<height>30</height>
+<text>Play()</text>
+<px>12</px>
+<py>33</py>
+</pin>
+<pin>
+<ID>_P1</ID>
+<x0>693</x0>
+<y0>344</y0>
+<width>60</width>
+<height>30</height>
+<text>Pause()</text>
+<px>12</px>
+<py>51</py>
+</pin>
+<pin>
+<ID>_P2</ID>
+<x0>476</x0>
+<y0>155</y0>
+<width>60</width>
+<height>30</height>
+<text>Action()</text>
+<px>99</px>
+<py>47</py>
+</pin>
+<codeclip>
+<ID>_C3</ID>
+<x0>200</x0>
+<y0>5</y0>
+<width>272</width>
+<height>198</height>
+<codetext>XTimer  timer;
+class XTimer implements ActionListener{
+  javax.swing.Timer unit;
+ 
+  XTimer( int del ){
+   unit = new javax.swing.Timer( del, this );
+  }
+
+  public void actionPerformed( ActionEvent e){
+    Action();
+  }
+
+}
+</codetext>
+</codeclip>
+<codeclip>
+<ID>_C4</ID>
+<x0>228</x0>
+<y0>228</y0>
+<width>211</width>
+<height>23</height>
+<codetext>int delay = 10; //インターバル間隔
+</codetext>
+</codeclip>
+<state>
+<ID>_S5</ID>
+<x0>415</x0>
+<y0>274</y0>
+<width>70</width>
+<height>40</height>
+<text>       状態1</text>
+<isinitstate>0</isinitstate>
+</state>
+<operation>
+<ID>_O6</ID>
+<state1>_SINIT</state1>
+<state2>_S5</state2>
+<x0>275</x0>
+<y0>319</y0>
+<width>126</width>
+<height>59</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>0</inconnecty0>
+<outconnectx0>100</outconnectx0>
+<outconnecty0>0</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>20</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>0</inpinlinkcount>
+<description>タイマー生成･設定</description>
+<codetext>timer = new XTimer( delay );
+</codetext>
+</operation>
+<operation>
+<ID>_O7</ID>
+<state1>_S5</state1>
+<state2>_S5</state2>
+<x0>522</x0>
+<y0>229</y0>
+<width>130</width>
+<height>53</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>34</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>タイマースタート</description>
+<codetext>timer.unit.start();
+</codetext>
+</operation>
+<operation>
+<ID>_O8</ID>
+<state1>_S5</state1>
+<state2>_S5</state2>
+<x0>525</x0>
+<y0>314</y0>
+<width>129</width>
+<height>55</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>35</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>タイマーストップ</description>
+<codetext>timer.unit.stop();
+</codetext>
+</operation>
+<action>
+<ID>_A9</ID>
+<comp1name>_P0</comp1name>
+<comp2name>_O7</comp2name>
+</action>
+<action>
+<ID>_A10</ID>
+<comp1name>_P1</comp1name>
+<comp2name>_O8</comp2name>
+</action>
+</aobject>
+<aobject>
+<ID>_A11</ID>
+<x0>163</x0>
+<y0>348</y0>
+<width>177</width>
+<height>94</height>
+<ID_maker>17</ID_maker>
+<objectname>Button_Control</objectname>
+<description>新しいオブジェクト</description>
+<state>
+<ID>_SINIT</ID>
+<x0>5</x0>
+<y0>166</y0>
+<width>70</width>
+<height>40</height>
+<text>  初期状態</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_P0</ID>
+<x0>103</x0>
+<y0>358</y0>
+<width>129</width>
+<height>31</height>
+<text>Button_is(JButton b)</text>
+<px>0</px>
+<py>37</py>
+</pin>
+<pin>
+<ID>_P1</ID>
+<x0>380</x0>
+<y0>188</y0>
+<width>92</width>
+<height>27</height>
+<text>Play_Pause()</text>
+<px>0</px>
+<py>71</py>
+</pin>
+<pin>
+<ID>_P2</ID>
+<x0>611</x0>
+<y0>87</y0>
+<width>60</width>
+<height>30</height>
+<text>Play()</text>
+<px>132</px>
+<py>36</py>
+</pin>
+<pin>
+<ID>_P3</ID>
+<x0>618</x0>
+<y0>325</y0>
+<width>60</width>
+<height>30</height>
+<text>Pause()</text>
+<px>129</px>
+<py>54</py>
+</pin>
+<state>
+<ID>_S4</ID>
+<x0>203</x0>
+<y0>165</y0>
+<width>70</width>
+<height>40</height>
+<text>   Stop状態</text>
+<isinitstate>0</isinitstate>
+</state>
+<state>
+<ID>_S5</ID>
+<x0>514</x0>
+<y0>172</y0>
+<width>70</width>
+<height>40</height>
+<text>   RUN状態</text>
+<isinitstate>0</isinitstate>
+</state>
+<operation>
+<ID>_O6</ID>
+<state1>_SINIT</state1>
+<state2>_S4</state2>
+<x0>64</x0>
+<y0>227</y0>
+<width>141</width>
+<height>64</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>0</inconnecty0>
+<outconnectx0>127</outconnectx0>
+<outconnecty0>0</outconnecty0>
+<inpintext>in(JButton b)</inpintext>
+<inpinx0>65</inpinx0>
+<inpiny0>41</inpiny0>
+<inpinwidth>76</inpinwidth>
+<inpinheight>24</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>変数設定
+</description>
+<codetext>btn = b;
+</codetext>
+</operation>
+<codeclip>
+<ID>_C7</ID>
+<x0>80</x0>
+<y0>81</y0>
+<width>100</width>
+<height>20</height>
+<codetext>JButton btn;
+</codetext>
+</codeclip>
+<action>
+<ID>_A8</ID>
+<comp1name>_P0</comp1name>
+<comp2name>_O6</comp2name>
+</action>
+<operation>
+<ID>_O9</ID>
+<state1>_S4</state1>
+<state2>_S5</state2>
+<x0>316</x0>
+<y0>41</y0>
+<width>130</width>
+<height>90</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>65</inconnecty0>
+<outconnectx0>108</outconnectx0>
+<outconnecty0>70</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>71</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>51</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>Play信号を出す</description>
+<codetext>btn.setText(&quot;II&quot;);
+</codetext>
+</operation>
+<operation>
+<ID>_O10</ID>
+<state1>_S5</state1>
+<state2>_S4</state2>
+<x0>316</x0>
+<y0>282</y0>
+<width>130</width>
+<height>90</height>
+<inconnectx0>103</inconnectx0>
+<inconnecty0>0</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>3</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>28</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>48</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>2</inpinlinkcount>
+<description>Pause信号を出す
+</description>
+<codetext>btn.setText(&quot;&gt;&quot;);
+</codetext>
+</operation>
+<action>
+<ID>_A11</ID>
+<comp1name>_P1</comp1name>
+<comp2name>_O9</comp2name>
+</action>
+<action>
+<ID>_A12</ID>
+<comp1name>_P1</comp1name>
+<comp2name>_O10</comp2name>
+</action>
+<action>
+<ID>_A13</ID>
+<comp1name>_O9</comp1name>
+<comp2name>_P2</comp2name>
+</action>
+<action>
+<ID>_A14</ID>
+<comp1name>_O10</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+<pin>
+<ID>_P15</ID>
+<x0>542</x0>
+<y0>305</y0>
+<width>60</width>
+<height>30</height>
+<text>Break()</text>
+<px>128</px>
+<py>71</py>
+</pin>
+<action>
+<ID>_A16</ID>
+<comp1name>_P15</comp1name>
+<comp2name>_O10</comp2name>
+</action>
+</aobject>
+<relation>
+<ID>_R12</ID>
+<pin1name>_P1</pin1name>
+<pin2name>_A11(_P0)</pin2name>
+</relation>
+<relation>
+<ID>_R13</ID>
+<pin1name>_P0</pin1name>
+<pin2name>_A11(_P1)</pin2name>
+</relation>
+<relation>
+<ID>_R14</ID>
+<pin1name>_A11(_P2)</pin1name>
+<pin2name>_A10(_P0)</pin2name>
+</relation>
+<relation>
+<ID>_R15</ID>
+<pin1name>_A11(_P3)</pin1name>
+<pin2name>_A10(_P1)</pin2name>
+</relation>
+<codeclip>
+<ID>_C17</ID>
+<x0>14</x0>
+<y0>25</y0>
+<width>126</width>
+<height>22</height>
+<codetext>void xread( int n ){
+  int i;
+  if( WorkFile != null ){
+    try{
+
+    if( n &gt;= 0 ){
+      WorkFile.seek( 4 + 3 * 8 * NumberOfStars * n );
+      for( i = 0;i &lt; NumberOfStars; i++){
+        px[i] = WorkFile.readDouble();
+      }
+      for( i = 0;i &lt; NumberOfStars; i++){
+        py[i] = WorkFile.readDouble();
+      }
+      for( i = 0;i &lt; NumberOfStars; i++){
+        pz[i] = WorkFile.readDouble();
+      }
+    }
+
+    } catch( IOException e ){}
+  }
+}
+</codetext>
+</codeclip>
+<operation>
+<ID>_O18</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>176</x0>
+<y0>56</y0>
+<width>125</width>
+<height>68</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JSlider s)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>46</inpiny0>
+<inpinwidth>75</inpinwidth>
+<inpinheight>23</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>変数設定
+ファイルを開く
+</description>
+<codetext>slider = s;
+try{
+
+File  fil = new File( FileName );
+if( fil.exists() ) fil.delete();
+WorkFile = new RandomAccessFile( fil, &quot;rw&quot; );
+slider.setValue( slider.getMinimum() );
+
+} catch( IOException e ){}
+</codetext>
+</operation>
+<relation>
+<ID>_R19</ID>
+<pin1name>_P4</pin1name>
+<pin2name>_O18</pin2name>
+</relation>
+<operation>
+<ID>_O20</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>380</x0>
+<y0>127</y0>
+<width>137</width>
+<height>73</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>97</inpinx0>
+<inpiny0>52</inpiny0>
+<inpinwidth>41</inpinwidth>
+<inpinheight>21</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>0</outpinx0>
+<outpiny0>51</outpiny0>
+<outpinwidth>36</outpinwidth>
+<outpinheight>23</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>ファイルの最後尾に
+移動して表示</description>
+<codetext>xread( max-1 );
+update( max-1 );
+</codetext>
+</operation>
+<operation>
+<ID>_O21</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>173</x0>
+<y0>255</y0>
+<width>143</width>
+<height>67</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>47</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>107</outpinx0>
+<outpiny0>44</outpiny0>
+<outpinwidth>36</outpinwidth>
+<outpinheight>23</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>ファイルの先頭に
+移動して表示</description>
+<codetext>xread( 0 );
+update( 0 );
+</codetext>
+</operation>
+<operation>
+<ID>_O22</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>465</x0>
+<y0>212</y0>
+<width>134</width>
+<height>86</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>65</inpiny0>
+<inpinwidth>42</inpinwidth>
+<inpinheight>21</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>0</outpinx0>
+<outpiny0>46</outpiny0>
+<outpinwidth>43</outpinwidth>
+<outpinheight>21</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>counterを１つ進めて
+表示</description>
+<codetext>xread( counter );
+update( counter ); 
+counter++;
+</codetext>
+</operation>
+<operation>
+<ID>_O23</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>167</x0>
+<y0>164</y0>
+<width>138</width>
+<height>66</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(int n)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>46</inpiny0>
+<inpinwidth>58</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>102</outpinx0>
+<outpiny0>46</outpiny0>
+<outpinwidth>36</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>n番目のデータを
+表示
+</description>
+<codetext>int mx = slider.getMaximum();
+int mn = slider.getMinimum();
+int i = max * ( n - mn ) / ( mx +1 - mn );
+xread( i );
+counter = i;
+
+</codetext>
+</operation>
+<operation>
+<ID>_O24</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>621</x0>
+<y0>0</y0>
+<width>140</width>
+<height>75</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>107</inpinx0>
+<inpiny0>55</inpiny0>
+<inpinwidth>33</inpinwidth>
+<inpinheight>21</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>ファイルの末尾に
+データを追加する</description>
+<codetext>xwrite( max++ );
+</codetext>
+</operation>
+<relation>
+<ID>_R25</ID>
+<pin1name>_P2</pin1name>
+<pin2name>_O20</pin2name>
+</relation>
+<relation>
+<ID>_R26</ID>
+<pin1name>_P3</pin1name>
+<pin2name>_O21</pin2name>
+</relation>
+<relation>
+<ID>_R27</ID>
+<pin1name>_A10(_P2)</pin1name>
+<pin2name>_O22</pin2name>
+</relation>
+<relation>
+<ID>_R28</ID>
+<pin1name>_P6</pin1name>
+<pin2name>_O24</pin2name>
+</relation>
+<relation>
+<ID>_R29</ID>
+<pin1name>_P5</pin1name>
+<pin2name>_O23</pin2name>
+</relation>
+<relation>
+<ID>_R30</ID>
+<pin1name>_O22</pin1name>
+<pin2name>_P7</pin2name>
+</relation>
+<relation>
+<ID>_R31</ID>
+<pin1name>_O20</pin1name>
+<pin2name>_P7</pin2name>
+</relation>
+<relation>
+<ID>_R32</ID>
+<pin1name>_O23</pin1name>
+<pin2name>_P7</pin2name>
+</relation>
+<relation>
+<ID>_R33</ID>
+<pin1name>_O21</pin1name>
+<pin2name>_P7</pin2name>
+</relation>
+<operation>
+<ID>_O34</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>568</x0>
+<y0>351</y0>
+<width>159</width>
+<height>85</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>45</inpiny0>
+<inpinwidth>39</inpinwidth>
+<inpinheight>22</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>0</outpinx0>
+<outpiny0>66</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>条件: counter &gt;= max
+       タイマー停止</description>
+<codetext></codetext>
+</operation>
+<relation>
+<ID>_R38</ID>
+<pin1name>_O34</pin1name>
+<pin2name>_A11(_P15)</pin2name>
+</relation>
+<codeclip>
+<ID>_C39</ID>
+<x0>14</x0>
+<y0>3</y0>
+<width>126</width>
+<height>26</height>
+<codetext>void xwrite( int n ){
+  int i;
+  try{
+
+  if( n == 0 ){
+    WorkFile.seek(0);
+    WorkFile.writeInt(NumberOfStars);
+  }
+  else{
+    WorkFile.seek( 4 + 3 * 8 * NumberOfStars * n );
+  }
+  for( i = 0;i &lt; NumberOfStars; i++){
+    WorkFile.writeDouble(px[i]);
+  }
+  for( i = 0;i &lt; NumberOfStars; i++){
+    WorkFile.writeDouble(py[i]);
+  }
+  for( i = 0;i &lt; NumberOfStars; i++){
+    WorkFile.writeDouble(pz[i]);
+  }
+
+  } catch( IOException e ){}
+}
+</codetext>
+</codeclip>
+<codeclip>
+<ID>_C40</ID>
+<x0>14</x0>
+<y0>46</y0>
+<width>126</width>
+<height>21</height>
+<codetext>void update( int n ){
+  int mx = slider.getMaximum();
+  int mn = slider.getMinimum();
+  slider.setValue( mn + ( mx+1 - mn ) * n / max );
+  counter = n; 
+}
+</codetext>
+</codeclip>
+<relation>
+<ID>_R43</ID>
+<pin1name>_O22</pin1name>
+<pin2name>_O34</pin2name>
+</relation>
+</xobject>
+<xobject>
+<ID>_X3</ID>
+<x0>493</x0>
+<y0>350</y0>
+<width>224</width>
+<height>133</height>
+<ID_maker>35</ID_maker>
+<objectname>Symulator_Unit</objectname>
+<description>新しいオブジェクト</description>
+<pin>
+<ID>_P0</ID>
+<x0>121</x0>
+<y0>371</y0>
+<width>123</width>
+<height>27</height>
+<text>Button_is(JButton b)</text>
+<px>0</px>
+<py>34</py>
+</pin>
+<pin>
+<ID>_P1</ID>
+<x0>25</x0>
+<y0>370</y0>
+<width>73</width>
+<height>29</height>
+<text>Run_Stop()</text>
+<px>0</px>
+<py>50</py>
+</pin>
+<pin>
+<ID>_P3</ID>
+<x0>428</x0>
+<y0>285</y0>
+<width>39</width>
+<height>30</height>
+<text>plot()</text>
+<px>161</px>
+<py>16</py>
+</pin>
+<aobject>
+<ID>_A14</ID>
+<x0>232</x0>
+<y0>236</y0>
+<width>159</width>
+<height>94</height>
+<ID_maker>11</ID_maker>
+<objectname>Interval_Timer</objectname>
+<description>新しいオブジェクト</description>
+<state>
+<ID>_SINIT</ID>
+<x0>188</x0>
+<y0>270</y0>
+<width>70</width>
+<height>40</height>
+<text>  初期状態</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_P0</ID>
+<x0>688</x0>
+<y0>258</y0>
+<width>60</width>
+<height>30</height>
+<text>Run()</text>
+<px>14</px>
+<py>53</py>
+</pin>
+<pin>
+<ID>_P1</ID>
+<x0>693</x0>
+<y0>344</y0>
+<width>60</width>
+<height>30</height>
+<text>Stop()</text>
+<px>12</px>
+<py>69</py>
+</pin>
+<pin>
+<ID>_P2</ID>
+<x0>476</x0>
+<y0>155</y0>
+<width>60</width>
+<height>30</height>
+<text>Action()</text>
+<px>105</px>
+<py>56</py>
+</pin>
+<codeclip>
+<ID>_C3</ID>
+<x0>200</x0>
+<y0>5</y0>
+<width>272</width>
+<height>198</height>
+<codetext>XTimer  timer;
+class XTimer implements ActionListener{
+  javax.swing.Timer unit;
+ 
+  XTimer( int del ){
+   unit = new javax.swing.Timer( del, this );
+  }
+
+  public void actionPerformed( ActionEvent e){
+    Action();
+  }
+
+}
+</codetext>
+</codeclip>
+<codeclip>
+<ID>_C4</ID>
+<x0>228</x0>
+<y0>228</y0>
+<width>211</width>
+<height>23</height>
+<codetext>int delay = 1; //インターバル間隔
+</codetext>
+</codeclip>
+<state>
+<ID>_S5</ID>
+<x0>415</x0>
+<y0>274</y0>
+<width>70</width>
+<height>40</height>
+<text>       状態1</text>
+<isinitstate>0</isinitstate>
+</state>
+<operation>
+<ID>_O6</ID>
+<state1>_SINIT</state1>
+<state2>_S5</state2>
+<x0>275</x0>
+<y0>319</y0>
+<width>126</width>
+<height>59</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>0</inconnecty0>
+<outconnectx0>100</outconnectx0>
+<outconnecty0>0</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>20</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>0</inpinlinkcount>
+<description>タイマー生成･設定</description>
+<codetext>timer = new XTimer( delay );
+</codetext>
+</operation>
+<operation>
+<ID>_O7</ID>
+<state1>_S5</state1>
+<state2>_S5</state2>
+<x0>522</x0>
+<y0>229</y0>
+<width>130</width>
+<height>53</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>34</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>タイマースタート</description>
+<codetext>timer.unit.start();
+</codetext>
+</operation>
+<operation>
+<ID>_O8</ID>
+<state1>_S5</state1>
+<state2>_S5</state2>
+<x0>525</x0>
+<y0>314</y0>
+<width>129</width>
+<height>55</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>35</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>タイマーストップ</description>
+<codetext>timer.unit.stop();
+</codetext>
+</operation>
+<action>
+<ID>_A9</ID>
+<comp1name>_P0</comp1name>
+<comp2name>_O7</comp2name>
+</action>
+<action>
+<ID>_A10</ID>
+<comp1name>_P1</comp1name>
+<comp2name>_O8</comp2name>
+</action>
+</aobject>
+<aobject>
+<ID>_A18</ID>
+<x0>38</x0>
+<y0>253</y0>
+<width>177</width>
+<height>76</height>
+<ID_maker>15</ID_maker>
+<objectname>Button_Control</objectname>
+<description>新しいオブジェクト</description>
+<state>
+<ID>_SINIT</ID>
+<x0>5</x0>
+<y0>166</y0>
+<width>70</width>
+<height>40</height>
+<text>  初期状態</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_P0</ID>
+<x0>103</x0>
+<y0>358</y0>
+<width>129</width>
+<height>31</height>
+<text>Button_is(JButton b)</text>
+<px>7</px>
+<py>30</py>
+</pin>
+<pin>
+<ID>_P1</ID>
+<x0>356</x0>
+<y0>187</y0>
+<width>60</width>
+<height>30</height>
+<text>Run_Stop()</text>
+<px>0</px>
+<py>49</py>
+</pin>
+<pin>
+<ID>_P2</ID>
+<x0>611</x0>
+<y0>87</y0>
+<width>60</width>
+<height>30</height>
+<text>Run()</text>
+<px>132</px>
+<py>36</py>
+</pin>
+<pin>
+<ID>_P3</ID>
+<x0>618</x0>
+<y0>325</y0>
+<width>60</width>
+<height>30</height>
+<text>Stop()</text>
+<px>131</px>
+<py>52</py>
+</pin>
+<state>
+<ID>_S4</ID>
+<x0>203</x0>
+<y0>165</y0>
+<width>70</width>
+<height>40</height>
+<text>   Stop状態</text>
+<isinitstate>0</isinitstate>
+</state>
+<state>
+<ID>_S5</ID>
+<x0>514</x0>
+<y0>169</y0>
+<width>70</width>
+<height>40</height>
+<text>   RUN状態</text>
+<isinitstate>0</isinitstate>
+</state>
+<operation>
+<ID>_O6</ID>
+<state1>_SINIT</state1>
+<state2>_S4</state2>
+<x0>64</x0>
+<y0>227</y0>
+<width>141</width>
+<height>64</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>0</inconnecty0>
+<outconnectx0>127</outconnectx0>
+<outconnecty0>0</outconnecty0>
+<inpintext>in(JButton b)</inpintext>
+<inpinx0>65</inpinx0>
+<inpiny0>41</inpiny0>
+<inpinwidth>76</inpinwidth>
+<inpinheight>24</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>変数設定
+</description>
+<codetext>btn = b;
+</codetext>
+</operation>
+<codeclip>
+<ID>_C7</ID>
+<x0>80</x0>
+<y0>81</y0>
+<width>100</width>
+<height>20</height>
+<codetext>JButton btn;
+</codetext>
+</codeclip>
+<action>
+<ID>_A8</ID>
+<comp1name>_P0</comp1name>
+<comp2name>_O6</comp2name>
+</action>
+<operation>
+<ID>_O9</ID>
+<state1>_S4</state1>
+<state2>_S5</state2>
+<x0>316</x0>
+<y0>41</y0>
+<width>130</width>
+<height>90</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>65</inconnecty0>
+<outconnectx0>108</outconnectx0>
+<outconnecty0>70</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>71</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>51</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>RUN信号を出す</description>
+<codetext>btn.setText(&quot;Stop&quot;);
+</codetext>
+</operation>
+<operation>
+<ID>_O10</ID>
+<state1>_S5</state1>
+<state2>_S4</state2>
+<x0>326</x0>
+<y0>282</y0>
+<width>130</width>
+<height>90</height>
+<inconnectx0>103</inconnectx0>
+<inconnecty0>0</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>3</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>28</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>48</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>Stop信号を出す
+</description>
+<codetext>btn.setText(&quot;RUN&quot;);
+</codetext>
+</operation>
+<action>
+<ID>_A11</ID>
+<comp1name>_P1</comp1name>
+<comp2name>_O9</comp2name>
+</action>
+<action>
+<ID>_A12</ID>
+<comp1name>_P1</comp1name>
+<comp2name>_O10</comp2name>
+</action>
+<action>
+<ID>_A13</ID>
+<comp1name>_O9</comp1name>
+<comp2name>_P2</comp2name>
+</action>
+<action>
+<ID>_A14</ID>
+<comp1name>_O10</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+</aobject>
+<relation>
+<ID>_R19</ID>
+<pin1name>_A18(_P2)</pin1name>
+<pin2name>_A14(_P0)</pin2name>
+</relation>
+<relation>
+<ID>_R20</ID>
+<pin1name>_A18(_P3)</pin1name>
+<pin2name>_A14(_P1)</pin2name>
+</relation>
+<relation>
+<ID>_R21</ID>
+<pin1name>_P0</pin1name>
+<pin2name>_A18(_P0)</pin2name>
+</relation>
+<relation>
+<ID>_R22</ID>
+<pin1name>_P1</pin1name>
+<pin2name>_A18(_P1)</pin2name>
+</relation>
+<operation>
+<ID>_O24</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>491</x0>
+<y0>128</y0>
+<width>226</width>
+<height>66</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>48</inpiny0>
+<inpinwidth>35</inpinwidth>
+<inpinheight>19</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>179</outpinx0>
+<outpiny0>48</outpiny0>
+<outpinwidth>47</outpinwidth>
+<outpinheight>19</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>条件: ++Time%RecordingSpeed ==0
+　　データを間引いて記録する
+</description>
+<codetext></codetext>
+</operation>
+<pin>
+<ID>_P26</ID>
+<x0>665</x0>
+<y0>286</y0>
+<width>56</width>
+<height>28</height>
+<text>record()</text>
+<px>108</px>
+<py>59</py>
+</pin>
+<operation>
+<ID>_O29</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>339</x0>
+<y0>128</y0>
+<width>129</width>
+<height>67</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>47</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>88</outpinx0>
+<outpiny0>47</outpiny0>
+<outpinwidth>41</outpinwidth>
+<outpinheight>21</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>シュミレーションの
+計算をする</description>
+<codetext>int i, j;
+double ax=0,ay=0,az=0;
+double rx,ry,rz,r2,u;
+
+for( i = 0; i &lt; NumberOfStars; i++ ){
+  ax = ay = az = 0.;
+  for( j = 0; j &lt; NumberOfStars; j++){
+    if( j != i ){
+      rx = xx[j] - xx[i];
+      ry = yy[j] - yy[i];
+      rz = zz[j] - zz[i];
+      r2 = rx * rx + ry * ry + rz * rz;
+      u = Math.sqrt( r2 ) * ( 1 - Math.exp( -0.2 * r2 ) ) / r2 / r2 ;
+      ax += u * rx;
+      ay += u * ry;
+      az += u * rz;
+    }
+  }
+  vx[i] += ax;
+  vy[i] += ay;
+  vz[i] += az;
+}
+
+for( i = 0; i &lt; NumberOfStars; i++ ){
+  px[i] = xx[i] += vx[i];
+  py[i] = yy[i] += vy[i];
+  pz[i] = zz[i] += vz[i];
+}
+</codetext>
+</operation>
+<relation>
+<ID>_R30</ID>
+<pin1name>_O24</pin1name>
+<pin2name>_P26</pin2name>
+</relation>
+<relation>
+<ID>_R31</ID>
+<pin1name>_A14(_P2)</pin1name>
+<pin2name>_O29</pin2name>
+</relation>
+<relation>
+<ID>_R32</ID>
+<pin1name>_O29</pin1name>
+<pin2name>_O24</pin2name>
+</relation>
+<relation>
+<ID>_R34</ID>
+<pin1name>_O29</pin1name>
+<pin2name>_P3</pin2name>
+</relation>
+</xobject>
+<relation>
+<ID>_R11</ID>
+<pin1name>_A0(_PAFastFoword)</pin1name>
+<pin2name>_X2(_P2)</pin2name>
+</relation>
+<relation>
+<ID>_R12</ID>
+<pin1name>_A0(_PAREW)</pin1name>
+<pin2name>_X2(_P3)</pin2name>
+</relation>
+<relation>
+<ID>_R13</ID>
+<pin1name>_A0(_PIndicater)</pin1name>
+<pin2name>_X2(_P4)</pin2name>
+</relation>
+<relation>
+<ID>_R14</ID>
+<pin1name>_A0(_PAIndicater)</pin1name>
+<pin2name>_X2(_P5)</pin2name>
+</relation>
+<relation>
+<ID>_R20</ID>
+<pin1name>_X2(_P7)</pin1name>
+<pin2name>_X1(_P0)</pin2name>
+</relation>
+<relation>
+<ID>_R25</ID>
+<pin1name>_A0(_PPlay_Pause)</pin1name>
+<pin2name>_X2(_P1)</pin2name>
+</relation>
+<relation>
+<ID>_R26</ID>
+<pin1name>_A0(_PAPlay_Pause)</pin1name>
+<pin2name>_X2(_P0)</pin2name>
+</relation>
+<relation>
+<ID>_R27</ID>
+<pin1name>_A0(_PRunStop)</pin1name>
+<pin2name>_X3(_P0)</pin2name>
+</relation>
+<relation>
+<ID>_R28</ID>
+<pin1name>_A0(_PARunStop)</pin1name>
+<pin2name>_X3(_P1)</pin2name>
+</relation>
+<relation>
+<ID>_R29</ID>
+<pin1name>_A0(_Pscreen)</pin1name>
+<pin2name>_X1(_P1)</pin2name>
+</relation>
+<relation>
+<ID>_R30</ID>
+<pin1name>_A0(_PAGO)</pin1name>
+<pin2name>_X1(_P3)</pin2name>
+</relation>
+<relation>
+<ID>_R31</ID>
+<pin1name>_A0(_PAHomePosition)</pin1name>
+<pin2name>_X1(_P2)</pin2name>
+</relation>
+<relation>
+<ID>_R32</ID>
+<pin1name>_A0(_PABACK)</pin1name>
+<pin2name>_X1(_P4)</pin2name>
+</relation>
+<relation>
+<ID>_R33</ID>
+<pin1name>_A0(_PAturnLeft)</pin1name>
+<pin2name>_X1(_P5)</pin2name>
+</relation>
+<relation>
+<ID>_R38</ID>
+<pin1name>_A0(_PAturnRight)</pin1name>
+<pin2name>_X1(_P6)</pin2name>
+</relation>
+<relation>
+<ID>_R39</ID>
+<pin1name>_A0(_PAturnAbove)</pin1name>
+<pin2name>_X1(_P7)</pin2name>
+</relation>
+<relation>
+<ID>_R40</ID>
+<pin1name>_A0(_PAturnBelow)</pin1name>
+<pin2name>_X1(_P8)</pin2name>
+</relation>
+<relation>
+<ID>_R41</ID>
+<pin1name>_A0(_PAturnOpposite)</pin1name>
+<pin2name>_X1(_P9)</pin2name>
+</relation>
+<aobject>
+<ID>_A0</ID>
+<x0>188</x0>
+<y0>2</y0>
+<width>271</width>
+<objectname>GUI</objectname>
+<description>GUIオブジェクト
+</description>
+<state>
+<ID>_SINIT</ID>
+<x0>0</x0>
+<y0>40</y0>
+<width>70</width>
+<height>40</height>
+<text>  InitState</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_Pstart</ID>
+<x0>400</x0>
+<y0>100</y0>
+<width>80</width>
+<height>26</height>
+<text>Start()</text>
+<px>14</px>
+<py>352</py>
+</pin>
+<pin>
+<ID>_PGUIout</ID>
+<x0>0</x0>
+<y0>84</y0>
+<width>180</width>
+<height>26</height>
+<text>GUI_created(JFrame f)</text>
+<px>423</px>
+<py>54</py>
+</pin>
+<pin>
+<ID>_PGUIclosed</ID>
+<x0>310</x0>
+<y0>0</y0>
+<width>180</width>
+<height>26</height>
+<text>GUI_closed()</text>
+<px>20</px>
+<py>203</py>
+</pin>
+<action>
+<ID>_Astart</ID>
+<comp1name>_Pstart</comp1name>
+<comp2name>_Ocreate</comp2name>
+</action>
+<operation>
+<ID>_Ocreate</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>220</x0>
+<y0>40</y0>
+<width>130</width>
+<height>64</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>43</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>GUIを作成する
+</description>
+<codetext>XGUI x = new XGUI();
+
+</codetext>
+</operation>
+<pin>
+<ID>_PHomePosition</ID>
+<x0>0</x0>
+<y0>110</y0>
+<width>200</width>
+<height>26</height>
+<text>HomePosition_created(JButton b)</text>
+<px>402</px>
+<py>60</py>
+</pin>
+<pin>
+<ID>_PAHomePosition</ID>
+<x0>0</x0>
+<y0>138</y0>
+<width>200</width>
+<height>26</height>
+<text>HomePosition_clicked()</text>
+<px>0</px>
+<py>48</py>
+</pin>
+<pin>
+<ID>_PBACK</ID>
+<x0>0</x0>
+<y0>166</y0>
+<width>200</width>
+<height>26</height>
+<text>BACK_created(JButton b)</text>
+<px>392</px>
+<py>117</py>
+</pin>
+<pin>
+<ID>_PABACK</ID>
+<x0>0</x0>
+<y0>194</y0>
+<width>200</width>
+<height>26</height>
+<text>BACK_clicked()</text>
+<px>0</px>
+<py>85</py>
+</pin>
+<pin>
+<ID>_PGO</ID>
+<x0>0</x0>
+<y0>222</y0>
+<width>200</width>
+<height>26</height>
+<text>GO_created(JButton b)</text>
+<px>365</px>
+<py>145</py>
+</pin>
+<pin>
+<ID>_PAGO</ID>
+<x0>0</x0>
+<y0>250</y0>
+<width>200</width>
+<height>26</height>
+<text>GO_clicked()</text>
+<px>0</px>
+<py>66</py>
+</pin>
+<pin>
+<ID>_PturnLeft</ID>
+<x0>0</x0>
+<y0>278</y0>
+<width>200</width>
+<height>26</height>
+<text>turnLeft_created(JButton b)</text>
+<px>387</px>
+<py>170</py>
+</pin>
+<pin>
+<ID>_PAturnLeft</ID>
+<x0>0</x0>
+<y0>306</y0>
+<width>200</width>
+<height>26</height>
+<text>turnLeft_clicked()</text>
+<px>0</px>
+<py>102</py>
+</pin>
+<pin>
+<ID>_PFastFoword</ID>
+<x0>0</x0>
+<y0>334</y0>
+<width>200</width>
+<height>26</height>
+<text>FastFoword_created(JButton b)</text>
+<px>378</px>
+<py>207</py>
+</pin>
+<pin>
+<ID>_PAFastFoword</ID>
+<x0>0</x0>
+<y0>362</y0>
+<width>200</width>
+<height>26</height>
+<text>FastFoword_clicked()</text>
+<px>0</px>
+<py>268</py>
+</pin>
+<pin>
+<ID>_PPlay_Pause</ID>
+<x0>0</x0>
+<y0>390</y0>
+<width>200</width>
+<height>26</height>
+<text>Play_Pause_created(JButton b)</text>
+<px>0</px>
+<py>232</py>
+</pin>
+<pin>
+<ID>_PAPlay_Pause</ID>
+<x0>0</x0>
+<y0>418</y0>
+<width>200</width>
+<height>26</height>
+<text>Play_Pause_clicked()</text>
+<px>5</px>
+<py>249</py>
+</pin>
+<pin>
+<ID>_PREW</ID>
+<x0>0</x0>
+<y0>446</y0>
+<width>200</width>
+<height>26</height>
+<text>REW_created(JButton b)</text>
+<px>362</px>
+<py>283</py>
+</pin>
+<pin>
+<ID>_PAREW</ID>
+<x0>0</x0>
+<y0>474</y0>
+<width>200</width>
+<height>26</height>
+<text>REW_clicked()</text>
+<px>0</px>
+<py>283</py>
+</pin>
+<pin>
+<ID>_PIndicater</ID>
+<x0>0</x0>
+<y0>502</y0>
+<width>200</width>
+<height>26</height>
+<text>Indicater_created(JSlider s)</text>
+<px>0</px>
+<py>300</py>
+</pin>
+<pin>
+<ID>_PAIndicater</ID>
+<x0>0</x0>
+<y0>530</y0>
+<width>200</width>
+<height>26</height>
+<text>Indicater_changed(int val)</text>
+<px>0</px>
+<py>319</py>
+</pin>
+<pin>
+<ID>_PturnAbove</ID>
+<x0>0</x0>
+<y0>558</y0>
+<width>200</width>
+<height>26</height>
+<text>turnAbove_created(JButton b)</text>
+<px>374</px>
+<py>353</py>
+</pin>
+<pin>
+<ID>_PAturnAbove</ID>
+<x0>0</x0>
+<y0>586</y0>
+<width>200</width>
+<height>26</height>
+<text>turnAbove_clicked()</text>
+<px>0</px>
+<py>138</py>
+</pin>
+<pin>
+<ID>_Pscreen</ID>
+<x0>0</x0>
+<y0>614</y0>
+<width>200</width>
+<height>26</height>
+<text>screen_created(JLabel l)</text>
+<px>0</px>
+<py>29</py>
+</pin>
+<pin>
+<ID>_PturnRight</ID>
+<x0>0</x0>
+<y0>670</y0>
+<width>200</width>
+<height>26</height>
+<text>turnRight_created(JButton b)</text>
+<px>339</px>
+<py>439</py>
+</pin>
+<pin>
+<ID>_PAturnRight</ID>
+<x0>0</x0>
+<y0>698</y0>
+<width>200</width>
+<height>26</height>
+<text>turnRight_clicked()</text>
+<px>0</px>
+<py>121</py>
+</pin>
+<pin>
+<ID>_PturnBelow</ID>
+<x0>0</x0>
+<y0>726</y0>
+<width>200</width>
+<height>26</height>
+<text>turnBelow_created(JButton b)</text>
+<px>308</px>
+<py>453</py>
+</pin>
+<pin>
+<ID>_PAturnBelow</ID>
+<x0>0</x0>
+<y0>754</y0>
+<width>200</width>
+<height>26</height>
+<text>turnBelow_clicked()</text>
+<px>0</px>
+<py>157</py>
+</pin>
+<pin>
+<ID>_PturnOpposite</ID>
+<x0>0</x0>
+<y0>782</y0>
+<width>200</width>
+<height>26</height>
+<text>turnOpposite_created(JButton b)</text>
+<px>312</px>
+<py>495</py>
+</pin>
+<pin>
+<ID>_PAturnOpposite</ID>
+<x0>0</x0>
+<y0>810</y0>
+<width>200</width>
+<height>26</height>
+<text>turnOpposite_clicked()</text>
+<px>0</px>
+<py>178</py>
+</pin>
+<pin>
+<ID>_PRunStop</ID>
+<x0>0</x0>
+<y0>838</y0>
+<width>200</width>
+<height>26</height>
+<text>RunStop_created(JButton b)</text>
+<px>0</px>
+<py>382</py>
+</pin>
+<pin>
+<ID>_PARunStop</ID>
+<x0>0</x0>
+<y0>866</y0>
+<width>200</width>
+<height>26</height>
+<text>RunStop_clicked()</text>
+<px>0</px>
+<py>398</py>
+</pin>
+<codeclip>
+<ID>_CXSTART</ID>
+<x0>0</x0>
+<y0>0</y0>
+<width>300</width>
+<height>26</height>
+<codetext> class XGUI extends JFrame implements WindowListener{
+ JPanel cnt;
+HomePosition IHomePosition;
+ class HomePosition extends JButton implements ActionListener{
+  HomePosition(){
+ setOpaque( true );
+ setName(  &quot;HomePosition&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 9 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;HOME&quot; );
+ addActionListener( this );
+ HomePosition_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ HomePosition_clicked(); }
+}
+BACK IBACK;
+ class BACK extends JButton implements ActionListener{
+  BACK(){
+ setOpaque( true );
+ setName(  &quot;BACK&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;-&quot; );
+ addActionListener( this );
+ BACK_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ BACK_clicked(); }
+}
+GO IGO;
+ class GO extends JButton implements ActionListener{
+  GO(){
+ setOpaque( true );
+ setName(  &quot;GO&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;+&quot; );
+ addActionListener( this );
+ GO_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ GO_clicked(); }
+}
+turnLeft IturnLeft;
+ class turnLeft extends JButton implements ActionListener{
+  turnLeft(){
+ setOpaque( true );
+ setName(  &quot;turnLeft&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;&lt;&quot; );
+ addActionListener( this );
+ turnLeft_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ turnLeft_clicked(); }
+}
+FastFoword IFastFoword;
+ class FastFoword extends JButton implements ActionListener{
+  FastFoword(){
+ setOpaque( true );
+ setName(  &quot;FastFoword&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;&gt;&gt;&quot; );
+ addActionListener( this );
+ FastFoword_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ FastFoword_clicked(); }
+}
+Play_Pause IPlay_Pause;
+ class Play_Pause extends JButton implements ActionListener{
+  Play_Pause(){
+ setOpaque( true );
+ setName(  &quot;Play_Pause&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;&gt;&quot; );
+ addActionListener( this );
+ Play_Pause_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ Play_Pause_clicked(); }
+}
+REW IREW;
+ class REW extends JButton implements ActionListener{
+  REW(){
+ setOpaque( true );
+ setName(  &quot;REW&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;&lt;&lt;&quot; );
+ addActionListener( this );
+ REW_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ REW_clicked(); }
+}
+Indicater IIndicater;
+ class Indicater extends JSlider implements ChangeListener{
+  Indicater(){
+ setOpaque( true );
+ setOrientation( SwingConstants.HORIZONTAL );
+ setName(  &quot;Indicater&quot; );
+ setForeground( new Color(  153, 255, 153 ));
+ setBackground( new Color(  153, 255, 153 ));
+ setMinimum( 0 );
+ setMaximum( 100 );
+ addChangeListener( this );
+ Indicater_created( this );
+}
+ public void stateChanged( ChangeEvent e ){ Indicater_changed( getValue() ); }
+}
+turnAbove IturnAbove;
+ class turnAbove extends JButton implements ActionListener{
+  turnAbove(){
+ setOpaque( true );
+ setName(  &quot;turnAbove&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;^&quot; );
+ addActionListener( this );
+ turnAbove_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ turnAbove_clicked(); }
+}
+screen Iscreen;
+ class screen extends JLabel{
+  screen(){
+ setOpaque( true );
+ setName(  &quot;screen&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  255, 255, 255 ));
+ setBackground( new Color(  0, 0, 0 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;&quot; );
+ screen_created( this );
+}
+ public void paintComponent( Graphics g ){ super.paintComponent(g);
+screen_paint(g);
+}
+}
+turnRight IturnRight;
+ class turnRight extends JButton implements ActionListener{
+  turnRight(){
+ setOpaque( true );
+ setName(  &quot;turnRight&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;&gt;&quot; );
+ addActionListener( this );
+ turnRight_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ turnRight_clicked(); }
+}
+turnBelow IturnBelow;
+ class turnBelow extends JButton implements ActionListener{
+  turnBelow(){
+ setOpaque( true );
+ setName(  &quot;turnBelow&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;v&quot; );
+ addActionListener( this );
+ turnBelow_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ turnBelow_clicked(); }
+}
+turnOpposite IturnOpposite;
+ class turnOpposite extends JButton implements ActionListener{
+  turnOpposite(){
+ setOpaque( true );
+ setName(  &quot;turnOpposite&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;x&quot; );
+ addActionListener( this );
+ turnOpposite_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ turnOpposite_clicked(); }
+}
+RunStop IRunStop;
+ class RunStop extends JButton implements ActionListener{
+  RunStop(){
+ setOpaque( true );
+ setName(  &quot;RunStop&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;RUN&quot; );
+ addActionListener( this );
+ RunStop_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ RunStop_clicked(); }
+}
+ XGUI(){
+ setTitle(&quot;銀河シュミレータ&quot;);
+ cnt = new JPanel( new BorderLayout() );
+ cnt.setPreferredSize(  new  Dimension( 470, 444 ) );
+ ((Component)cnt).setBackground( new Color( 153, 255, 153 ) );
+ IHomePosition = new HomePosition();
+ cnt.add( IHomePosition, 0 );
+ cnt.getLayout().removeLayoutComponent( IHomePosition );
+ IHomePosition.setBounds( 126, 421, 68, 20 );
+ IBACK = new BACK();
+ cnt.add( IBACK, 0 );
+ cnt.getLayout().removeLayoutComponent( IBACK );
+ IBACK.setBounds( 146, 400, 47, 19 );
+ IGO = new GO();
+ cnt.add( IGO, 0 );
+ cnt.getLayout().removeLayoutComponent( IGO );
+ IGO.setBounds( 146, 377, 47, 21 );
+ IturnLeft = new turnLeft();
+ cnt.add( IturnLeft, 0 );
+ cnt.getLayout().removeLayoutComponent( IturnLeft );
+ IturnLeft.setBounds( 0, 399, 42, 21 );
+ IFastFoword = new FastFoword();
+ cnt.add( IFastFoword, 0 );
+ cnt.getLayout().removeLayoutComponent( IFastFoword );
+ IFastFoword.setBounds( 398, 410, 69, 30 );
+ IPlay_Pause = new Play_Pause();
+ cnt.add( IPlay_Pause, 0 );
+ cnt.getLayout().removeLayoutComponent( IPlay_Pause );
+ IPlay_Pause.setBounds( 328, 410, 70, 30 );
+ IREW = new REW();
+ cnt.add( IREW, 0 );
+ cnt.getLayout().removeLayoutComponent( IREW );
+ IREW.setBounds( 262, 410, 66, 30 );
+ IIndicater = new Indicater();
+ cnt.add( IIndicater, 0 );
+ cnt.getLayout().removeLayoutComponent( IIndicater );
+ IIndicater.setBounds( 261, 381, 205, 25 );
+ IturnAbove = new turnAbove();
+ cnt.add( IturnAbove, 0 );
+ cnt.getLayout().removeLayoutComponent( IturnAbove );
+ IturnAbove.setBounds( 41, 377, 50, 22 );
+ Iscreen = new screen();
+ cnt.add( Iscreen, 0 );
+ cnt.getLayout().removeLayoutComponent( Iscreen );
+ Iscreen.setBounds( 3, 1, 462, 373 );
+ IturnRight = new turnRight();
+ cnt.add( IturnRight, 0 );
+ cnt.getLayout().removeLayoutComponent( IturnRight );
+ IturnRight.setBounds( 91, 399, 46, 21 );
+ IturnBelow = new turnBelow();
+ cnt.add( IturnBelow, 0 );
+ cnt.getLayout().removeLayoutComponent( IturnBelow );
+ IturnBelow.setBounds( 42, 420, 49, 23 );
+ IturnOpposite = new turnOpposite();
+ cnt.add( IturnOpposite, 0 );
+ cnt.getLayout().removeLayoutComponent( IturnOpposite );
+ IturnOpposite.setBounds( 42, 399, 49, 21 );
+ IRunStop = new RunStop();
+ cnt.add( IRunStop, 0 );
+ cnt.getLayout().removeLayoutComponent( IRunStop );
+ IRunStop.setBounds( 196, 382, 64, 59 );
+ setContentPane( cnt );
+ pack();
+ addWindowListener( this );
+ setVisible( true );
+ GUI_created( this );
+}
+ public void windowActivated( WindowEvent e ){}
+ public void windowClosed( WindowEvent e ){}
+ public void windowClosing( WindowEvent e ){ GUI_closed(); }
+ public void windowDeactivated( WindowEvent e ){}
+ public void windowDeiconified( WindowEvent e ){}
+ public void windowIconified( WindowEvent e ){}
+ public void windowOpened( WindowEvent e ){}
+}
+</codetext>
+</codeclip>
+<ID_maker>49</ID_maker>
+<height>453</height>
+<レイアウト>銀河シュミレータ
+470
+444
+153
+255
+153
+BUTTON;HomePosition;HOME;126;421;68;20;0;0;0;192;192;192;Dialog;9;null;0;0;
+BUTTON;BACK;-;146;400;47;19;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;GO;+;146;377;47;21;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;turnLeft;&lt;;0;399;42;21;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;FastFoword;&gt;&gt;;398;410;69;30;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;Play_Pause;&gt;;328;410;70;30;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;REW;&lt;&lt;;262;410;66;30;0;0;0;192;192;192;Dialog;12;null;0;0;
+HSLIDER;Indicater;0;100;261;381;205;25;153;255;153;153;255;153;
+BUTTON;turnAbove;^;41;377;50;22;0;0;0;192;192;192;Dialog;12;null;0;0;
+LABEL;screen;null;3;1;462;373;255;255;255;0;0;0;Dialog;12;null;0;0;
+BUTTON;turnRight;&gt;;91;399;46;21;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;turnBelow;v;42;420;49;23;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;turnOpposite;x;42;399;49;21;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;RunStop;RUN;196;382;64;59;0;0;0;192;192;192;Dialog;12;null;0;0;
+</レイアウト>
+<pin>
+<ID>_P48</ID>
+<x0>0</x0>
+<y0>641</y0>
+<width>199</width>
+<height>28</height>
+<text>screen_paint(Graphics g )</text>
+<px>66</px>
+<py>4</py>
+</pin>
+</aobject>
+<relation>
+<ID>_R46</ID>
+<pin1name>_A0(_P48)</pin1name>
+<pin2name>_X1(_P13)</pin2name>
+</relation>
+<pin>
+<ID>_P47</ID>
+<x0>40</x0>
+<y0>347</y0>
+<width>60</width>
+<height>30</height>
+<text>Start()</text>
+<px>10</px>
+<py>34</py>
+</pin>
+<relation>
+<ID>_R48</ID>
+<pin1name>_P47</pin1name>
+<pin2name>_A0(_Pstart)</pin2name>
+</relation>
+<operation>
+<ID>_O52</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>24</x0>
+<y0>149</y0>
+<width>129</width>
+<height>73</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>54</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>プログラム終了
+</description>
+<codetext>System.exit(0);
+</codetext>
+</operation>
+<relation>
+<ID>_R53</ID>
+<pin1name>_A0(_PGUIclosed)</pin1name>
+<pin2name>_O52</pin2name>
+</relation>
+<relation>
+<ID>_R54</ID>
+<pin1name>_X3(_P3)</pin1name>
+<pin2name>_X1(_P0)</pin2name>
+</relation>
+<relation>
+<ID>_R55</ID>
+<pin1name>_X3(_P26)</pin1name>
+<pin2name>_X2(_P6)</pin2name>
+</relation>
+</xobject>
+<xobject>
+<ID>_X2</ID>
+<x0>194</x0>
+<y0>102</y0>
+<width>156</width>
+<height>74</height>
+<ID_maker>24</ID_maker>
+<objectname>Initialise</objectname>
+<description>新しいオブジェクト</description>
+<pin>
+<ID>_P1</ID>
+<x0>20</x0>
+<y0>106</y0>
+<width>60</width>
+<height>30</height>
+<text>Start()</text>
+<px>5</px>
+<py>32</py>
+</pin>
+<pin>
+<ID>_P2</ID>
+<x0>168</x0>
+<y0>31</y0>
+<width>77</width>
+<height>28</height>
+<text>Symulate()</text>
+<px>66</px>
+<py>31</py>
+</pin>
+<pin>
+<ID>_P3</ID>
+<x0>354</x0>
+<y0>34</y0>
+<width>42</width>
+<height>29</height>
+<text>Play()</text>
+<px>81</px>
+<py>48</py>
+</pin>
+<aobject>
+<ID>_A4</ID>
+<x0>145</x0>
+<y0>100</y0>
+<width>242</width>
+<objectname>GUI</objectname>
+<description>GUIオブジェクト
+</description>
+<state>
+<ID>_SINIT</ID>
+<x0>0</x0>
+<y0>40</y0>
+<width>70</width>
+<height>40</height>
+<text>  InitState</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_Pstart</ID>
+<x0>400</x0>
+<y0>100</y0>
+<width>80</width>
+<height>26</height>
+<text>Start()</text>
+<px>0</px>
+<py>36</py>
+</pin>
+<pin>
+<ID>_PGUIout</ID>
+<x0>0</x0>
+<y0>84</y0>
+<width>180</width>
+<height>26</height>
+<text>GUI_created(JFrame f)</text>
+<px>338</px>
+<py>55</py>
+</pin>
+<pin>
+<ID>_PGUIclosed</ID>
+<x0>310</x0>
+<y0>0</y0>
+<width>180</width>
+<height>26</height>
+<text>GUI_closed()</text>
+<px>0</px>
+<py>110</py>
+</pin>
+<action>
+<ID>_Astart</ID>
+<comp1name>_Pstart</comp1name>
+<comp2name>_Ocreate</comp2name>
+</action>
+<operation>
+<ID>_Ocreate</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>220</x0>
+<y0>40</y0>
+<width>130</width>
+<height>64</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>43</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// GUIを作成する
+XGUI x = new XGUI();
+
+</codetext>
+</operation>
+<pin>
+<ID>_Pplayer</ID>
+<x0>0</x0>
+<y0>110</y0>
+<width>200</width>
+<height>26</height>
+<text>player_created(JButton b)</text>
+<px>384</px>
+<py>72</py>
+</pin>
+<pin>
+<ID>_PAplayer</ID>
+<x0>0</x0>
+<y0>138</y0>
+<width>200</width>
+<height>26</height>
+<text>player_clicked()</text>
+<px>111</px>
+<py>11</py>
+</pin>
+<pin>
+<ID>_Psymulator</ID>
+<x0>0</x0>
+<y0>166</y0>
+<width>200</width>
+<height>26</height>
+<text>symulator_created(JButton b)</text>
+<px>377</px>
+<py>93</py>
+</pin>
+<pin>
+<ID>_PAsymulator</ID>
+<x0>0</x0>
+<y0>194</y0>
+<width>200</width>
+<height>26</height>
+<text>symulator_clicked()</text>
+<px>5</px>
+<py>65</py>
+</pin>
+<pin>
+<ID>_Pcompose</ID>
+<x0>0</x0>
+<y0>222</y0>
+<width>200</width>
+<height>26</height>
+<text>compose_created(JButton b)</text>
+<px>352</px>
+<py>144</py>
+</pin>
+<pin>
+<ID>_PAcompose</ID>
+<x0>0</x0>
+<y0>250</y0>
+<width>200</width>
+<height>26</height>
+<text>compose_clicked()</text>
+<px>102</px>
+<py>42</py>
+</pin>
+<pin>
+<ID>_Precording_speed</ID>
+<x0>0</x0>
+<y0>278</y0>
+<width>200</width>
+<height>26</height>
+<text>recording_speed_created(JTextField t)</text>
+<px>0</px>
+<py>137</py>
+</pin>
+<pin>
+<ID>_PArecording_speed</ID>
+<x0>0</x0>
+<y0>306</y0>
+<width>200</width>
+<height>26</height>
+<text>recording_speed_input(String s)</text>
+<px>426</px>
+<py>208</py>
+</pin>
+<pin>
+<ID>_PLABEL13</ID>
+<x0>0</x0>
+<y0>334</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL13_created(JLabel l)</text>
+<px>437</px>
+<py>210</py>
+</pin>
+<pin>
+<ID>_PPLABEL13</ID>
+<x0>0</x0>
+<y0>362</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL13_paint(Graphics g)</text>
+<px>447</px>
+<py>229</py>
+</pin>
+<pin>
+<ID>_Pscreen</ID>
+<x0>0</x0>
+<y0>390</y0>
+<width>200</width>
+<height>26</height>
+<text>screen_created(JLabel l)</text>
+<px>95</px>
+<py>108</py>
+</pin>
+<pin>
+<ID>_PPscreen</ID>
+<x0>0</x0>
+<y0>418</y0>
+<width>200</width>
+<height>26</height>
+<text>screen_paint(Graphics g)</text>
+<px>95</px>
+<py>87</py>
+</pin>
+<pin>
+<ID>_Plight_speed</ID>
+<x0>0</x0>
+<y0>446</y0>
+<width>200</width>
+<height>26</height>
+<text>light_speed_created(JTextField t)</text>
+<px>0</px>
+<py>157</py>
+</pin>
+<pin>
+<ID>_PAlight_speed</ID>
+<x0>0</x0>
+<y0>474</y0>
+<width>200</width>
+<height>26</height>
+<text>light_speed_input(String s)</text>
+<px>428</px>
+<py>292</py>
+</pin>
+<pin>
+<ID>_PLABEL10</ID>
+<x0>0</x0>
+<y0>502</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL10_created(JLabel l)</text>
+<px>487</px>
+<py>331</py>
+</pin>
+<pin>
+<ID>_PPLABEL10</ID>
+<x0>0</x0>
+<y0>530</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL10_paint(Graphics g)</text>
+<px>568</px>
+<py>322</py>
+</pin>
+<pin>
+<ID>_Pspeed_distribution</ID>
+<x0>0</x0>
+<y0>558</y0>
+<width>200</width>
+<height>26</height>
+<text>speed_distribution_created(JTextField t)</text>
+<px>0</px>
+<py>175</py>
+</pin>
+<pin>
+<ID>_PAspeed_distribution</ID>
+<x0>0</x0>
+<y0>586</y0>
+<width>200</width>
+<height>26</height>
+<text>speed_distribution_input(String s)</text>
+<px>398</px>
+<py>361</py>
+</pin>
+<pin>
+<ID>_PLABEL8</ID>
+<x0>0</x0>
+<y0>614</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL8_created(JLabel l)</text>
+<px>446</px>
+<py>392</py>
+</pin>
+<pin>
+<ID>_PPLABEL8</ID>
+<x0>0</x0>
+<y0>642</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL8_paint(Graphics g)</text>
+<px>488</px>
+<py>409</py>
+</pin>
+<pin>
+<ID>_Pscale</ID>
+<x0>0</x0>
+<y0>670</y0>
+<width>200</width>
+<height>26</height>
+<text>scale_created(JTextField t)</text>
+<px>0</px>
+<py>198</py>
+</pin>
+<pin>
+<ID>_PAscale</ID>
+<x0>0</x0>
+<y0>698</y0>
+<width>200</width>
+<height>26</height>
+<text>scale_input(String s)</text>
+<px>375</px>
+<py>442</py>
+</pin>
+<pin>
+<ID>_PLABEL6</ID>
+<x0>0</x0>
+<y0>726</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL6_created(JLabel l)</text>
+<px>452</px>
+<py>484</py>
+</pin>
+<pin>
+<ID>_PPLABEL6</ID>
+<x0>0</x0>
+<y0>754</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL6_paint(Graphics g)</text>
+<px>442</px>
+<py>468</py>
+</pin>
+<pin>
+<ID>_Pnomber_of_star</ID>
+<x0>0</x0>
+<y0>782</y0>
+<width>200</width>
+<height>26</height>
+<text>nomber_of_star_created(JTextField t)</text>
+<px>0</px>
+<py>218</py>
+</pin>
+<pin>
+<ID>_PAnomber_of_star</ID>
+<x0>0</x0>
+<y0>810</y0>
+<width>200</width>
+<height>26</height>
+<text>nomber_of_star_input(String s)</text>
+<px>542</px>
+<py>515</py>
+</pin>
+<pin>
+<ID>_PLABEL4</ID>
+<x0>0</x0>
+<y0>838</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL4_created(JLabel l)</text>
+<px>501</px>
+<py>531</py>
+</pin>
+<pin>
+<ID>_PPLABEL4</ID>
+<x0>0</x0>
+<y0>866</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL4_paint(Graphics g)</text>
+<px>530</px>
+<py>537</py>
+</pin>
+<pin>
+<ID>_Psize_of_star</ID>
+<x0>0</x0>
+<y0>894</y0>
+<width>200</width>
+<height>26</height>
+<text>size_of_star_created(JTextField t)</text>
+<px>0</px>
+<py>235</py>
+</pin>
+<pin>
+<ID>_PAsize_of_star</ID>
+<x0>0</x0>
+<y0>922</y0>
+<width>200</width>
+<height>26</height>
+<text>size_of_star_input(String s)</text>
+<px>368</px>
+<py>599</py>
+</pin>
+<pin>
+<ID>_PLABEL2</ID>
+<x0>0</x0>
+<y0>950</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL2_created(JLabel l)</text>
+<px>575</px>
+<py>584</py>
+</pin>
+<pin>
+<ID>_PPLABEL2</ID>
+<x0>0</x0>
+<y0>978</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL2_paint(Graphics g)</text>
+<px>428</px>
+<py>611</py>
+</pin>
+<pin>
+<ID>_Pmax_speed</ID>
+<x0>0</x0>
+<y0>1006</y0>
+<width>200</width>
+<height>26</height>
+<text>max_speed_created(JTextField t)</text>
+<px>0</px>
+<py>255</py>
+</pin>
+<pin>
+<ID>_PAmax_speed</ID>
+<x0>0</x0>
+<y0>1034</y0>
+<width>200</width>
+<height>26</height>
+<text>max_speed_input(String s)</text>
+<px>450</px>
+<py>660</py>
+</pin>
+<pin>
+<ID>_PLABEL0</ID>
+<x0>0</x0>
+<y0>1062</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL0_created(JLabel l)</text>
+<px>598</px>
+<py>671</py>
+</pin>
+<pin>
+<ID>_PPLABEL0</ID>
+<x0>0</x0>
+<y0>1090</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL0_paint(Graphics g)</text>
+<px>475</px>
+<py>708</py>
+</pin>
+<codeclip>
+<ID>_CXSTART</ID>
+<x0>0</x0>
+<y0>0</y0>
+<width>300</width>
+<height>26</height>
+<codetext> class XGUI extends JFrame implements WindowListener{
+ JPanel cnt;
+player Iplayer;
+ class player extends JButton implements ActionListener{
+  player(){
+ setOpaque( true );
+ setName(  &quot;player&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 1, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;Player&quot; );
+ addActionListener( this );
+ player_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ player_clicked(); }
+}
+symulator Isymulator;
+ class symulator extends JButton implements ActionListener{
+  symulator(){
+ setOpaque( true );
+ setName(  &quot;symulator&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 1, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;Symulator&quot; );
+ addActionListener( this );
+ symulator_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ symulator_clicked(); }
+}
+compose Icompose;
+ class compose extends JButton implements ActionListener{
+  compose(){
+ setOpaque( true );
+ setName(  &quot;compose&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 1, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;Compose&quot; );
+ addActionListener( this );
+ compose_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ compose_clicked(); }
+}
+recording_speed Irecording_speed;
+ class recording_speed extends JTextField implements ActionListener{
+  recording_speed(){
+ setOpaque( true );
+ setName(  &quot;recording_speed&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setText( &quot;5&quot; );
+ addActionListener( this );
+ recording_speed_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ recording_speed_input( getText() ); }
+}
+LABEL13 ILABEL13;
+ class LABEL13 extends JLabel{
+  LABEL13(){
+ setOpaque( true );
+ setName(  &quot;LABEL13&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 1, 12 ));
+ setForeground( new Color(  102, 102, 153 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 2 );
+ setVerticalAlignment( 0 );
+ setText( &quot;Recording Speed&quot; );
+ LABEL13_created( this );
+}
+ public void paintComponent( Graphics g ){ super.paintComponent(g);
+LABEL13_paint(g);
+}
+}
+screen Iscreen;
+ class screen extends JLabel{
+  screen(){
+ setOpaque( true );
+ setName(  &quot;screen&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 1, 12 ));
+ setForeground( new Color(  102, 102, 153 ));
+ setBackground( new Color(  0, 0, 0 ));
+ setHorizontalAlignment( 2 );
+ setVerticalAlignment( 0 );
+ setText( &quot;&quot; );
+ screen_created( this );
+}
+ public void paintComponent( Graphics g ){ super.paintComponent(g);
+screen_paint(g);
+}
+}
+light_speed Ilight_speed;
+ class light_speed extends JTextField implements ActionListener{
+  light_speed(){
+ setOpaque( true );
+ setName(  &quot;light_speed&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setText( &quot;30&quot; );
+ addActionListener( this );
+ light_speed_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ light_speed_input( getText() ); }
+}
+LABEL10 ILABEL10;
+ class LABEL10 extends JLabel{
+  LABEL10(){
+ setOpaque( true );
+ setName(  &quot;LABEL10&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 1, 12 ));
+ setForeground( new Color(  102, 102, 153 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 2 );
+ setVerticalAlignment( 0 );
+ setText( &quot;Light Speed&quot; );
+ LABEL10_created( this );
+}
+ public void paintComponent( Graphics g ){ super.paintComponent(g);
+LABEL10_paint(g);
+}
+}
+speed_distribution Ispeed_distribution;
+ class speed_distribution extends JTextField implements ActionListener{
+  speed_distribution(){
+ setOpaque( true );
+ setName(  &quot;speed_distribution&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setText( &quot;0.5&quot; );
+ addActionListener( this );
+ speed_distribution_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ speed_distribution_input( getText() ); }
+}
+LABEL8 ILABEL8;
+ class LABEL8 extends JLabel{
+  LABEL8(){
+ setOpaque( true );
+ setName(  &quot;LABEL8&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 1, 12 ));
+ setForeground( new Color(  102, 102, 153 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 2 );
+ setVerticalAlignment( 0 );
+ setText( &quot;Speed Distribution&quot; );
+ LABEL8_created( this );
+}
+ public void paintComponent( Graphics g ){ super.paintComponent(g);
+LABEL8_paint(g);
+}
+}
+scale Iscale;
+ class scale extends JTextField implements ActionListener{
+  scale(){
+ setOpaque( true );
+ setName(  &quot;scale&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setText( &quot;250&quot; );
+ addActionListener( this );
+ scale_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ scale_input( getText() ); }
+}
+LABEL6 ILABEL6;
+ class LABEL6 extends JLabel{
+  LABEL6(){
+ setOpaque( true );
+ setName(  &quot;LABEL6&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 1, 12 ));
+ setForeground( new Color(  102, 102, 153 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 2 );
+ setVerticalAlignment( 0 );
+ setText( &quot;Scale&quot; );
+ LABEL6_created( this );
+}
+ public void paintComponent( Graphics g ){ super.paintComponent(g);
+LABEL6_paint(g);
+}
+}
+nomber_of_star Inomber_of_star;
+ class nomber_of_star extends JTextField implements ActionListener{
+  nomber_of_star(){
+ setOpaque( true );
+ setName(  &quot;nomber_of_star&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setText( &quot;128&quot; );
+ addActionListener( this );
+ nomber_of_star_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ nomber_of_star_input( getText() ); }
+}
+LABEL4 ILABEL4;
+ class LABEL4 extends JLabel{
+  LABEL4(){
+ setOpaque( true );
+ setName(  &quot;LABEL4&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 1, 12 ));
+ setForeground( new Color(  102, 102, 153 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 2 );
+ setVerticalAlignment( 0 );
+ setText( &quot;Number of Star&quot; );
+ LABEL4_created( this );
+}
+ public void paintComponent( Graphics g ){ super.paintComponent(g);
+LABEL4_paint(g);
+}
+}
+size_of_star Isize_of_star;
+ class size_of_star extends JTextField implements ActionListener{
+  size_of_star(){
+ setOpaque( true );
+ setName(  &quot;size_of_star&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setText( &quot;20&quot; );
+ addActionListener( this );
+ size_of_star_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ size_of_star_input( getText() ); }
+}
+LABEL2 ILABEL2;
+ class LABEL2 extends JLabel{
+  LABEL2(){
+ setOpaque( true );
+ setName(  &quot;LABEL2&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 1, 12 ));
+ setForeground( new Color(  102, 102, 153 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 2 );
+ setVerticalAlignment( 0 );
+ setText( &quot;Size of Star&quot; );
+ LABEL2_created( this );
+}
+ public void paintComponent( Graphics g ){ super.paintComponent(g);
+LABEL2_paint(g);
+}
+}
+max_speed Imax_speed;
+ class max_speed extends JTextField implements ActionListener{
+  max_speed(){
+ setOpaque( true );
+ setName(  &quot;max_speed&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setText( &quot;0.4&quot; );
+ addActionListener( this );
+ max_speed_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ max_speed_input( getText() ); }
+}
+LABEL0 ILABEL0;
+ class LABEL0 extends JLabel{
+  LABEL0(){
+ setOpaque( true );
+ setName(  &quot;LABEL0&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 1, 12 ));
+ setForeground( new Color(  102, 102, 153 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 2 );
+ setVerticalAlignment( 0 );
+ setText( &quot;Max Speed&quot; );
+ LABEL0_created( this );
+}
+ public void paintComponent( Graphics g ){ super.paintComponent(g);
+LABEL0_paint(g);
+}
+}
+ XGUI(){
+ setTitle(&quot;Initialise&quot;);
+ cnt = new JPanel( new BorderLayout() );
+ cnt.setPreferredSize(  new  Dimension( 495, 445 ) );
+ ((Component)cnt).setBackground( new Color( 204, 204, 204 ) );
+ Iplayer = new player();
+ cnt.add( Iplayer, 0 );
+ cnt.getLayout().removeLayoutComponent( Iplayer );
+ Iplayer.setBounds( 382, 408, 104, 31 );
+ Isymulator = new symulator();
+ cnt.add( Isymulator, 0 );
+ cnt.getLayout().removeLayoutComponent( Isymulator );
+ Isymulator.setBounds( 282, 408, 100, 31 );
+ Icompose = new compose();
+ cnt.add( Icompose, 0 );
+ cnt.getLayout().removeLayoutComponent( Icompose );
+ Icompose.setBounds( 181, 408, 101, 31 );
+ Irecording_speed = new recording_speed();
+ cnt.add( Irecording_speed, 0 );
+ cnt.getLayout().removeLayoutComponent( Irecording_speed );
+ Irecording_speed.setBounds( 118, 412, 35, 28 );
+ ILABEL13 = new LABEL13();
+ cnt.add( ILABEL13, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL13 );
+ ILABEL13.setBounds( 4, 411, 107, 29 );
+ Iscreen = new screen();
+ cnt.add( Iscreen, 0 );
+ cnt.getLayout().removeLayoutComponent( Iscreen );
+ Iscreen.setBounds( 4, 142, 483, 261 );
+ Ilight_speed = new light_speed();
+ cnt.add( Ilight_speed, 0 );
+ cnt.getLayout().removeLayoutComponent( Ilight_speed );
+ Ilight_speed.setBounds( 380, 95, 93, 33 );
+ ILABEL10 = new LABEL10();
+ cnt.add( ILABEL10, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL10 );
+ ILABEL10.setBounds( 259, 97, 97, 28 );
+ Ispeed_distribution = new speed_distribution();
+ cnt.add( Ispeed_distribution, 0 );
+ cnt.getLayout().removeLayoutComponent( Ispeed_distribution );
+ Ispeed_distribution.setBounds( 136, 96, 93, 33 );
+ ILABEL8 = new LABEL8();
+ cnt.add( ILABEL8, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL8 );
+ ILABEL8.setBounds( 6, 97, 105, 31 );
+ Iscale = new scale();
+ cnt.add( Iscale, 0 );
+ cnt.getLayout().removeLayoutComponent( Iscale );
+ Iscale.setBounds( 379, 52, 94, 33 );
+ ILABEL6 = new LABEL6();
+ cnt.add( ILABEL6, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL6 );
+ ILABEL6.setBounds( 261, 53, 94, 28 );
+ Inomber_of_star = new nomber_of_star();
+ cnt.add( Inomber_of_star, 0 );
+ cnt.getLayout().removeLayoutComponent( Inomber_of_star );
+ Inomber_of_star.setBounds( 136, 53, 92, 32 );
+ ILABEL4 = new LABEL4();
+ cnt.add( ILABEL4, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL4 );
+ ILABEL4.setBounds( 6, 55, 95, 29 );
+ Isize_of_star = new size_of_star();
+ cnt.add( Isize_of_star, 0 );
+ cnt.getLayout().removeLayoutComponent( Isize_of_star );
+ Isize_of_star.setBounds( 379, 8, 96, 33 );
+ ILABEL2 = new LABEL2();
+ cnt.add( ILABEL2, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL2 );
+ ILABEL2.setBounds( 262, 9, 90, 32 );
+ Imax_speed = new max_speed();
+ cnt.add( Imax_speed, 0 );
+ cnt.getLayout().removeLayoutComponent( Imax_speed );
+ Imax_speed.setBounds( 136, 8, 92, 35 );
+ ILABEL0 = new LABEL0();
+ cnt.add( ILABEL0, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL0 );
+ ILABEL0.setBounds( 7, 10, 80, 33 );
+ setContentPane( cnt );
+ pack();
+ addWindowListener( this );
+ setVisible( true );
+ GUI_created( this );
+}
+ public void windowActivated( WindowEvent e ){}
+ public void windowClosed( WindowEvent e ){}
+ public void windowClosing( WindowEvent e ){ GUI_closed(); }
+ public void windowDeactivated( WindowEvent e ){}
+ public void windowDeiconified( WindowEvent e ){}
+ public void windowIconified( WindowEvent e ){}
+ public void windowOpened( WindowEvent e ){}
+}
+</codetext>
+</codeclip>
+<ID_maker>56</ID_maker>
+<height>290</height>
+<レイアウト>Initialise
+495
+445
+204
+204
+204
+BUTTON;player;Player;382;408;104;31;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;symulator;Symulator;282;408;100;31;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;compose;Compose;181;408;101;31;0;0;0;192;192;192;Dialog;12;null;0;0;
+TEXTFIELD;recording_speed;5;118;412;35;28;0;0;0;255;255;255;Dialog;12;
+LABEL;LABEL13;Recording Speed;4;411;107;29;102;102;153;192;192;192;Dialog;12;null;2;0;
+LABEL;screen;null;4;142;483;261;102;102;153;0;0;0;Dialog;12;null;2;0;
+TEXTFIELD;light_speed;30;380;95;93;33;0;0;0;255;255;255;Dialog;12;
+LABEL;LABEL10;Light Speed;259;97;97;28;102;102;153;192;192;192;Dialog;12;null;2;0;
+TEXTFIELD;speed_distribution;0.5;136;96;93;33;0;0;0;255;255;255;Dialog;12;
+LABEL;LABEL8;Speed Distribution;6;97;105;31;102;102;153;192;192;192;Dialog;12;null;2;0;
+TEXTFIELD;scale;250;379;52;94;33;0;0;0;255;255;255;Dialog;12;
+LABEL;LABEL6;Scale;261;53;94;28;102;102;153;192;192;192;Dialog;12;null;2;0;
+TEXTFIELD;nomber_of_star;128;136;53;92;32;0;0;0;255;255;255;Dialog;12;
+LABEL;LABEL4;Number of Star;6;55;95;29;102;102;153;192;192;192;Dialog;12;null;2;0;
+TEXTFIELD;size_of_star;20;379;8;96;33;0;0;0;255;255;255;Dialog;12;
+LABEL;LABEL2;Size of Star;262;9;90;32;102;102;153;192;192;192;Dialog;12;null;2;0;
+TEXTFIELD;max_speed;0.4;136;8;92;35;0;0;0;255;255;255;Dialog;12;
+LABEL;LABEL0;Max Speed;7;10;80;33;102;102;153;192;192;192;Dialog;12;null;2;0;
+</レイアウト>
+</aobject>
+<relation>
+<ID>_R5</ID>
+<pin1name>_P1</pin1name>
+<pin2name>_A4(_Pstart)</pin2name>
+</relation>
+<operation>
+<ID>_O6</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>0</x0>
+<y0>152</y0>
+<width>129</width>
+<height>73</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>89</inpinx0>
+<inpiny0>54</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// プログラム終了
+System.exit(0);
+</codetext>
+</operation>
+<relation>
+<ID>_R7</ID>
+<pin1name>_A4(_PGUIclosed)</pin1name>
+<pin2name>_O6</pin2name>
+</relation>
+<relation>
+<ID>_R8</ID>
+<pin1name>_A4(_PAplayer)</pin1name>
+<pin2name>_P3</pin2name>
+</relation>
+<xobject>
+<ID>_X9</ID>
+<x0>412</x0>
+<y0>99</y0>
+<width>239</width>
+<height>288</height>
+<ID_maker>44</ID_maker>
+<objectname>Setting</objectname>
+<description>新しいオブジェクト</description>
+<pin>
+<ID>_P0</ID>
+<x0>0</x0>
+<y0>93</y0>
+<width>188</width>
+<height>29</height>
+<text>recoding_speed_is(JTextField t)</text>
+<px>0</px>
+<py>138</py>
+</pin>
+<pin>
+<ID>_P1</ID>
+<x0>0</x0>
+<y0>153</y0>
+<width>165</width>
+<height>25</height>
+<text>light_speed_is(JTextField t)</text>
+<px>0</px>
+<py>158</py>
+</pin>
+<pin>
+<ID>_P2</ID>
+<x0>0</x0>
+<y0>335</y0>
+<width>194</width>
+<height>33</height>
+<text>speed_distribution_is(JTextField t)</text>
+<px>0</px>
+<py>176</py>
+</pin>
+<pin>
+<ID>_P3</ID>
+<x0>1</x0>
+<y0>31</y0>
+<width>131</width>
+<height>31</height>
+<text>scale_is(JTextField t)</text>
+<px>0</px>
+<py>199</py>
+</pin>
+<pin>
+<ID>_P4</ID>
+<x0>0</x0>
+<y0>394</y0>
+<width>193</width>
+<height>31</height>
+<text>number_of_stars_is(JTextField t)</text>
+<px>0</px>
+<py>219</py>
+</pin>
+<pin>
+<ID>_P5</ID>
+<x0>0</x0>
+<y0>209</y0>
+<width>162</width>
+<height>31</height>
+<text>size_of_stars(JTextField t) </text>
+<px>0</px>
+<py>236</py>
+</pin>
+<pin>
+<ID>_P6</ID>
+<x0>0</x0>
+<y0>270</y0>
+<width>147</width>
+<height>33</height>
+<text>max_speed(JTextField t)</text>
+<px>0</px>
+<py>256</py>
+</pin>
+<pin>
+<ID>_P7</ID>
+<x0>412</x0>
+<y0>270</y0>
+<width>69</width>
+<height>29</height>
+<text>compose()</text>
+<px>0</px>
+<py>43</py>
+</pin>
+<pin>
+<ID>_P9</ID>
+<x0>394</x0>
+<y0>194</y0>
+<width>104</width>
+<height>28</height>
+<text>paint(Graphics g)</text>
+<px>0</px>
+<py>88</py>
+</pin>
+<pin>
+<ID>_P10</ID>
+<x0>0</x0>
+<y0>455</y0>
+<width>112</width>
+<height>31</height>
+<text>screen_is(JLabel l)</text>
+<px>1</px>
+<py>109</py>
+</pin>
+<operation>
+<ID>_O14</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>211</x0>
+<y0>1</y0>
+<width>150</width>
+<height>58</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JTextField t)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>33</inpiny0>
+<inpinwidth>91</inpinwidth>
+<inpinheight>25</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>scale設定</description>
+<codetext>scale = t;
+</codetext>
+</operation>
+<relation>
+<ID>_R15</ID>
+<pin1name>_P3</pin1name>
+<pin2name>_O14</pin2name>
+</relation>
+<operation>
+<ID>_O17</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>211</x0>
+<y0>62</y0>
+<width>150</width>
+<height>58</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JTextField t)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>33</inpiny0>
+<inpinwidth>91</inpinwidth>
+<inpinheight>25</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>recording_speed設定</description>
+<codetext>recording_speed = t;
+</codetext>
+</operation>
+<operation>
+<ID>_O18</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>212</x0>
+<y0>120</y0>
+<width>150</width>
+<height>58</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JTextField t)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>33</inpiny0>
+<inpinwidth>91</inpinwidth>
+<inpinheight>25</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>light_speed設定</description>
+<codetext>light_speed = t;
+</codetext>
+</operation>
+<operation>
+<ID>_O19</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>213</x0>
+<y0>179</y0>
+<width>150</width>
+<height>58</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JTextField t)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>33</inpiny0>
+<inpinwidth>91</inpinwidth>
+<inpinheight>25</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>size_of_stars設定</description>
+<codetext>size_of_stars = t;
+</codetext>
+</operation>
+<operation>
+<ID>_O20</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>214</x0>
+<y0>241</y0>
+<width>150</width>
+<height>58</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JTextField t)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>33</inpiny0>
+<inpinwidth>91</inpinwidth>
+<inpinheight>25</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>max_speed設定</description>
+<codetext>max_speed = t;
+</codetext>
+</operation>
+<operation>
+<ID>_O21</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>214</x0>
+<y0>306</y0>
+<width>150</width>
+<height>58</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JTextField t)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>33</inpiny0>
+<inpinwidth>91</inpinwidth>
+<inpinheight>25</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>speed_distribution設定</description>
+<codetext>speed_distribution = t;
+</codetext>
+</operation>
+<operation>
+<ID>_O22</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>214</x0>
+<y0>364</y0>
+<width>150</width>
+<height>58</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JTextField t)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>33</inpiny0>
+<inpinwidth>91</inpinwidth>
+<inpinheight>25</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>number_of_stars設定</description>
+<codetext>number_of_stars = t;
+</codetext>
+</operation>
+<operation>
+<ID>_O23</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>214</x0>
+<y0>425</y0>
+<width>150</width>
+<height>58</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JLabel l)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>33</inpiny0>
+<inpinwidth>91</inpinwidth>
+<inpinheight>25</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>screen設定</description>
+<codetext>screen = l;
+</codetext>
+</operation>
+<relation>
+<ID>_R24</ID>
+<pin1name>_P0</pin1name>
+<pin2name>_O17</pin2name>
+</relation>
+<relation>
+<ID>_R25</ID>
+<pin1name>_P1</pin1name>
+<pin2name>_O18</pin2name>
+</relation>
+<relation>
+<ID>_R26</ID>
+<pin1name>_P5</pin1name>
+<pin2name>_O19</pin2name>
+</relation>
+<relation>
+<ID>_R27</ID>
+<pin1name>_P6</pin1name>
+<pin2name>_O20</pin2name>
+</relation>
+<relation>
+<ID>_R28</ID>
+<pin1name>_P2</pin1name>
+<pin2name>_O21</pin2name>
+</relation>
+<relation>
+<ID>_R29</ID>
+<pin1name>_P4</pin1name>
+<pin2name>_O22</pin2name>
+</relation>
+<relation>
+<ID>_R30</ID>
+<pin1name>_P10</pin1name>
+<pin2name>_O23</pin2name>
+</relation>
+<operation>
+<ID>_O31</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>538</x0>
+<y0>159</y0>
+<width>143</width>
+<height>60</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(Graphics g)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>37</inpiny0>
+<inpinwidth>93</inpinwidth>
+<inpinheight>24</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>星をスクリーンに表示</description>
+<codetext>  if( px == null )return;
+  NumberOfStars = px.length;
+  int i;
+  if( screen == null ) return;
+  int width  = screen.getWidth();
+  int height = screen.getHeight();
+  int x0 = width  / 2;
+  int y0 = height / 2;
+  double scl  = width / 500.0;
+  double vscl = width / 10.0;
+  for( i = 0; i &lt; NumberOfStars; i++ ){
+    g.setColor( Color.white );
+    g.drawOval( (int)(x0 + scl*px[i] - 2), (int)(y0 - scl * py[i] -2), 4, 4 );
+    g.setColor( Color.red );
+    g.drawLine( (int)(x0 + scl*px[i]), (int)(y0 - scl*py[i]), (int)(x0 + scl*px[i] + vscl*vx[i]), (int)(y0 - scl*py[i] - vscl*vy[i]) );
+  }
+</codetext>
+</operation>
+<relation>
+<ID>_R32</ID>
+<pin1name>_P9</pin1name>
+<pin2name>_O31</pin2name>
+</relation>
+<operation>
+<ID>_O38</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>544</x0>
+<y0>226</y0>
+<width>136</width>
+<height>67</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>48</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>星のデータを
+ランダムに設定</description>
+<codetext> Scale = parseDouble(scale);
+ RecordingSpeed = parseInt(recording_speed);
+ LightSpeed= parseDouble(light_speed);
+ SizeOfStars= parseDouble(size_of_stars);
+ MaxSpeed= parseDouble(max_speed);
+ SpeedDistribution= parseDouble(speed_distribution);
+ NumberOfStars= parseInt(number_of_stars);
+ Random rnd = new Random();
+
+ px = new double[NumberOfStars];
+ py = new double[NumberOfStars];
+ pz = new double[NumberOfStars];
+
+ xx = new double[NumberOfStars];
+ yy = new double[NumberOfStars];
+ zz = new double[NumberOfStars];
+
+ vx = new double[NumberOfStars];
+ vy = new double[NumberOfStars];
+ vz = new double[NumberOfStars];
+
+
+
+//　位置設定
+ int i;
+ int j; 
+ double sx;
+ double sy;
+ double sz;
+ double tx;
+ double ty;
+ double tz;
+
+ sx = sy = sz =0.0;
+ for( i = 0; i &lt; NumberOfStars; i++ ){
+   do{
+     tx = Scale * ( rnd.nextDouble() - .5 );
+     ty = Scale * ( rnd.nextDouble() - .5 );
+     tz = 0.2 * Scale * ( rnd.nextDouble() - .5 );
+     for( j = 0;( j &lt; i )&amp;&amp;( ( tx-px[j] )*( tx-px[j] ) + ( ty-py[j] )*( ty-py[j] ) + ( tz-pz[j] )*( tz-pz[j] ) &gt; SizeOfStars * SizeOfStars ); j++ );
+   }
+   while( j &lt; i );  
+   sx += ( px[i] = tx );
+   sy += ( py[i] = ty );
+   sz += ( pz[i] = tz );
+}
+
+// 位置のゼロ補正
+sx /= NumberOfStars;
+sy /= NumberOfStars;
+sz /= NumberOfStars;
+for( i = 0; i &lt; NumberOfStars; i++ ){
+  xx[i] = px[i] -= sx;
+  yy[i] = py[i] -= sy;
+  zz[i] = pz[i] -= sz;
+}
+
+//　速度設定
+sx = sy = sz =0.0;
+for( i = 0; i &lt; NumberOfStars; i++ ){
+  double p = Math.sqrt( px[i]*px[i] + py[i]*py[i] );
+  double v = MaxSpeed * ( 1 - SpeedDistribution *  rnd.nextDouble()  );
+  sx += ( vx[i] = -v * py[i] / p );
+  sy += ( vy[i] =  v * px[i] / p );
+  vz[i] = 0;
+}
+
+// 速度のゼロ補正
+sx /= NumberOfStars;
+sy /= NumberOfStars;
+sz /= NumberOfStars;
+for( i = 0; i &lt; NumberOfStars; i++ ){
+  vx[i] -= sx;
+  vy[i] -= sy;
+}
+
+screen.repaint();
+</codetext>
+</operation>
+<relation>
+<ID>_R39</ID>
+<pin1name>_P7</pin1name>
+<pin2name>_O38</pin2name>
+</relation>
+<codeclip>
+<ID>_C41</ID>
+<x0>578</x0>
+<y0>0</y0>
+<width>173</width>
+<height>21</height>
+<codetext>public double parseDouble( JTextField txt ){
+  return( ( new Double( 0.0 )).parseDouble(txt.getText()) );
+}
+ 
+</codetext>
+</codeclip>
+<codeclip>
+<ID>_C42</ID>
+<x0>578</x0>
+<y0>20</y0>
+<width>120</width>
+<height>21</height>
+<codetext>public int parseInt( JTextField txt ){
+  return( ( new Integer( 0 )).parseInt( txt.getText() ) );
+}
+</codetext>
+</codeclip>
+<codeclip>
+<ID>_C43</ID>
+<x0>387</x0>
+<y0>0</y0>
+<width>189</width>
+<height>143</height>
+<codetext>JLabel screen;
+JTextField scale;
+JTextField recording_speed;
+JTextField light_speed;
+JTextField size_of_stars;
+JTextField max_speed;
+JTextField speed_distribution;
+JTextField number_of_stars;
+</codetext>
+</codeclip>
+</xobject>
+<relation>
+<ID>_R10</ID>
+<pin1name>_A4(_Precording_speed)</pin1name>
+<pin2name>_X9(_P0)</pin2name>
+</relation>
+<relation>
+<ID>_R11</ID>
+<pin1name>_A4(_Plight_speed)</pin1name>
+<pin2name>_X9(_P1)</pin2name>
+</relation>
+<relation>
+<ID>_R12</ID>
+<pin1name>_A4(_Pspeed_distribution)</pin1name>
+<pin2name>_X9(_P2)</pin2name>
+</relation>
+<relation>
+<ID>_R13</ID>
+<pin1name>_A4(_Pscale)</pin1name>
+<pin2name>_X9(_P3)</pin2name>
+</relation>
+<relation>
+<ID>_R14</ID>
+<pin1name>_A4(_Pnomber_of_star)</pin1name>
+<pin2name>_X9(_P4)</pin2name>
+</relation>
+<relation>
+<ID>_R15</ID>
+<pin1name>_A4(_Psize_of_star)</pin1name>
+<pin2name>_X9(_P5)</pin2name>
+</relation>
+<relation>
+<ID>_R16</ID>
+<pin1name>_A4(_Pmax_speed)</pin1name>
+<pin2name>_X9(_P6)</pin2name>
+</relation>
+<relation>
+<ID>_R17</ID>
+<pin1name>_A4(_Pscreen)</pin1name>
+<pin2name>_X9(_P10)</pin2name>
+</relation>
+<relation>
+<ID>_R18</ID>
+<pin1name>_A4(_PPscreen)</pin1name>
+<pin2name>_X9(_P9)</pin2name>
+</relation>
+<relation>
+<ID>_R20</ID>
+<pin1name>_A4(_PAcompose)</pin1name>
+<pin2name>_X9(_P7)</pin2name>
+</relation>
+<relation>
+<ID>_R23</ID>
+<pin1name>_A4(_PAsymulator)</pin1name>
+<pin2name>_P2</pin2name>
+</relation>
+</xobject>
+<relation>
+<ID>_R3</ID>
+<pin1name>_X2(_P2)</pin1name>
+<pin2name>_X0(_P47)</pin2name>
+</relation>
+<pin>
+<ID>_P5</ID>
+<x0>66</x0>
+<y0>127</y0>
+<width>60</width>
+<height>30</height>
+<text>Start()</text>
+<px>9</px>
+<py>33</py>
+</pin>
+<relation>
+<ID>_R6</ID>
+<pin1name>_P5</pin1name>
+<pin2name>_X2(_P1)</pin2name>
+</relation>
+<codeclip>
+<ID>_C9</ID>
+<x0>163</x0>
+<y0>246</y0>
+<width>477</width>
+<height>226</height>
+<codetext>double[] px, py, pz;             //　位置（入出力用）
+double[] xx, yy, zz;             //　位置(計算用)
+double[] vx, vy, vz;             //　速度
+int      Time = 0;               //　時刻(今までに行ったシュミレーションの回数)
+int      RecordingSpeed;         //　位置データ記録のときのデータの圧縮率
+int      NumberOfStars;          //　星の数
+double   SizeOfStars;            //　星の大きさ(内部の重力は逆二乗則に従わない)
+double   Scale;                  //　星の分布の広がり
+double   MaxSpeed;               //　星の初速の最高速度
+double   SpeedDistribution;      //　星の初速のばらつき
+double   LightSpeed;             //　光速(使っていない)
+RandomAccessFile WorkFile;       //　作業ファイル
+String FileName = &quot;Recorder.wrk&quot;;//　作業ファイルの名前
+</codetext>
+</codeclip>
+<xobject>
+<ID>_X10</ID>
+<x0>380</x0>
+<y0>149</y0>
+<width>181</width>
+<height>75</height>
+<ID_maker>27</ID_maker>
+<objectname>Player</objectname>
+<description>新しいオブジェクト</description>
+<pin>
+<ID>_P0</ID>
+<x0>29</x0>
+<y0>375</y0>
+<width>60</width>
+<height>30</height>
+<text>Start()</text>
+<px>15</px>
+<py>35</py>
+</pin>
+<aobject>
+<ID>_A1</ID>
+<x0>153</x0>
+<y0>30</y0>
+<width>271</width>
+<objectname>GUI</objectname>
+<description>GUIオブジェクト
+</description>
+<state>
+<ID>_SINIT</ID>
+<x0>0</x0>
+<y0>40</y0>
+<width>70</width>
+<height>40</height>
+<text>  InitState</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_Pstart</ID>
+<x0>400</x0>
+<y0>100</y0>
+<width>80</width>
+<height>26</height>
+<text>Start()</text>
+<px>14</px>
+<py>352</py>
+</pin>
+<pin>
+<ID>_PGUIout</ID>
+<x0>0</x0>
+<y0>84</y0>
+<width>180</width>
+<height>26</height>
+<text>GUI_created(JFrame f)</text>
+<px>423</px>
+<py>54</py>
+</pin>
+<pin>
+<ID>_PGUIclosed</ID>
+<x0>310</x0>
+<y0>0</y0>
+<width>180</width>
+<height>26</height>
+<text>GUI_closed()</text>
+<px>20</px>
+<py>203</py>
+</pin>
+<action>
+<ID>_Astart</ID>
+<comp1name>_Pstart</comp1name>
+<comp2name>_Ocreate</comp2name>
+</action>
+<operation>
+<ID>_Ocreate</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>220</x0>
+<y0>40</y0>
+<width>130</width>
+<height>64</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>43</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// GUIを作成する
+XGUI x = new XGUI();
+
+</codetext>
+</operation>
+<pin>
+<ID>_PHomePosition</ID>
+<x0>0</x0>
+<y0>110</y0>
+<width>200</width>
+<height>26</height>
+<text>HomePosition_created(JButton b)</text>
+<px>402</px>
+<py>60</py>
+</pin>
+<pin>
+<ID>_PAHomePosition</ID>
+<x0>0</x0>
+<y0>138</y0>
+<width>200</width>
+<height>26</height>
+<text>HomePosition_clicked()</text>
+<px>0</px>
+<py>48</py>
+</pin>
+<pin>
+<ID>_PBACK</ID>
+<x0>0</x0>
+<y0>166</y0>
+<width>200</width>
+<height>26</height>
+<text>BACK_created(JButton b)</text>
+<px>392</px>
+<py>117</py>
+</pin>
+<pin>
+<ID>_PABACK</ID>
+<x0>0</x0>
+<y0>194</y0>
+<width>200</width>
+<height>26</height>
+<text>BACK_clicked()</text>
+<px>0</px>
+<py>85</py>
+</pin>
+<pin>
+<ID>_PGO</ID>
+<x0>0</x0>
+<y0>222</y0>
+<width>200</width>
+<height>26</height>
+<text>GO_created(JButton b)</text>
+<px>365</px>
+<py>145</py>
+</pin>
+<pin>
+<ID>_PAGO</ID>
+<x0>0</x0>
+<y0>250</y0>
+<width>200</width>
+<height>26</height>
+<text>GO_clicked()</text>
+<px>0</px>
+<py>66</py>
+</pin>
+<pin>
+<ID>_PturnLeft</ID>
+<x0>0</x0>
+<y0>278</y0>
+<width>200</width>
+<height>26</height>
+<text>turnLeft_created(JButton b)</text>
+<px>387</px>
+<py>170</py>
+</pin>
+<pin>
+<ID>_PAturnLeft</ID>
+<x0>0</x0>
+<y0>306</y0>
+<width>200</width>
+<height>26</height>
+<text>turnLeft_clicked()</text>
+<px>0</px>
+<py>102</py>
+</pin>
+<pin>
+<ID>_PFastFoword</ID>
+<x0>0</x0>
+<y0>334</y0>
+<width>200</width>
+<height>26</height>
+<text>FastFoword_created(JButton b)</text>
+<px>378</px>
+<py>207</py>
+</pin>
+<pin>
+<ID>_PAFastFoword</ID>
+<x0>0</x0>
+<y0>362</y0>
+<width>200</width>
+<height>26</height>
+<text>FastFoword_clicked()</text>
+<px>0</px>
+<py>268</py>
+</pin>
+<pin>
+<ID>_PPlay_Pause</ID>
+<x0>0</x0>
+<y0>390</y0>
+<width>200</width>
+<height>26</height>
+<text>Play_Pause_created(JButton b)</text>
+<px>0</px>
+<py>232</py>
+</pin>
+<pin>
+<ID>_PAPlay_Pause</ID>
+<x0>0</x0>
+<y0>418</y0>
+<width>200</width>
+<height>26</height>
+<text>Play_Pause_clicked()</text>
+<px>5</px>
+<py>249</py>
+</pin>
+<pin>
+<ID>_PREW</ID>
+<x0>0</x0>
+<y0>446</y0>
+<width>200</width>
+<height>26</height>
+<text>REW_created(JButton b)</text>
+<px>362</px>
+<py>283</py>
+</pin>
+<pin>
+<ID>_PAREW</ID>
+<x0>0</x0>
+<y0>474</y0>
+<width>200</width>
+<height>26</height>
+<text>REW_clicked()</text>
+<px>0</px>
+<py>283</py>
+</pin>
+<pin>
+<ID>_PIndicater</ID>
+<x0>0</x0>
+<y0>502</y0>
+<width>200</width>
+<height>26</height>
+<text>Indicater_created(JSlider s)</text>
+<px>0</px>
+<py>300</py>
+</pin>
+<pin>
+<ID>_PAIndicater</ID>
+<x0>0</x0>
+<y0>530</y0>
+<width>200</width>
+<height>26</height>
+<text>Indicater_changed(int val)</text>
+<px>0</px>
+<py>319</py>
+</pin>
+<pin>
+<ID>_PturnAbove</ID>
+<x0>0</x0>
+<y0>558</y0>
+<width>200</width>
+<height>26</height>
+<text>turnAbove_created(JButton b)</text>
+<px>374</px>
+<py>353</py>
+</pin>
+<pin>
+<ID>_PAturnAbove</ID>
+<x0>0</x0>
+<y0>586</y0>
+<width>200</width>
+<height>26</height>
+<text>turnAbove_clicked()</text>
+<px>0</px>
+<py>138</py>
+</pin>
+<pin>
+<ID>_Pscreen</ID>
+<x0>0</x0>
+<y0>614</y0>
+<width>200</width>
+<height>26</height>
+<text>screen_created(JLabel l)</text>
+<px>0</px>
+<py>29</py>
+</pin>
+<pin>
+<ID>_PturnRight</ID>
+<x0>0</x0>
+<y0>670</y0>
+<width>200</width>
+<height>26</height>
+<text>turnRight_created(JButton b)</text>
+<px>339</px>
+<py>439</py>
+</pin>
+<pin>
+<ID>_PAturnRight</ID>
+<x0>0</x0>
+<y0>698</y0>
+<width>200</width>
+<height>26</height>
+<text>turnRight_clicked()</text>
+<px>0</px>
+<py>121</py>
+</pin>
+<pin>
+<ID>_PturnBelow</ID>
+<x0>0</x0>
+<y0>726</y0>
+<width>200</width>
+<height>26</height>
+<text>turnBelow_created(JButton b)</text>
+<px>308</px>
+<py>453</py>
+</pin>
+<pin>
+<ID>_PAturnBelow</ID>
+<x0>0</x0>
+<y0>754</y0>
+<width>200</width>
+<height>26</height>
+<text>turnBelow_clicked()</text>
+<px>0</px>
+<py>157</py>
+</pin>
+<pin>
+<ID>_PturnOpposite</ID>
+<x0>0</x0>
+<y0>782</y0>
+<width>200</width>
+<height>26</height>
+<text>turnOpposite_created(JButton b)</text>
+<px>312</px>
+<py>495</py>
+</pin>
+<pin>
+<ID>_PAturnOpposite</ID>
+<x0>0</x0>
+<y0>810</y0>
+<width>200</width>
+<height>26</height>
+<text>turnOpposite_clicked()</text>
+<px>0</px>
+<py>178</py>
+</pin>
+<pin>
+<ID>_PRunStop</ID>
+<x0>0</x0>
+<y0>838</y0>
+<width>200</width>
+<height>26</height>
+<text>RunStop_created(JButton b)</text>
+<px>0</px>
+<py>423</py>
+</pin>
+<pin>
+<ID>_PARunStop</ID>
+<x0>0</x0>
+<y0>866</y0>
+<width>200</width>
+<height>26</height>
+<text>RunStop_clicked()</text>
+<px>371</px>
+<py>405</py>
+</pin>
+<codeclip>
+<ID>_CXSTART</ID>
+<x0>0</x0>
+<y0>0</y0>
+<width>300</width>
+<height>26</height>
+<codetext> class XGUI extends JFrame implements WindowListener{
+ JPanel cnt;
+HomePosition IHomePosition;
+ class HomePosition extends JButton implements ActionListener{
+  HomePosition(){
+ setOpaque( true );
+ setName(  &quot;HomePosition&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 9 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;HOME&quot; );
+ addActionListener( this );
+ HomePosition_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ HomePosition_clicked(); }
+}
+BACK IBACK;
+ class BACK extends JButton implements ActionListener{
+  BACK(){
+ setOpaque( true );
+ setName(  &quot;BACK&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;-&quot; );
+ addActionListener( this );
+ BACK_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ BACK_clicked(); }
+}
+GO IGO;
+ class GO extends JButton implements ActionListener{
+  GO(){
+ setOpaque( true );
+ setName(  &quot;GO&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;+&quot; );
+ addActionListener( this );
+ GO_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ GO_clicked(); }
+}
+turnLeft IturnLeft;
+ class turnLeft extends JButton implements ActionListener{
+  turnLeft(){
+ setOpaque( true );
+ setName(  &quot;turnLeft&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;&lt;&quot; );
+ addActionListener( this );
+ turnLeft_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ turnLeft_clicked(); }
+}
+FastFoword IFastFoword;
+ class FastFoword extends JButton implements ActionListener{
+  FastFoword(){
+ setOpaque( true );
+ setName(  &quot;FastFoword&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;&gt;&gt;&quot; );
+ addActionListener( this );
+ FastFoword_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ FastFoword_clicked(); }
+}
+Play_Pause IPlay_Pause;
+ class Play_Pause extends JButton implements ActionListener{
+  Play_Pause(){
+ setOpaque( true );
+ setName(  &quot;Play_Pause&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;&gt;&quot; );
+ addActionListener( this );
+ Play_Pause_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ Play_Pause_clicked(); }
+}
+REW IREW;
+ class REW extends JButton implements ActionListener{
+  REW(){
+ setOpaque( true );
+ setName(  &quot;REW&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;&lt;&lt;&quot; );
+ addActionListener( this );
+ REW_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ REW_clicked(); }
+}
+Indicater IIndicater;
+ class Indicater extends JSlider implements ChangeListener{
+  Indicater(){
+ setOpaque( true );
+ setOrientation( SwingConstants.HORIZONTAL );
+ setName(  &quot;Indicater&quot; );
+ setForeground( new Color(  153, 255, 153 ));
+ setBackground( new Color(  153, 255, 153 ));
+ setMinimum( 0 );
+ setMaximum( 100 );
+ addChangeListener( this );
+ Indicater_created( this );
+}
+ public void stateChanged( ChangeEvent e ){ Indicater_changed( getValue() ); }
+}
+turnAbove IturnAbove;
+ class turnAbove extends JButton implements ActionListener{
+  turnAbove(){
+ setOpaque( true );
+ setName(  &quot;turnAbove&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;^&quot; );
+ addActionListener( this );
+ turnAbove_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ turnAbove_clicked(); }
+}
+screen Iscreen;
+ class screen extends JLabel{
+  screen(){
+ setOpaque( true );
+ setName(  &quot;screen&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  255, 255, 255 ));
+ setBackground( new Color(  0, 0, 0 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;&quot; );
+ screen_created( this );
+}
+ public void paintComponent( Graphics g ){ super.paintComponent(g);
+screen_paint(g);
+}
+}
+turnRight IturnRight;
+ class turnRight extends JButton implements ActionListener{
+  turnRight(){
+ setOpaque( true );
+ setName(  &quot;turnRight&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;&gt;&quot; );
+ addActionListener( this );
+ turnRight_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ turnRight_clicked(); }
+}
+turnBelow IturnBelow;
+ class turnBelow extends JButton implements ActionListener{
+  turnBelow(){
+ setOpaque( true );
+ setName(  &quot;turnBelow&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;v&quot; );
+ addActionListener( this );
+ turnBelow_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ turnBelow_clicked(); }
+}
+turnOpposite IturnOpposite;
+ class turnOpposite extends JButton implements ActionListener{
+  turnOpposite(){
+ setOpaque( true );
+ setName(  &quot;turnOpposite&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;x&quot; );
+ addActionListener( this );
+ turnOpposite_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ turnOpposite_clicked(); }
+}
+RunStop IRunStop;
+ class RunStop extends JButton implements ActionListener{
+  RunStop(){
+ setOpaque( true );
+ setName(  &quot;RunStop&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;RUN&quot; );
+ addActionListener( this );
+ RunStop_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ RunStop_clicked(); }
+}
+ XGUI(){
+ setTitle(&quot;銀河シュミレータ&quot;);
+ cnt = new JPanel( new BorderLayout() );
+ cnt.setPreferredSize(  new  Dimension( 470, 444 ) );
+ ((Component)cnt).setBackground( new Color( 153, 255, 153 ) );
+ IHomePosition = new HomePosition();
+ cnt.add( IHomePosition, 0 );
+ cnt.getLayout().removeLayoutComponent( IHomePosition );
+ IHomePosition.setBounds( 126, 421, 68, 20 );
+ IBACK = new BACK();
+ cnt.add( IBACK, 0 );
+ cnt.getLayout().removeLayoutComponent( IBACK );
+ IBACK.setBounds( 146, 400, 47, 19 );
+ IGO = new GO();
+ cnt.add( IGO, 0 );
+ cnt.getLayout().removeLayoutComponent( IGO );
+ IGO.setBounds( 146, 377, 47, 21 );
+ IturnLeft = new turnLeft();
+ cnt.add( IturnLeft, 0 );
+ cnt.getLayout().removeLayoutComponent( IturnLeft );
+ IturnLeft.setBounds( 0, 399, 42, 21 );
+ IFastFoword = new FastFoword();
+ cnt.add( IFastFoword, 0 );
+ cnt.getLayout().removeLayoutComponent( IFastFoword );
+ IFastFoword.setBounds( 398, 410, 69, 30 );
+ IPlay_Pause = new Play_Pause();
+ cnt.add( IPlay_Pause, 0 );
+ cnt.getLayout().removeLayoutComponent( IPlay_Pause );
+ IPlay_Pause.setBounds( 328, 410, 70, 30 );
+ IREW = new REW();
+ cnt.add( IREW, 0 );
+ cnt.getLayout().removeLayoutComponent( IREW );
+ IREW.setBounds( 262, 410, 66, 30 );
+ IIndicater = new Indicater();
+ cnt.add( IIndicater, 0 );
+ cnt.getLayout().removeLayoutComponent( IIndicater );
+ IIndicater.setBounds( 261, 381, 205, 25 );
+ IturnAbove = new turnAbove();
+ cnt.add( IturnAbove, 0 );
+ cnt.getLayout().removeLayoutComponent( IturnAbove );
+ IturnAbove.setBounds( 41, 377, 50, 22 );
+ Iscreen = new screen();
+ cnt.add( Iscreen, 0 );
+ cnt.getLayout().removeLayoutComponent( Iscreen );
+ Iscreen.setBounds( 3, 1, 462, 373 );
+ IturnRight = new turnRight();
+ cnt.add( IturnRight, 0 );
+ cnt.getLayout().removeLayoutComponent( IturnRight );
+ IturnRight.setBounds( 91, 399, 46, 21 );
+ IturnBelow = new turnBelow();
+ cnt.add( IturnBelow, 0 );
+ cnt.getLayout().removeLayoutComponent( IturnBelow );
+ IturnBelow.setBounds( 42, 420, 49, 23 );
+ IturnOpposite = new turnOpposite();
+ cnt.add( IturnOpposite, 0 );
+ cnt.getLayout().removeLayoutComponent( IturnOpposite );
+ IturnOpposite.setBounds( 42, 399, 49, 21 );
+ IRunStop = new RunStop();
+ cnt.add( IRunStop, 0 );
+ cnt.getLayout().removeLayoutComponent( IRunStop );
+ IRunStop.setBounds( 196, 382, 64, 59 );
+ setContentPane( cnt );
+ pack();
+ addWindowListener( this );
+ setVisible( true );
+ GUI_created( this );
+}
+ public void windowActivated( WindowEvent e ){}
+ public void windowClosed( WindowEvent e ){}
+ public void windowClosing( WindowEvent e ){ GUI_closed(); }
+ public void windowDeactivated( WindowEvent e ){}
+ public void windowDeiconified( WindowEvent e ){}
+ public void windowIconified( WindowEvent e ){}
+ public void windowOpened( WindowEvent e ){}
+}
+</codetext>
+</codeclip>
+<ID_maker>49</ID_maker>
+<height>453</height>
+<レイアウト>銀河シュミレータ
+470
+444
+153
+255
+153
+BUTTON;HomePosition;HOME;126;421;68;20;0;0;0;192;192;192;Dialog;9;null;0;0;
+BUTTON;BACK;-;146;400;47;19;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;GO;+;146;377;47;21;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;turnLeft;&lt;;0;399;42;21;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;FastFoword;&gt;&gt;;398;410;69;30;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;Play_Pause;&gt;;328;410;70;30;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;REW;&lt;&lt;;262;410;66;30;0;0;0;192;192;192;Dialog;12;null;0;0;
+HSLIDER;Indicater;0;100;261;381;205;25;153;255;153;153;255;153;
+BUTTON;turnAbove;^;41;377;50;22;0;0;0;192;192;192;Dialog;12;null;0;0;
+LABEL;screen;null;3;1;462;373;255;255;255;0;0;0;Dialog;12;null;0;0;
+BUTTON;turnRight;&gt;;91;399;46;21;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;turnBelow;v;42;420;49;23;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;turnOpposite;x;42;399;49;21;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;RunStop;RUN;196;382;64;59;0;0;0;192;192;192;Dialog;12;null;0;0;
+</レイアウト>
+<pin>
+<ID>_P48</ID>
+<x0>0</x0>
+<y0>641</y0>
+<width>199</width>
+<height>28</height>
+<text>screen_paint(Graphics g )</text>
+<px>66</px>
+<py>4</py>
+</pin>
+</aobject>
+<xobject>
+<ID>_X2</ID>
+<x0>454</x0>
+<y0>30</y0>
+<width>226</width>
+<height>197</height>
+<ID_maker>42</ID_maker>
+<objectname>_3D_Plotter</objectname>
+<description>新しいオブジェクト</description>
+<pin>
+<ID>_P0</ID>
+<x0>0</x0>
+<y0>89</y0>
+<width>44</width>
+<height>27</height>
+<text>plot()</text>
+<px>165</px>
+<py>171</py>
+</pin>
+<pin>
+<ID>_P1</ID>
+<x0>0</x0>
+<y0>24</y0>
+<width>123</width>
+<height>29</height>
+<text>Screen_is(JLabel l)</text>
+<px>0</px>
+<py>29</py>
+</pin>
+<pin>
+<ID>_P2</ID>
+<x0>0</x0>
+<y0>206</y0>
+<width>95</width>
+<height>30</height>
+<text>HomePosition()</text>
+<px>1</px>
+<py>48</py>
+</pin>
+<pin>
+<ID>_P3</ID>
+<x0>344</x0>
+<y0>205</y0>
+<width>60</width>
+<height>30</height>
+<text>GO()</text>
+<px>0</px>
+<py>66</py>
+</pin>
+<pin>
+<ID>_P4</ID>
+<x0>348</x0>
+<y0>278</y0>
+<width>60</width>
+<height>30</height>
+<text>BACK()</text>
+<px>0</px>
+<py>85</py>
+</pin>
+<pin>
+<ID>_P5</ID>
+<x0>0</x0>
+<y0>447</y0>
+<width>76</width>
+<height>29</height>
+<text>turnLeft()</text>
+<px>1</px>
+<py>102</py>
+</pin>
+<pin>
+<ID>_P6</ID>
+<x0>0</x0>
+<y0>383</y0>
+<width>79</width>
+<height>30</height>
+<text>turnRight()</text>
+<px>0</px>
+<py>121</py>
+</pin>
+<pin>
+<ID>_P7</ID>
+<x0>2</x0>
+<y0>329</y0>
+<width>70</width>
+<height>30</height>
+<text>turnAbove()</text>
+<px>0</px>
+<py>138</py>
+</pin>
+<pin>
+<ID>_P8</ID>
+<x0>0</x0>
+<y0>269</y0>
+<width>79</width>
+<height>33</height>
+<text>turnBelow()</text>
+<px>0</px>
+<py>157</py>
+</pin>
+<pin>
+<ID>_P9</ID>
+<x0>324</x0>
+<y0>369</y0>
+<width>90</width>
+<height>29</height>
+<text>turnOpposite()</text>
+<px>3</px>
+<py>178</py>
+</pin>
+<pin>
+<ID>_P13</ID>
+<x0>0</x0>
+<y0>147</y0>
+<width>105</width>
+<height>30</height>
+<text>paint(Graphics g)</text>
+<px>120</px>
+<py>4</py>
+</pin>
+<operation>
+<ID>_O15</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>146</x0>
+<y0>1</y0>
+<width>150</width>
+<height>62</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JLabel l)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>43</inpiny0>
+<inpinwidth>76</inpinwidth>
+<inpinheight>19</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>スクリーンを取得する</description>
+<codetext>screen = l;
+move_step = 20.;
+rot_step = 3.1416/40.;
+rot_sin = Math.sin(rot_step);
+rot_cos = Math.cos(rot_step);
+HomePosition();
+</codetext>
+</operation>
+<relation>
+<ID>_R16</ID>
+<pin1name>_P1</pin1name>
+<pin2name>_O15</pin2name>
+</relation>
+<codeclip>
+<ID>_C17</ID>
+<x0>336</x0>
+<y0>2</y0>
+<width>224</width>
+<height>160</height>
+<codetext>double site1x=1.,site1y=0.,site1z=0.;
+double site2x=0.,site2y=1.,site2z=0.;
+double site0x=0.,site0y=0.,site0z=1.;
+double o1=100.,o2=100.;
+double ox=0.,oy=0.,oz=-1000.;
+double move_step=20.,rot_step;
+double rot_sin,rot_cos;
+ 
+JLabel screen;
+</codetext>
+</codeclip>
+<operation>
+<ID>_O19</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>147</x0>
+<y0>67</y0>
+<width>148</width>
+<height>58</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>34</inpiny0>
+<inpinwidth>30</inpinwidth>
+<inpinheight>24</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>星を表示する</description>
+<codetext>if( screen != null ) screen.repaint();
+</codetext>
+</operation>
+<relation>
+<ID>_R20</ID>
+<pin1name>_P0</pin1name>
+<pin2name>_O19</pin2name>
+</relation>
+<operation>
+<ID>_O21</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>148</x0>
+<y0>128</y0>
+<width>147</width>
+<height>58</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(Graphics g)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>38</inpiny0>
+<inpinwidth>86</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>スクリーンを表示する</description>
+<codetext>double rx,ry,rz;
+double disp1,disp2,disp0,disp;
+int i;
+
+if( ( screen == null ) || ( px == null ) ) return;
+o1 = screen.getWidth() / 2.;
+o2 = screen.getHeight() / 2.;
+g.setColor( Color.white );
+for( i = 0; i &lt; NumberOfStars; i++){
+  rx = px[i] - ox;
+  ry = py[i] - oy;
+  rz = pz[i] - oz;
+  disp1 = site1x * rx + site1y * ry + site1z * rz;
+  disp2 = site2x * rx + site2y * ry + site2z * rz;
+  disp0 = site0x * rx + site0y * ry + site0z * rz;
+  disp = Math.sqrt( disp1*disp1 + disp2*disp2 + disp0*disp0 );
+  if( disp0 &gt; 0 ) g.drawOval( (int)( o1 * ( 1 +  disp1/disp ) ), (int)( o2 * ( 1 - disp2/disp ) ), 1, 1 );
+}
+ 
+</codetext>
+</operation>
+<relation>
+<ID>_R22</ID>
+<pin1name>_P13</pin1name>
+<pin2name>_O21</pin2name>
+</relation>
+<operation>
+<ID>_O23</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>147</x0>
+<y0>189</y0>
+<width>146</width>
+<height>55</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>35</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>視点を原点に戻す</description>
+<codetext>ox = 0.;
+oy = 0.;
+oz = -1000;
+site1x = 1.; site1y = 0.; site1z = 0.;
+site2x = 0.; site2y = 1.; site2z = 0.;
+site0x = 0.; site0y = 0.; site0z = 1.;
+screen.repaint();
+
+</codetext>
+</operation>
+<relation>
+<ID>_R24</ID>
+<pin1name>_P2</pin1name>
+<pin2name>_O23</pin2name>
+</relation>
+<operation>
+<ID>_O25</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>147</x0>
+<y0>249</y0>
+<width>148</width>
+<height>55</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>35</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>視点を下方に移す</description>
+<codetext>site0x = rot_cos * site0x - rot_sin * site2x;
+site0y = rot_cos * site0y - rot_sin * site2y;
+site0z = rot_cos * site0z - rot_sin * site2z;
+site2x = rot_sin * site0x + rot_cos * site2x;
+site2y = rot_sin * site0y + rot_cos * site2y;
+site2z = rot_sin * site0z + rot_cos * site2z;
+screen.repaint();
+ 
+</codetext>
+</operation>
+<relation>
+<ID>_R26</ID>
+<pin1name>_P8</pin1name>
+<pin2name>_O25</pin2name>
+</relation>
+<operation>
+<ID>_O29</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>148</x0>
+<y0>309</y0>
+<width>145</width>
+<height>55</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>35</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>視点を上方に移す</description>
+<codetext>site0x =  rot_cos * site0x + rot_sin * site2x;
+site0y =  rot_cos * site0y + rot_sin * site2y;
+site0z =  rot_cos * site0z + rot_sin * site2z;
+site2x = -rot_sin * site0x + rot_cos * site2x;
+site2y = -rot_sin * site0y + rot_cos * site2y;
+site2z = -rot_sin * site0z + rot_cos * site2z;
+screen.repaint();
+ 
+</codetext>
+</operation>
+<operation>
+<ID>_O30</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>151</x0>
+<y0>370</y0>
+<width>145</width>
+<height>55</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>35</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>視点を右に移す</description>
+<codetext>site0x =  rot_cos * site0x + rot_sin * site1x;
+site0y =  rot_cos * site0y + rot_sin * site1y;
+site0z =  rot_cos * site0z + rot_sin * site1z;
+site1x = -rot_sin * site0x + rot_cos * site1x;
+site1y = -rot_sin * site0y + rot_cos * site1y;
+site1z = -rot_sin * site0z + rot_cos * site1z;
+screen.repaint();
+ 
+</codetext>
+</operation>
+<operation>
+<ID>_O31</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>152</x0>
+<y0>433</y0>
+<width>145</width>
+<height>55</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>35</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>視点を左に移す</description>
+<codetext>site0x = rot_cos * site0x - rot_sin * site1x;
+site0y = rot_cos * site0y - rot_sin * site1y;
+site0z = rot_cos * site0z - rot_sin * site1z;
+site1x = rot_sin * site0x + rot_cos * site1x;
+site1y = rot_sin * site0y + rot_cos * site1y;
+site1z = rot_sin * site0z + rot_cos * site1z;
+screen.repaint();
+ 
+</codetext>
+</operation>
+<relation>
+<ID>_R32</ID>
+<pin1name>_P7</pin1name>
+<pin2name>_O29</pin2name>
+</relation>
+<relation>
+<ID>_R33</ID>
+<pin1name>_P6</pin1name>
+<pin2name>_O30</pin2name>
+</relation>
+<relation>
+<ID>_R34</ID>
+<pin1name>_P5</pin1name>
+<pin2name>_O31</pin2name>
+</relation>
+<operation>
+<ID>_O35</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>454</x0>
+<y0>193</y0>
+<width>131</width>
+<height>54</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>34</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>視点を前方に移動</description>
+<codetext>ox = ox + site0x * move_step;
+oy = oy + site0y * move_step;
+oz = oz + site0z * move_step;
+screen.repaint();
+</codetext>
+</operation>
+<relation>
+<ID>_R36</ID>
+<pin1name>_P3</pin1name>
+<pin2name>_O35</pin2name>
+</relation>
+<operation>
+<ID>_O38</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>453</x0>
+<y0>268</y0>
+<width>131</width>
+<height>54</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>34</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>視点を後方に移動</description>
+<codetext>ox = ox - site0x * move_step;
+oy = oy - site0y * move_step;
+oz = oz - site0z * move_step;
+screen.repaint();
+</codetext>
+</operation>
+<relation>
+<ID>_R39</ID>
+<pin1name>_P4</pin1name>
+<pin2name>_O38</pin2name>
+</relation>
+<operation>
+<ID>_O40</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>459</x0>
+<y0>356</y0>
+<width>127</width>
+<height>53</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>33</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>視点を反転する</description>
+<codetext>site1z = -site1z;
+site2z = -site2z;
+site0z = -site0z;
+screen.repaint();
+</codetext>
+</operation>
+<relation>
+<ID>_R41</ID>
+<pin1name>_P9</pin1name>
+<pin2name>_O40</pin2name>
+</relation>
+</xobject>
+<xobject>
+<ID>_X3</ID>
+<x0>456</x0>
+<y0>233</y0>
+<width>226</width>
+<height>136</height>
+<ID_maker>44</ID_maker>
+<objectname>Player_Unit</objectname>
+<description>新しいオブジェクト</description>
+<pin>
+<ID>_P0</ID>
+<x0>23</x0>
+<y0>414</y0>
+<width>91</width>
+<height>27</height>
+<text>Play_Pause()</text>
+<px>0</px>
+<py>46</py>
+</pin>
+<pin>
+<ID>_P1</ID>
+<x0>14</x0>
+<y0>380</y0>
+<width>126</width>
+<height>26</height>
+<text>Button_is(JButton b)</text>
+<px>2</px>
+<py>29</py>
+</pin>
+<pin>
+<ID>_P2</ID>
+<x0>546</x0>
+<y0>175</y0>
+<width>38</width>
+<height>28</height>
+<text>FF()</text>
+<px>0</px>
+<py>65</py>
+</pin>
+<pin>
+<ID>_P3</ID>
+<x0>27</x0>
+<y0>297</y0>
+<width>60</width>
+<height>30</height>
+<text>Rew()</text>
+<px>0</px>
+<py>80</py>
+</pin>
+<pin>
+<ID>_P4</ID>
+<x0>16</x0>
+<y0>99</y0>
+<width>118</width>
+<height>28</height>
+<text>Slider_is(JSlider s)</text>
+<px>0</px>
+<py>97</py>
+</pin>
+<pin>
+<ID>_P5</ID>
+<x0>21</x0>
+<y0>204</y0>
+<width>89</width>
+<height>32</height>
+<text>read( int n)</text>
+<px>0</px>
+<py>116</py>
+</pin>
+<pin>
+<ID>_P7</ID>
+<x0>360</x0>
+<y0>256</y0>
+<width>77</width>
+<height>25</height>
+<text>out()</text>
+<px>164</px>
+<py>7</py>
+</pin>
+<codeclip>
+<ID>_C8</ID>
+<x0>349</x0>
+<y0>0</y0>
+<width>193</width>
+<height>55</height>
+<codetext>JSlider slider=null;
+int counter=0;
+int max=0;
+</codetext>
+</codeclip>
+<aobject>
+<ID>_A10</ID>
+<x0>365</x0>
+<y0>351</y0>
+<width>147</width>
+<height>71</height>
+<ID_maker>11</ID_maker>
+<objectname>Interval_Timer</objectname>
+<description>新しいオブジェクト</description>
+<state>
+<ID>_SINIT</ID>
+<x0>188</x0>
+<y0>270</y0>
+<width>70</width>
+<height>40</height>
+<text>  初期状態</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_P0</ID>
+<x0>688</x0>
+<y0>258</y0>
+<width>60</width>
+<height>30</height>
+<text>Play()</text>
+<px>12</px>
+<py>33</py>
+</pin>
+<pin>
+<ID>_P1</ID>
+<x0>693</x0>
+<y0>344</y0>
+<width>60</width>
+<height>30</height>
+<text>Pause()</text>
+<px>12</px>
+<py>51</py>
+</pin>
+<pin>
+<ID>_P2</ID>
+<x0>476</x0>
+<y0>155</y0>
+<width>60</width>
+<height>30</height>
+<text>Action()</text>
+<px>99</px>
+<py>47</py>
+</pin>
+<codeclip>
+<ID>_C3</ID>
+<x0>200</x0>
+<y0>5</y0>
+<width>272</width>
+<height>198</height>
+<codetext>XTimer  timer;
+class XTimer implements ActionListener{
+  javax.swing.Timer unit;
+ 
+  XTimer( int del ){
+   unit = new javax.swing.Timer( del, this );
+  }
+
+  public void actionPerformed( ActionEvent e){
+    Action();
+  }
+
+}
+</codetext>
+</codeclip>
+<codeclip>
+<ID>_C4</ID>
+<x0>228</x0>
+<y0>228</y0>
+<width>211</width>
+<height>23</height>
+<codetext>int delay = 10; //インターバル間隔
+</codetext>
+</codeclip>
+<state>
+<ID>_S5</ID>
+<x0>415</x0>
+<y0>274</y0>
+<width>70</width>
+<height>40</height>
+<text>       状態1</text>
+<isinitstate>0</isinitstate>
+</state>
+<operation>
+<ID>_O6</ID>
+<state1>_SINIT</state1>
+<state2>_S5</state2>
+<x0>275</x0>
+<y0>319</y0>
+<width>126</width>
+<height>59</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>0</inconnecty0>
+<outconnectx0>100</outconnectx0>
+<outconnecty0>0</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>20</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>0</inpinlinkcount>
+<description>タイマー生成･設定</description>
+<codetext>timer = new XTimer( delay );
+</codetext>
+</operation>
+<operation>
+<ID>_O7</ID>
+<state1>_S5</state1>
+<state2>_S5</state2>
+<x0>522</x0>
+<y0>229</y0>
+<width>130</width>
+<height>53</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>34</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>タイマースタート</description>
+<codetext>timer.unit.start();
+</codetext>
+</operation>
+<operation>
+<ID>_O8</ID>
+<state1>_S5</state1>
+<state2>_S5</state2>
+<x0>525</x0>
+<y0>314</y0>
+<width>129</width>
+<height>55</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>35</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>タイマーストップ</description>
+<codetext>timer.unit.stop();
+</codetext>
+</operation>
+<action>
+<ID>_A9</ID>
+<comp1name>_P0</comp1name>
+<comp2name>_O7</comp2name>
+</action>
+<action>
+<ID>_A10</ID>
+<comp1name>_P1</comp1name>
+<comp2name>_O8</comp2name>
+</action>
+</aobject>
+<aobject>
+<ID>_A11</ID>
+<x0>163</x0>
+<y0>348</y0>
+<width>177</width>
+<height>94</height>
+<ID_maker>17</ID_maker>
+<objectname>Button_Control</objectname>
+<description>新しいオブジェクト</description>
+<state>
+<ID>_SINIT</ID>
+<x0>5</x0>
+<y0>166</y0>
+<width>70</width>
+<height>40</height>
+<text>  初期状態</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_P0</ID>
+<x0>103</x0>
+<y0>358</y0>
+<width>129</width>
+<height>31</height>
+<text>Button_is(JButton b)</text>
+<px>0</px>
+<py>37</py>
+</pin>
+<pin>
+<ID>_P1</ID>
+<x0>380</x0>
+<y0>188</y0>
+<width>92</width>
+<height>27</height>
+<text>Play_Pause()</text>
+<px>0</px>
+<py>71</py>
+</pin>
+<pin>
+<ID>_P2</ID>
+<x0>611</x0>
+<y0>87</y0>
+<width>60</width>
+<height>30</height>
+<text>Play()</text>
+<px>132</px>
+<py>36</py>
+</pin>
+<pin>
+<ID>_P3</ID>
+<x0>618</x0>
+<y0>325</y0>
+<width>60</width>
+<height>30</height>
+<text>Pause()</text>
+<px>129</px>
+<py>54</py>
+</pin>
+<state>
+<ID>_S4</ID>
+<x0>203</x0>
+<y0>165</y0>
+<width>70</width>
+<height>40</height>
+<text>   Stop状態</text>
+<isinitstate>0</isinitstate>
+</state>
+<state>
+<ID>_S5</ID>
+<x0>514</x0>
+<y0>172</y0>
+<width>70</width>
+<height>40</height>
+<text>   RUN状態</text>
+<isinitstate>0</isinitstate>
+</state>
+<operation>
+<ID>_O6</ID>
+<state1>_SINIT</state1>
+<state2>_S4</state2>
+<x0>64</x0>
+<y0>227</y0>
+<width>141</width>
+<height>64</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>0</inconnecty0>
+<outconnectx0>127</outconnectx0>
+<outconnecty0>0</outconnecty0>
+<inpintext>in(JButton b)</inpintext>
+<inpinx0>65</inpinx0>
+<inpiny0>41</inpiny0>
+<inpinwidth>76</inpinwidth>
+<inpinheight>24</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>変数設定
+</description>
+<codetext>btn = b;
+</codetext>
+</operation>
+<codeclip>
+<ID>_C7</ID>
+<x0>80</x0>
+<y0>81</y0>
+<width>100</width>
+<height>20</height>
+<codetext>JButton btn;
+</codetext>
+</codeclip>
+<action>
+<ID>_A8</ID>
+<comp1name>_P0</comp1name>
+<comp2name>_O6</comp2name>
+</action>
+<operation>
+<ID>_O9</ID>
+<state1>_S4</state1>
+<state2>_S5</state2>
+<x0>316</x0>
+<y0>41</y0>
+<width>130</width>
+<height>90</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>65</inconnecty0>
+<outconnectx0>108</outconnectx0>
+<outconnecty0>70</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>71</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>51</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>Play信号を出す</description>
+<codetext>btn.setText(&quot;II&quot;);
+</codetext>
+</operation>
+<operation>
+<ID>_O10</ID>
+<state1>_S5</state1>
+<state2>_S4</state2>
+<x0>316</x0>
+<y0>282</y0>
+<width>130</width>
+<height>90</height>
+<inconnectx0>103</inconnectx0>
+<inconnecty0>0</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>3</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>28</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>48</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>2</inpinlinkcount>
+<description>Pause信号を出す
+</description>
+<codetext>btn.setText(&quot;&gt;&quot;);
+</codetext>
+</operation>
+<action>
+<ID>_A11</ID>
+<comp1name>_P1</comp1name>
+<comp2name>_O9</comp2name>
+</action>
+<action>
+<ID>_A12</ID>
+<comp1name>_P1</comp1name>
+<comp2name>_O10</comp2name>
+</action>
+<action>
+<ID>_A13</ID>
+<comp1name>_O9</comp1name>
+<comp2name>_P2</comp2name>
+</action>
+<action>
+<ID>_A14</ID>
+<comp1name>_O10</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+<pin>
+<ID>_P15</ID>
+<x0>542</x0>
+<y0>305</y0>
+<width>60</width>
+<height>30</height>
+<text>Break()</text>
+<px>128</px>
+<py>71</py>
+</pin>
+<action>
+<ID>_A16</ID>
+<comp1name>_P15</comp1name>
+<comp2name>_O10</comp2name>
+</action>
+</aobject>
+<relation>
+<ID>_R12</ID>
+<pin1name>_P1</pin1name>
+<pin2name>_A11(_P0)</pin2name>
+</relation>
+<relation>
+<ID>_R13</ID>
+<pin1name>_P0</pin1name>
+<pin2name>_A11(_P1)</pin2name>
+</relation>
+<relation>
+<ID>_R14</ID>
+<pin1name>_A11(_P2)</pin1name>
+<pin2name>_A10(_P0)</pin2name>
+</relation>
+<relation>
+<ID>_R15</ID>
+<pin1name>_A11(_P3)</pin1name>
+<pin2name>_A10(_P1)</pin2name>
+</relation>
+<codeclip>
+<ID>_C17</ID>
+<x0>14</x0>
+<y0>25</y0>
+<width>126</width>
+<height>22</height>
+<codetext>void xread( int n ){
+  int i;
+  if( WorkFile != null ){
+    try{
+
+    if( n &gt;= 0 ){
+      WorkFile.seek( 4 + 3 * 8 * NumberOfStars * n );
+      for( i = 0;i &lt; NumberOfStars; i++){
+        px[i] = WorkFile.readDouble();
+      }
+      for( i = 0;i &lt; NumberOfStars; i++){
+        py[i] = WorkFile.readDouble();
+      }
+      for( i = 0;i &lt; NumberOfStars; i++){
+        pz[i] = WorkFile.readDouble();
+      }
+    }
+
+    } catch( IOException e ){}
+  }
+}
+</codetext>
+</codeclip>
+<operation>
+<ID>_O18</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>176</x0>
+<y0>56</y0>
+<width>125</width>
+<height>68</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JSlider s)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>46</inpiny0>
+<inpinwidth>75</inpinwidth>
+<inpinheight>23</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>変数設定
+ファイルを開く
+</description>
+<codetext>slider = s;
+try{
+
+File  fil = new File( FileName );
+WorkFile = new RandomAccessFile( fil, &quot;r&quot; );
+NumberOfStars = WorkFile.readInt();
+px = new double[NumberOfStars];
+py = new double[NumberOfStars];
+pz = new double[NumberOfStars];
+max = ( (int)( WorkFile.length() ) - 4 ) / NumberOfStars / 3 / 8; 
+xread( 0 );
+update( 0 );
+} catch( IOException e ){}
+</codetext>
+</operation>
+<relation>
+<ID>_R19</ID>
+<pin1name>_P4</pin1name>
+<pin2name>_O18</pin2name>
+</relation>
+<operation>
+<ID>_O20</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>380</x0>
+<y0>127</y0>
+<width>137</width>
+<height>73</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>97</inpinx0>
+<inpiny0>52</inpiny0>
+<inpinwidth>41</inpinwidth>
+<inpinheight>21</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>0</outpinx0>
+<outpiny0>51</outpiny0>
+<outpinwidth>36</outpinwidth>
+<outpinheight>23</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>ファイルの最後尾に
+移動して表示</description>
+<codetext>xread( max-1 );
+update( max-1 );
+</codetext>
+</operation>
+<operation>
+<ID>_O21</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>173</x0>
+<y0>255</y0>
+<width>143</width>
+<height>67</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>47</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>107</outpinx0>
+<outpiny0>44</outpiny0>
+<outpinwidth>36</outpinwidth>
+<outpinheight>23</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>ファイルの先頭に
+移動して表示</description>
+<codetext>xread( 0 );
+update( 0 );
+</codetext>
+</operation>
+<operation>
+<ID>_O22</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>465</x0>
+<y0>212</y0>
+<width>134</width>
+<height>86</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>65</inpiny0>
+<inpinwidth>42</inpinwidth>
+<inpinheight>21</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>0</outpinx0>
+<outpiny0>46</outpiny0>
+<outpinwidth>43</outpinwidth>
+<outpinheight>21</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>counterを１つ進めて
+表示</description>
+<codetext>xread( counter );
+update( counter ); 
+counter++;
+</codetext>
+</operation>
+<operation>
+<ID>_O23</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>167</x0>
+<y0>164</y0>
+<width>138</width>
+<height>66</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(int n)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>46</inpiny0>
+<inpinwidth>58</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>102</outpinx0>
+<outpiny0>46</outpiny0>
+<outpinwidth>36</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>n番目のデータを
+表示
+</description>
+<codetext>int mx = slider.getMaximum();
+int mn = slider.getMinimum();
+int i = max * ( n - mn ) / ( mx +1 - mn );
+xread( i );
+counter = i;
+
+</codetext>
+</operation>
+<relation>
+<ID>_R25</ID>
+<pin1name>_P2</pin1name>
+<pin2name>_O20</pin2name>
+</relation>
+<relation>
+<ID>_R26</ID>
+<pin1name>_P3</pin1name>
+<pin2name>_O21</pin2name>
+</relation>
+<relation>
+<ID>_R27</ID>
+<pin1name>_A10(_P2)</pin1name>
+<pin2name>_O22</pin2name>
+</relation>
+<relation>
+<ID>_R29</ID>
+<pin1name>_P5</pin1name>
+<pin2name>_O23</pin2name>
+</relation>
+<relation>
+<ID>_R30</ID>
+<pin1name>_O22</pin1name>
+<pin2name>_P7</pin2name>
+</relation>
+<relation>
+<ID>_R31</ID>
+<pin1name>_O20</pin1name>
+<pin2name>_P7</pin2name>
+</relation>
+<relation>
+<ID>_R32</ID>
+<pin1name>_O23</pin1name>
+<pin2name>_P7</pin2name>
+</relation>
+<relation>
+<ID>_R33</ID>
+<pin1name>_O21</pin1name>
+<pin2name>_P7</pin2name>
+</relation>
+<operation>
+<ID>_O34</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>568</x0>
+<y0>351</y0>
+<width>159</width>
+<height>85</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>45</inpiny0>
+<inpinwidth>39</inpinwidth>
+<inpinheight>22</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>0</outpinx0>
+<outpiny0>66</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>条件: counter &gt;= max
+       タイマー停止</description>
+<codetext></codetext>
+</operation>
+<relation>
+<ID>_R38</ID>
+<pin1name>_O34</pin1name>
+<pin2name>_A11(_P15)</pin2name>
+</relation>
+<codeclip>
+<ID>_C40</ID>
+<x0>14</x0>
+<y0>46</y0>
+<width>126</width>
+<height>21</height>
+<codetext>void update( int n ){
+  int mx = slider.getMaximum();
+  int mn = slider.getMinimum();
+  slider.setValue( mn + ( mx+1 - mn ) * n / max );
+  counter = n; 
+}
+</codetext>
+</codeclip>
+<relation>
+<ID>_R43</ID>
+<pin1name>_O22</pin1name>
+<pin2name>_O34</pin2name>
+</relation>
+</xobject>
+<relation>
+<ID>_R4</ID>
+<pin1name>_X3(_P7)</pin1name>
+<pin2name>_X2(_P0)</pin2name>
+</relation>
+<relation>
+<ID>_R5</ID>
+<pin1name>_A1(_P48)</pin1name>
+<pin2name>_X2(_P13)</pin2name>
+</relation>
+<relation>
+<ID>_R6</ID>
+<pin1name>_A1(_Pscreen)</pin1name>
+<pin2name>_X2(_P1)</pin2name>
+</relation>
+<relation>
+<ID>_R7</ID>
+<pin1name>_A1(_PAHomePosition)</pin1name>
+<pin2name>_X2(_P2)</pin2name>
+</relation>
+<relation>
+<ID>_R8</ID>
+<pin1name>_A1(_PAGO)</pin1name>
+<pin2name>_X2(_P3)</pin2name>
+</relation>
+<relation>
+<ID>_R9</ID>
+<pin1name>_A1(_PABACK)</pin1name>
+<pin2name>_X2(_P4)</pin2name>
+</relation>
+<relation>
+<ID>_R10</ID>
+<pin1name>_A1(_PAturnLeft)</pin1name>
+<pin2name>_X2(_P5)</pin2name>
+</relation>
+<relation>
+<ID>_R11</ID>
+<pin1name>_A1(_PAturnRight)</pin1name>
+<pin2name>_X2(_P6)</pin2name>
+</relation>
+<relation>
+<ID>_R12</ID>
+<pin1name>_A1(_PAturnAbove)</pin1name>
+<pin2name>_X2(_P7)</pin2name>
+</relation>
+<relation>
+<ID>_R13</ID>
+<pin1name>_A1(_PAturnBelow)</pin1name>
+<pin2name>_X2(_P8)</pin2name>
+</relation>
+<relation>
+<ID>_R14</ID>
+<pin1name>_A1(_PAturnOpposite)</pin1name>
+<pin2name>_X2(_P9)</pin2name>
+</relation>
+<relation>
+<ID>_R15</ID>
+<pin1name>_A1(_PPlay_Pause)</pin1name>
+<pin2name>_X3(_P1)</pin2name>
+</relation>
+<relation>
+<ID>_R16</ID>
+<pin1name>_A1(_PAPlay_Pause)</pin1name>
+<pin2name>_X3(_P0)</pin2name>
+</relation>
+<relation>
+<ID>_R17</ID>
+<pin1name>_A1(_PAFastFoword)</pin1name>
+<pin2name>_X3(_P2)</pin2name>
+</relation>
+<relation>
+<ID>_R19</ID>
+<pin1name>_A1(_PAREW)</pin1name>
+<pin2name>_X3(_P3)</pin2name>
+</relation>
+<relation>
+<ID>_R20</ID>
+<pin1name>_A1(_PIndicater)</pin1name>
+<pin2name>_X3(_P4)</pin2name>
+</relation>
+<relation>
+<ID>_R21</ID>
+<pin1name>_A1(_PAIndicater)</pin1name>
+<pin2name>_X3(_P5)</pin2name>
+</relation>
+<relation>
+<ID>_R22</ID>
+<pin1name>_P0</pin1name>
+<pin2name>_A1(_Pstart)</pin2name>
+</relation>
+<operation>
+<ID>_O23</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>12</x0>
+<y0>167</y0>
+<width>110</width>
+<height>83</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>70</inpinx0>
+<inpiny0>64</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// プログラム終了
+System.exit(0);
+</codetext>
+</operation>
+<relation>
+<ID>_R24</ID>
+<pin1name>_A1(_PGUIclosed)</pin1name>
+<pin2name>_O23</pin2name>
+</relation>
+<operation>
+<ID>_O25</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>457</x0>
+<y0>401</y0>
+<width>106</width>
+<height>71</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JButton b)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>49</inpiny0>
+<inpinwidth>81</inpinwidth>
+<inpinheight>22</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// ボタンを
+// 使えなくする
+b.setVisible(false);
+</codetext>
+</operation>
+<relation>
+<ID>_R26</ID>
+<pin1name>_A1(_PRunStop)</pin1name>
+<pin2name>_O25</pin2name>
+</relation>
+</xobject>
+<relation>
+<ID>_R12</ID>
+<pin1name>_X2(_P3)</pin1name>
+<pin2name>_X10(_P0)</pin2name>
+</relation>
+</xobject>
+<relation>
+<ID>_R7</ID>
+<pin1name>_PSTART</pin1name>
+<pin2name>_X4(_P5)</pin2name>
+</relation>
+<プロパティ>
+<ID>properties</ID>
+<LookandFeel>javax.swing.plaf.metal.MetalLookAndFeel</LookandFeel>
+<MainWinx0>0</MainWinx0>
+<MainWiny0>0</MainWiny0>
+<MainWinWidth>1024</MainWinWidth>
+<MainWinHeight>740</MainWinHeight>
+<MesgWinx0>0</MesgWinx0>
+<MesgWiny0>0</MesgWiny0>
+<MesgWinWidth>1032</MesgWinWidth>
+<MesgWinHeight>745</MesgWinHeight>
+<FileWinx0>36</FileWinx0>
+<FileWiny0>478</FileWiny0>
+<FileWinWidth>578</FileWinWidth>
+<FileWinHeight>262</FileWinHeight>
+<EditWinx0>347</EditWinx0>
+<EditWiny0>0</EditWiny0>
+<EditWinWidth>676</EditWinWidth>
+<EditWinHeight>541</EditWinHeight>
+<PropWinx0>1</PropWinx0>
+<PropWiny0>1</PropWiny0>
+<PropWinWidth>615</PropWinWidth>
+<PropWinHeight>448</PropWinHeight>
+<DividerLocation1>2</DividerLocation1>
+<DividerLocation2>2</DividerLocation2>
+<ToolBarVisible>1</ToolBarVisible>
+<ViewSourceAtCompile>0</ViewSourceAtCompile>
+<NoSourceCreate>0</NoSourceCreate>
+<JavaEditCommand>leafpad</JavaEditCommand>
+<JavaViewCommand></JavaViewCommand>
+<HelpCommand>xdg-open ./help/manual.html</HelpCommand>
+<ApplicationType>0</ApplicationType>
+<CompileCommand0>./compile_java</CompileCommand0>
+<RunCommand0>./run_java</RunCommand0>
+<GUIDesignerCommand0>java -jar guidsin.jar -java</GUIDesignerCommand0>
+<ImportFiles0> import java.awt.*;
+ import java.awt.event.*;
+ import javax.swing.*;
+ import javax.swing.event.*;
+ import javax.swing.tree.*;
+ import java.io.*;
+ import java.net.*;
+ import java.util.*;
+import java.awt.geom.*;
+import java.awt.print.*;
+import javax.swing.border.*;
+import javax.swing.filechooser.*;
+ import javax.swing.*;
+ import javax.swing.event.*;
+ import javax.swing.tree.*;
+ import java.io.*;
+ import java.net.*;
+ import java.util.*;
+import java.awt.image.BufferedImage;
+import javax.sound.sampled.*;
+
+class Starter{
+  public static void main( String args[] ){
+    %AppName% ap = new %AppName%();
+    ap.ARGS = args;
+    ap.Start();
+  }
+}
+</ImportFiles0>
+<ProgramStartupCode0> String[] ARGS;
+</ProgramStartupCode0>
+<NativeHelpCommand0></NativeHelpCommand0>
+<CompileCommand1></CompileCommand1>
+<RunCommand1></RunCommand1>
+<GUIDesignerCommand1>java -jar guidsin.jar -applet</GUIDesignerCommand1>
+<ImportFiles1> import java.awt.*;
+ import java.awt.event.*;
+ import java.applet.*;
+ import javax.swing.*;
+ import javax.swing.event.*;
+ import javax.swing.tree.*;
+ import java.io.*;
+ import java.net.*;
+ import java.util.*;
+ public class javatext extends Applet {
+   %AppName% ap;
+   public void init() {
+     ap = new %AppName%();
+     ap.APPLET = this;
+     ap.Start();
+   }
+ }
+</ImportFiles1>
+<ProgramStartupCode1> Applet APPLET;
+</ProgramStartupCode1>
+<NativeHelpCommand1></NativeHelpCommand1>
+<CompileCommand2></CompileCommand2>
+<RunCommand2></RunCommand2>
+<GUIDesignerCommand2></GUIDesignerCommand2>
+<ImportFiles2>#include &lt;stdio.h&gt;
+
+void Startup();
+</ImportFiles2>
+<ProgramStartupCode2>int main(){
+ Startup();
+ %AppName%::Start();
+ }
+</ProgramStartupCode2>
+<NativeHelpCommand2></NativeHelpCommand2>
+<CompileCommand3></CompileCommand3>
+<RunCommand3></RunCommand3>
+<GUIDesignerCommand3>java -jar guidsin.jar -cpp</GUIDesignerCommand3>
+<ImportFiles3>#include &lt;stdio.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;math.h&gt;
+#include &quot;Ekagen.h&quot;
+void Startup();
+</ImportFiles3>
+<ProgramStartupCode3>void Emain(){
+Startup();
+%AppName%::Start();
+}
+</ProgramStartupCode3>
+<NativeHelpCommand3></NativeHelpCommand3>
+<MoveStep>8</MoveStep>
+<ImageEditCommand></ImageEditCommand>
+<CompilerFileName>javac.exe</CompilerFileName>
+<CompileCommand4>./compile_android Test com example test</CompileCommand4>
+<RunCommand4>./run_android Test com example test</RunCommand4>
+<GUIDesignerCommand4>java -jar guidsin.jar -android</GUIDesignerCommand4>
+<ImportFiles4>package com.example.test;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.View;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.widget.Button;
+import android.view.SurfaceHolder;
+import android.view.SurfaceHolder.Callback;
+import android.view.SurfaceView;
+import android.widget.EditText;
+import android.text.SpannableStringBuilder;
+import android.text.TextWatcher;
+import android.text.Editable;
+import android.graphics.Matrix;
+import android.graphics.Typeface;
+import android.graphics.RectF;
+import android.graphics.BitmapFactory;
+import java.io.*;
+ import java.net.*;
+import java.util.*;
+import java.text.SimpleDateFormat;
+import android.media.MediaPlayer;
+import android.os.Handler;
+import android.content.res.Configuration;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.app.Activity;
+import android.graphics.Color;
+
+import android.widget.AbsoluteLayout;
+import android.widget.*;
+import android.view.Gravity;
+import android.view.View.OnClickListener;
+
+import android.hardware.Camera;
+
+public class HelloWorld extends Activity {
+  public void onCreate(Bundle bundle) {
+    super.onCreate(bundle);
+    %AppName% ap = new %AppName%();
+    ap.ACTIVITY = this;
+    ap.Start();
+  }
+}
+</ImportFiles4>
+<ProgramStartupCode4>Activity ACTIVITY;
+</ProgramStartupCode4>
+<NativeHelpCommand4>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    package=&quot;com.example.test&quot;
+    android:versionCode=&quot;1&quot;
+    android:versionName=&quot;1.0&quot; &gt;
+
+    
+    
+  &lt;uses-permission android:name=&quot;android.permission.CAMERA&quot; /&gt; 
+  &lt;uses-feature android:name=&quot;android.hardware.camera&quot; /&gt; 
+  &lt;uses-feature android:name=&quot;android.hardware.usb.host&quot; /&gt; 
+  &lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot;/&gt;
+  &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt; 
+  &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;
+
+  &lt;uses-sdk android:minSdkVersion=&quot;3&quot; android:targetSdkVersion=&quot;21&quot;/&gt;
+  
+ 
+    &lt;application android:label=&quot;@string/app_name&quot; &gt;
+        &lt;activity
+            android:name=&quot;HelloWorld&quot;
+            android:label=&quot;@string/app_name&quot; &gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+
+                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+            &lt;/intent-filter&gt;
+        &lt;/activity&gt;
+    &lt;/application&gt;
+
+&lt;/manifest&gt;
+</NativeHelpCommand4>
+<HtmlEditCommand></HtmlEditCommand>
+<CompileCommand5></CompileCommand5>
+<RunCommand5></RunCommand5>
+<GUIDesignerCommand5></GUIDesignerCommand5>
+<ImportFiles5></ImportFiles5>
+<ProgramStartupCode5>gosub @_PSTART
+end
+</ProgramStartupCode5>
+<NativeHelpCommand5></NativeHelpCommand5>
+<NoOptimizePin>0</NoOptimizePin>
+<CompileCommand6>./compile_c</CompileCommand6>
+<RunCommand6>./run_c</RunCommand6>
+<GUIDesignerCommand6></GUIDesignerCommand6>
+<ImportFiles6>#include &lt;setjmp.h&gt;
+#include &lt;pthread.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdarg.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;math.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netdb.h&gt;
+
+#include &lt;X11/Xlib.h&gt;
+#include &lt;X11/Xutil.h&gt;
+#include &lt;X11/Xlocale.h&gt; /* ロケール用ヘッダーファイル */
+#include &lt;X11/xpm.h&gt;
+#include &lt;sys/time.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;termios.h&gt;
+#include &lt;errno.h&gt;
+</ImportFiles6>
+<ProgramStartupCode6>int ARGC; char** ARGV;
+int main( int argc, char** argv ){
+  ARGC=argc;
+  ARGV=argv;
+  _PSTART();
+}
+</ProgramStartupCode6>
+<NativeHelpCommand6></NativeHelpCommand6>
+</プロパティ>
+</xobject>

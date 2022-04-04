@@ -1,0 +1,1952 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<xobject>
+<ID>_X90</ID>
+<x0>389</x0>
+<y0>137</y0>
+<width>364</width>
+<height>54</height>
+<ID_maker>29</ID_maker>
+<objectname>メニューエディタ</objectname>
+<description>新しいオブジェクト</description>
+<aobject>
+<ID>_A0</ID>
+<x0>80</x0>
+<y0>55</y0>
+<width>267</width>
+<height>247</height>
+<ID_maker>27</ID_maker>
+<objectname>GUI</objectname>
+<description>This is a GUI Object.
+</description>
+<state>
+<ID>_SINIT</ID>
+<x0>0</x0>
+<y0>40</y0>
+<width>70</width>
+<height>40</height>
+<text>  InitState</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_Pstart</ID>
+<x0>400</x0>
+<y0>100</y0>
+<width>80</width>
+<height>26</height>
+<text>Start()</text>
+<px>0</px>
+<py>36</py>
+</pin>
+<pin>
+<ID>_PGUIout</ID>
+<x0>0</x0>
+<y0>84</y0>
+<width>180</width>
+<height>26</height>
+<text>GUI_created( JFrame f )</text>
+<px>0</px>
+<py>54</py>
+</pin>
+<pin>
+<ID>_PGUIclosed</ID>
+<x0>316</x0>
+<y0>0</y0>
+<width>180</width>
+<height>26</height>
+<text>GUI_closed()</text>
+<px>69</px>
+<py>8</py>
+</pin>
+<operation>
+<ID>_Ocreate</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>220</x0>
+<y0>40</y0>
+<width>130</width>
+<height>64</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>43</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>
+Create GUI
+</description>
+<codetext>
+ XGUI x = new XGUI();
+</codetext>
+</operation>
+<action>
+<ID>_Astart</ID>
+<comp1name>_Pstart</comp1name>
+<comp2name>_Ocreate</comp2name>
+</action>
+<pin>
+<ID>_Pサブメニュー作成ボタン</ID>
+<x0>0</x0>
+<y0>110</y0>
+<width>200</width>
+<height>26</height>
+<text>サブメニュー作成ボタン_created( Component c )</text>
+<px>465</px>
+<py>58</py>
+</pin>
+<pin>
+<ID>_PAサブメニュー作成ボタン</ID>
+<x0>0</x0>
+<y0>138</y0>
+<width>200</width>
+<height>26</height>
+<text>サブメニュー作成ボタン_clicked()</text>
+<px>0</px>
+<py>143</py>
+</pin>
+<pin>
+<ID>_PLABEL3</ID>
+<x0>0</x0>
+<y0>166</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL3_created( Component c )</text>
+<px>447</px>
+<py>105</py>
+</pin>
+<pin>
+<ID>_P挿入ボタン</ID>
+<x0>0</x0>
+<y0>194</y0>
+<width>200</width>
+<height>26</height>
+<text>挿入ボタン_created( Component c )</text>
+<px>465</px>
+<py>123</py>
+</pin>
+<pin>
+<ID>_PA挿入ボタン</ID>
+<x0>0</x0>
+<y0>222</y0>
+<width>200</width>
+<height>26</height>
+<text>挿入ボタン_clicked()</text>
+<px>0</px>
+<py>77</py>
+</pin>
+<pin>
+<ID>_Pメニューコンテナ</ID>
+<x0>0</x0>
+<y0>250</y0>
+<width>200</width>
+<height>26</height>
+<text>メニューコンテナ_created( Component c )</text>
+<px>0</px>
+<py>222</py>
+</pin>
+<pin>
+<ID>_PAメニューコンテナ</ID>
+<x0>0</x0>
+<y0>278</y0>
+<width>200</width>
+<height>26</height>
+<text>メニューコンテナ_selected( Object o )</text>
+<px>380</px>
+<py>199</py>
+</pin>
+<pin>
+<ID>_PLABEL4</ID>
+<x0>0</x0>
+<y0>306</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL4_created( Component c )</text>
+<px>384</px>
+<py>180</py>
+</pin>
+<pin>
+<ID>_Pメニューのテキスト</ID>
+<x0>0</x0>
+<y0>334</y0>
+<width>200</width>
+<height>26</height>
+<text>メニューのテキスト_created( Component c )</text>
+<px>0</px>
+<py>182</py>
+</pin>
+<pin>
+<ID>_PAメニューのテキスト</ID>
+<x0>0</x0>
+<y0>362</y0>
+<width>200</width>
+<height>26</height>
+<text>メニューのテキスト_input( String txt )</text>
+<px>0</px>
+<py>201</py>
+</pin>
+<pin>
+<ID>_PLABEL6</ID>
+<x0>0</x0>
+<y0>390</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL6_created( Component c )</text>
+<px>470</px>
+<py>263</py>
+</pin>
+<pin>
+<ID>_Pショートカットキーlist</ID>
+<x0>0</x0>
+<y0>418</y0>
+<width>200</width>
+<height>26</height>
+<text>ショートカットキーlist_created( Component c )</text>
+<px>0</px>
+<py>162</py>
+</pin>
+<pin>
+<ID>_PAショートカットキーlist</ID>
+<x0>0</x0>
+<y0>446</y0>
+<width>200</width>
+<height>26</height>
+<text>ショートカットキーlist_selected( Object o )</text>
+<px>402</px>
+<py>170</py>
+</pin>
+<pin>
+<ID>_P追加ボタン</ID>
+<x0>0</x0>
+<y0>474</y0>
+<width>200</width>
+<height>26</height>
+<text>追加ボタン_created( Component c )</text>
+<px>301</px>
+<py>299</py>
+</pin>
+<pin>
+<ID>_PA追加ボタン</ID>
+<x0>0</x0>
+<y0>502</y0>
+<width>200</width>
+<height>26</height>
+<text>追加ボタン_clicked()</text>
+<px>1</px>
+<py>100</py>
+</pin>
+<pin>
+<ID>_P削除ボタン</ID>
+<x0>0</x0>
+<y0>530</y0>
+<width>200</width>
+<height>26</height>
+<text>削除ボタン_created( Component c )</text>
+<px>383</px>
+<py>353</py>
+</pin>
+<pin>
+<ID>_PA削除ボタン</ID>
+<x0>0</x0>
+<y0>558</y0>
+<width>200</width>
+<height>26</height>
+<text>削除ボタン_clicked()</text>
+<px>0</px>
+<py>122</py>
+</pin>
+<codeclip>
+<ID>_CGUI</ID>
+<x0>0</x0>
+<y0>0</y0>
+<width>300</width>
+<height>28</height>
+<codetext> class XGUI extends JFrame implements WindowListener{
+ JPanel cnt;
+サブメニュー作成ボタン Iサブメニュー作成ボタン;
+ class サブメニュー作成ボタン extends JButton implements ActionListener{
+  サブメニュー作成ボタン(){
+ setOpaque( true );
+ setName(  &quot;サブメニュー作成ボタン&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 1, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;サブメニュー作成&quot; );
+ addActionListener( this );
+ サブメニュー作成ボタン_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ サブメニュー作成ボタン_clicked(); }
+}
+LABEL3 ILABEL3;
+ class LABEL3 extends JLabel{
+  LABEL3(){
+ setOpaque( true );
+ setName(  &quot;LABEL3&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  204, 204, 204 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;メニューのツリー図&quot; );
+ LABEL3_created( this );
+}
+}
+挿入ボタン I挿入ボタン;
+ class 挿入ボタン extends JButton implements ActionListener{
+  挿入ボタン(){
+ setOpaque( true );
+ setName(  &quot;挿入ボタン&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;前方に挿入&quot; );
+ addActionListener( this );
+ 挿入ボタン_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ 挿入ボタン_clicked(); }
+}
+メニューコンテナ Iメニューコンテナ;
+ class メニューコンテナ extends JList implements ListSelectionListener{
+ JScrollPane scrl;
+  メニューコンテナ(){
+ setOpaque( true );
+ setName(  &quot;メニューコンテナ&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ scrl = new JScrollPane( this );
+ addListSelectionListener( this );
+ メニューコンテナ_created( this );
+}
+ public void valueChanged( ListSelectionEvent e ){ メニューコンテナ_selected( getSelectedValue() ); }
+}
+LABEL4 ILABEL4;
+ class LABEL4 extends JLabel{
+  LABEL4(){
+ setOpaque( true );
+ setName(  &quot;LABEL4&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  204, 204, 204 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;表示テキスト&quot; );
+ LABEL4_created( this );
+}
+}
+メニューのテキスト Iメニューのテキスト;
+ class メニューのテキスト extends JTextField implements ActionListener{
+  メニューのテキスト(){
+ setOpaque( true );
+ setName(  &quot;メニューのテキスト&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setText( &quot;メニュー&quot; );
+ addActionListener( this );
+ メニューのテキスト_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ メニューのテキスト_input( getText() ); }
+}
+LABEL6 ILABEL6;
+ class LABEL6 extends JLabel{
+  LABEL6(){
+ setOpaque( true );
+ setName(  &quot;LABEL6&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  204, 204, 204 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;ショートカットキー&quot; );
+ LABEL6_created( this );
+}
+}
+ショートカットキーlist Iショートカットキーlist;
+ class ショートカットキーlist extends JList implements ListSelectionListener{
+ JScrollPane scrl;
+  ショートカットキーlist(){
+ setOpaque( true );
+ setName(  &quot;ショートカットキーlist&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ scrl = new JScrollPane( this );
+ addListSelectionListener( this );
+ ショートカットキーlist_created( this );
+}
+ public void valueChanged( ListSelectionEvent e ){ ショートカットキーlist_selected( getSelectedValue() ); }
+}
+追加ボタン I追加ボタン;
+ class 追加ボタン extends JButton implements ActionListener{
+  追加ボタン(){
+ setOpaque( true );
+ setName(  &quot;追加ボタン&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;後方に挿入&quot; );
+ addActionListener( this );
+ 追加ボタン_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ 追加ボタン_clicked(); }
+}
+削除ボタン I削除ボタン;
+ class 削除ボタン extends JButton implements ActionListener{
+  削除ボタン(){
+ setOpaque( true );
+ setName(  &quot;削除ボタン&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;削除&quot; );
+ addActionListener( this );
+ 削除ボタン_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ 削除ボタン_clicked(); }
+}
+ XGUI(){
+ setTitle(&quot;メニューエディタ&quot;);
+ cnt = new JPanel( new BorderLayout() );
+ cnt.setPreferredSize(  new  Dimension( 263, 465 ) );
+ ((Component)cnt).setBackground( new Color( 204, 204, 204 ) );
+ Iサブメニュー作成ボタン = new サブメニュー作成ボタン();
+ cnt.add( Iサブメニュー作成ボタン, 0 );
+ cnt.getLayout().removeLayoutComponent( Iサブメニュー作成ボタン );
+ Iサブメニュー作成ボタン.setBounds( 124, 140, 133, 26 );
+ ILABEL3 = new LABEL3();
+ cnt.add( ILABEL3, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL3 );
+ ILABEL3.setBounds( 17, 175, 213, 17 );
+ I挿入ボタン = new 挿入ボタン();
+ cnt.add( I挿入ボタン, 0 );
+ cnt.getLayout().removeLayoutComponent( I挿入ボタン );
+ I挿入ボタン.setBounds( 1, 111, 95, 28 );
+ Iメニューコンテナ = new メニューコンテナ();
+ cnt.add( Iメニューコンテナ.scrl, 0 );
+ cnt.getLayout().removeLayoutComponent( Iメニューコンテナ.scrl );
+ ( Iメニューコンテナ.scrl ).setBounds( 3, 196, 259, 266 );
+ ILABEL4 = new LABEL4();
+ cnt.add( ILABEL4, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL4 );
+ ILABEL4.setBounds( 20, 3, 202, 18 );
+ Iメニューのテキスト = new メニューのテキスト();
+ cnt.add( Iメニューのテキスト, 0 );
+ cnt.getLayout().removeLayoutComponent( Iメニューのテキスト );
+ Iメニューのテキスト.setBounds( 2, 25, 258, 30 );
+ ILABEL6 = new LABEL6();
+ cnt.add( ILABEL6, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL6 );
+ ILABEL6.setBounds( 9, 61, 235, 16 );
+ Iショートカットキーlist = new ショートカットキーlist();
+ cnt.add( Iショートカットキーlist.scrl, 0 );
+ cnt.getLayout().removeLayoutComponent( Iショートカットキーlist.scrl );
+ ( Iショートカットキーlist.scrl ).setBounds( 2, 80, 259, 29 );
+ I追加ボタン = new 追加ボタン();
+ cnt.add( I追加ボタン, 0 );
+ cnt.getLayout().removeLayoutComponent( I追加ボタン );
+ I追加ボタン.setBounds( 96, 111, 97, 28 );
+ I削除ボタン = new 削除ボタン();
+ cnt.add( I削除ボタン, 0 );
+ cnt.getLayout().removeLayoutComponent( I削除ボタン );
+ I削除ボタン.setBounds( 193, 111, 64, 28 );
+ setContentPane( cnt );
+ pack();
+ addWindowListener( this );
+ GUI_created( this );
+}
+ public void windowActivated( WindowEvent e ){}
+ public void windowClosed( WindowEvent e ){}
+ public void windowClosing( WindowEvent e ){ GUI_closed(); }
+ public void windowDeactivated( WindowEvent e ){}
+ public void windowDeiconified( WindowEvent e ){}
+ public void windowIconified( WindowEvent e ){}
+ public void windowOpened( WindowEvent e ){}
+}
+</codetext>
+</codeclip>
+<レイアウト>メニューエディタ
+263
+465
+204
+204
+204
+BUTTON;サブメニュー作成ボタン;サブメニュー作成;124;140;133;26;0;0;0;192;192;192;Dialog;12;null;0;0;
+LABEL;LABEL3;メニューのツリー図;17;175;213;17;0;0;0;204;204;204;Dialog;12;null;0;0;
+BUTTON;挿入ボタン;前方に挿入;1;111;95;28;0;0;0;192;192;192;Dialog;12;null;0;0;
+LIST;メニューコンテナ;3;196;259;266;0;0;0;255;255;255;Dialog;12;
+LABEL;LABEL4;表示テキスト;20;3;202;18;0;0;0;204;204;204;Dialog;12;null;0;0;
+TEXTFIELD;メニューのテキスト;メニュー;2;25;258;30;0;0;0;255;255;255;Dialog;12;
+LABEL;LABEL6;ショートカットキー;9;61;235;16;0;0;0;204;204;204;Dialog;12;null;0;0;
+LIST;ショートカットキーlist;2;80;259;29;0;0;0;255;255;255;Dialog;12;
+BUTTON;追加ボタン;後方に挿入;96;111;97;28;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;削除ボタン;削除;193;111;64;28;0;0;0;192;192;192;Dialog;12;null;0;0;
+</レイアウト>
+</aobject>
+<pin>
+<ID>_P1</ID>
+<x0>11</x0>
+<y0>52</y0>
+<width>60</width>
+<height>30</height>
+<text>start()</text>
+<px>298</px>
+<py>35</py>
+</pin>
+<relation>
+<ID>_R2</ID>
+<pin1name>_P1</pin1name>
+<pin2name>_A0(_Pstart)</pin2name>
+</relation>
+<xobject>
+<ID>_X3</ID>
+<x0>377</x0>
+<y0>74</y0>
+<width>214</width>
+<height>230</height>
+<ID_maker>52</ID_maker>
+<objectname>メインコントロール</objectname>
+<description>新しいオブジェクト</description>
+<pin>
+<ID>_P0</ID>
+<x0>74</x0>
+<y0>156</y0>
+<width>53</width>
+<height>24</height>
+<text>show()</text>
+<px>159</px>
+<py>1</py>
+</pin>
+<pin>
+<ID>_P3</ID>
+<x0>8</x0>
+<y0>76</y0>
+<width>150</width>
+<height>24</height>
+<text>MenuEditor_is(JFrame f )</text>
+<px>0</px>
+<py>35</py>
+</pin>
+<pin>
+<ID>_P4</ID>
+<x0>22</x0>
+<y0>228</y0>
+<width>146</width>
+<height>30</height>
+<text>EditWindow_is(JFrame f )</text>
+<px>52</px>
+<py>64</py>
+</pin>
+<pin>
+<ID>_P5</ID>
+<x0>656</x0>
+<y0>289</y0>
+<width>60</width>
+<height>30</height>
+<text>insert()</text>
+<px>3</px>
+<py>58</py>
+</pin>
+<pin>
+<ID>_P6</ID>
+<x0>654</x0>
+<y0>334</y0>
+<width>60</width>
+<height>30</height>
+<text>append()</text>
+<px>0</px>
+<py>81</py>
+</pin>
+<pin>
+<ID>_P7</ID>
+<x0>658</x0>
+<y0>385</y0>
+<width>60</width>
+<height>30</height>
+<text>delete()</text>
+<px>3</px>
+<py>103</py>
+</pin>
+<pin>
+<ID>_P8</ID>
+<x0>186</x0>
+<y0>372</y0>
+<width>159</width>
+<height>24</height>
+<text>shortcut_is(Component c)</text>
+<px>0</px>
+<py>143</py>
+</pin>
+<codeclip>
+<ID>_C15</ID>
+<x0>408</x0>
+<y0>76</y0>
+<width>176</width>
+<height>22</height>
+<codetext>JFrame メニューエディタ;
+</codetext>
+</codeclip>
+<pin>
+<ID>_P10</ID>
+<x0>196</x0>
+<y0>266</y0>
+<width>126</width>
+<height>26</height>
+<text>text_is(Component c)</text>
+<px>0</px>
+<py>163</py>
+</pin>
+<operation>
+<ID>_O46</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>186</x0>
+<y0>28</y0>
+<width>143</width>
+<height>71</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JFrame f)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>50</inpiny0>
+<inpinwidth>95</inpinwidth>
+<inpinheight>21</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>103</outpinx0>
+<outpiny0>51</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>メニューエディタを
+取得</description>
+<codetext>メニューエディタ=f;
+f.setLocation( 400,0 );
+f.setVisible(false);
+</codetext>
+</operation>
+<pin>
+<ID>_P12</ID>
+<x0>178</x0>
+<y0>405</y0>
+<width>172</width>
+<height>25</height>
+<text>menuView_is(Component c)</text>
+<px>0</px>
+<py>203</py>
+</pin>
+<relation>
+<ID>_R47</ID>
+<pin1name>_P3</pin1name>
+<pin2name>_O46</pin2name>
+</relation>
+<operation>
+<ID>_O18</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>200</x0>
+<y0>105</y0>
+<width>128</width>
+<height>72</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>53</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>メニューエディタを
+表示
+</description>
+<codetext>メニューエディタ.setVisible(true);
+</codetext>
+</operation>
+<relation>
+<ID>_R19</ID>
+<pin1name>_P0</pin1name>
+<pin2name>_O18</pin2name>
+</relation>
+<codeclip>
+<ID>_C20</ID>
+<x0>406</x0>
+<y0>49</y0>
+<width>196</width>
+<height>23</height>
+<codetext>JFrame 編集ウィンドウ;
+</codetext>
+</codeclip>
+<operation>
+<ID>_O21</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>198</x0>
+<y0>188</y0>
+<width>129</width>
+<height>65</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JFrame f )</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>46</inpiny0>
+<inpinwidth>81</inpinwidth>
+<inpinheight>19</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>45</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>編集ウィンドウを
+取得</description>
+<codetext>編集ウィンドウ=f;
+</codetext>
+</operation>
+<relation>
+<ID>_R22</ID>
+<pin1name>_P4</pin1name>
+<pin2name>_O21</pin2name>
+</relation>
+<relation>
+<ID>_R51</ID>
+<pin1name>_O21</pin1name>
+<pin2name>_X25(_P50)</pin2name>
+</relation>
+<operation>
+<ID>_O24</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>452</x0>
+<y0>121</y0>
+<width>130</width>
+<height>90</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(JMenuBar m)</inpintext>
+<inpinx0>31</inpinx0>
+<inpiny0>69</inpiny0>
+<inpinwidth>100</inpinwidth>
+<inpinheight>21</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>編集ウィンドウの
+メニューバーを
+設定
+</description>
+<codetext>編集ウィンドウ.setJMenuBar( m );
+</codetext>
+</operation>
+<xobject>
+<ID>_X25</ID>
+<x0>384</x0>
+<y0>236</y0>
+<width>231</width>
+<height>234</height>
+<ID_maker>59</ID_maker>
+<objectname>メニュー</objectname>
+<description>新しいオブジェクト</description>
+<operation>
+<ID>_O47</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>435</x0>
+<y0>302</y0>
+<width>183</width>
+<height>69</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in(Object o)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>47</inpiny0>
+<inpinwidth>80</inpinwidth>
+<inpinheight>22</inpinheight>
+<outpintext>out(JMenuBar m)</outpintext>
+<outpinx0>79</outpinx0>
+<outpiny0>46</outpiny0>
+<outpinwidth>105</outpinwidth>
+<outpinheight>24</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>メニューのツリーを設定
+</description>
+<codetext>ツリーモデル = new DefaultTreeModel((DefaultMutableTreeNode)o);
+メニューのツリー = new JTree( ツリーモデル );
+JScrollPane sc = new JScrollPane(メニューのツリー);
+sc.setPreferredSize( メニューのコンテナ.getSize() );
+メニューのコンテナ.removeAll();
+メニューのコンテナ.add(sc);
+メニューのコンテナ.validate();
+メニューのコンテナ.repaint();
+メニューバー = new JMenuBar();
+m = メニューバー;
+</codetext>
+</operation>
+<pin>
+<ID>_P1</ID>
+<x0>492</x0>
+<y0>416</y0>
+<width>155</width>
+<height>27</height>
+<text>setMenuBar(JMenuBar m)</text>
+<px>75</px>
+<py>35</py>
+</pin>
+<pin>
+<ID>_P2</ID>
+<x0>612</x0>
+<y0>220</y0>
+<width>164</width>
+<height>25</height>
+<text>menuView_is(Component c)</text>
+<px>0</px>
+<py>173</py>
+</pin>
+<pin>
+<ID>_P3</ID>
+<x0>142</x0>
+<y0>248</y0>
+<width>46</width>
+<height>29</height>
+<text>insert()</text>
+<px>174</px>
+<py>60</py>
+</pin>
+<pin>
+<ID>_P4</ID>
+<x0>131</x0>
+<y0>289</y0>
+<width>71</width>
+<height>27</height>
+<text>append()</text>
+<px>174</px>
+<py>105</py>
+</pin>
+<pin>
+<ID>_P5</ID>
+<x0>268</x0>
+<y0>78</y0>
+<width>128</width>
+<height>26</height>
+<text>text_is( Component c)</text>
+<px>0</px>
+<py>60</py>
+</pin>
+<pin>
+<ID>_P6</ID>
+<x0>141</x0>
+<y0>343</y0>
+<width>55</width>
+<height>31</height>
+<text>delete()</text>
+<px>174</px>
+<py>156</py>
+</pin>
+<pin>
+<ID>_P7</ID>
+<x0>612</x0>
+<y0>40</y0>
+<width>152</width>
+<height>29</height>
+<text>shortcut_is( Component c)</text>
+<px>0</px>
+<py>140</py>
+</pin>
+<pin>
+<ID>_P8</ID>
+<x0>285</x0>
+<y0>408</y0>
+<width>70</width>
+<height>31</height>
+<text>subMenu()</text>
+<px>8</px>
+<py>204</py>
+</pin>
+<xobject>
+<ID>_X39</ID>
+<x0>232</x0>
+<y0>162</y0>
+<width>167</width>
+<height>211</height>
+<ID_maker>45</ID_maker>
+<objectname>メニュー項目</objectname>
+<description>新しいオブジェクト</description>
+<pin>
+<ID>_P0</ID>
+<x0>300</x0>
+<y0>148</y0>
+<width>96</width>
+<height>24</height>
+<text>join(Object top)</text>
+<px>66</px>
+<py>143</py>
+</pin>
+<pin>
+<ID>_P1</ID>
+<x0>19</x0>
+<y0>149</y0>
+<width>43</width>
+<height>25</height>
+<text>start()</text>
+<px>9</px>
+<py>31</py>
+</pin>
+<pin>
+<ID>_P2</ID>
+<x0>672</x0>
+<y0>261</y0>
+<width>60</width>
+<height>30</height>
+<text>insert()</text>
+<px>14</px>
+<py>90</py>
+</pin>
+<pin>
+<ID>_P3</ID>
+<x0>675</x0>
+<y0>339</y0>
+<width>60</width>
+<height>30</height>
+<text>append()</text>
+<px>8</px>
+<py>117</py>
+</pin>
+<pin>
+<ID>_P4</ID>
+<x0>15</x0>
+<y0>378</y0>
+<width>60</width>
+<height>30</height>
+<text>delete()</text>
+<px>12</px>
+<py>144</py>
+</pin>
+<pin>
+<ID>_P5</ID>
+<x0>8</x0>
+<y0>234</y0>
+<width>70</width>
+<height>25</height>
+<text>subMenu()</text>
+<px>76</px>
+<py>176</py>
+</pin>
+<operation>
+<ID>_O11</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>117</x0>
+<y0>107</y0>
+<width>155</width>
+<height>64</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>44</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(Object top)</outpintext>
+<outpinx0>62</outpinx0>
+<outpiny0>42</outpiny0>
+<outpinwidth>93</outpinwidth>
+<outpinheight>22</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>メニューのトップ項目を
+作成</description>
+<codetext>トップ項目  = new メニュー項目(parent);
+トップ項目.親のメニュー項目 = null;
+トップ項目.サブメニュー = new Vector();
+トップ項目.ノード = new ツリーノード();
+トップ項目.ノード.setUserObject(&quot;メニューバー&quot;);
+トップ項目.ノード.項目 = トップ項目;
+トップ項目.メニューコンポーネント = null;
+トップ項目.表示テキスト = &quot;メニューバー&quot;;
+トップ項目.ショートカット = 0;
+top=トップ項目.ノード;
+</codetext>
+</operation>
+<codeclip>
+<ID>_C17</ID>
+<x0>419</x0>
+<y0>2</y0>
+<width>327</width>
+<height>210</height>
+<codetext>//             &lt;&lt;        プロパティ        &gt;&gt;
+メニュー項目         親のメニュー項目;
+Vector                      サブメニュー;
+ツリーノード         ノード;
+JMenu                     メニューコンポーネント;
+String                       表示テキスト;
+int                              ショートカット;
+
+//             &lt;&lt;      内部クラス     &gt;&gt;
+class ツリーノード extends DefaultMutableTreeNode{
+メニュー項目 項目;
+}
+</codetext>
+</codeclip>
+<pin>
+<ID>_P8</ID>
+<x0>10</x0>
+<y0>305</y0>
+<width>59</width>
+<height>26</height>
+<text>modefy()</text>
+<px>9</px>
+<py>176</py>
+</pin>
+<relation>
+<ID>_R12</ID>
+<pin1name>_P1</pin1name>
+<pin2name>_O11</pin2name>
+</relation>
+<relation>
+<ID>_R13</ID>
+<pin1name>_O11</pin1name>
+<pin2name>_P0</pin2name>
+</relation>
+<codeclip>
+<ID>_C15</ID>
+<x0>25</x0>
+<y0>3</y0>
+<width>306</width>
+<height>22</height>
+<codetext>メニュー項目 トップ項目;//メニューのトップ項目
+</codetext>
+</codeclip>
+<operation>
+<ID>_O21</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>117</x0>
+<y0>174</y0>
+<width>185</width>
+<height>82</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>62</inpiny0>
+<inpinwidth>38</inpinwidth>
+<inpinheight>21</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>条件: 選択された項目() != null
+選択された項目の
+サブメニューを作成する</description>
+<codetext>メニューを挿入( 選択された項目(), 選択された項目().サブメニュー.size() );
+</codetext>
+</operation>
+<operation>
+<ID>_O19</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>117</x0>
+<y0>260</y0>
+<width>213</width>
+<height>69</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>47</inpiny0>
+<inpinwidth>34</inpinwidth>
+<inpinheight>22</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>条件: 選択項目はトップではない()
+選択された項目のデータを修正する</description>
+<codetext>メニュー項目 s = 選択された項目();
+
+s.表示テキスト = メニューの編集.getText();
+s.ノード.setUserObject( s.表示テキスト );
+s.メニューコンポーネント.setText( s.表示テキスト );
+s.ショートカット = ショートカットキー[ショートカットキーのリスト.getSelectedIndex() ] ;
+s.メニューコンポーネント.setMnemonic( s.ショートカット );
+表示を更新する();
+</codetext>
+</operation>
+<relation>
+<ID>_R20</ID>
+<pin1name>_P8</pin1name>
+<pin2name>_O19</pin2name>
+</relation>
+<codeclip>
+<ID>_C22</ID>
+<x0>25</x0>
+<y0>24</y0>
+<width>236</width>
+<height>21</height>
+<codetext>private メニュー項目 選択された項目(){
+  if( メニューのツリー.getLastSelectedPathComponent() == null ) return( null );
+  else return( ( (ツリーノード)(メニューのツリー.getLastSelectedPathComponent()) ).項目 );
+}
+</codetext>
+</codeclip>
+<relation>
+<ID>_R23</ID>
+<pin1name>_P5</pin1name>
+<pin2name>_O21</pin2name>
+</relation>
+<operation>
+<ID>_O24</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>116</x0>
+<y0>334</y0>
+<width>213</width>
+<height>68</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>49</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>条件: 選択項目はトップではない()
+選択された項目を削除する</description>
+<codetext>メニュー項目 s = 選択された項目();
+
+s.ノード.setUserObject( null );
+s.ノード.項目 = null;
+if(s.親のメニュー項目 != null ) { 
+  s.親のメニュー項目.サブメニュー.remove( s); 
+  ツリーモデル.removeNodeFromParent( s.ノード );
+  if( s.親のメニュー項目.メニューコンポーネント == null ){
+     メニューバー.remove( s.メニューコンポーネント );
+  }
+  else{
+     s.親のメニュー項目.メニューコンポーネント.remove( s.メニューコンポーネント );
+  }
+}
+s.親のメニュー項目 = null;
+s.サブメニュー = null; 
+s.ノード = null;
+s.メニューコンポーネント= null;
+s.表示テキスト = null;
+s.ショートカット = 0;
+表示を更新する();
+</codetext>
+</operation>
+<relation>
+<ID>_R25</ID>
+<pin1name>_P4</pin1name>
+<pin2name>_O24</pin2name>
+</relation>
+<operation>
+<ID>_O26</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>423</x0>
+<y0>218</y0>
+<width>204</width>
+<height>68</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>174</inpinx0>
+<inpiny0>49</inpiny0>
+<inpinwidth>31</inpinwidth>
+<inpinheight>19</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>条件: 選択項目はトップではない()
+選択された項目の前に
+新しいメニューを追加する</description>
+<codetext>メニュー項目 親項目 = 選択された項目().親のメニュー項目;
+int 番号 = 親項目.サブメニュー.indexOf( 選択された項目() );
+メニューを挿入( 親項目, 番号 );
+
+</codetext>
+</operation>
+<relation>
+<ID>_R27</ID>
+<pin1name>_P2</pin1name>
+<pin2name>_O26</pin2name>
+</relation>
+<operation>
+<ID>_O28</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>424</x0>
+<y0>295</y0>
+<width>205</width>
+<height>69</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>166</inpinx0>
+<inpiny0>49</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>条件: 選択項目はトップではない()
+選択された項目の後ろに
+新しいメニューを挿入する</description>
+<codetext>メニュー項目 親項目 = 選択された項目().親のメニュー項目;
+int 番号 = 親項目.サブメニュー.indexOf( 選択された項目() ) + 1;
+メニューを挿入( 親項目, 番号 );
+
+</codetext>
+</operation>
+<relation>
+<ID>_R29</ID>
+<pin1name>_P3</pin1name>
+<pin2name>_O28</pin2name>
+</relation>
+<codeclip>
+<ID>_C32</ID>
+<x0>25</x0>
+<y0>44</y0>
+<width>293</width>
+<height>20</height>
+<codetext>private boolean 選択項目はトップではない(){
+   return( ( 選択された項目() != null ) &amp;&amp; ( 選択された項目().親のメニュー項目 != null ) );
+}
+</codetext>
+</codeclip>
+<codeclip>
+<ID>_C33</ID>
+<x0>25</x0>
+<y0>83</y0>
+<width>195</width>
+<height>21</height>
+<codetext>private void 表示を更新する(){
+メニューのツリー.validate();
+メニューのツリー.repaint();
+メニューバー.validate();
+メニューバー.repaint();
+JPanel p = (JPanel)( 編集ウィンドウ.getContentPane() );
+p.setPreferredSize( p.getSize() );
+編集ウィンドウ.pack();
+}
+</codetext>
+</codeclip>
+<codeclip>
+<ID>_C34</ID>
+<x0>25</x0>
+<y0>63</y0>
+<width>346</width>
+<height>21</height>
+<codetext>private void メニューを挿入( メニュー項目 親項目, int 番号 ){
+
+if( 番号 &gt; 親項目.サブメニュー.size() ) return;
+メニュー項目 新しい項目  = new メニュー項目(parent);
+新しい項目.親のメニュー項目 = 親項目;
+新しい項目.サブメニュー = new Vector();
+新しい項目.ノード = new ツリーノード();
+新しい項目.ノード.項目 = 新しい項目;
+新しい項目.表示テキスト = メニューの編集.getText();
+新しい項目.ノード.setUserObject( 新しい項目.表示テキスト );
+新しい項目.メニューコンポーネント = new JMenu( 新しい項目.表示テキスト );
+新しい項目.ショートカット = ショートカットキー[ショートカットキーのリスト.getSelectedIndex() ] ;
+新しい項目.メニューコンポーネント.setMnemonic( 新しい項目.ショートカット );
+ツリーモデル.insertNodeInto( 新しい項目.ノード, 親項目.ノード, 番号 );
+if( 親項目.メニューコンポーネント == null )  メニューバー.add( 新しい項目.メニューコンポーネント, 番号 );
+else  親項目.メニューコンポーネント.add( 新しい項目.メニューコンポーネント, 番号 );
+親項目.サブメニュー.add( 番号, 新しい項目 );
+メニューのツリー.scrollPathToVisible( new TreePath( 新しい項目.ノード.getPath() ));
+表示を更新する();
+
+}
+</codetext>
+</codeclip>
+<pin>
+<ID>_P37</ID>
+<x0>677</x0>
+<y0>399</y0>
+<width>79</width>
+<height>27</height>
+<text>load(String s)</text>
+<px>8</px>
+<py>60</py>
+</pin>
+<operation>
+<ID>_O38</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>419</x0>
+<y0>371</y0>
+<width>216</width>
+<height>75</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(String s)</inpintext>
+<inpinx0>146</inpinx0>
+<inpiny0>31</inpiny0>
+<inpinwidth>70</inpinwidth>
+<inpinheight>21</inpinheight>
+<outpintext>out( メニュー項目 m, StringTokenizer t)</outpintext>
+<outpinx0>0</outpinx0>
+<outpiny0>52</outpiny0>
+<outpinwidth>216</outpinwidth>
+<outpinheight>24</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>条件: s.startsWith(&quot;Menu&quot;)
+メニューをロードする
+</description>
+<codetext>  t = new StringTokenizer( s, &quot;;&quot; );
+  String d = t.nextToken();
+  m =トップ項目;
+</codetext>
+</operation>
+<relation>
+<ID>_R39</ID>
+<pin1name>_P37</pin1name>
+<pin2name>_O38</pin2name>
+</relation>
+<operation>
+<ID>_O41</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>118</x0>
+<y0>407</y0>
+<width>210</width>
+<height>60</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(メニュー項目 p, StringTokenizer f)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>39</inpiny0>
+<inpinwidth>211</inpinwidth>
+<inpinheight>22</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>2</inpinlinkcount>
+<description>メニューを作成する</description>
+<codetext>  do{
+    メニュー項目 項目 =new メニュー項目(parent);
+    String 名前 = f.nextToken();
+    int       キー = ( new Integer( f.nextToken() ) ).intValue();
+ 
+    項目.親のメニュー項目 = p;
+    項目.サブメニュー = new Vector();
+    項目.ノード = new ツリーノード();
+    項目.ノード.項目 = 項目;
+    項目.ノード.setUserObject( 名前 );
+    ツリーモデル.insertNodeInto( 項目.ノード, p.ノード, p.サブメニュー.size() );
+    メニューのツリー.scrollPathToVisible( new TreePath( 項目.ノード.getPath() ));
+    項目.メニューコンポーネント = new JMenu( 名前 );
+    項目 .メニューコンポーネント.setMnemonic( キー );
+    if( p.メニューコンポーネント == null )  メニューバー.add( 項目.メニューコンポーネント );
+    else  p.メニューコンポーネント.add( 項目.メニューコンポーネント );
+    項目.表示テキスト = 名前;
+    項目.ショートカット = キー ;
+    p.サブメニュー.add( 項目 );
+    表示を更新する();
+    if( f.nextToken().equals( &quot;Menu&quot;)  )  repeat( 項目, f );
+  }
+  while( f.nextToken().equals( &quot;Menu&quot;) );
+</codetext>
+</operation>
+<relation>
+<ID>_R42</ID>
+<pin1name>_O38</pin1name>
+<pin2name>_O41</pin2name>
+</relation>
+<pin>
+<ID>_P43</ID>
+<x0>418</x0>
+<y0>457</y0>
+<width>227</width>
+<height>27</height>
+<text>repeat(メニュー項目 p, StringTokenizer f)</text>
+<px>10</px>
+<py>40</py>
+</pin>
+<relation>
+<ID>_R44</ID>
+<pin1name>_P43</pin1name>
+<pin2name>_O41</pin2name>
+</relation>
+</xobject>
+<codeclip>
+<ID>_C10</ID>
+<x0>394</x0>
+<y0>5</y0>
+<width>213</width>
+<height>21</height>
+<codetext>JList ショートカットキーのリスト;
+int[] ショートカットキー
+  = {
+    java.awt.event.KeyEvent.VK_0,
+    java.awt.event.KeyEvent.VK_1,
+    java.awt.event.KeyEvent.VK_2,
+    java.awt.event.KeyEvent.VK_3,
+    java.awt.event.KeyEvent.VK_4,
+    java.awt.event.KeyEvent.VK_5,
+    java.awt.event.KeyEvent.VK_6,
+    java.awt.event.KeyEvent.VK_7,
+    java.awt.event.KeyEvent.VK_8,
+    java.awt.event.KeyEvent.VK_9,
+    java.awt.event.KeyEvent.VK_A,
+    java.awt.event.KeyEvent.VK_B,
+    java.awt.event.KeyEvent.VK_C,
+    java.awt.event.KeyEvent.VK_D,
+    java.awt.event.KeyEvent.VK_E,
+    java.awt.event.KeyEvent.VK_F,
+    java.awt.event.KeyEvent.VK_G,
+    java.awt.event.KeyEvent.VK_H,
+    java.awt.event.KeyEvent.VK_I,
+    java.awt.event.KeyEvent.VK_J,
+    java.awt.event.KeyEvent.VK_K,
+    java.awt.event.KeyEvent.VK_L,
+    java.awt.event.KeyEvent.VK_M,
+    java.awt.event.KeyEvent.VK_N,
+    java.awt.event.KeyEvent.VK_O,
+    java.awt.event.KeyEvent.VK_P,
+    java.awt.event.KeyEvent.VK_Q,
+    java.awt.event.KeyEvent.VK_R,
+    java.awt.event.KeyEvent.VK_S,
+    java.awt.event.KeyEvent.VK_T,
+    java.awt.event.KeyEvent.VK_U,
+    java.awt.event.KeyEvent.VK_V,
+    java.awt.event.KeyEvent.VK_W,
+    java.awt.event.KeyEvent.VK_X,
+    java.awt.event.KeyEvent.VK_Y,
+    java.awt.event.KeyEvent.VK_Z,
+     };
+String[]  ショートカットの表示
+  ={
+    &quot;ALT+0&quot;,
+    &quot;ALT+1&quot;,
+    &quot;ALT+2&quot;,
+    &quot;ALT+3&quot;,
+    &quot;ALT+4&quot;,
+    &quot;ALT+5&quot;,
+    &quot;ALT+6&quot;,
+    &quot;ALT+7&quot;,
+    &quot;ALT+8&quot;,
+    &quot;ALT+9&quot;,
+    &quot;ALT+A&quot;,
+    &quot;ALT+B&quot;,
+    &quot;ALT+C&quot;,
+    &quot;ALT+D&quot;,
+    &quot;ALT+E&quot;,
+    &quot;ALT+F&quot;,
+    &quot;ALT+G&quot;,
+    &quot;ALT+H&quot;,
+    &quot;ALT+I&quot;,
+    &quot;ALT+J&quot;,
+    &quot;ALT+K&quot;,
+    &quot;ALT+L&quot;,
+    &quot;ALT+M&quot;,
+    &quot;ALT+N&quot;,
+    &quot;ALT+O&quot;,
+    &quot;ALT+P&quot;,
+    &quot;ALT+Q&quot;,
+    &quot;ALT+R&quot;,
+    &quot;ALT+S&quot;,
+    &quot;ALT+T&quot;,
+    &quot;ALT+U&quot;,
+    &quot;ALT+V&quot;,
+    &quot;ALT+W&quot;,
+    &quot;ALT+X&quot;,
+    &quot;ALT+Y&quot;,
+    &quot;ALT+Z&quot;
+    };
+</codetext>
+</codeclip>
+<operation>
+<ID>_O11</ID>
+<state1>null</state1>
+<state2>null</state2>
+<x0>437</x0>
+<y0>29</y0>
+<width>144</width>
+<height>67</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>0</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>0</outconnecty0>
+<inpintext>in(Component c)</inpintext>
+<inpinx0>39</inpinx0>
+<inpiny0>48</inpiny0>
+<inpinwidth>106</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>ショートカットキーの
+リストを生成
+</description>
+<codetext>ショートカットキーのリスト = (JList)c;
+ショートカットキーのリスト.setListData(ショートカットの表示 );
+ショートカットキーのリスト.setSelectedIndex(0);
+</codetext>
+</operation>
+<relation>
+<ID>_R12</ID>
+<pin1name>_P7</pin1name>
+<pin2name>_O11</pin2name>
+</relation>
+<operation>
+<ID>_O40</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>84</x0>
+<y0>45</y0>
+<width>161</width>
+<height>70</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in(Component c)</inpintext>
+<inpinx0>55</inpinx0>
+<inpiny0>49</inpiny0>
+<inpinwidth>106</inpinwidth>
+<inpinheight>22</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>121</outpinx0>
+<outpiny0>70</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>メニューの編集用
+テキストを生成</description>
+<codetext>メニューの編集 = (JTextField )c;
+</codetext>
+</operation>
+<codeclip>
+<ID>_C41</ID>
+<x0>74</x0>
+<y0>12</y0>
+<width>175</width>
+<height>27</height>
+<codetext>JTextField メニューの編集;
+</codetext>
+</codeclip>
+<relation>
+<ID>_R42</ID>
+<pin1name>_P5</pin1name>
+<pin2name>_O40</pin2name>
+</relation>
+<codeclip>
+<ID>_C43</ID>
+<x0>415</x0>
+<y0>119</y0>
+<width>221</width>
+<height>36</height>
+<codetext>Container メニューのコンテナ;
+JMenuBar メニューバー;
+</codetext>
+</codeclip>
+<operation>
+<ID>_O44</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>448</x0>
+<y0>160</y0>
+<width>152</width>
+<height>83</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in(Component c)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>61</inpiny0>
+<inpinwidth>98</inpinwidth>
+<inpinheight>23</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>0</outpinx0>
+<outpiny0>83</outpiny0>
+<outpinwidth>109</outpinwidth>
+<outpinheight>24</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>メニューのコンテナを
+設定
+</description>
+<codetext>メニューのコンテナ = (Container)c;
+メニューのコンテナ.setLayout( new FlowLayout(FlowLayout.LEFT) );
+
+</codetext>
+</operation>
+<relation>
+<ID>_R45</ID>
+<pin1name>_P2</pin1name>
+<pin2name>_O44</pin2name>
+</relation>
+<codeclip>
+<ID>_C46</ID>
+<x0>412</x0>
+<y0>257</y0>
+<width>238</width>
+<height>38</height>
+<codetext>JTree                         メニューのツリー;
+DefaultTreeModel   ツリーモデル;
+</codetext>
+</codeclip>
+<relation>
+<ID>_R48</ID>
+<pin1name>_X39(_P0)</pin1name>
+<pin2name>_O47</pin2name>
+</relation>
+<relation>
+<ID>_R49</ID>
+<pin1name>_O47</pin1name>
+<pin2name>_P1</pin2name>
+</relation>
+<pin>
+<ID>_P50</ID>
+<x0>136</x0>
+<y0>168</y0>
+<width>52</width>
+<height>28</height>
+<text>start()</text>
+<px>10</px>
+<py>40</py>
+</pin>
+<relation>
+<ID>_R51</ID>
+<pin1name>_P29</pin1name>
+<pin2name>_X39(_P8)</pin2name>
+</relation>
+<relation>
+<ID>_R52</ID>
+<pin1name>_P6</pin1name>
+<pin2name>_X39(_P4)</pin2name>
+</relation>
+<relation>
+<ID>_R53</ID>
+<pin1name>_P4</pin1name>
+<pin2name>_X39(_P3)</pin2name>
+</relation>
+<relation>
+<ID>_R54</ID>
+<pin1name>_P3</pin1name>
+<pin2name>_X39(_P2)</pin2name>
+</relation>
+<pin>
+<ID>_P29</ID>
+<x0>139</x0>
+<y0>388</y0>
+<width>56</width>
+<height>30</height>
+<text>modefy()</text>
+<px>9</px>
+<py>112</py>
+</pin>
+<relation>
+<ID>_R55</ID>
+<pin1name>_P50</pin1name>
+<pin2name>_X39(_P1)</pin2name>
+</relation>
+<relation>
+<ID>_R56</ID>
+<pin1name>_P8</pin1name>
+<pin2name>_X39(_P5)</pin2name>
+</relation>
+<pin>
+<ID>_P57</ID>
+<x0>126</x0>
+<y0>209</y0>
+<width>79</width>
+<height>28</height>
+<text>load(String s)</text>
+<px>154</px>
+<py>200</py>
+</pin>
+<relation>
+<ID>_R58</ID>
+<pin1name>_P57</pin1name>
+<pin2name>_X39(_P37)</pin2name>
+</relation>
+</xobject>
+<relation>
+<ID>_R26</ID>
+<pin1name>_X25(_P1)</pin1name>
+<pin2name>_O24</pin2name>
+</relation>
+<relation>
+<ID>_R28</ID>
+<pin1name>_P12</pin1name>
+<pin2name>_X25(_P2)</pin2name>
+</relation>
+<pin>
+<ID>_P29</ID>
+<x0>233</x0>
+<y0>435</y0>
+<width>71</width>
+<height>27</height>
+<text>subMenu()</text>
+<px>0</px>
+<py>124</py>
+</pin>
+<relation>
+<ID>_R31</ID>
+<pin1name>_P5</pin1name>
+<pin2name>_X25(_P3)</pin2name>
+</relation>
+<relation>
+<ID>_R32</ID>
+<pin1name>_P6</pin1name>
+<pin2name>_X25(_P4)</pin2name>
+</relation>
+<relation>
+<ID>_R33</ID>
+<pin1name>_P7</pin1name>
+<pin2name>_X25(_P6)</pin2name>
+</relation>
+<relation>
+<ID>_R34</ID>
+<pin1name>_P29</pin1name>
+<pin2name>_X25(_P8)</pin2name>
+</relation>
+<relation>
+<ID>_R35</ID>
+<pin1name>_P8</pin1name>
+<pin2name>_X25(_P7)</pin2name>
+</relation>
+<relation>
+<ID>_R36</ID>
+<pin1name>_P10</pin1name>
+<pin2name>_X25(_P5)</pin2name>
+</relation>
+<pin>
+<ID>_P38</ID>
+<x0>63</x0>
+<y0>338</y0>
+<width>101</width>
+<height>31</height>
+<text>modefy(String s)</text>
+<px>0</px>
+<py>182</py>
+</pin>
+<relation>
+<ID>_R42</ID>
+<pin1name>_O41</pin1name>
+<pin2name>_X25(_P29)</pin2name>
+</relation>
+<relation>
+<ID>_R43</ID>
+<pin1name>_P38</pin1name>
+<pin2name>_O41</pin2name>
+</relation>
+<operation>
+<ID>_O41</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>187</x0>
+<y0>303</y0>
+<width>144</width>
+<height>62</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(Object o)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>39</inpiny0>
+<inpinwidth>76</inpinwidth>
+<inpinheight>23</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>104</outpinx0>
+<outpiny0>43</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>修正信号を出力</description>
+<codetext></codetext>
+</operation>
+<pin>
+<ID>_P49</ID>
+<x0>652</x0>
+<y0>430</y0>
+<width>84</width>
+<height>29</height>
+<text>load(String s)</text>
+<px>133</px>
+<py>116</py>
+</pin>
+<relation>
+<ID>_R50</ID>
+<pin1name>_P49</pin1name>
+<pin2name>_X25(_P57)</pin2name>
+</relation>
+</xobject>
+<pin>
+<ID>_P6</ID>
+<x0>601</x0>
+<y0>13</y0>
+<width>53</width>
+<height>23</height>
+<text>show()</text>
+<px>204</px>
+<py>36</py>
+</pin>
+<relation>
+<ID>_R7</ID>
+<pin1name>_P6</pin1name>
+<pin2name>_X3(_P0)</pin2name>
+</relation>
+<pin>
+<ID>_P10</ID>
+<x0>233</x0>
+<y0>4</y0>
+<width>60</width>
+<height>30</height>
+<text>closed()</text>
+<px>145</px>
+<py>6</py>
+</pin>
+<relation>
+<ID>_R11</ID>
+<pin1name>_A0(_PGUIclosed)</pin1name>
+<pin2name>_P10</pin2name>
+</relation>
+<relation>
+<ID>_R12</ID>
+<pin1name>_A0(_PGUIout)</pin1name>
+<pin2name>_X3(_P3)</pin2name>
+</relation>
+<pin>
+<ID>_P13</ID>
+<x0>610</x0>
+<y0>135</y0>
+<width>77</width>
+<height>23</height>
+<text>in( JFrame f)</text>
+<px>4</px>
+<py>36</py>
+</pin>
+<relation>
+<ID>_R14</ID>
+<pin1name>_P13</pin1name>
+<pin2name>_X3(_P4)</pin2name>
+</relation>
+<relation>
+<ID>_R15</ID>
+<pin1name>_A0(_PA挿入ボタン)</pin1name>
+<pin2name>_X3(_P5)</pin2name>
+</relation>
+<relation>
+<ID>_R16</ID>
+<pin1name>_A0(_PA追加ボタン)</pin1name>
+<pin2name>_X3(_P6)</pin2name>
+</relation>
+<relation>
+<ID>_R17</ID>
+<pin1name>_A0(_PA削除ボタン)</pin1name>
+<pin2name>_X3(_P7)</pin2name>
+</relation>
+<relation>
+<ID>_R26</ID>
+<pin1name>_A0(_Pショートカットキーlist)</pin1name>
+<pin2name>_X3(_P8)</pin2name>
+</relation>
+<relation>
+<ID>_R23</ID>
+<pin1name>_A0(_PAサブメニュー作成ボタン)</pin1name>
+<pin2name>_X3(_P29)</pin2name>
+</relation>
+<relation>
+<ID>_R20</ID>
+<pin1name>_A0(_Pメニューのテキスト)</pin1name>
+<pin2name>_X3(_P10)</pin2name>
+</relation>
+<relation>
+<ID>_R22</ID>
+<pin1name>_A0(_Pメニューコンテナ)</pin1name>
+<pin2name>_X3(_P12)</pin2name>
+</relation>
+<relation>
+<ID>_R25</ID>
+<pin1name>_A0(_PAメニューのテキスト)</pin1name>
+<pin2name>_X3(_P38)</pin2name>
+</relation>
+<pin>
+<ID>_P27</ID>
+<x0>614</x0>
+<y0>184</y0>
+<width>80</width>
+<height>29</height>
+<text>load(String s)</text>
+<px>82</px>
+<py>36</py>
+</pin>
+<relation>
+<ID>_R28</ID>
+<pin1name>_P27</pin1name>
+<pin2name>_X3(_P49)</pin2name>
+</relation>
+</xobject>

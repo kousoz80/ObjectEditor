@@ -1,0 +1,11 @@
+A51Basic
+720
+529
+192
+192
+192
+xxscale=1
+TEXTFIELD;InputField;null;3;2;547;32;51;51;51;255;255;255;Dialog;12;1;1;1;JTextField;
+BUTTON;EnterButton;Enter;555;1;80;32;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;1;JButton;
+BUTTON;StopButton;Stop;639;0;78;34;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;1;JButton;
+LABEL;Display;null;2;37;716;488;255;255;255;0;0;0;Monospaced;16;null;2;1;1;1;1;JLabel;

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<aobject>
+<ID>_A10</ID>
+<x0>365</x0>
+<y0>351</y0>
+<width>147</width>
+<height>71</height>
+<ID_maker>11</ID_maker>
+<objectname>Interval_Timer</objectname>
+<description>新しいオブジェクト</description>
+<state>
+<ID>_SINIT</ID>
+<x0>188</x0>
+<y0>270</y0>
+<width>70</width>
+<height>40</height>
+<text>  初期状態</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_P0</ID>
+<x0>688</x0>
+<y0>258</y0>
+<width>60</width>
+<height>30</height>
+<text>Play()</text>
+<px>12</px>
+<py>33</py>
+</pin>
+<pin>
+<ID>_P1</ID>
+<x0>693</x0>
+<y0>344</y0>
+<width>60</width>
+<height>30</height>
+<text>Pause()</text>
+<px>12</px>
+<py>51</py>
+</pin>
+<pin>
+<ID>_P2</ID>
+<x0>476</x0>
+<y0>155</y0>
+<width>60</width>
+<height>30</height>
+<text>Action()</text>
+<px>99</px>
+<py>47</py>
+</pin>
+<codeclip>
+<ID>_C3</ID>
+<x0>200</x0>
+<y0>5</y0>
+<width>272</width>
+<height>198</height>
+<codetext>XTimer  timer;
+class XTimer implements ActionListener{
+  javax.swing.Timer unit;
+ 
+  XTimer( int del ){
+   unit = new javax.swing.Timer( del, this );
+  }
+
+  public void actionPerformed( ActionEvent e){
+    Action();
+  }
+
+}
+</codetext>
+</codeclip>
+<codeclip>
+<ID>_C4</ID>
+<x0>228</x0>
+<y0>228</y0>
+<width>211</width>
+<height>23</height>
+<codetext>int delay = 10; //インターバル間隔
+</codetext>
+</codeclip>
+<state>
+<ID>_S5</ID>
+<x0>415</x0>
+<y0>274</y0>
+<width>70</width>
+<height>40</height>
+<text>       状態1</text>
+<isinitstate>0</isinitstate>
+</state>
+<operation>
+<ID>_O6</ID>
+<state1>_SINIT</state1>
+<state2>_S5</state2>
+<x0>275</x0>
+<y0>319</y0>
+<width>126</width>
+<height>59</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>0</inconnecty0>
+<outconnectx0>100</outconnectx0>
+<outconnecty0>0</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>20</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>0</inpinlinkcount>
+<description></description>
+<codetext>// タイマー生成･設定
+timer = new XTimer( delay );
+</codetext>
+</operation>
+<operation>
+<ID>_O7</ID>
+<state1>_S5</state1>
+<state2>_S5</state2>
+<x0>522</x0>
+<y0>229</y0>
+<width>130</width>
+<height>53</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>34</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// タイマースタート
+timer.unit.start();
+</codetext>
+</operation>
+<operation>
+<ID>_O8</ID>
+<state1>_S5</state1>
+<state2>_S5</state2>
+<x0>525</x0>
+<y0>314</y0>
+<width>129</width>
+<height>55</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>35</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// タイマーストップ
+timer.unit.stop();
+</codetext>
+</operation>
+<action>
+<ID>_A9</ID>
+<comp1name>_P0</comp1name>
+<comp2name>_O7</comp2name>
+</action>
+<action>
+<ID>_A10</ID>
+<comp1name>_P1</comp1name>
+<comp2name>_O8</comp2name>
+</action>
+</aobject>

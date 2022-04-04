@@ -1,0 +1,4 @@
+cd .
+adb uninstall $2.$3.$4
+adb install apk/$1.apk
+adb shell am start -a android.intentaction.MAIN -n $2.$3.$4/.$1

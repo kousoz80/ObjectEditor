@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C18</ID>
+<x0>30</x0>
+<y0>383</y0>
+<width>212</width>
+<height>21</height>
+<codetext>// ファイルをバッファにロードする
+char* load( char* file_name ){
+  int c;
+  FILE* fp;
+  struct stat stt;
+  char* buf;
+  char* p;
+
+  stat( file_name, &amp;stt );
+  p = buf = (char*)malloc( stt.st_size+16 );
+  if( buf == NULL ) return NULL;
+  fp= fopen( file_name, &quot;r&quot; );
+  while( ( c = getc( fp ) ) != EOF ){
+    if( c == &apos;\n&apos; ) *p++ = &apos;\r&apos;;
+    *p++ = (char)c;
+  }
+  *p++ = &apos;\0&apos;;
+  fclose( fp );
+  return buf;
+}
+</codetext>
+</codeclip>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<operation>
+<ID>_O11</ID>
+<state1>_S6</state1>
+<state2>_S6</state2>
+<x0>310</x0>
+<y0>126</y0>
+<width>139</width>
+<height>81</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>8</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>61</outconnecty0>
+<inpintext>in(String s)</inpintext>
+<inpinx0>69</inpinx0>
+<inpiny0>58</inpiny0>
+<inpinwidth>71</inpinwidth>
+<inpinheight>23</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>102</outpinx0>
+<outpiny0>35</outpiny0>
+<outpinwidth>39</outpinwidth>
+<outpinheight>24</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>ロードを開始する
+</description>
+<codetext>JPanel panel= null;
+String line;
+
+try{
+//System.out.println(s);
+din = new BufferedReader( new FileReader(s) );
+window.setTitle( din.readLine() );
+int wid = parseInt( din.readLine() );
+int hei = parseInt( din.readLine() );
+panel = (JPanel)(window.getContentPane());
+panel.removeAll();
+panel.setBackground( new Color( parseInt( din.readLine() ),parseInt( din.readLine() ),parseInt( din.readLine() ) ) );
+panel.setPreferredSize( new Dimension( wid, hei ) );
+panel.setSize( wid, hei );
+window.pack();
+put(window);
+} catch( IOException ie ) { System.out.println(&quot;file: [&quot;+s+&quot;] format error&quot;);}
+try{
+while( ( line=din.readLine() )!=null ){
+//   System.out.println(line);
+   isLoad();
+   Load(line);
+}
+din.close();
+} catch( IOException ie ) {System.out.println(&quot;data error&quot;);}
+panel.validate();
+</codetext>
+</operation>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C22</ID>
+<x0>1</x0>
+<y0>44</y0>
+<width>179</width>
+<height>20</height>
+<codetext>// 拡張GUIコンポーネント
+class XJLabel extends JLabel{    //イメージファイル名を持つJLabel
+ String ImageFile;
+ boolean is_opaque=true;
+ boolean print_create_pin=true;
+ boolean print_paint_pin=true;
+ String super_class = &quot;JLabel&quot;;
+}
+
+class XJButton extends JButton{//イメージファイル名を持つJButton
+ String ImageFile;
+ boolean is_opaque=true;
+ boolean print_create_pin=true;
+ boolean print_clicked_pin=true;
+ String super_class = &quot;JButton&quot;;
+}
+
+class XJCheckBox extends JCheckBox{
+ boolean is_opaque=true;
+ boolean print_create_pin=true;
+ boolean print_check_pin=true;
+ String super_class = &quot;JCheckBox&quot;;
+}
+
+class XJTextField extends JTextField{
+ boolean is_opaque=true;
+ boolean print_create_pin=true;
+ boolean print_input_pin=true;
+ String super_class = &quot;JTextField&quot;;
+}
+
+class XJTextArea extends JTextArea{
+ boolean is_opaque=true;
+ boolean is_scrollable=true;
+ boolean print_create_pin=true;
+ String super_class = &quot;JTextArea&quot;;
+}
+
+class XJHSlider extends JSlider{
+ boolean is_opaque=true;
+ boolean print_create_pin=true;
+ boolean print_changed_pin=true;
+ String super_class = &quot;JSlider&quot;;
+}
+
+class XJVSlider extends JSlider{
+ boolean is_opaque=true;
+ boolean print_create_pin=true;
+ boolean print_changed_pin=true;
+ String super_class = &quot;JSlider&quot;;
+}
+
+class XJList extends JList{
+ boolean is_opaque=true;
+ boolean is_scrollable=true;
+ boolean print_create_pin=true;
+ boolean print_selected_pin=true;
+ String super_class = &quot;JList&quot;;
+}
+</codetext>
+</codeclip>

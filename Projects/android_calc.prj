@@ -1,0 +1,2464 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<xobject>
+<ID>project</ID>
+<x0>0</x0>
+<y0>0</y0>
+<width>200</width>
+<height>100</height>
+<ID_maker>75</ID_maker>
+<objectname>android_calc</objectname>
+<description>新規のアプリケーション</description>
+<codeclip>
+<ID>_CSTART</ID>
+<x0>50</x0>
+<y0>1</y0>
+<width>80</width>
+<height>24</height>
+<codetext>Activity ACTIVITY;
+</codetext>
+</codeclip>
+<pin>
+<ID>_PSTART</ID>
+<x0>39</x0>
+<y0>47</y0>
+<width>55</width>
+<height>24</height>
+<text>Start()</text>
+<px>50</px>
+<py>50</py>
+</pin>
+<relation>
+<ID>_R1</ID>
+<pin1name>_PSTART</pin1name>
+<pin2name>_A0(_Pstart)</pin2name>
+</relation>
+<aobject>
+<ID>_A25</ID>
+<x0>418</x0>
+<y0>351</y0>
+<width>120</width>
+<height>207</height>
+<ID_maker>42</ID_maker>
+<objectname>toNumeric</objectname>
+<description>数字キーを0-9の数字に変換</description>
+<state>
+<ID>_SINIT</ID>
+<x0>28</x0>
+<y0>227</y0>
+<width>70</width>
+<height>40</height>
+<text>  初期状態</text>
+<isinitstate>1</isinitstate>
+</state>
+<operation>
+<ID>_O0</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>238</x0>
+<y0>0</y0>
+<width>131</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(int d)</outpintext>
+<outpinx0>75</outpinx0>
+<outpiny0>27</outpiny0>
+<outpinwidth>56</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// 0を出力
+d=0;
+</codetext>
+</operation>
+<pin>
+<ID>_P1</ID>
+<x0>157</x0>
+<y0>23</y0>
+<width>45</width>
+<height>23</height>
+<text>key0()</text>
+<px>1</px>
+<py>189</py>
+</pin>
+<action>
+<ID>_A2</ID>
+<comp1name>_P1</comp1name>
+<comp2name>_O0</comp2name>
+</action>
+<pin>
+<ID>_P3</ID>
+<x0>578</x0>
+<y0>214</y0>
+<width>66</width>
+<height>29</height>
+<text>num(int d)</text>
+<px>52</px>
+<py>79</py>
+</pin>
+<action>
+<ID>_A15</ID>
+<comp1name>_O0</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+<operation>
+<ID>_O5</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>238</x0>
+<y0>46</y0>
+<width>130</width>
+<height>45</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>1</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(int d)</outpintext>
+<outpinx0>75</outpinx0>
+<outpiny0>26</outpiny0>
+<outpinwidth>56</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// 1を出力
+d=1;
+</codetext>
+</operation>
+<action>
+<ID>_A6</ID>
+<comp1name>_O5</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+<operation>
+<ID>_O7</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>237</x0>
+<y0>90</y0>
+<width>131</width>
+<height>45</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>1</inpinx0>
+<inpiny0>25</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(int d)</outpintext>
+<outpinx0>75</outpinx0>
+<outpiny0>25</outpiny0>
+<outpinwidth>56</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// 2を出力
+d=2;
+</codetext>
+</operation>
+<operation>
+<ID>_O8</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>237</x0>
+<y0>134</y0>
+<width>133</width>
+<height>44</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>34</inpinwidth>
+<inpinheight>19</inpinheight>
+<outpintext>out(int d)</outpintext>
+<outpinx0>77</outpinx0>
+<outpiny0>24</outpiny0>
+<outpinwidth>56</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// 3を出力
+d=3;
+</codetext>
+</operation>
+<operation>
+<ID>_O9</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>236</x0>
+<y0>175</y0>
+<width>134</width>
+<height>47</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>1</inpinx0>
+<inpiny0>27</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(int d)</outpintext>
+<outpinx0>79</outpinx0>
+<outpiny0>27</outpiny0>
+<outpinwidth>56</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// 4を出力
+d=4;
+</codetext>
+</operation>
+<operation>
+<ID>_O10</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>237</x0>
+<y0>221</y0>
+<width>134</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>27</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(int d)</outpintext>
+<outpinx0>78</outpinx0>
+<outpiny0>26</outpiny0>
+<outpinwidth>56</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// 5を出力
+d=5;
+</codetext>
+</operation>
+<operation>
+<ID>_O11</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>238</x0>
+<y0>266</y0>
+<width>133</width>
+<height>45</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(int d)</outpintext>
+<outpinx0>78</outpinx0>
+<outpiny0>26</outpiny0>
+<outpinwidth>56</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// 6を出力
+d=6;
+</codetext>
+</operation>
+<operation>
+<ID>_O12</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>241</x0>
+<y0>403</y0>
+<width>133</width>
+<height>43</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>1</inpinx0>
+<inpiny0>24</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(int d)</outpintext>
+<outpinx0>77</outpinx0>
+<outpiny0>24</outpiny0>
+<outpinwidth>56</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// 9を出力
+d=9;
+</codetext>
+</operation>
+<operation>
+<ID>_O13</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>239</x0>
+<y0>312</y0>
+<width>133</width>
+<height>45</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(int d)</outpintext>
+<outpinx0>77</outpinx0>
+<outpiny0>26</outpiny0>
+<outpinwidth>56</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// 7を出力
+d=7;
+</codetext>
+</operation>
+<operation>
+<ID>_O14</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>240</x0>
+<y0>358</y0>
+<width>133</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(int d)</outpintext>
+<outpinx0>78</outpinx0>
+<outpiny0>26</outpiny0>
+<outpinwidth>56</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// 8を出力
+d=8;
+</codetext>
+</operation>
+<pin>
+<ID>_P16</ID>
+<x0>161</x0>
+<y0>153</y0>
+<width>45</width>
+<height>23</height>
+<text>key3()</text>
+<px>4</px>
+<py>28</py>
+</pin>
+<pin>
+<ID>_P17</ID>
+<x0>160</x0>
+<y0>109</y0>
+<width>45</width>
+<height>23</height>
+<text>key2()</text>
+<px>1</px>
+<py>151</py>
+</pin>
+<pin>
+<ID>_P18</ID>
+<x0>159</x0>
+<y0>70</y0>
+<width>45</width>
+<height>23</height>
+<text>key1()</text>
+<px>2</px>
+<py>169</py>
+</pin>
+<action>
+<ID>_A19</ID>
+<comp1name>_P18</comp1name>
+<comp2name>_O5</comp2name>
+</action>
+<action>
+<ID>_A20</ID>
+<comp1name>_P17</comp1name>
+<comp2name>_O7</comp2name>
+</action>
+<action>
+<ID>_A21</ID>
+<comp1name>_O7</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+<action>
+<ID>_A22</ID>
+<comp1name>_P16</comp1name>
+<comp2name>_O8</comp2name>
+</action>
+<action>
+<ID>_A23</ID>
+<comp1name>_O8</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+<pin>
+<ID>_P24</ID>
+<x0>171</x0>
+<y0>319</y0>
+<width>45</width>
+<height>23</height>
+<text>key7()</text>
+<px>0</px>
+<py>77</py>
+</pin>
+<pin>
+<ID>_P25</ID>
+<x0>179</x0>
+<y0>413</y0>
+<width>45</width>
+<height>23</height>
+<text>key9()</text>
+<px>4</px>
+<py>43</py>
+</pin>
+<pin>
+<ID>_P26</ID>
+<x0>165</x0>
+<y0>233</y0>
+<width>45</width>
+<height>23</height>
+<text>key5()</text>
+<px>1</px>
+<py>113</py>
+</pin>
+<pin>
+<ID>_P27</ID>
+<x0>165</x0>
+<y0>190</y0>
+<width>45</width>
+<height>23</height>
+<text>key4()</text>
+<px>0</px>
+<py>131</py>
+</pin>
+<pin>
+<ID>_P28</ID>
+<x0>168</x0>
+<y0>279</y0>
+<width>45</width>
+<height>23</height>
+<text>key6()</text>
+<px>0</px>
+<py>96</py>
+</pin>
+<pin>
+<ID>_P29</ID>
+<x0>176</x0>
+<y0>362</y0>
+<width>45</width>
+<height>23</height>
+<text>key8()</text>
+<px>6</px>
+<py>60</py>
+</pin>
+<action>
+<ID>_A30</ID>
+<comp1name>_P27</comp1name>
+<comp2name>_O9</comp2name>
+</action>
+<action>
+<ID>_A31</ID>
+<comp1name>_P26</comp1name>
+<comp2name>_O10</comp2name>
+</action>
+<action>
+<ID>_A32</ID>
+<comp1name>_O9</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+<action>
+<ID>_A33</ID>
+<comp1name>_O10</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+<action>
+<ID>_A34</ID>
+<comp1name>_P28</comp1name>
+<comp2name>_O11</comp2name>
+</action>
+<action>
+<ID>_A35</ID>
+<comp1name>_O11</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+<action>
+<ID>_A36</ID>
+<comp1name>_P24</comp1name>
+<comp2name>_O13</comp2name>
+</action>
+<action>
+<ID>_A37</ID>
+<comp1name>_O13</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+<action>
+<ID>_A38</ID>
+<comp1name>_P29</comp1name>
+<comp2name>_O14</comp2name>
+</action>
+<action>
+<ID>_A39</ID>
+<comp1name>_O14</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+<action>
+<ID>_A40</ID>
+<comp1name>_P25</comp1name>
+<comp2name>_O12</comp2name>
+</action>
+<action>
+<ID>_A41</ID>
+<comp1name>_O12</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+</aobject>
+<aobject>
+<ID>_A24</ID>
+<x0>409</x0>
+<y0>126</y0>
+<width>171</width>
+<height>207</height>
+<ID_maker>40</ID_maker>
+<objectname>toOperater</objectname>
+<description>演算キーを演算子に変換</description>
+<state>
+<ID>_SINIT</ID>
+<x0>151</x0>
+<y0>222</y0>
+<width>70</width>
+<height>40</height>
+<text>  初期状態</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_P18</ID>
+<x0>31</x0>
+<y0>293</y0>
+<width>60</width>
+<height>30</height>
+<text>add()</text>
+<px>0</px>
+<py>100</py>
+</pin>
+<pin>
+<ID>_P1</ID>
+<x0>34</x0>
+<y0>339</y0>
+<width>60</width>
+<height>30</height>
+<text>sub()</text>
+<px>2</px>
+<py>82</py>
+</pin>
+<pin>
+<ID>_P2</ID>
+<x0>38</x0>
+<y0>387</y0>
+<width>60</width>
+<height>30</height>
+<text>mult()</text>
+<px>6</px>
+<py>64</py>
+</pin>
+<pin>
+<ID>_P3</ID>
+<x0>37</x0>
+<y0>431</y0>
+<width>60</width>
+<height>30</height>
+<text>div()</text>
+<px>9</px>
+<py>46</py>
+</pin>
+<pin>
+<ID>_P4</ID>
+<x0>626</x0>
+<y0>250</y0>
+<width>113</width>
+<height>30</height>
+<text>operater(String op)</text>
+<px>60</px>
+<py>69</py>
+</pin>
+<operation>
+<ID>_O6</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>367</x0>
+<y0>272</y0>
+<width>142</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(String s)</outpintext>
+<outpinx0>65</outpinx0>
+<outpiny0>27</outpiny0>
+<outpinwidth>77</outpinwidth>
+<outpinheight>18</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// &quot;+&quot;を出力
+s=&quot;+&quot;;
+</codetext>
+</operation>
+<operation>
+<ID>_O7</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>367</x0>
+<y0>318</y0>
+<width>142</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>27</inpiny0>
+<inpinwidth>33</inpinwidth>
+<inpinheight>19</inpinheight>
+<outpintext>out(String s)</outpintext>
+<outpinx0>70</outpinx0>
+<outpiny0>25</outpiny0>
+<outpinwidth>72</outpinwidth>
+<outpinheight>21</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// &quot;-&quot;を出力
+s=&quot;-&quot;;
+</codetext>
+</operation>
+<operation>
+<ID>_O8</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>368</x0>
+<y0>364</y0>
+<width>145</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>28</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(String s)</outpintext>
+<outpinx0>70</outpinx0>
+<outpiny0>27</outpiny0>
+<outpinwidth>75</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// &quot;*&quot;を出力
+s=&quot;*&quot;;
+</codetext>
+</operation>
+<operation>
+<ID>_O9</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>369</x0>
+<y0>411</y0>
+<width>147</width>
+<height>44</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>25</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(String s)</outpintext>
+<outpinx0>73</outpinx0>
+<outpiny0>24</outpiny0>
+<outpinwidth>75</outpinwidth>
+<outpinheight>21</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// &quot;/&quot;を出力
+s=&quot;/&quot;;
+</codetext>
+</operation>
+<action>
+<ID>_A19</ID>
+<comp1name>_P18</comp1name>
+<comp2name>_O6</comp2name>
+</action>
+<action>
+<ID>_A11</ID>
+<comp1name>_O6</comp1name>
+<comp2name>_P4</comp2name>
+</action>
+<action>
+<ID>_A12</ID>
+<comp1name>_O7</comp1name>
+<comp2name>_P4</comp2name>
+</action>
+<action>
+<ID>_A13</ID>
+<comp1name>_O8</comp1name>
+<comp2name>_P4</comp2name>
+</action>
+<action>
+<ID>_A14</ID>
+<comp1name>_O9</comp1name>
+<comp2name>_P4</comp2name>
+</action>
+<action>
+<ID>_A15</ID>
+<comp1name>_P1</comp1name>
+<comp2name>_O7</comp2name>
+</action>
+<action>
+<ID>_A16</ID>
+<comp1name>_P2</comp1name>
+<comp2name>_O8</comp2name>
+</action>
+<action>
+<ID>_A17</ID>
+<comp1name>_P3</comp1name>
+<comp2name>_O9</comp2name>
+</action>
+<pin>
+<ID>_P20</ID>
+<x0>27</x0>
+<y0>63</y0>
+<width>60</width>
+<height>30</height>
+<text>inv()</text>
+<px>9</px>
+<py>190</py>
+</pin>
+<pin>
+<ID>_P21</ID>
+<x0>25</x0>
+<y0>111</y0>
+<width>73</width>
+<height>29</height>
+<text>mplus()</text>
+<px>0</px>
+<py>172</py>
+</pin>
+<pin>
+<ID>_P22</ID>
+<x0>26</x0>
+<y0>157</y0>
+<width>73</width>
+<height>30</height>
+<text>mr()</text>
+<px>3</px>
+<py>154</py>
+</pin>
+<pin>
+<ID>_P23</ID>
+<x0>28</x0>
+<y0>202</y0>
+<width>60</width>
+<height>30</height>
+<text>clr()</text>
+<px>0</px>
+<py>136</py>
+</pin>
+<pin>
+<ID>_P24</ID>
+<x0>28</x0>
+<y0>250</y0>
+<width>63</width>
+<height>29</height>
+<text>equal()</text>
+<px>0</px>
+<py>118</py>
+</pin>
+<operation>
+<ID>_O25</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>366</x0>
+<y0>42</y0>
+<width>142</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(String s)</outpintext>
+<outpinx0>65</outpinx0>
+<outpiny0>27</outpiny0>
+<outpinwidth>77</outpinwidth>
+<outpinheight>18</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// &quot;+/-&quot;を出力
+s=&quot;+/-&quot;;
+</codetext>
+</operation>
+<operation>
+<ID>_O26</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>366</x0>
+<y0>89</y0>
+<width>142</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(String s)</outpintext>
+<outpinx0>65</outpinx0>
+<outpiny0>27</outpiny0>
+<outpinwidth>77</outpinwidth>
+<outpinheight>18</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// &quot;M+&quot;を出力
+s=&quot;M+&quot;;
+</codetext>
+</operation>
+<operation>
+<ID>_O27</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>366</x0>
+<y0>136</y0>
+<width>142</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(String s)</outpintext>
+<outpinx0>65</outpinx0>
+<outpiny0>27</outpiny0>
+<outpinwidth>77</outpinwidth>
+<outpinheight>18</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// &quot;Mr&quot;を出力
+s=&quot;Mr&quot;;
+</codetext>
+</operation>
+<operation>
+<ID>_O28</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>366</x0>
+<y0>181</y0>
+<width>142</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(String s)</outpintext>
+<outpinx0>65</outpinx0>
+<outpiny0>27</outpiny0>
+<outpinwidth>77</outpinwidth>
+<outpinheight>18</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// &quot;C&quot;を出力
+s=&quot;C&quot;;
+</codetext>
+</operation>
+<operation>
+<ID>_O29</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>366</x0>
+<y0>229</y0>
+<width>142</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(String s)</outpintext>
+<outpinx0>65</outpinx0>
+<outpiny0>27</outpiny0>
+<outpinwidth>77</outpinwidth>
+<outpinheight>18</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// &quot;=&quot;を出力
+s=&quot;=&quot;;
+</codetext>
+</operation>
+<action>
+<ID>_A30</ID>
+<comp1name>_P20</comp1name>
+<comp2name>_O25</comp2name>
+</action>
+<action>
+<ID>_A31</ID>
+<comp1name>_P21</comp1name>
+<comp2name>_O26</comp2name>
+</action>
+<action>
+<ID>_A32</ID>
+<comp1name>_P22</comp1name>
+<comp2name>_O27</comp2name>
+</action>
+<action>
+<ID>_A33</ID>
+<comp1name>_P23</comp1name>
+<comp2name>_O28</comp2name>
+</action>
+<action>
+<ID>_A34</ID>
+<comp1name>_P24</comp1name>
+<comp2name>_O29</comp2name>
+</action>
+<action>
+<ID>_A35</ID>
+<comp1name>_O25</comp1name>
+<comp2name>_P4</comp2name>
+</action>
+<action>
+<ID>_A36</ID>
+<comp1name>_O29</comp1name>
+<comp2name>_P4</comp2name>
+</action>
+<action>
+<ID>_A37</ID>
+<comp1name>_O28</comp1name>
+<comp2name>_P4</comp2name>
+</action>
+<action>
+<ID>_A38</ID>
+<comp1name>_O27</comp1name>
+<comp2name>_P4</comp2name>
+</action>
+<action>
+<ID>_A39</ID>
+<comp1name>_O26</comp1name>
+<comp2name>_P4</comp2name>
+</action>
+</aobject>
+<aobject>
+<ID>_A23</ID>
+<x0>656</x0>
+<y0>109</y0>
+<width>181</width>
+<height>481</height>
+<ID_maker>48</ID_maker>
+<objectname>main_coltrol</objectname>
+<description>電卓の制御プログラム
+</description>
+<state>
+<ID>_SINIT</ID>
+<x0>22</x0>
+<y0>55</y0>
+<width>89</width>
+<height>47</height>
+<text>      初期状態</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_P0</ID>
+<x0>420</x0>
+<y0>94</y0>
+<width>60</width>
+<height>30</height>
+<text>num(int d)</text>
+<px>14</px>
+<py>340</py>
+</pin>
+<pin>
+<ID>_P1</ID>
+<x0>551</x0>
+<y0>403</y0>
+<width>91</width>
+<height>27</height>
+<text>operater(String op)</text>
+<px>1</px>
+<py>86</py>
+</pin>
+<pin>
+<ID>_P2</ID>
+<x0>290</x0>
+<y0>59</y0>
+<width>124</width>
+<height>28</height>
+<text>Disp_is(EditText e)</text>
+<px>1</px>
+<py>449</py>
+</pin>
+<state>
+<ID>_S39</ID>
+<x0>251</x0>
+<y0>391</y0>
+<width>72</width>
+<height>42</height>
+<text>    計算状態</text>
+<isinitstate>0</isinitstate>
+</state>
+<pin>
+<ID>_P4</ID>
+<x0>671</x0>
+<y0>126</y0>
+<width>52</width>
+<height>30</height>
+<text>dot()</text>
+<px>17</px>
+<py>225</py>
+</pin>
+<operation>
+<ID>_O40</ID>
+<state1>_S30</state1>
+<state2>_S39</state2>
+<x0>298</x0>
+<y0>273</y0>
+<width>118</width>
+<height>64</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>0</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>46</outconnecty0>
+<inpintext>in(String op)</inpintext>
+<inpinx0>38</inpinx0>
+<inpiny0>44</inpiny0>
+<inpinwidth>80</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// 計算状態に遷移
+// する
+op1 = op;
+</codetext>
+</operation>
+<operation>
+<ID>_O41</ID>
+<state1>_S21</state1>
+<state2>_S39</state2>
+<x0>447</x0>
+<y0>273</y0>
+<width>118</width>
+<height>64</height>
+<inconnectx0>26</inconnectx0>
+<inconnecty0>4</inconnecty0>
+<outconnectx0>2</outconnectx0>
+<outconnecty0>49</outconnecty0>
+<inpintext>in(String op)</inpintext>
+<inpinx0>38</inpinx0>
+<inpiny0>44</inpiny0>
+<inpinwidth>80</inpinwidth>
+<inpinheight>21</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// 計算状態に遷移
+// する
+op1 = op;
+</codetext>
+</operation>
+<operation>
+<ID>_O42</ID>
+<state1>_S22</state1>
+<state2>_S39</state2>
+<x0>614</x0>
+<y0>272</y0>
+<width>118</width>
+<height>64</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>0</inconnecty0>
+<outconnectx0>5</outconnectx0>
+<outconnecty0>53</outconnecty0>
+<inpintext>in(String op)</inpintext>
+<inpinx0>40</inpinx0>
+<inpiny0>44</inpiny0>
+<inpinwidth>79</inpinwidth>
+<inpinheight>21</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// 計算状態に遷移
+// する
+op1 = op;
+</codetext>
+</operation>
+<action>
+<ID>_A43</ID>
+<comp1name>_P1</comp1name>
+<comp2name>_O40</comp2name>
+</action>
+<codeclip>
+<ID>_C9</ID>
+<x0>148</x0>
+<y0>16</y0>
+<width>178</width>
+<height>23</height>
+<codetext>EditText disp;
+</codetext>
+</codeclip>
+<operation>
+<ID>_O17</ID>
+<state1>_SINIT</state1>
+<state2>_S30</state2>
+<x0>137</x0>
+<y0>45</y0>
+<width>130</width>
+<height>73</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>25</inconnecty0>
+<outconnectx0>71</outconnectx0>
+<outconnecty0>55</outconnecty0>
+<inpintext>in(EditText e)</inpintext>
+<inpinx0>29</inpinx0>
+<inpiny0>52</inpiny0>
+<inpinwidth>101</inpinwidth>
+<inpinheight>21</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// 表示を取得
+// 初期設定
+disp = e;
+reg1 = 0;
+reg0 = 0;
+mem = 0;
+digit = 1;
+op1 = &quot;&quot;;
+op0 = &quot;&quot;;
+disp.setText(reg1+&quot;&quot;);
+</codetext>
+</operation>
+<action>
+<ID>_A18</ID>
+<comp1name>_P2</comp1name>
+<comp2name>_O17</comp2name>
+</action>
+<codeclip>
+<ID>_C19</ID>
+<x0>10</x0>
+<y0>187</y0>
+<width>125</width>
+<height>126</height>
+<codetext>String op1;
+double reg1;
+double mem;
+double digit;
+String op0;
+double reg0;
+
+</codetext>
+</codeclip>
+<state>
+<ID>_S21</ID>
+<x0>422</x0>
+<y0>201</y0>
+<width>90</width>
+<height>44</height>
+<text>  整数入力状態</text>
+<isinitstate>0</isinitstate>
+</state>
+<state>
+<ID>_S22</ID>
+<x0>530</x0>
+<y0>199</y0>
+<width>90</width>
+<height>45</height>
+<text>  小数入力状態</text>
+<isinitstate>0</isinitstate>
+</state>
+<operation>
+<ID>_O24</ID>
+<state1>_S21</state1>
+<state2>_S21</state2>
+<x0>515</x0>
+<y0>62</y0>
+<width>103</width>
+<height>49</height>
+<inconnectx0>2</inconnectx0>
+<inconnecty0>32</inconnecty0>
+<outconnectx0>3</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in(int d)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>30</inpiny0>
+<inpinwidth>47</inpinwidth>
+<inpinheight>19</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// 整数部を入力
+reg1 = reg1 * 10. + d;
+disp.setText(reg1 + &quot;&quot; );
+</codetext>
+</operation>
+<action>
+<ID>_A25</ID>
+<comp1name>_P0</comp1name>
+<comp2name>_O24</comp2name>
+</action>
+<operation>
+<ID>_O26</ID>
+<state1>_S21</state1>
+<state2>_S22</state2>
+<x0>641</x0>
+<y0>54</y0>
+<width>126</width>
+<height>53</height>
+<inconnectx0>1</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>2</outconnectx0>
+<outconnecty0>38</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>87</inpinx0>
+<inpiny0>33</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// 小数入力状態に
+// 遷移する
+digit = 1;
+</codetext>
+</operation>
+<action>
+<ID>_A27</ID>
+<comp1name>_P4</comp1name>
+<comp2name>_O26</comp2name>
+</action>
+<operation>
+<ID>_O28</ID>
+<state1>_S22</state1>
+<state2>_S22</state2>
+<x0>660</x0>
+<y0>164</y0>
+<width>94</width>
+<height>70</height>
+<inconnectx0>3</inconnectx0>
+<inconnecty0>49</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>49</outconnecty0>
+<inpintext>in(int d)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>32</inpiny0>
+<inpinwidth>49</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// 小数部を入力
+digit = digit / 10.0;
+reg1 = reg1 + d * digit;
+disp.setText(reg1+&quot;&quot;);
+</codetext>
+</operation>
+<action>
+<ID>_A29</ID>
+<comp1name>_P0</comp1name>
+<comp2name>_O28</comp2name>
+</action>
+<state>
+<ID>_S30</ID>
+<x0>170</x0>
+<y0>165</y0>
+<width>95</width>
+<height>45</height>
+<text>    初期入力状態</text>
+<isinitstate>0</isinitstate>
+</state>
+<operation>
+<ID>_O31</ID>
+<state1>_S30</state1>
+<state2>_S21</state2>
+<x0>312</x0>
+<y0>132</y0>
+<width>104</width>
+<height>58</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>28</inconnecty0>
+<outconnectx0>89</outconnectx0>
+<outconnecty0>9</outconnecty0>
+<inpintext>in(int d)</inpintext>
+<inpinx0>57</inpinx0>
+<inpiny0>34</inpiny0>
+<inpinwidth>47</inpinwidth>
+<inpinheight>24</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// 整数部(1桁目)
+// を入力
+reg1 = d;
+disp.setText(reg1+&quot;&quot;);
+
+</codetext>
+</operation>
+<action>
+<ID>_A32</ID>
+<comp1name>_P0</comp1name>
+<comp2name>_O31</comp2name>
+</action>
+<action>
+<ID>_A44</ID>
+<comp1name>_P1</comp1name>
+<comp2name>_O41</comp2name>
+</action>
+<action>
+<ID>_A45</ID>
+<comp1name>_P1</comp1name>
+<comp2name>_O42</comp2name>
+</action>
+<operation>
+<ID>_O46</ID>
+<state1>_S39</state1>
+<state2>_S30</state2>
+<x0>172</x0>
+<y0>272</y0>
+<width>108</width>
+<height>66</height>
+<inconnectx0>35</inconnectx0>
+<inconnecty0>49</inconnecty0>
+<outconnectx0>36</outconnectx0>
+<outconnecty0>1</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>20</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>0</inpinlinkcount>
+<description></description>
+<codetext>// 計算する
+if( op1.equals(&quot;+/-&quot;) )       reg1 = -reg1;
+else if( op1.equals(&quot;C&quot;) )    reg1 = 0.0;
+else if( op1.equals(&quot;M+&quot;) )   mem += reg1;
+else if( op1.equals(&quot;Mr&quot;) ){  reg1 = mem; mem = 0.0; }
+else{
+  if( op0.equals(&quot;+&quot;) )     reg1 = reg0 + reg1;
+  else if( op0.equals(&quot;-&quot;) )reg1 = reg0 - reg1;
+  else if( op0.equals(&quot;*&quot;) )reg1 = reg0 * reg1;
+  else if( op0.equals(&quot;/&quot;) )reg1 = reg0 / reg1;
+  op0   = op1;
+  reg0 = reg1;
+}
+disp.setText(reg1+&quot;&quot;);
+
+</codetext>
+</operation>
+</aobject>
+<relation>
+<ID>_R29</ID>
+<pin1name>_A25(_P3)</pin1name>
+<pin2name>_A23(_P0)</pin2name>
+</relation>
+<relation>
+<ID>_R28</ID>
+<pin1name>_A24(_P4)</pin1name>
+<pin2name>_A23(_P1)</pin2name>
+</relation>
+<relation>
+<ID>_R54</ID>
+<pin1name>_A0(_Pdisplay)</pin1name>
+<pin2name>_A23(_P2)</pin2name>
+</relation>
+<relation>
+<ID>_R55</ID>
+<pin1name>_A0(_PAdot_Button)</pin1name>
+<pin2name>_A23(_P4)</pin2name>
+</relation>
+<relation>
+<ID>_R56</ID>
+<pin1name>_A0(_PAdiv_Button)</pin1name>
+<pin2name>_A24(_P3)</pin2name>
+</relation>
+<relation>
+<ID>_R57</ID>
+<pin1name>_A0(_PAmult_Button)</pin1name>
+<pin2name>_A24(_P2)</pin2name>
+</relation>
+<relation>
+<ID>_R58</ID>
+<pin1name>_A0(_PAinv_Bottun)</pin1name>
+<pin2name>_A24(_P20)</pin2name>
+</relation>
+<relation>
+<ID>_R59</ID>
+<pin1name>_A0(_PAmem_pButton)</pin1name>
+<pin2name>_A24(_P21)</pin2name>
+</relation>
+<relation>
+<ID>_R60</ID>
+<pin1name>_A0(_PAminus_Button)</pin1name>
+<pin2name>_A24(_P1)</pin2name>
+</relation>
+<relation>
+<ID>_R61</ID>
+<pin1name>_A0(_PAplus_Button)</pin1name>
+<pin2name>_A24(_P18)</pin2name>
+</relation>
+<relation>
+<ID>_R62</ID>
+<pin1name>_A0(_PAequal_Button)</pin1name>
+<pin2name>_A24(_P24)</pin2name>
+</relation>
+<relation>
+<ID>_R63</ID>
+<pin1name>_A0(_PACLR_Button)</pin1name>
+<pin2name>_A24(_P23)</pin2name>
+</relation>
+<relation>
+<ID>_R64</ID>
+<pin1name>_A0(_PAMR_Button)</pin1name>
+<pin2name>_A24(_P22)</pin2name>
+</relation>
+<relation>
+<ID>_R65</ID>
+<pin1name>_A0(_PAButton3)</pin1name>
+<pin2name>_A25(_P16)</pin2name>
+</relation>
+<relation>
+<ID>_R66</ID>
+<pin1name>_A0(_PAButton9)</pin1name>
+<pin2name>_A25(_P25)</pin2name>
+</relation>
+<relation>
+<ID>_R67</ID>
+<pin1name>_A0(_PAButton8)</pin1name>
+<pin2name>_A25(_P29)</pin2name>
+</relation>
+<relation>
+<ID>_R68</ID>
+<pin1name>_A0(_PAButton7)</pin1name>
+<pin2name>_A25(_P24)</pin2name>
+</relation>
+<relation>
+<ID>_R69</ID>
+<pin1name>_A0(_PAButton6)</pin1name>
+<pin2name>_A25(_P28)</pin2name>
+</relation>
+<relation>
+<ID>_R70</ID>
+<pin1name>_A0(_PAButton5)</pin1name>
+<pin2name>_A25(_P26)</pin2name>
+</relation>
+<relation>
+<ID>_R71</ID>
+<pin1name>_A0(_PAButton4)</pin1name>
+<pin2name>_A25(_P27)</pin2name>
+</relation>
+<relation>
+<ID>_R72</ID>
+<pin1name>_A0(_PAButton2)</pin1name>
+<pin2name>_A25(_P17)</pin2name>
+</relation>
+<relation>
+<ID>_R73</ID>
+<pin1name>_A0(_PAButton1)</pin1name>
+<pin2name>_A25(_P18)</pin2name>
+</relation>
+<relation>
+<ID>_R74</ID>
+<pin1name>_A0(_PAButton0)</pin1name>
+<pin2name>_A25(_P1)</pin2name>
+</relation>
+<aobject>
+<ID>_A0</ID>
+<x0>100</x0>
+<y0>100</y0>
+<width>280</width>
+<objectname>GUI</objectname>
+<description>GUIオブジェクト
+</description>
+<state>
+<ID>_SINIT</ID>
+<x0>0</x0>
+<y0>40</y0>
+<width>70</width>
+<height>40</height>
+<text>  InitState</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_Pstart</ID>
+<x0>400</x0>
+<y0>100</y0>
+<width>80</width>
+<height>26</height>
+<text>Start()</text>
+<px>0</px>
+<py>36</py>
+</pin>
+<pin>
+<ID>_PGUIout</ID>
+<x0>0</x0>
+<y0>84</y0>
+<width>180</width>
+<height>26</height>
+<text>GUI_created(AbsoluteLayout l)</text>
+<px>0</px>
+<py>54</py>
+</pin>
+<action>
+<ID>_Astart</ID>
+<comp1name>_Pstart</comp1name>
+<comp2name>_Ocreate</comp2name>
+</action>
+<operation>
+<ID>_Ocreate</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>220</x0>
+<y0>40</y0>
+<width>130</width>
+<height>64</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>43</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// GUIを作成する
+XGUI x = new XGUI();
+
+</codetext>
+</operation>
+<pin>
+<ID>_PAdiv_Button</ID>
+<x0>0</x0>
+<y0>110</y0>
+<width>200</width>
+<height>26</height>
+<text>div_Button_clicked()</text>
+<px>0</px>
+<py>72</py>
+</pin>
+<pin>
+<ID>_PAmult_Button</ID>
+<x0>0</x0>
+<y0>138</y0>
+<width>200</width>
+<height>26</height>
+<text>mult_Button_clicked()</text>
+<px>0</px>
+<py>90</py>
+</pin>
+<pin>
+<ID>_PAminus_Button</ID>
+<x0>0</x0>
+<y0>166</y0>
+<width>200</width>
+<height>26</height>
+<text>minus_Button_clicked()</text>
+<px>0</px>
+<py>108</py>
+</pin>
+<pin>
+<ID>_PAplus_Button</ID>
+<x0>0</x0>
+<y0>194</y0>
+<width>200</width>
+<height>26</height>
+<text>plus_Button_clicked()</text>
+<px>0</px>
+<py>126</py>
+</pin>
+<pin>
+<ID>_PAequal_Button</ID>
+<x0>0</x0>
+<y0>222</y0>
+<width>200</width>
+<height>26</height>
+<text>equal_Button_clicked()</text>
+<px>0</px>
+<py>144</py>
+</pin>
+<pin>
+<ID>_PACLR_Button</ID>
+<x0>0</x0>
+<y0>250</y0>
+<width>200</width>
+<height>26</height>
+<text>CLR_Button_clicked()</text>
+<px>0</px>
+<py>162</py>
+</pin>
+<pin>
+<ID>_PAMR_Button</ID>
+<x0>0</x0>
+<y0>278</y0>
+<width>200</width>
+<height>26</height>
+<text>MR_Button_clicked()</text>
+<px>0</px>
+<py>180</py>
+</pin>
+<pin>
+<ID>_PAmem_pButton</ID>
+<x0>0</x0>
+<y0>306</y0>
+<width>200</width>
+<height>26</height>
+<text>mem_pButton_clicked()</text>
+<px>0</px>
+<py>198</py>
+</pin>
+<pin>
+<ID>_PAinv_Bottun</ID>
+<x0>0</x0>
+<y0>334</y0>
+<width>200</width>
+<height>26</height>
+<text>inv_Bottun_clicked()</text>
+<px>0</px>
+<py>216</py>
+</pin>
+<pin>
+<ID>_PAdot_Button</ID>
+<x0>0</x0>
+<y0>362</y0>
+<width>200</width>
+<height>26</height>
+<text>dot_Button_clicked()</text>
+<px>0</px>
+<py>234</py>
+</pin>
+<pin>
+<ID>_PAButton3</ID>
+<x0>0</x0>
+<y0>390</y0>
+<width>200</width>
+<height>26</height>
+<text>Button3_clicked()</text>
+<px>0</px>
+<py>252</py>
+</pin>
+<pin>
+<ID>_PAButton9</ID>
+<x0>0</x0>
+<y0>418</y0>
+<width>200</width>
+<height>26</height>
+<text>Button9_clicked()</text>
+<px>0</px>
+<py>270</py>
+</pin>
+<pin>
+<ID>_PAButton8</ID>
+<x0>0</x0>
+<y0>446</y0>
+<width>200</width>
+<height>26</height>
+<text>Button8_clicked()</text>
+<px>0</px>
+<py>288</py>
+</pin>
+<pin>
+<ID>_PAButton7</ID>
+<x0>0</x0>
+<y0>474</y0>
+<width>200</width>
+<height>26</height>
+<text>Button7_clicked()</text>
+<px>0</px>
+<py>306</py>
+</pin>
+<pin>
+<ID>_PAButton6</ID>
+<x0>0</x0>
+<y0>502</y0>
+<width>200</width>
+<height>26</height>
+<text>Button6_clicked()</text>
+<px>0</px>
+<py>324</py>
+</pin>
+<pin>
+<ID>_PAButton5</ID>
+<x0>0</x0>
+<y0>530</y0>
+<width>200</width>
+<height>26</height>
+<text>Button5_clicked()</text>
+<px>0</px>
+<py>342</py>
+</pin>
+<pin>
+<ID>_PAButton4</ID>
+<x0>0</x0>
+<y0>558</y0>
+<width>200</width>
+<height>26</height>
+<text>Button4_clicked()</text>
+<px>0</px>
+<py>360</py>
+</pin>
+<pin>
+<ID>_PAButton2</ID>
+<x0>0</x0>
+<y0>586</y0>
+<width>200</width>
+<height>26</height>
+<text>Button2_clicked()</text>
+<px>0</px>
+<py>378</py>
+</pin>
+<pin>
+<ID>_PAButton1</ID>
+<x0>0</x0>
+<y0>614</y0>
+<width>200</width>
+<height>26</height>
+<text>Button1_clicked()</text>
+<px>0</px>
+<py>396</py>
+</pin>
+<pin>
+<ID>_Pdisplay</ID>
+<x0>0</x0>
+<y0>642</y0>
+<width>200</width>
+<height>26</height>
+<text>display_created(EditText e)</text>
+<px>0</px>
+<py>414</py>
+</pin>
+<pin>
+<ID>_PAButton0</ID>
+<x0>0</x0>
+<y0>670</y0>
+<width>200</width>
+<height>26</height>
+<text>Button0_clicked()</text>
+<px>0</px>
+<py>432</py>
+</pin>
+<codeclip>
+<ID>_CXSTART</ID>
+<x0>0</x0>
+<y0>0</y0>
+<width>300</width>
+<height>26</height>
+<codetext> class XGUI{
+div_Button Idiv_Button;
+ class div_Button extends Button{
+ div_Button(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;/&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {div_Button_clicked();}} );
+}
+}
+mult_Button Imult_Button;
+ class mult_Button extends Button{
+ mult_Button(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;x&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {mult_Button_clicked();}} );
+}
+}
+minus_Button Iminus_Button;
+ class minus_Button extends Button{
+ minus_Button(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;-&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {minus_Button_clicked();}} );
+}
+}
+plus_Button Iplus_Button;
+ class plus_Button extends Button{
+ plus_Button(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;+&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {plus_Button_clicked();}} );
+}
+}
+equal_Button Iequal_Button;
+ class equal_Button extends Button{
+ equal_Button(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;=&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {equal_Button_clicked();}} );
+}
+}
+CLR_Button ICLR_Button;
+ class CLR_Button extends Button{
+ CLR_Button(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;C&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {CLR_Button_clicked();}} );
+}
+}
+MR_Button IMR_Button;
+ class MR_Button extends Button{
+ MR_Button(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;MR&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {MR_Button_clicked();}} );
+}
+}
+mem_pButton Imem_pButton;
+ class mem_pButton extends Button{
+ mem_pButton(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;M+&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {mem_pButton_clicked();}} );
+}
+}
+inv_Bottun Iinv_Bottun;
+ class inv_Bottun extends Button{
+ inv_Bottun(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 10f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;+/-&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {inv_Bottun_clicked();}} );
+}
+}
+dot_Button Idot_Button;
+ class dot_Button extends Button{
+ dot_Button(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;.&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {dot_Button_clicked();}} );
+}
+}
+Button3 IButton3;
+ class Button3 extends Button{
+ Button3(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;3&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {Button3_clicked();}} );
+}
+}
+Button9 IButton9;
+ class Button9 extends Button{
+ Button9(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;9&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {Button9_clicked();}} );
+}
+}
+Button8 IButton8;
+ class Button8 extends Button{
+ Button8(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;8&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {Button8_clicked();}} );
+}
+}
+Button7 IButton7;
+ class Button7 extends Button{
+ Button7(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;7&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {Button7_clicked();}} );
+}
+}
+Button6 IButton6;
+ class Button6 extends Button{
+ Button6(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;6&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {Button6_clicked();}} );
+}
+}
+Button5 IButton5;
+ class Button5 extends Button{
+ Button5(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;5&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {Button5_clicked();}} );
+}
+}
+Button4 IButton4;
+ class Button4 extends Button{
+ Button4(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;4&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {Button4_clicked();}} );
+}
+}
+Button2 IButton2;
+ class Button2 extends Button{
+ Button2(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;2&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {Button2_clicked();}} );
+}
+}
+Button1 IButton1;
+ class Button1 extends Button{
+ Button1(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;1&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {Button1_clicked();}} );
+}
+}
+display Idisplay;
+ class display extends EditText{
+ display(){
+ super(ACTIVITY);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 20f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 255, 255, 255 ));
+ setText( &quot;0&quot; );
+ display_created( this );
+}
+}
+Button0 IButton0;
+ class Button0 extends Button{
+ Button0(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;0&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {Button0_clicked();}} );
+}
+}
+ XGUI(){
+ AbsoluteLayout layout=new AbsoluteLayout(ACTIVITY);
+layout.setBackgroundColor(Color.rgb( 255, 204, 204));
+ACTIVITY.setContentView(layout);
+ACTIVITY.setTitle(&quot;Calculator&quot;);
+ Idiv_Button = new div_Button();
+ Idiv_Button.setLayoutParams( new AbsoluteLayout.LayoutParams( 64,42,199,180 ) );
+ layout.addView( Idiv_Button );
+ Imult_Button = new mult_Button();
+ Imult_Button.setLayoutParams( new AbsoluteLayout.LayoutParams( 66,42,198,135 ) );
+ layout.addView( Imult_Button );
+ Iminus_Button = new minus_Button();
+ Iminus_Button.setLayoutParams( new AbsoluteLayout.LayoutParams( 66,43,198,88 ) );
+ layout.addView( Iminus_Button );
+ Iplus_Button = new plus_Button();
+ Iplus_Button.setLayoutParams( new AbsoluteLayout.LayoutParams( 67,42,196,43 ) );
+ layout.addView( Iplus_Button );
+ Iequal_Button = new equal_Button();
+ Iequal_Button.setLayoutParams( new AbsoluteLayout.LayoutParams( 76,42,265,180 ) );
+ layout.addView( Iequal_Button );
+ ICLR_Button = new CLR_Button();
+ ICLR_Button.setLayoutParams( new AbsoluteLayout.LayoutParams( 76,42,265,135 ) );
+ layout.addView( ICLR_Button );
+ IMR_Button = new MR_Button();
+ IMR_Button.setLayoutParams( new AbsoluteLayout.LayoutParams( 78,43,265,88 ) );
+ layout.addView( IMR_Button );
+ Imem_pButton = new mem_pButton();
+ Imem_pButton.setLayoutParams( new AbsoluteLayout.LayoutParams( 76,42,265,43 ) );
+ layout.addView( Imem_pButton );
+ Iinv_Bottun = new inv_Bottun();
+ Iinv_Bottun.setLayoutParams( new AbsoluteLayout.LayoutParams( 69,42,129,180 ) );
+ layout.addView( Iinv_Bottun );
+ Idot_Button = new dot_Button();
+ Idot_Button.setLayoutParams( new AbsoluteLayout.LayoutParams( 63,42,64,180 ) );
+ layout.addView( Idot_Button );
+ IButton3 = new Button3();
+ IButton3.setLayoutParams( new AbsoluteLayout.LayoutParams( 69,42,127,135 ) );
+ layout.addView( IButton3 );
+ IButton9 = new Button9();
+ IButton9.setLayoutParams( new AbsoluteLayout.LayoutParams( 67,42,127,43 ) );
+ layout.addView( IButton9 );
+ IButton8 = new Button8();
+ IButton8.setLayoutParams( new AbsoluteLayout.LayoutParams( 61,42,64,43 ) );
+ layout.addView( IButton8 );
+ IButton7 = new Button7();
+ IButton7.setLayoutParams( new AbsoluteLayout.LayoutParams( 63,42,0,43 ) );
+ layout.addView( IButton7 );
+ IButton6 = new Button6();
+ IButton6.setLayoutParams( new AbsoluteLayout.LayoutParams( 69,43,127,88 ) );
+ layout.addView( IButton6 );
+ IButton5 = new Button5();
+ IButton5.setLayoutParams( new AbsoluteLayout.LayoutParams( 61,43,64,88 ) );
+ layout.addView( IButton5 );
+ IButton4 = new Button4();
+ IButton4.setLayoutParams( new AbsoluteLayout.LayoutParams( 63,43,0,88 ) );
+ layout.addView( IButton4 );
+ IButton2 = new Button2();
+ IButton2.setLayoutParams( new AbsoluteLayout.LayoutParams( 61,42,64,135 ) );
+ layout.addView( IButton2 );
+ IButton1 = new Button1();
+ IButton1.setLayoutParams( new AbsoluteLayout.LayoutParams( 63,42,0,135 ) );
+ layout.addView( IButton1 );
+ Idisplay = new display();
+ Idisplay.setLayoutParams( new AbsoluteLayout.LayoutParams( 343,40,0,0 ) );
+ layout.addView( Idisplay );
+ IButton0 = new Button0();
+ IButton0.setLayoutParams( new AbsoluteLayout.LayoutParams( 63,42,0,180 ) );
+ layout.addView( IButton0 );
+ GUI_created( layout );
+}
+}
+</codetext>
+</codeclip>
+<ID_maker>41</ID_maker>
+<height>454</height>
+<レイアウト>Calculator
+233
+152
+255
+204
+204
+xxscale=1.5
+BUTTON;div_Button;/;133;120;43;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;mult_Button;x;132;90;44;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;minus_Button;-;132;59;44;29;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;plus_Button;+;131;29;45;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;equal_Button;=;177;120;51;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;CLR_Button;C;177;90;51;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;MR_Button;MR;177;59;52;29;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;mem_pButton;M+;177;29;51;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;inv_Bottun;+/-;86;120;46;28;0;0;0;192;192;192;Dialog;10;null;0;0;1;0;1;Button;
+BUTTON;dot_Button;.;43;120;42;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;Button3;3;85;90;46;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;Button9;9;85;29;45;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;Button8;8;43;29;41;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;Button7;7;0;29;42;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;Button6;6;85;59;46;29;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;Button5;5;43;59;41;29;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;Button4;4;0;59;42;29;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;Button2;2;43;90;41;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;Button1;1;0;90;42;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+TEXTFIELD;display;0;0;0;229;27;0;0;0;255;255;255;Dialog;20;1;1;0;EditText;
+BUTTON;Button0;0;0;120;42;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+</レイアウト>
+</aobject>
+<プロパティ>
+<ID>properties</ID>
+<LookandFeel>javax.swing.plaf.metal.MetalLookAndFeel</LookandFeel>
+<MainWinx0>0</MainWinx0>
+<MainWiny0>0</MainWiny0>
+<MainWinWidth>1024</MainWinWidth>
+<MainWinHeight>740</MainWinHeight>
+<MesgWinx0>0</MesgWinx0>
+<MesgWiny0>0</MesgWiny0>
+<MesgWinWidth>1032</MesgWinWidth>
+<MesgWinHeight>745</MesgWinHeight>
+<FileWinx0>36</FileWinx0>
+<FileWiny0>478</FileWiny0>
+<FileWinWidth>578</FileWinWidth>
+<FileWinHeight>262</FileWinHeight>
+<EditWinx0>347</EditWinx0>
+<EditWiny0>0</EditWiny0>
+<EditWinWidth>676</EditWinWidth>
+<EditWinHeight>541</EditWinHeight>
+<PropWinx0>1</PropWinx0>
+<PropWiny0>1</PropWiny0>
+<PropWinWidth>615</PropWinWidth>
+<PropWinHeight>448</PropWinHeight>
+<DividerLocation1>2</DividerLocation1>
+<DividerLocation2>2</DividerLocation2>
+<ToolBarVisible>1</ToolBarVisible>
+<ViewSourceAtCompile>0</ViewSourceAtCompile>
+<NoSourceCreate>0</NoSourceCreate>
+<JavaEditCommand>leafpad</JavaEditCommand>
+<JavaViewCommand></JavaViewCommand>
+<HelpCommand>xdg-open ./help/manual.html</HelpCommand>
+<ApplicationType>4</ApplicationType>
+<CompileCommand0>./compile_java</CompileCommand0>
+<RunCommand0>./run_java</RunCommand0>
+<GUIDesignerCommand0>java -jar guidsin.jar -java</GUIDesignerCommand0>
+<ImportFiles0> import java.awt.*;
+ import java.awt.event.*;
+ import javax.swing.*;
+ import javax.swing.event.*;
+ import javax.swing.tree.*;
+ import java.io.*;
+ import java.net.*;
+ import java.util.*;
+import java.awt.geom.*;
+import java.awt.print.*;
+import javax.swing.border.*;
+import javax.swing.filechooser.*;
+ import javax.swing.*;
+ import javax.swing.event.*;
+ import javax.swing.tree.*;
+ import java.io.*;
+ import java.net.*;
+ import java.util.*;
+import java.awt.image.BufferedImage;
+import javax.sound.sampled.*;
+
+class Starter{
+  public static void main( String args[] ){
+    %AppName% ap = new %AppName%();
+    ap.ARGS = args;
+    ap.Start();
+  }
+}
+</ImportFiles0>
+<ProgramStartupCode0> String[] ARGS;
+</ProgramStartupCode0>
+<NativeHelpCommand0></NativeHelpCommand0>
+<CompileCommand1></CompileCommand1>
+<RunCommand1></RunCommand1>
+<GUIDesignerCommand1>java -jar guidsin.jar -applet</GUIDesignerCommand1>
+<ImportFiles1> import java.awt.*;
+ import java.awt.event.*;
+ import java.applet.*;
+ import javax.swing.*;
+ import javax.swing.event.*;
+ import javax.swing.tree.*;
+ import java.io.*;
+ import java.net.*;
+ import java.util.*;
+ public class javatext extends Applet {
+   %AppName% ap;
+   public void init() {
+     ap = new %AppName%();
+     ap.APPLET = this;
+     ap.Start();
+   }
+ }
+</ImportFiles1>
+<ProgramStartupCode1> Applet APPLET;
+</ProgramStartupCode1>
+<NativeHelpCommand1></NativeHelpCommand1>
+<CompileCommand2></CompileCommand2>
+<RunCommand2></RunCommand2>
+<GUIDesignerCommand2></GUIDesignerCommand2>
+<ImportFiles2>#include &lt;stdio.h&gt;
+
+void Startup();
+</ImportFiles2>
+<ProgramStartupCode2>int main(){
+ Startup();
+ %AppName%::Start();
+ }
+</ProgramStartupCode2>
+<NativeHelpCommand2></NativeHelpCommand2>
+<CompileCommand3></CompileCommand3>
+<RunCommand3></RunCommand3>
+<GUIDesignerCommand3>java -jar guidsin.jar -cpp</GUIDesignerCommand3>
+<ImportFiles3>#include &lt;stdio.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;math.h&gt;
+#include &quot;Ekagen.h&quot;
+void Startup();
+</ImportFiles3>
+<ProgramStartupCode3>void Emain(){
+Startup();
+%AppName%::Start();
+}
+</ProgramStartupCode3>
+<NativeHelpCommand3></NativeHelpCommand3>
+<MoveStep>8</MoveStep>
+<ImageEditCommand></ImageEditCommand>
+<CompilerFileName>javac.exe</CompilerFileName>
+<CompileCommand4>./compile_android Test com example test</CompileCommand4>
+<RunCommand4>./run_android Test com example test</RunCommand4>
+<GUIDesignerCommand4>java -jar guidsin.jar -android</GUIDesignerCommand4>
+<ImportFiles4>package com.example.test;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.View;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.widget.Button;
+import android.view.SurfaceHolder;
+import android.view.SurfaceHolder.Callback;
+import android.view.SurfaceView;
+import android.widget.EditText;
+import android.text.SpannableStringBuilder;
+import android.text.TextWatcher;
+import android.text.Editable;
+import android.graphics.Matrix;
+import android.graphics.Typeface;
+import android.graphics.RectF;
+import android.graphics.BitmapFactory;
+import java.io.*;
+ import java.net.*;
+import java.util.*;
+import java.text.SimpleDateFormat;
+import android.media.MediaPlayer;
+import android.os.Handler;
+import android.content.res.Configuration;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.app.Activity;
+import android.graphics.Color;
+
+import android.widget.AbsoluteLayout;
+import android.widget.*;
+import android.view.Gravity;
+import android.view.View.OnClickListener;
+
+import android.hardware.Camera;
+
+public class HelloWorld extends Activity {
+  public void onCreate(Bundle bundle) {
+    super.onCreate(bundle);
+    %AppName% ap = new %AppName%();
+    ap.ACTIVITY = this;
+    ap.Start();
+  }
+}
+</ImportFiles4>
+<ProgramStartupCode4>Activity ACTIVITY;
+</ProgramStartupCode4>
+<NativeHelpCommand4>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    package=&quot;com.example.test&quot;
+    android:versionCode=&quot;1&quot;
+    android:versionName=&quot;1.0&quot; &gt;
+
+    
+    
+  &lt;uses-permission android:name=&quot;android.permission.CAMERA&quot; /&gt; 
+  &lt;uses-feature android:name=&quot;android.hardware.camera&quot; /&gt; 
+  &lt;uses-feature android:name=&quot;android.hardware.usb.host&quot; /&gt; 
+  &lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot;/&gt;
+  &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt; 
+  &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;
+
+  &lt;uses-sdk android:minSdkVersion=&quot;3&quot; android:targetSdkVersion=&quot;21&quot;/&gt;
+  
+ 
+    &lt;application android:label=&quot;@string/app_name&quot; &gt;
+        &lt;activity
+            android:name=&quot;HelloWorld&quot;
+            android:label=&quot;@string/app_name&quot; &gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+
+                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+            &lt;/intent-filter&gt;
+        &lt;/activity&gt;
+    &lt;/application&gt;
+
+&lt;/manifest&gt;
+</NativeHelpCommand4>
+<HtmlEditCommand></HtmlEditCommand>
+<CompileCommand5></CompileCommand5>
+<RunCommand5></RunCommand5>
+<GUIDesignerCommand5></GUIDesignerCommand5>
+<ImportFiles5></ImportFiles5>
+<ProgramStartupCode5>gosub @_PSTART
+end
+</ProgramStartupCode5>
+<NativeHelpCommand5></NativeHelpCommand5>
+<NoOptimizePin>0</NoOptimizePin>
+<CompileCommand6>./compile_c</CompileCommand6>
+<RunCommand6>./run_c</RunCommand6>
+<GUIDesignerCommand6></GUIDesignerCommand6>
+<ImportFiles6>#include &lt;setjmp.h&gt;
+#include &lt;pthread.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdarg.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;math.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netdb.h&gt;
+
+#include &lt;X11/Xlib.h&gt;
+#include &lt;X11/Xutil.h&gt;
+#include &lt;X11/Xlocale.h&gt; /* ロケール用ヘッダーファイル */
+#include &lt;X11/xpm.h&gt;
+#include &lt;sys/time.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;termios.h&gt;
+#include &lt;errno.h&gt;
+</ImportFiles6>
+<ProgramStartupCode6>int ARGC; char** ARGV;
+int main( int argc, char** argv ){
+  ARGC=argc;
+  ARGV=argv;
+  _PSTART();
+}
+</ProgramStartupCode6>
+<NativeHelpCommand6></NativeHelpCommand6>
+</プロパティ>
+</xobject>

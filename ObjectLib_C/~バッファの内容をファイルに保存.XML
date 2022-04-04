@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C20</ID>
+<x0>30</x0>
+<y0>403</y0>
+<width>212</width>
+<height>21</height>
+<codetext>//バッファの内容をファイルに保存
+void save( char* file_name, char* buf ){
+  FILE* fp;
+  fp = fopen( file_name, &quot;w&quot; );
+  fprintf( fp, &quot;%s&quot;, buf );
+  fclose(fp);
+}
+</codetext>
+</codeclip>

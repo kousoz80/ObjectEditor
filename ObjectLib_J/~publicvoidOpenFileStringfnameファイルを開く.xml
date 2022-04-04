@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C38</ID>
+<x0>419</x0>
+<y0>0</y0>
+<width>309</width>
+<height>20</height>
+<codetext>public void OpenFile( String fname )// ファイルを開く
+{
+
+try{
+
+BufferedReader din = new BufferedReader( new FileReader( fname ) );
+String line;
+
+txt.setText(&quot;&quot;);
+
+while( (line=din.readLine()) != null ){
+  txt.append( line + &quot;\n&quot; );
+}
+
+din.close();
+
+
+} catch( IOException ie ){ System.out.println(&quot;読みだしエラー&quot;); }
+
+}
+
+</codetext>
+</codeclip>

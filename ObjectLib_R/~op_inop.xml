@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<operation>
+<ID>_O34</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>582</x0>
+<y0>145</y0>
+<width>81</width>
+<height>68</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>20</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(op#)</outpintext>
+<outpinx0>14</outpinx0>
+<outpiny0>46</outpiny0>
+<outpinwidth>57</outpinwidth>
+<outpinheight>21</outpinheight>
+<inpinlinkcount>0</inpinlinkcount>
+<description></description>
+<codetext>op_in:
+  op#=
+</codetext>
+</operation>

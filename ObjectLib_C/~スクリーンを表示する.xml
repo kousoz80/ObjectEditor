@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<operation>
+<ID>_O21</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>148</x0>
+<y0>128</y0>
+<width>147</width>
+<height>58</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(HWND hwnd)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>38</inpiny0>
+<inpinwidth>98</inpinwidth>
+<inpinheight>21</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>スクリーンを表示する</description>
+<codetext>PAINTSTRUCT ps;
+HDC         PaintDC;
+HPEN        hpen;
+HBRUSH      hbrush;
+double      rx,ry,rz;
+double      disp1,disp2,disp0,disp;
+int i;
+
+if( ( screen == NULL ) || ( px == NULL ) ) return;
+o1 = ( rect.left + rect.right )  / 2.;
+o2 = ( rect.top  + rect.bottom ) / 2.;
+
+PaintDC=BeginPaint(hwnd,&amp;ps);   /*  ウインドウ描画用のデバイスコンテキスト取得  */
+
+//黒い四角を描く(宇宙空間の表示)
+hbrush=(HBRUSH)GetStockObject(BLACK_BRUSH);
+SelectObject(PaintDC,hbrush);
+Rectangle(PaintDC,rect.left,rect.top,rect.right,rect.bottom);
+
+//星を描く
+hpen=(HPEN)GetStockObject(WHITE_PEN);
+SelectObject(PaintDC,hpen);
+for( i = 0; i &lt; NumberOfStars; i++){
+  rx = px[i] - ox;
+  ry = py[i] - oy;
+  rz = pz[i] - oz;
+  disp1 = site1x * rx + site1y * ry + site1z * rz;
+  disp2 = site2x * rx + site2y * ry + site2z * rz;
+  disp0 = site0x * rx + site0y * ry + site0z * rz;
+  disp = sqrt( disp1*disp1 + disp2*disp2 + disp0*disp0 );
+  if( disp0 &gt; 0 ){
+    Ellipse(PaintDC, (short)( o1 * ( 1 +  disp1/disp )-1 ), (short)( o2 * ( 1 - disp2/disp )-1 ), (short)( o1 * ( 1 +  disp1/disp )+1 ), (short)( o2 * ( 1 - disp2/disp )+1 ) );
+  }
+}
+EndPaint(hwnd,&amp;ps);             /*  ウインドウ描画用のデバイスコンテキスト開放  */
+
+</codetext>
+</operation>

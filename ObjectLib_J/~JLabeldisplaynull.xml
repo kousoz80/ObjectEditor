@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C7</ID>
+<x0>99</x0>
+<y0>298</y0>
+<width>495</width>
+<height>280</height>
+<codetext> JLabel        display = null;
+ JTextField    cmd_line = null;
+ BufferedImage image = null;
+ Graphics2D    graphics = null;
+ A51Basic      a51basic = null;
+ Thread        thread = null;
+ String        InputBuffer=&quot;&quot;;
+ int           KeyCode=0;
+ boolean       is_getch = false;
+ char          GetchChar = &apos;\0&apos;;
+ 
+ int width=640, height=480, posx=0, posy=0;
+ int for_r=255, for_g=255, for_b=255, bak_r=0, bak_g=0, bak_b=0;
+ int fontsize=16;
+ int stepx = fontsize+2, stepy = fontsize+2;
+</codetext>
+</codeclip>

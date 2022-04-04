@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<operation>
+<ID>_O72</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>394</x0>
+<y0>314</y0>
+<width>123</width>
+<height>54</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>33</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>72</outpinx0>
+<outpiny0>33</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>画像をロード</description>
+<codetext>int x, y;
+FILE* fp;
+unsigned char* p;
+char* file_name = showOpenDialog(&quot;画像のロード&quot;);
+if( ( file_name == NULL ) ||  ( ( fp = fopen( file_name , &quot;r&quot;) ) == NULL ) ) return;
+for( y = 0; y &lt; 480; y++ ){
+  for( x = 0; x &lt; 640; x++ ){
+     p = (unsigned char*) (image-&gt;imageData + ( y * image-&gt;widthStep + x * image-&gt;nChannels ) );
+     if( fscanf( fp, &quot;%d %d %d\n&quot;, &amp;p[0], &amp;p[1], &amp;p[2]) != 3 ){
+       fclose( fp );
+       return;
+    }
+  }
+}
+fclose( fp );
+</codetext>
+</operation>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<aobject>
+<ID>_A57</ID>
+<x0>340</x0>
+<y0>149</y0>
+<width>259</width>
+<height>57</height>
+<ID_maker>10</ID_maker>
+<objectname>FileSelector</objectname>
+<description></description>
+<action>
+<ID>_AX9</ID>
+<comp1name>_PX1</comp1name>
+<comp2name>_OX8</comp2name>
+</action>
+<state>
+<ID>_SINIT</ID>
+<x0>138</x0>
+<y0>82</y0>
+<width>70</width>
+<height>40</height>
+<text> InitialState</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_PX1</ID>
+<x0>395</x0>
+<y0>215</y0>
+<width>60</width>
+<height>30</height>
+<text>request()</text>
+<px>105</px>
+<py>1</py>
+</pin>
+<pin>
+<ID>_PX3</ID>
+<x0>390</x0>
+<y0>104</y0>
+<width>62</width>
+<height>28</height>
+<text>cansel()</text>
+<px>206</px>
+<py>0</py>
+</pin>
+<pin>
+<ID>_PX5</ID>
+<x0>389</x0>
+<y0>142</y0>
+<width>152</width>
+<height>23</height>
+<text>selected(String fileName)</text>
+<px>105</px>
+<py>34</py>
+</pin>
+<operation>
+<ID>_OX8</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>255</x0>
+<y0>122</y0>
+<width>119</width>
+<height>64</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>0</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>0</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>80</inpinx0>
+<inpiny0>44</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>ファイル選択
+ダイアログを開く</description>
+<codetext>JFileChooser chooser = new JFileChooser();
+chooser.setDialogTitle( &quot;イメージファイルを選択&quot; );
+chooser.setFileSelectionMode( JFileChooser.FILES_AND_DIRECTORIES );
+if( chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION ){
+    selected( chooser.getSelectedFile().getPath() );
+}
+else cansel();
+</codetext>
+</operation>
+</aobject>

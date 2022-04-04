@@ -1,0 +1,5 @@
+#!
+cp test.r /ProgramFiles/github/oreore-OS/src/paint.r
+cd /ProgramFiles/github/oreore-OS
+/ProgramFiles/github/oreore-OS/compile -paint
+echo "compile end"

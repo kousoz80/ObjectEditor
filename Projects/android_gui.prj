@@ -1,0 +1,934 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<xobject>
+<ID>project</ID>
+<x0>0</x0>
+<y0>0</y0>
+<width>200</width>
+<height>100</height>
+<ID_maker>18</ID_maker>
+<objectname>android_gui</objectname>
+<description>新規のアプリケーション</description>
+<codeclip>
+<ID>_CSTART</ID>
+<x0>50</x0>
+<y0>1</y0>
+<width>80</width>
+<height>24</height>
+<codetext>Activity ACTIVITY;
+</codetext>
+</codeclip>
+<pin>
+<ID>_PSTART</ID>
+<x0>39</x0>
+<y0>47</y0>
+<width>55</width>
+<height>24</height>
+<text>Start()</text>
+<px>50</px>
+<py>50</py>
+</pin>
+<relation>
+<ID>_R1</ID>
+<pin1name>_PSTART</pin1name>
+<pin2name>_A0(_Pstart)</pin2name>
+</relation>
+<aobject>
+<ID>_A0</ID>
+<x0>36</x0>
+<y0>100</y0>
+<width>280</width>
+<objectname>GUI</objectname>
+<description>GUIオブジェクト
+</description>
+<state>
+<ID>_SINIT</ID>
+<x0>0</x0>
+<y0>40</y0>
+<width>70</width>
+<height>40</height>
+<text>  InitState</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_Pstart</ID>
+<x0>400</x0>
+<y0>100</y0>
+<width>80</width>
+<height>26</height>
+<text>Start()</text>
+<px>0</px>
+<py>36</py>
+</pin>
+<pin>
+<ID>_PGUIout</ID>
+<x0>0</x0>
+<y0>84</y0>
+<width>180</width>
+<height>26</height>
+<text>GUI_created(AbsoluteLayout l)</text>
+<px>0</px>
+<py>54</py>
+</pin>
+<action>
+<ID>_Astart</ID>
+<comp1name>_Pstart</comp1name>
+<comp2name>_Ocreate</comp2name>
+</action>
+<operation>
+<ID>_Ocreate</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>220</x0>
+<y0>40</y0>
+<width>130</width>
+<height>64</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>43</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// GUIを作成する
+XGUI x = new XGUI();
+
+</codetext>
+</operation>
+<pin>
+<ID>_PAdiv_Button</ID>
+<x0>0</x0>
+<y0>110</y0>
+<width>200</width>
+<height>26</height>
+<text>div_Button_clicked()</text>
+<px>0</px>
+<py>72</py>
+</pin>
+<pin>
+<ID>_PAmult_Button</ID>
+<x0>0</x0>
+<y0>138</y0>
+<width>200</width>
+<height>26</height>
+<text>mult_Button_clicked()</text>
+<px>0</px>
+<py>90</py>
+</pin>
+<pin>
+<ID>_PAminus_Button</ID>
+<x0>0</x0>
+<y0>166</y0>
+<width>200</width>
+<height>26</height>
+<text>minus_Button_clicked()</text>
+<px>0</px>
+<py>108</py>
+</pin>
+<pin>
+<ID>_PAplus_Button</ID>
+<x0>0</x0>
+<y0>194</y0>
+<width>200</width>
+<height>26</height>
+<text>plus_Button_clicked()</text>
+<px>0</px>
+<py>126</py>
+</pin>
+<pin>
+<ID>_PAequal_Button</ID>
+<x0>0</x0>
+<y0>222</y0>
+<width>200</width>
+<height>26</height>
+<text>equal_Button_clicked()</text>
+<px>0</px>
+<py>144</py>
+</pin>
+<pin>
+<ID>_PACLR_Button</ID>
+<x0>0</x0>
+<y0>250</y0>
+<width>200</width>
+<height>26</height>
+<text>CLR_Button_clicked()</text>
+<px>0</px>
+<py>162</py>
+</pin>
+<pin>
+<ID>_PAMR_Button</ID>
+<x0>0</x0>
+<y0>278</y0>
+<width>200</width>
+<height>26</height>
+<text>MR_Button_clicked()</text>
+<px>0</px>
+<py>180</py>
+</pin>
+<pin>
+<ID>_PAmem_pButton</ID>
+<x0>0</x0>
+<y0>306</y0>
+<width>200</width>
+<height>26</height>
+<text>mem_pButton_clicked()</text>
+<px>0</px>
+<py>198</py>
+</pin>
+<pin>
+<ID>_PAinv_Bottun</ID>
+<x0>0</x0>
+<y0>334</y0>
+<width>200</width>
+<height>26</height>
+<text>inv_Bottun_clicked()</text>
+<px>0</px>
+<py>216</py>
+</pin>
+<pin>
+<ID>_PAdot_Button</ID>
+<x0>0</x0>
+<y0>362</y0>
+<width>200</width>
+<height>26</height>
+<text>dot_Button_clicked()</text>
+<px>0</px>
+<py>234</py>
+</pin>
+<pin>
+<ID>_PAButton3</ID>
+<x0>0</x0>
+<y0>390</y0>
+<width>200</width>
+<height>26</height>
+<text>Button3_clicked()</text>
+<px>0</px>
+<py>252</py>
+</pin>
+<pin>
+<ID>_PAButton9</ID>
+<x0>0</x0>
+<y0>418</y0>
+<width>200</width>
+<height>26</height>
+<text>Button9_clicked()</text>
+<px>0</px>
+<py>270</py>
+</pin>
+<pin>
+<ID>_PAButton8</ID>
+<x0>0</x0>
+<y0>446</y0>
+<width>200</width>
+<height>26</height>
+<text>Button8_clicked()</text>
+<px>0</px>
+<py>288</py>
+</pin>
+<pin>
+<ID>_PAButton7</ID>
+<x0>0</x0>
+<y0>474</y0>
+<width>200</width>
+<height>26</height>
+<text>Button7_clicked()</text>
+<px>0</px>
+<py>306</py>
+</pin>
+<pin>
+<ID>_PAButton6</ID>
+<x0>0</x0>
+<y0>502</y0>
+<width>200</width>
+<height>26</height>
+<text>Button6_clicked()</text>
+<px>0</px>
+<py>324</py>
+</pin>
+<pin>
+<ID>_PAButton5</ID>
+<x0>0</x0>
+<y0>530</y0>
+<width>200</width>
+<height>26</height>
+<text>Button5_clicked()</text>
+<px>0</px>
+<py>342</py>
+</pin>
+<pin>
+<ID>_PAButton4</ID>
+<x0>0</x0>
+<y0>558</y0>
+<width>200</width>
+<height>26</height>
+<text>Button4_clicked()</text>
+<px>0</px>
+<py>360</py>
+</pin>
+<pin>
+<ID>_PAButton2</ID>
+<x0>0</x0>
+<y0>586</y0>
+<width>200</width>
+<height>26</height>
+<text>Button2_clicked()</text>
+<px>0</px>
+<py>378</py>
+</pin>
+<pin>
+<ID>_PAButton1</ID>
+<x0>0</x0>
+<y0>614</y0>
+<width>200</width>
+<height>26</height>
+<text>Button1_clicked()</text>
+<px>0</px>
+<py>396</py>
+</pin>
+<pin>
+<ID>_Pdisplay</ID>
+<x0>0</x0>
+<y0>642</y0>
+<width>200</width>
+<height>26</height>
+<text>display_created(EditText e)</text>
+<px>0</px>
+<py>414</py>
+</pin>
+<pin>
+<ID>_PAButton0</ID>
+<x0>0</x0>
+<y0>670</y0>
+<width>200</width>
+<height>26</height>
+<text>Button0_clicked()</text>
+<px>0</px>
+<py>432</py>
+</pin>
+<codeclip>
+<ID>_CXSTART</ID>
+<x0>0</x0>
+<y0>0</y0>
+<width>300</width>
+<height>26</height>
+<codetext> class XGUI{
+div_Button Idiv_Button;
+ class div_Button extends Button{
+ div_Button(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;/&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {div_Button_clicked();}} );
+}
+}
+mult_Button Imult_Button;
+ class mult_Button extends Button{
+ mult_Button(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;x&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {mult_Button_clicked();}} );
+}
+}
+minus_Button Iminus_Button;
+ class minus_Button extends Button{
+ minus_Button(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;-&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {minus_Button_clicked();}} );
+}
+}
+plus_Button Iplus_Button;
+ class plus_Button extends Button{
+ plus_Button(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;+&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {plus_Button_clicked();}} );
+}
+}
+equal_Button Iequal_Button;
+ class equal_Button extends Button{
+ equal_Button(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;=&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {equal_Button_clicked();}} );
+}
+}
+CLR_Button ICLR_Button;
+ class CLR_Button extends Button{
+ CLR_Button(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;C&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {CLR_Button_clicked();}} );
+}
+}
+MR_Button IMR_Button;
+ class MR_Button extends Button{
+ MR_Button(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;MR&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {MR_Button_clicked();}} );
+}
+}
+mem_pButton Imem_pButton;
+ class mem_pButton extends Button{
+ mem_pButton(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;M+&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {mem_pButton_clicked();}} );
+}
+}
+inv_Bottun Iinv_Bottun;
+ class inv_Bottun extends Button{
+ inv_Bottun(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 10f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;+/-&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {inv_Bottun_clicked();}} );
+}
+}
+dot_Button Idot_Button;
+ class dot_Button extends Button{
+ dot_Button(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;.&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {dot_Button_clicked();}} );
+}
+}
+Button3 IButton3;
+ class Button3 extends Button{
+ Button3(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;3&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {Button3_clicked();}} );
+}
+}
+Button9 IButton9;
+ class Button9 extends Button{
+ Button9(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;9&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {Button9_clicked();}} );
+}
+}
+Button8 IButton8;
+ class Button8 extends Button{
+ Button8(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;8&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {Button8_clicked();}} );
+}
+}
+Button7 IButton7;
+ class Button7 extends Button{
+ Button7(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;7&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {Button7_clicked();}} );
+}
+}
+Button6 IButton6;
+ class Button6 extends Button{
+ Button6(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;6&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {Button6_clicked();}} );
+}
+}
+Button5 IButton5;
+ class Button5 extends Button{
+ Button5(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;5&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {Button5_clicked();}} );
+}
+}
+Button4 IButton4;
+ class Button4 extends Button{
+ Button4(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;4&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {Button4_clicked();}} );
+}
+}
+Button2 IButton2;
+ class Button2 extends Button{
+ Button2(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;2&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {Button2_clicked();}} );
+}
+}
+Button1 IButton1;
+ class Button1 extends Button{
+ Button1(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;1&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {Button1_clicked();}} );
+}
+}
+display Idisplay;
+ class display extends EditText{
+ display(){
+ super(ACTIVITY);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 255, 255, 255 ));
+ setText( &quot;0&quot; );
+ display_created( this );
+}
+}
+Button0 IButton0;
+ class Button0 extends Button{
+ Button0(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( 12f ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;0&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {Button0_clicked();}} );
+}
+}
+ XGUI(){
+ AbsoluteLayout layout=new AbsoluteLayout(ACTIVITY);
+layout.setBackgroundColor(Color.rgb( 255, 204, 204));
+ACTIVITY.setContentView(layout);
+ACTIVITY.setTitle(&quot;Calculator&quot;);
+ Idiv_Button = new div_Button();
+ Idiv_Button.setLayoutParams( new AbsoluteLayout.LayoutParams( 43,28,133,120 ) );
+ layout.addView( Idiv_Button );
+ Imult_Button = new mult_Button();
+ Imult_Button.setLayoutParams( new AbsoluteLayout.LayoutParams( 44,28,132,90 ) );
+ layout.addView( Imult_Button );
+ Iminus_Button = new minus_Button();
+ Iminus_Button.setLayoutParams( new AbsoluteLayout.LayoutParams( 44,29,132,59 ) );
+ layout.addView( Iminus_Button );
+ Iplus_Button = new plus_Button();
+ Iplus_Button.setLayoutParams( new AbsoluteLayout.LayoutParams( 45,28,131,29 ) );
+ layout.addView( Iplus_Button );
+ Iequal_Button = new equal_Button();
+ Iequal_Button.setLayoutParams( new AbsoluteLayout.LayoutParams( 51,28,177,120 ) );
+ layout.addView( Iequal_Button );
+ ICLR_Button = new CLR_Button();
+ ICLR_Button.setLayoutParams( new AbsoluteLayout.LayoutParams( 51,28,177,90 ) );
+ layout.addView( ICLR_Button );
+ IMR_Button = new MR_Button();
+ IMR_Button.setLayoutParams( new AbsoluteLayout.LayoutParams( 52,29,177,59 ) );
+ layout.addView( IMR_Button );
+ Imem_pButton = new mem_pButton();
+ Imem_pButton.setLayoutParams( new AbsoluteLayout.LayoutParams( 51,28,177,29 ) );
+ layout.addView( Imem_pButton );
+ Iinv_Bottun = new inv_Bottun();
+ Iinv_Bottun.setLayoutParams( new AbsoluteLayout.LayoutParams( 46,28,86,120 ) );
+ layout.addView( Iinv_Bottun );
+ Idot_Button = new dot_Button();
+ Idot_Button.setLayoutParams( new AbsoluteLayout.LayoutParams( 42,28,43,120 ) );
+ layout.addView( Idot_Button );
+ IButton3 = new Button3();
+ IButton3.setLayoutParams( new AbsoluteLayout.LayoutParams( 46,28,85,90 ) );
+ layout.addView( IButton3 );
+ IButton9 = new Button9();
+ IButton9.setLayoutParams( new AbsoluteLayout.LayoutParams( 45,28,85,29 ) );
+ layout.addView( IButton9 );
+ IButton8 = new Button8();
+ IButton8.setLayoutParams( new AbsoluteLayout.LayoutParams( 41,28,43,29 ) );
+ layout.addView( IButton8 );
+ IButton7 = new Button7();
+ IButton7.setLayoutParams( new AbsoluteLayout.LayoutParams( 42,28,0,29 ) );
+ layout.addView( IButton7 );
+ IButton6 = new Button6();
+ IButton6.setLayoutParams( new AbsoluteLayout.LayoutParams( 46,29,85,59 ) );
+ layout.addView( IButton6 );
+ IButton5 = new Button5();
+ IButton5.setLayoutParams( new AbsoluteLayout.LayoutParams( 41,29,43,59 ) );
+ layout.addView( IButton5 );
+ IButton4 = new Button4();
+ IButton4.setLayoutParams( new AbsoluteLayout.LayoutParams( 42,29,0,59 ) );
+ layout.addView( IButton4 );
+ IButton2 = new Button2();
+ IButton2.setLayoutParams( new AbsoluteLayout.LayoutParams( 41,28,43,90 ) );
+ layout.addView( IButton2 );
+ IButton1 = new Button1();
+ IButton1.setLayoutParams( new AbsoluteLayout.LayoutParams( 42,28,0,90 ) );
+ layout.addView( IButton1 );
+ Idisplay = new display();
+ Idisplay.setLayoutParams( new AbsoluteLayout.LayoutParams( 229,27,0,0 ) );
+ layout.addView( Idisplay );
+ IButton0 = new Button0();
+ IButton0.setLayoutParams( new AbsoluteLayout.LayoutParams( 42,28,0,120 ) );
+ layout.addView( IButton0 );
+ GUI_created( layout );
+}
+}
+</codetext>
+</codeclip>
+<ID_maker>41</ID_maker>
+<height>454</height>
+<レイアウト>Calculator
+233
+152
+255
+204
+204
+BUTTON;div_Button;/;133;120;43;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;mult_Button;x;132;90;44;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;minus_Button;-;132;59;44;29;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;plus_Button;+;131;29;45;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;equal_Button;=;177;120;51;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;CLR_Button;C;177;90;51;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;MR_Button;MR;177;59;52;29;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;mem_pButton;M+;177;29;51;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;inv_Bottun;+/-;86;120;46;28;0;0;0;192;192;192;Dialog;10;null;0;0;1;0;1;Button;
+BUTTON;dot_Button;.;43;120;42;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;Button3;3;85;90;46;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;Button9;9;85;29;45;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;Button8;8;43;29;41;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;Button7;7;0;29;42;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;Button6;6;85;59;46;29;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;Button5;5;43;59;41;29;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;Button4;4;0;59;42;29;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;Button2;2;43;90;41;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;Button1;1;0;90;42;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+TEXTFIELD;display;0;0;0;229;27;0;0;0;255;255;255;Dialog;12;1;1;0;EditText;
+BUTTON;Button0;0;0;120;42;28;0;0;0;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+</レイアウト>
+</aobject>
+<プロパティ>
+<ID>properties</ID>
+<LookandFeel>javax.swing.plaf.metal.MetalLookAndFeel</LookandFeel>
+<MainWinx0>0</MainWinx0>
+<MainWiny0>0</MainWiny0>
+<MainWinWidth>1024</MainWinWidth>
+<MainWinHeight>740</MainWinHeight>
+<MesgWinx0>0</MesgWinx0>
+<MesgWiny0>0</MesgWiny0>
+<MesgWinWidth>1032</MesgWinWidth>
+<MesgWinHeight>745</MesgWinHeight>
+<FileWinx0>36</FileWinx0>
+<FileWiny0>478</FileWiny0>
+<FileWinWidth>578</FileWinWidth>
+<FileWinHeight>262</FileWinHeight>
+<EditWinx0>347</EditWinx0>
+<EditWiny0>0</EditWiny0>
+<EditWinWidth>676</EditWinWidth>
+<EditWinHeight>541</EditWinHeight>
+<PropWinx0>1</PropWinx0>
+<PropWiny0>1</PropWiny0>
+<PropWinWidth>615</PropWinWidth>
+<PropWinHeight>448</PropWinHeight>
+<DividerLocation1>2</DividerLocation1>
+<DividerLocation2>2</DividerLocation2>
+<ToolBarVisible>1</ToolBarVisible>
+<ViewSourceAtCompile>0</ViewSourceAtCompile>
+<NoSourceCreate>0</NoSourceCreate>
+<JavaEditCommand>leafpad</JavaEditCommand>
+<JavaViewCommand></JavaViewCommand>
+<HelpCommand>xdg-open ./help/manual.html</HelpCommand>
+<ApplicationType>4</ApplicationType>
+<CompileCommand0>./compile_java</CompileCommand0>
+<RunCommand0>./run_java</RunCommand0>
+<GUIDesignerCommand0>java -jar guidsin.jar -java</GUIDesignerCommand0>
+<ImportFiles0> import java.awt.*;
+ import java.awt.event.*;
+ import javax.swing.*;
+ import javax.swing.event.*;
+ import javax.swing.tree.*;
+ import java.io.*;
+ import java.net.*;
+ import java.util.*;
+import java.awt.geom.*;
+import java.awt.print.*;
+import javax.swing.border.*;
+import javax.swing.filechooser.*;
+ import javax.swing.*;
+ import javax.swing.event.*;
+ import javax.swing.tree.*;
+ import java.io.*;
+ import java.net.*;
+ import java.util.*;
+import java.awt.image.BufferedImage;
+import javax.sound.sampled.*;
+
+class Starter{
+  public static void main( String args[] ){
+    %AppName% ap = new %AppName%();
+    ap.ARGS = args;
+    ap.Start();
+  }
+}
+</ImportFiles0>
+<ProgramStartupCode0> String[] ARGS;
+</ProgramStartupCode0>
+<NativeHelpCommand0></NativeHelpCommand0>
+<CompileCommand1></CompileCommand1>
+<RunCommand1></RunCommand1>
+<GUIDesignerCommand1>java -jar guidsin.jar -applet</GUIDesignerCommand1>
+<ImportFiles1> import java.awt.*;
+ import java.awt.event.*;
+ import java.applet.*;
+ import javax.swing.*;
+ import javax.swing.event.*;
+ import javax.swing.tree.*;
+ import java.io.*;
+ import java.net.*;
+ import java.util.*;
+ public class javatext extends Applet {
+   %AppName% ap;
+   public void init() {
+     ap = new %AppName%();
+     ap.APPLET = this;
+     ap.Start();
+   }
+ }
+</ImportFiles1>
+<ProgramStartupCode1> Applet APPLET;
+</ProgramStartupCode1>
+<NativeHelpCommand1></NativeHelpCommand1>
+<CompileCommand2></CompileCommand2>
+<RunCommand2></RunCommand2>
+<GUIDesignerCommand2></GUIDesignerCommand2>
+<ImportFiles2>#include &lt;stdio.h&gt;
+
+void Startup();
+</ImportFiles2>
+<ProgramStartupCode2>int main(){
+ Startup();
+ %AppName%::Start();
+ }
+</ProgramStartupCode2>
+<NativeHelpCommand2></NativeHelpCommand2>
+<CompileCommand3></CompileCommand3>
+<RunCommand3></RunCommand3>
+<GUIDesignerCommand3>java -jar guidsin.jar -cpp</GUIDesignerCommand3>
+<ImportFiles3>#include &lt;stdio.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;math.h&gt;
+#include &quot;Ekagen.h&quot;
+void Startup();
+</ImportFiles3>
+<ProgramStartupCode3>void Emain(){
+Startup();
+%AppName%::Start();
+}
+</ProgramStartupCode3>
+<NativeHelpCommand3></NativeHelpCommand3>
+<MoveStep>8</MoveStep>
+<ImageEditCommand></ImageEditCommand>
+<CompilerFileName>javac.exe</CompilerFileName>
+<CompileCommand4>./compile_android Test com example test</CompileCommand4>
+<RunCommand4>./run_android Test com example test</RunCommand4>
+<GUIDesignerCommand4>java -jar guidsin.jar -android</GUIDesignerCommand4>
+<ImportFiles4>package com.example.test;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.View;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.widget.Button;
+import android.view.SurfaceHolder;
+import android.view.SurfaceHolder.Callback;
+import android.view.SurfaceView;
+import android.widget.EditText;
+import android.text.SpannableStringBuilder;
+import android.text.TextWatcher;
+import android.text.Editable;
+import android.graphics.Matrix;
+import android.graphics.Typeface;
+import android.graphics.RectF;
+import android.graphics.BitmapFactory;
+import java.io.*;
+ import java.net.*;
+import java.util.*;
+import java.text.SimpleDateFormat;
+import android.media.MediaPlayer;
+import android.os.Handler;
+import android.content.res.Configuration;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.app.Activity;
+import android.graphics.Color;
+
+import android.widget.AbsoluteLayout;
+import android.widget.*;
+import android.view.Gravity;
+import android.view.View.OnClickListener;
+
+import android.hardware.Camera;
+
+public class HelloWorld extends Activity {
+  public void onCreate(Bundle bundle) {
+    super.onCreate(bundle);
+    %AppName% ap = new %AppName%();
+    ap.ACTIVITY = this;
+    ap.Start();
+  }
+}
+</ImportFiles4>
+<ProgramStartupCode4>Activity ACTIVITY;
+</ProgramStartupCode4>
+<NativeHelpCommand4>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    package=&quot;com.example.test&quot;
+    android:versionCode=&quot;1&quot;
+    android:versionName=&quot;1.0&quot; &gt;
+
+    
+    
+  &lt;uses-permission android:name=&quot;android.permission.CAMERA&quot; /&gt; 
+  &lt;uses-feature android:name=&quot;android.hardware.camera&quot; /&gt; 
+  &lt;uses-feature android:name=&quot;android.hardware.usb.host&quot; /&gt; 
+  &lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot;/&gt;
+  &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt; 
+  &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;
+
+  &lt;uses-sdk android:minSdkVersion=&quot;3&quot; android:targetSdkVersion=&quot;21&quot;/&gt;
+  
+ 
+    &lt;application android:label=&quot;@string/app_name&quot; &gt;
+        &lt;activity
+            android:name=&quot;HelloWorld&quot;
+            android:label=&quot;@string/app_name&quot; &gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+
+                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+            &lt;/intent-filter&gt;
+        &lt;/activity&gt;
+    &lt;/application&gt;
+
+&lt;/manifest&gt;
+</NativeHelpCommand4>
+<HtmlEditCommand></HtmlEditCommand>
+<CompileCommand5></CompileCommand5>
+<RunCommand5></RunCommand5>
+<GUIDesignerCommand5></GUIDesignerCommand5>
+<ImportFiles5></ImportFiles5>
+<ProgramStartupCode5>gosub @_PSTART
+end
+</ProgramStartupCode5>
+<NativeHelpCommand5></NativeHelpCommand5>
+<NoOptimizePin>0</NoOptimizePin>
+<CompileCommand6>./compile_c</CompileCommand6>
+<RunCommand6>./run_c</RunCommand6>
+<GUIDesignerCommand6></GUIDesignerCommand6>
+<ImportFiles6>#include &lt;setjmp.h&gt;
+#include &lt;pthread.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdarg.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;math.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netdb.h&gt;
+
+#include &lt;X11/Xlib.h&gt;
+#include &lt;X11/Xutil.h&gt;
+#include &lt;X11/Xlocale.h&gt; /* ロケール用ヘッダーファイル */
+#include &lt;X11/xpm.h&gt;
+#include &lt;sys/time.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;termios.h&gt;
+#include &lt;errno.h&gt;
+</ImportFiles6>
+<ProgramStartupCode6>int ARGC; char** ARGV;
+int main( int argc, char** argv ){
+  ARGC=argc;
+  ARGV=argv;
+  _PSTART();
+}
+</ProgramStartupCode6>
+<NativeHelpCommand6></NativeHelpCommand6>
+</プロパティ>
+</xobject>

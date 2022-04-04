@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C15</ID>
+<x0>320</x0>
+<y0>40</y0>
+<width>135</width>
+<height>22</height>
+<codetext>// ファイルメニュー
+ 
+  char fmenu$(Label.SIZE)
+  char fmenu_open$(Button.SIZE)
+  char fmenu_save$(Button.SIZE)
+  char fmenu_exit$(Button.SIZE)
+  long com0#,com1#
+  
+
+// ファイルメニューを作成する
+create_fmenu:
+  GUI, -&gt;Window.component com#=
+
+  // シートを生成
+  fmenu, GUI, com#, &quot;&quot;, create_label 
+  fmenu, -&gt;Label.component com0#=
+  160, com0#, -&gt;Component.width#=
+  60, com0#, -&gt;Component.height#=
+  RAISED_BORDER, com#, -&gt;Component.border#=
+  FALSE, com0#, -&gt;Component.is_visible#=
+
+  // 開くボタンを生成
+  fmenu_open, desktop, com0#, &quot;   open&quot;, create_button 
+  fmenu_open, -&gt;Button.component com1#=
+  0,   com1#, -&gt;Component.x#=
+  0,   com1#, -&gt;Component.y#=
+  160, com1#, -&gt;Component.width#=
+  20,   com1#, -&gt;Component.height#=
+  fmenu_open, fmenu_open_clicked, set_button_lclicked
+
+  // 保存ボタンを生成
+ fmenu_save, desktop, com0#, &quot;  save&quot;, create_button 
+ fmenu_save, -&gt;Button.component com1#=
+  0,    com1#, -&gt;Component.x#=
+  20,   com1#, -&gt;Component.y#=
+  160, com1#, -&gt;Component.width#=
+  20,   com1#, -&gt;Component.height#=
+ fmenu_save, fmenu_save_clicked, set_button_lclicked
+
+  // 終了ボタンを生成
+  fmenu_exit, desktop, com0#, &quot;  exit&quot;, create_button 
+  fmenu_exit, -&gt;Button.component com1#=
+  0,   com1#, -&gt;Component.x#=
+  40,   com1#, -&gt;Component.y#=
+  160, com1#, -&gt;Component.width#=
+  20,   com1#, -&gt;Component.height#=
+  fmenu_exit, fmenu_exit_clicked, set_button_lclicked
+  end
+
+
+// ファイルメニューを表示する
+show_fmenu:
+  GUI, -&gt;Window.component com0#=
+  fmenu, -&gt;Label.component com1#=
+  mouse_x#, com0#, -&gt;Component.left# - com1#, -&gt;Component.x#=
+  mouse_y#, com0#, -&gt;Component.top# - com1#, -&gt;Component.y#=
+  TRUE, com1#, -&gt;Component.is_visible#=
+  com1#, pop_up_component
+  com0#, repaint
+  end
+
+
+// ファイルメニューを非表示にする
+hide_fmenu:
+  GUI, -&gt;Window.component com0#=
+  fmenu, -&gt;Label.component com1#=
+  TRUE, com1#, -&gt;Component.is_visible#=
+  com0#, repaint
+  end
+
+
+// 開くボタンをクリックしたとき
+fmenu_open_clicked:
+  fmenu, -&gt;Label.component com0#=
+  FALSE, com#, -&gt;Component.is_visible#=
+  desktop, -&gt;Desktop.component repaint
+  file_open, show_open_dialog
+  end
+
+
+// 保存ボタンをクリックしたとき
+fmenu_save_clicked:
+  fmenu, -&gt;Label.component com0#=
+  FALSE, com0#, -&gt;Component.is_visible#=
+  desktop, -&gt;Desktop.component repaint
+  file_save, show_save_dialog
+  end
+
+
+// 終了ボタンをクリックしたとき
+fmenu_exit_clicked:
+  fmenu, -&gt;Label.component com0#=
+  FALSE, com0#, -&gt;Component.is_visible#=
+  exit_program
+  end
+</codetext>
+</codeclip>

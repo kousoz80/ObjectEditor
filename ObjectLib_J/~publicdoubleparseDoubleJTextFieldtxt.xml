@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C22</ID>
+<x0>344</x0>
+<y0>127</y0>
+<width>293</width>
+<height>19</height>
+<codetext>public double parseDouble( JTextField txt ){
+  return( ( new Double( 0.0 )).parseDouble(txt.getText()) );
+}
+ 
+</codetext>
+</codeclip>

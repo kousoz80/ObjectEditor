@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C38</ID>
+<x0>593</x0>
+<y0>507</y0>
+<width>119</width>
+<height>33</height>
+<codetext>// キー入力処理
+calc_keyin:
+  if key_code+2%=&apos;+&apos;  then &apos;+&apos;, op_in
+  if key_code+2%=&apos;-&apos;   then &apos;-&apos;, op_in
+  if key_code+2%=&apos;*&apos;   then &apos;*&apos;, op_in
+  if key_code+2%=&apos;/&apos;    then &apos;/&apos;, op_in
+  if key_code+2%=&apos;m&apos;  then &apos;M&apos;, op_in
+  if key_code+2%=&apos;p&apos;   then &apos;P&apos;, op_in
+  if key_code+2%=&apos;i&apos;    then &apos;I&apos;, op_in
+  if key_code+2%=&apos;c&apos;    then &apos;C&apos;, op_in
+  if key_code+2%=&apos;=&apos;   then &apos;=&apos;, op_in
+  if key_code#=851968 then &apos;=&apos;, op_in
+  if key_code+2%=&apos;.&apos;     then dot_in
+  if key_code+2%&lt;&apos;0&apos;    then end
+  if key_code+2%&gt;&apos;9&apos;    then end
+  key_code+2%, &apos;0&apos;, - num_in
+  end
+</codetext>
+</codeclip>

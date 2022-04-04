@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C3</ID>
+<x0>57</x0>
+<y0>266</y0>
+<width>350</width>
+<height>322</height>
+<codetext>// 変数
+ A51Basic      a51basic = null;
+ Handler       disp_handler = null;
+ Paint         paint = null;
+ SurfaceView   disp = null;
+ SurfaceHolder sufaceHolder = null;
+ Thread        thread = null;
+ EditText      input = null, edit = null;
+ Button        enter_button = null;
+ Button        stop_button = null;
+ Matrix        matrix = null;
+ Bitmap        bitmap = null;
+ Canvas        bmp_canvas = null;
+ String        InputBuffer=&quot;&quot;;
+ boolean      input_flg = false;
+ char          GetchChar = &apos;\0&apos;;
+ int fontsize = 20;
+ int width=640, height=320, posx=0, posy=0;
+ int stepx = fontsize+3, stepy = fontsize+3;
+boolean prog_mode=false;
+Handler handler = new Handler();
+</codetext>
+</codeclip>

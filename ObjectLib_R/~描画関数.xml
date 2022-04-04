@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C19</ID>
+<x0>94</x0>
+<y0>54</y0>
+<width>110</width>
+<height>20</height>
+<codetext>// 描画関数
+// グラフィック画面を初期化する
+init_screen:
+/ rcx=graphic_protocol/
+/ rcx=(rcx)/
+/ rdx=rdi/
+/ rax=set_mode/
+/ rax=(rax)/
+/ call (rax)/
+  end
+
+
+// マウスを初期化する
+init_mouse:
+/ rcx=pointer_protocol/
+/ rcx=(rcx)/
+/ rdx=0/
+/ rax=mouse_reset/
+/ rax=(rax)/
+/ call (rax)/
+  end
+
+
+// 入力デバイスの状態を読み取る
+read_input_device:
+  0, mouse_left#= mouse_right#= mouse_dx#= mouse_dy#= key_code#=
+  inkey key_code#= key_code#=
+  if key_code#=quit_key# then 0, gui_is_running#= end                       // 終了
+  if key_code#=mode_key# then 1, mouse_mode#, - mouse_mode#=    // マウス・キーボードの切り替え
+  if mouse_mode#=0 goto get_keyboad_mouse
+  
+// マウスの状態を読み込む
+/ rcx=pointer_protocol/
+/ rcx=(rcx)/
+/ rdx=mouse_data/
+/ rax=mouse_get_state/
+/ rax=(rax)/
+/ call (rax)/
+/ rdi=rax/
+  tt#=
+  if tt#&lt;&gt;0 then 1, mouse_mode#= gotoget_keyboad_mouse // エラーが出たときはキーボードマウスを有効にする
+  
+  // マウスのデータを読み込む
+  mouse_data+MOUSE_X!, MOUSE_SENSIVITY, / mouse_dx#=
+  mouse_data+MOUSE_Y!, MOUSE_SENSIVITY, / mouse_dy#=
+  mouse_data+MOUSE_LEFT$,   mouse_left#=
+  mouse_data+MOUSE_RIGHT$, mouse_right#=
+  goto set_cursor_position
+
+// キーボードマウス
+get_keyboad_mouse:
+  if key_code#=0 then 0, end
+  if key_code#=speed_key# then max_speed#, mouse_speed#, - mouse_speed#= // カーソル移動速度の切り替え
+  if key_code#=up_key#     then 0, mouse_speed#, - mouse_dy#=   //  マウスカーソルの移動
+  if key_code#=down_key# then mouse_speed#, mouse_dy#=
+  if key_code#=right_key#  then mouse_speed#, mouse_dx#=
+  if key_code#=left_key#    then 0, mouse_speed#, -   mouse_dx#=
+  if key_code#=lclick_key#  then 1, mouse_left#=      // 左クリック
+  if key_code#=rclick_key#  then 1, mouse_right#=  // 右クリック
+
+// マウスカーソルの位置(とキーコード)を設定する
+set_cursor_position:
+  restore_cursor_area
+  mouse_x#, mouse_dx#, + mouse_x#=
+  mouse_y#, mouse_dy#, + mouse_y#=
+  if mouse_x#&lt;0 then 0, mouse_x#=
+  if mouse_x#&gt;=screen_width#  then screen_width#,  1, - mouse_x#=
+  if mouse_y#&lt;0 then 0, mouse_y#=
+  if mouse_y#&gt;=screen_height# then screen_height#, 1, - mouse_y#=
+  save_cursor_area
+  draw_cursor
+  end
+
+
+// マウスカーソル領域を復帰する
+restore_cursor_area:
+  mouse_x#, x0#= CURSOR_SIZE-1, + x1#=
+  if x1#&gt;=screen_width#  then screen_width#,  1, - x1#= 
+  mouse_y#, y0#= CURSOR_SIZE-1, + y1#=
+  if y1#&gt;=screen_height# then screen_height#, 1, - y1#= 
+  mouse_cursor_area, qq#=
+  for ii#=y0# to y1#
+    for jj#=x0# to x1#
+      ii#, screen_width#, * jj#, +
+      4, * graphic_base#, + pp#=
+      (qq)!, (pp)!=
+      qq#, 4, + qq#=
+    next jj#
+  next ii#
+  end
+
+  
+// マウスカーソル領域を退避する
+save_cursor_area:
+  mouse_x#, x0#= CURSOR_SIZE-1, + x1#=
+  if x1#&gt;=screen_width#  then screen_width#,  1, - x1#= 
+  mouse_y#, y0#= CURSOR_SIZE-1, + y1#=
+  if y1#&gt;=screen_height# then screen_height#, 1, - y1#= 
+  mouse_cursor_area, qq#=
+  for ii#=y0# to y1#
+    for jj#=x0# to x1#
+      ii#, screen_width#, * jj#, +
+      4, * graphic_base#, + pp#=
+      (pp)!, (qq)!=
+      qq#, 4, + qq#=
+    next jj#
+  next ii#
+  end
+
+
+// マウスカーソルを描く
+draw_cursor:
+  mouse_x#, x2#= CURSOR_SIZE-1, + x3#=
+  if x3#&gt;=screen_width#  then screen_width#,   1, - x3#= 
+  mouse_y#, y2#= CURSOR_SIZE-1, + y3#=
+  if y3#&gt;=screen_height# then screen_height#, 1, - y3#= 
+  for ii#=y2# to y3#
+    for jj#=x2# to x3#
+      ii#, y2#, - CURSOR_SIZE, * jj#, +
+       x2#, -  4, * mouse_cursor, + qq#=
+      ii#, screen_width#, * jj#, +
+      4, * graphic_base#, + pp#=
+      (qq)!,  0xff000000, and tt#= 
+      if tt#=0 then (qq)!, (pp)!=  // 最上位の8ビットが0でないときは透明色とする
+    next jj#
+  next ii#
+  end
+
+  
+// マウスカーソルをロード
+load_cursor:
+  CURSOR_SIZE, CURSOR_SIZE, * 4, * pp#=
+  &quot;cursor.dat&quot;, fp, ropen qq#=
+  if qq#=ERROR then -1, end
+  pp#, mouse_cursor, fp, _read
+  fp, rclose 
+  0, end
+
+  
+// フォントをロード
+load_font:
+  FONT_WIDTH, FONT_HEIGHT, * 256, * pp#=
+  &quot;font.dat&quot;, fp, ropen qq#=
+  if qq#=ERROR then -1, end
+  pp#, font_area#, fp, _read
+  fp, rclose 
+  0, end
+
+  
+// 描画色をセット
+set_color:
+  color#=
+  end
+  
+
+// 描画色を得る
+get_color:
+  color#,
+  end
+
+// スクリーンバッファを描画する
+_disp:
+  screen_width#, screen_height#, * 1, - ii#=
+_disp1:
+  (screen_buffer)!(ii#), (graphic_base)!(ii#)=
+  ii#--
+  if ii#&gt;=0 goto _disp1
+  save_cursor_area
+  draw_cursor
+  end
+
+
+// 画面を指定した色で塗りつぶす
+gcls:
+  pp#=
+  screen_width#, screen_height#, * 1, - ii#=
+gcls1:
+  pp#, (screen_buffer)!(ii#)=
+  ii#--
+  if ii#&gt;=0 goto gcls1
+  _disp
+  end
+
+
+// 点を打つ
+draw_point:
+  py#= pop px#=
+  if color#=COLOR_CLEAR then end
+  py#, screen_width#, * px#, +
+  4, * screen_buffer#, + pp#=
+//  4, * graphic_base#, + pp#=
+  color#, (pp)!=
+  end
+
+
+// 与えられた座標の色を返す
+get_point:
+  py#= pop px#=
+  py#, screen_width#, * px#, +
+  4, * screen_buffer#, + pp#=
+  (pp)!,  end
+
+  
+// 線を引く
+// 使用法: gx, gy, gx1, gy1, draw_line
+draw_line:
+  gy1#= pop gx1#= pop gy#= pop gx#=
+  if color#=COLOR_CLEAR then end
+
+line:
+  gx#, gx1#, - tx#= abs rx#=
+  gy#, gy1#, - ty#= abs ry#=
+  if ry#&gt;rx# goto line_y
+  if gx#=gx1# then gx#, gy#, draw_point end
+  
+  // モードX
+  line_x:
+    1, rx#=
+    if tx#&lt;0  then -1, rx#=
+    for ix#=0 to tx# step rx#
+      ix#, ty#,  * tx#, / gy1#, + ry#=
+      ix#, gx1#, + ry#, draw_point
+    next ix#
+    end
+    
+  line_y: /* モード　ｙ */
+    1, ry#=
+    if ty#&lt;0  then -1, ry#=
+    for iy#=0 to ty# step ry#
+      iy#, tx#,  * ty#, / gx1#, + rx#=
+      iy#, gy1#, + rx#, swap draw_point
+    next iy#
+    end
+    
+// 長方形を描いてうめる
+// 使用法: gx, gy, gx1, gy1, fill_rect
+fill_rect: 
+  gy1#= pop gx1#= pop gy#= pop gx#=
+  if color#=COLOR_CLEAR then end
+
+  1, rx#= ry#=
+  if gy#&lt;gy1# then -1, ry#=
+  if gx#&lt;gx1# then -1, rx#=
+  for iy#=gy1# to gy# step ry#
+    for ix#=gx1# to gx# step rx#
+      ix#,  iy#, draw_point
+    next ix#
+  next iy#
+  end
+
+// 長方形を描く
+// 使用法: gx, gy, gx1, gy1, draw_rect
+draw_rect: 
+  gy1#= pop gx1#= pop gy#= pop gx#=
+  if color#=COLOR_CLEAR then end
+  1, rx#= ry#=
+  if gy#&lt;gy1# then -1, ry#=
+  if gx#&lt;gx1# then -1, rx#=
+  for ix#=gx1# to gx# step rx#
+    ix#, gy#,  draw_point
+    ix#, gy1#, draw_point
+  next ix#
+  for iy#=gy1# to gy# step ry#
+    gx#,  iy#, draw_point
+    gx1#, iy#, draw_point
+  next iy#
+  end
+  
+// 楕円を描いてうめる
+// 使用法: gx, gy, gx1, gy1, fill_circle
+fill_circle:
+  draw_circle
+  ox1#, oy1#, paint
+  end
+
+// 楕円を描く
+// 使用法: gx, gy, gx1, gy1, draw_circle
+draw_circle:
+  long ox1#,oy1#
+  gy1#= pop gx1#= pop gy#= pop gx#=
+  if color#=COLOR_CLEAR then end
+  gx#,  vx#=  gy#,  vy#=
+  gx1#, vx1#= gy1#, vy1#=
+  if gx1#&gt;gx# then gx1#, gx#, swap gx#= swap gx1#=
+  if gy1#&gt;gy# then gy1#, gy#, swap gy#= swap gy1#=
+  gx#, gx1#, + 2, / ox1#=
+  gy#, gy1#, + 2, / oy1#=
+  gx#, gx1#, - 2, / qx#=
+  if qx#=0 then line end
+  gy#, gy1#, - 2, / qy#=
+  if qy#=0 then line end
+  gx#, gx1#=  oy1#, gy1#=
+  for ii#=0 to TABLE_N
+    qx#, cos2table#(ii#), * 32767, / ox1#, + gx#=
+    qy#, sin2table#(ii#), * 32767, / oy1#, + gy#=
+    line
+    gx#, gx1#= gy#, gy1#=
+  next ii#
+  end
+
+
+// 三角形を描いてうめる
+// 使用法: sx, sy, sx1, sy1, sx2, sy2, fill_triangle
+fill_triangle:
+  draw_triangle
+  trx#, trx1#, + trx2#, + 3, / trx#= 
+  try#, try1#, + try2#, + 3, / try#= 
+  trx#, try#, paint
+  end
+
+
+// 三角形を描く
+// 使用法: sx, sy, sx1, sy1, sx2, sy2, draw_triangle
+draw_triangle:
+  long trx#,try#,trx1#,try1#,trx2#,try2#
+  try2#= pop trx2#= pop
+  try1#= pop trx1#= pop
+  try#=   pop trx#=
+  if color#=COLOR_CLEAR then end
+  trx#, try#, trx1#, try1#, draw_line
+  trx1#, try1#, trx2#, try2#, draw_line
+  trx2#, try2#, trx#, try#, draw_line
+  end
+
+
+// 塗る
+paint:
+  const Q_SIZE   4096
+  long   q_buf#(Q_SIZE)
+  long   put_p#,get_p#
+  
+  gy#= pop gx#=
+  if color#=COLOR_CLEAR then end
+  0, put_p#= get_p#=
+  gx#, gy#, get_point co#=
+  if co#=color# then end
+  gx#, gy#, put_pset
+
+  paint1:  // うった点の座標を求める
+    if get_p#=put_p# then end
+    q_buf#(get_p#), vx#=   get_p#++
+    q_buf#(get_p#), vy#=   get_p#++
+    if get_p#&gt;=Q_SIZE then 0, get_p#=
+
+    // うった点の四方にまた点をうつ
+    vx#, 1, + vy#, put_pset
+    vx#, 1,  - vy#, put_pset
+    vy#, 1, + vx#, swap put_pset
+    vy#, 1,  -  vx#, swap put_pset
+  goto paint1
+  
+  //  点をうってその座標を記録する
+  put_pset:
+    qy#= pop qx#=
+    if qx#&lt;0     then end  // 範囲外ならしない
+    if qx#&gt;=screen_width#  then end
+    if qy#&lt;0     then end
+    if qy#&gt;=screen_height# then end
+    qx#, qy#, get_point co#=
+    if co#=color# then end // すでに点がうってあるときもしない
+    qx#, qy#, draw_point
+    qx#, q_buf#(put_p#)=  put_p#++
+    qy#, q_buf#(put_p#)=  put_p#++
+    if put_p#&gt;=Q_SIZE then 0, put_p#=
+    end
+
+
+// 画像を描画
+// 使用法: gx, gy, address, draw_image
+draw_image:
+  qq#= pop gy#= pop gx#=
+  (qq)!, rx#=
+  qq#, 4, + qq#=
+  (qq)!, ry#=
+  qq#, 4, + qq#=
+  gx#, rx#, + 1, - gx1#=
+  gy#, ry#, + 1, - gy1#=
+  for ii#=gy# to gy1#
+    for jj#=gx# to gx1#
+      ii#, screen_width#, * jj#, +
+      4, * screen_buffer#, + pp#=
+      if (qq)$(3)=0 then (qq)!, (pp)!=
+      qq#, 4, + qq#=
+    next jj#
+  next ii#
+  jj#, ii#, end
+    
+
+// コピーエリアに画像をコピー
+// 使用法: gx, gy, gx1, gy1, copy_image
+copy_image:
+  gy1#= pop gx1#= pop gy#= pop gx#=
+  if gx1#&gt;=screen_width#  then screen_width#,  1, - gx1#= 
+  if gy1#&gt;=screen_height# then screen_height#, 1, - gy1#= 
+  copy_area#, qq#=
+  gx1#, gx#, - 1, + (qq)!=
+  qq#, 4, + qq#=
+  gy1#, gy#, - 1, + (qq)!=
+  qq#, 4, + qq#=
+  for ii#=gy# to gy1#
+    for jj#=gx# to gx1#
+      ii#, screen_width#, * jj#, +
+      4, * screen_buffer#, + pp#=
+      (pp)!, (qq)!=
+      qq#, 4, + qq#=
+    next jj#
+  next ii#
+  end
+
+
+// コピーエリアから貼り付ける
+// 使用法: gx, gy, paste_image
+paste_image:
+  copy_area#, draw_image
+  end
+    
+
+// 画像をロード
+// 使用法:  fname, load_image address#= pop size#=
+load_image:
+  char image_fp$(FILE_SIZE)
+  long fnm#,fsz#
+
+  fnm#=
+  fnm#, image_fp, ropen tt#=
+  if tt#=ERROR then NULL, end
+  4, sx, image_fp, _read
+  4, sy, image_fp, _read
+
+  sx!, sy!, *  4, *  tt#=
+  8, +  fsz#=  xmalloc pp#=
+  sx!, (pp)!(0)=   sy!, (pp)!(1)= 
+  pp#, 8, + qq#=
+  tt#, qq#,  image_fp, _read
+  image_fp, rclose
+  fsz#, pp#, end
+
+  
+// 画像をセーブ
+// 使用法: address, fname, save_image
+save_image:
+  pp#= pop qq#=
+  pp#, image_fp, wopen tt#=
+  if tt#=ERROR then ERROR, end
+  qq#, 4, + tt#=
+  4, qq#, image_fp, _write
+  4, tt#,  image_fp, _write
+  (qq)!, (tt)!, *  4, * tt#=
+  qq#, 8, + qq#=
+  tt#, qq#, image_fp, _write
+  image_fp, wclose
+  0, end
+
+  
+// 文字列描画
+draw_string:
+  long dsx#,dsy#,dsw#,dss#,dsr#
+  dss#= pop dsw#= pop dsy#= pop dsx#=
+  if color#=COLOR_CLEAR then end
+  dsx#, dsw#, + FONT_WIDTH, - dsw#=
+  draw_string1:
+    if (dss)$=NULL then end
+    dsx#, dsy#, (dss)$, draw_font dsr#=
+    dsx#, FONT_WIDTH, + dsx#=
+    dss#++
+  if dsx#&lt;dsw# goto draw_string1
+  dsr#, end
+
+
+// 1文字描画
+draw_font:
+  pp#= pop ty#= pop tx#=
+  pp#, FONT_WIDTH, * FONT_HEIGHT, * font_area#, + qq#=
+  tx#, FONT_WIDTH-1,  + rx#=
+  ty#, FONT_HEIGHT-1, + ry#=
+  for ii#=ty# to ry#
+     for jj#=tx# to rx#
+        if (qq)$&lt;&gt;0 then jj#, ii#, draw_point
+        qq#++
+     next jj#
+  next ii#
+  ii#, end
+
+
+ .data
+
+// グラフィックAPIのガイド
+graphic_guid:
+ data 0x4a3823dc9042a9de
+ data 0x6a5180d0de7afb96
+
+// マウスAPIのガイド
+pointer_guid:
+ data 0x11d50b7531878c87
+ data 0x4dc13f2790004f9a
+
+ .data
+ 
+// 三角関数テーブル
+  const TABLE_N 256 // 区分点 （全データ数＝３２１）
+sin2table: // ｆ（ｘ）＝３２７６７＊ｓｉｎ（ｘ）
+  data 0,804,1607,2410
+  data 3211,4011,4807,5601
+  data 6392,7179,7961,8739
+  data 9511,10278,11038,11792
+  data 12539,13278,14009,14732
+  data 15446,16150,16845,17530
+  data 18204,18867,19519,20159
+  data 20787,21402,22004,22594
+  data 23169,23731,24278,24811
+  data 25329,25831,26318,26789
+  data 27244,27683,28105,28510
+  data 28897,29268,29621,29955
+  data 30272,30571,30851,31113
+  data 31356,31580,31785,31970
+  data 32137,32284,32412,32520
+  data 32609,32678,32727,32757
+cos2table: /* ｆ（ｘ）＝３２７６７＊ｃｏｓ（ｘ） */
+  data 32767,32757,32727,32678
+  data 32609,32520,32412,32284
+  data 32137,31970,31785,31580
+  data 31356,31113,30851,30571
+  data 30272,29955,29621,29268
+  data 28897,28510,28105,27683
+  data 27244,26789,26318,25831
+  data 25329,24811,24278,23731
+  data 23169,22594,22004,21402
+  data 20787,20159,19519,18867
+  data 18204,17530,16845,16150
+  data 15446,14732,14009,13278
+  data 12539,11792,11038,10278
+  data 9511,8739,7961,7179
+  data 6392,5601,4807,4011
+  data 3211,2410,1607,804
+  data 0,-805,-1608,-2411
+  data -3212,-4012,-4808,-5602
+  data -6393,-7180,-7962,-8740
+  data -9512,-10279,-11039,-11793
+  data -12540,-13279,-14010,-14733
+  data -15447,-16151,-16846,-17531
+  data -18205,-18868,-19520,-20160
+  data -20788,-21403,-22005,-22595
+  data -23170,-23732,-24279,-24812
+  data -25330,-25832,-26319,-26790
+  data -27245,-27684,-28106,-28511
+  data -28898,-29269,-29622,-29956
+  data -30273,-30572,-30852,-31114
+  data -31357,-31581,-31786,-31971
+  data -32138,-32285,-32413,-32521
+  data -32610,-32679,-32728,-32758
+  data -32767,-32758,-32728,-32679
+  data -32610,-32521,-32413,-32285
+  data -32138,-31971,-31786,-31581
+  data -31357,-31114,-30852,-30572
+  data -30273,-29956,-29622,-29269
+  data -28898,-28511,-28106,-27684
+  data -27245,-26790,-26319,-25832
+  data -25330,-24812,-24279,-23732
+  data -23170,-22595,-22005,-21403
+  data -20788,-20160,-19520,-18868
+  data -18205,-17531,-16846,-16151
+  data -15447,-14733,-14010,-13279
+  data -12540,-11793,-11039,-10279
+  data -9512,-8740,-7962,-7180
+  data -6393,-5602,-4808,-4012
+  data -3212,-2411,-1608,-805
+  data -1,804,1607,2410
+  data 3211,4011,4807,5601
+  data 6392,7179,7961,8739
+  data 9511,10278,11038,11792
+  data 12539,13278,14009,14732
+  data 15446,16150,16845,17530
+  data 18204,18867,19519,20159
+  data 20787,21402,22004,22594
+  data 23169,23731,24278,24811
+  data 25329,25831,26318,26789
+  data 27244,27683,28105,28510
+  data 28897,29268,29621,29955
+  data 30272,30571,30851,31113
+  data 31356,31580,31785,31970
+  data 32137,32284,32412,32520
+  data 32609,32678,32727,32757
+  data 32767,32757,32727,32678
+  data 32609,32520,32412,32284
+  data 32137,31970,31785,31580
+</codetext>
+</codeclip>

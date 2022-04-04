@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<operation>
+<ID>_O20</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>352</x0>
+<y0>110</y0>
+<width>130</width>
+<height>69</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(String name)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>49</inpiny0>
+<inpinwidth>94</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>塗膜をファイルに
+保存する</description>
+<codetext>  RandomAccessFile WorkFile;       //　作業ファイル
+  int x, y, p;
+  Color c;
+
+  try{
+    WorkFile = new RandomAccessFile( file_name, &quot;rw&quot; );
+    WorkFile.seek(0);
+    WorkFile.writeInt( width );
+    WorkFile.writeInt( height );
+    for( y = 0;y &lt; height; y++){
+      for( x = 0; x &lt; width; x++ ){
+        p = getIndex( x, y );
+        c = (Color)color.get( p );
+        WorkFile.writeDouble( mm[ p ] );
+        WorkFile.writeDouble( k1[ p ] );
+        WorkFile.writeDouble( k2[ p ] );
+        WorkFile.writeDouble( u1[ p ] );
+        WorkFile.writeDouble( u2[ p ] );
+        WorkFile.writeInt( c.getRed() );
+        WorkFile.writeInt( c.getGreen() );
+        WorkFile.writeInt( c.getBlue() );
+      }
+    }
+    WorkFile.close();
+  } catch( Exception e ){}
+</codetext>
+</operation>

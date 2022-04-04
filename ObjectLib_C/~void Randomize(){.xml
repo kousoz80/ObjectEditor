@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C44</ID>
+<x0>578</x0>
+<y0>40</y0>
+<width>127</width>
+<height>22</height>
+<codetext>void Randomize(){
+  srand( (unsigned int)( clock() &amp; 0xffff ) );
+}
+
+double rnd(){
+  return (((rand()/32768.+rand())/32768.+rand())/32768.+rand())/32768.;
+}
+
+</codetext>
+</codeclip>

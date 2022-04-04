@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C37</ID>
+<x0>106</x0>
+<y0>69</y0>
+<width>132</width>
+<height>22</height>
+<codetext>// XML パーサ
+class Nxml{
+  NxmlElement root;
+
+  // コンストラクタ(ルート要素を生成)
+  Nxml(){
+    root = new NxmlElement( null, &quot;ROOT&quot; );
+    new NxmlAttribute( root, &quot;ID&quot;, &quot;ROOT&quot; );
+  }
+
+  // ルート要素を返す
+  public Object   ルート要素(){
+                    return( root );
+                  }
+
+  //親要素を返す
+  public Object   親要素( Object 要素 ){
+                    if( 要素 instanceof NxmlElement ) return( ( (NxmlElement)要素 ).parent );
+                    return( null );
+                  }
+
+  // 新しい要素を作って返す
+  public Object   新しい要素( Object 親要素, Object obj, String ID ){
+                    NxmlElement e;
+                    if( obj == null ) return( null );
+                    if( 親要素 instanceof NxmlElement ){
+                      if( 子要素( 親要素, ID ) != null ) return( null );
+                      if( obj instanceof NxmlElement ) e = new NxmlElement( (NxmlElement)親要素, (NxmlElement)obj );
+                      else if( obj instanceof String ) e = new NxmlElement( (NxmlElement)親要素, (String)obj );
+                      else if( ( obj instanceof File ) &amp;&amp; ( (File)obj ).isFile() ){
+                        e = new NxmlElement( (NxmlElement)親要素, (File)obj );
+                      }
+                      else return( null );
+                      if( 属性値( e, &quot;ID&quot; ) == null ) new NxmlAttribute( e, &quot;ID&quot;, ID );
+                      else XsetAttributeValue( e, &quot;ID&quot;, ID );
+                      return( e );
+                    }
+                    return( null );
+                  }
+
+  // 子要素のリストを返す
+  public Vector   子要素のリスト( Object 親要素 ){
+                    if( 親要素 instanceof NxmlElement ){
+                      Vector v = new Vector();
+                      for( int i = 0; i &lt; ( (NxmlElement)親要素 ).child.size(); i++ ){
+                        Object n = ( (NxmlElement)親要素 ).child.get(i);
+                        if( n instanceof NxmlElement ) v.add( n );
+                      }
+                      return( v );
+                    }
+                    return( null );
+                  }
+
+  // 特定の名前を持つ子要素のリストを返す
+  public Vector   子要素のリスト( Object 親要素, String 要素名 ){
+                    if( 親要素 instanceof NxmlElement ){
+                      Vector v = new Vector();
+                      for( int i = 0; i &lt; ( (NxmlElement)親要素 ).child.size(); i++ ){
+                        Object n = ( (NxmlElement)親要素 ).child.get(i);
+                        if( ( n instanceof NxmlElement ) &amp;&amp; 要素の名前( n ).equals( 要素名 ) ) v.add( n );
+                      }
+                      return( v );
+                    }
+                    return( null );
+                  }
+
+  // 特定のIDを持つ子要素を返す
+  public Object   子要素( Object 親要素, String ID ){
+                    if( 親要素 instanceof NxmlElement ){
+                      for( int i = 0; i &lt; ( (NxmlElement)親要素 ).child.size(); i++ ){
+                        Object n = ( (NxmlElement)親要素 ).child.get(i);
+                        if( ( n instanceof NxmlElement ) &amp;&amp; 要素のID( n ).equals( ID ) ) return( n );
+                      }
+                    }
+                    return( null );
+                  }
+
+  // 要素の名前を返す
+  public String   要素の名前( Object 要素 ){
+                    if( 要素 instanceof NxmlElement ) return( ( (NxmlElement)要素 ).name );
+                    return( null );
+                  }
+
+  // 要素のＩＤを返す
+  public String   要素のID( Object 要素 ){
+                    if( 要素 instanceof NxmlElement ) return( 属性値( 要素, &quot;ID&quot; ) );
+                    else return( null );
+                  }
+
+  // 要素をXML形式でファイルに保存する
+  public boolean  要素を保存( Object 要素, File ファイル ){
+                    if( 要素 instanceof NxmlElement ){
+                      ( (NxmlElement)要素 ).save( ファイル );
+                      return( true );
+                    }
+                    return( false );
+                  }
+
+  // 要素を削除する
+  public boolean  要素を削除( Object 要素 ){
+                    if( ( 要素 instanceof NxmlElement) &amp;&amp; !要素.equals(root) ){
+                      ( (NxmlElement)要素 ).suicide();
+                      return( true );
+                    }
+                    return( false );
+                  }
+
+  // 属性の名前のリストを返す
+  public Vector   属性名のリスト( Object 要素 ){
+                    if( 要素 instanceof NxmlElement ){
+                      Vector v = new Vector();
+                      Vector c = ( (NxmlElement)要素 ).child;
+                      for( int i = 0; i &lt; c.size(); i++ ){
+                        if( c.get(i) instanceof NxmlAttribute ) v.add( ( (NxmlAttribute)( c.get(i) ) ).name );
+                      }
+                      return ( v );
+                    }
+                    return( null );
+                  }
+
+  // 属性の値を返す
+  public String   属性値( Object 要素, String 属性名 ){
+                    if( 要素 instanceof NxmlElement ){
+                      Vector c = ( (NxmlElement)要素 ).child;
+                      for( int i = 0; i &lt; c.size(); i++ ){
+                        if( ( c.get(i) instanceof NxmlAttribute ) &amp;&amp; ( (NxmlAttribute)( c.get(i) ) ).name.equals( 属性名 ) ){
+                          return( ( (NxmlAttribute)( c.get(i) ) ).value );
+                        }
+                      }
+                      return ( null );
+                    }
+                    return( null );
+                  }
+
+
+  // 属性の値をセットする
+  public boolean  属性値をセット( Object 要素, String 属性名, String 属性値 ){
+                    if( 属性名.equals(&quot;ID&quot;) || !( 要素 instanceof NxmlElement ) ) return( false );
+                    if( 属性値( 要素, 属性名 ) == null ) {
+                      new NxmlAttribute( (NxmlElement)要素, 属性名, 属性値 );
+                      return( true );
+                    }
+                    else return( XsetAttributeValue( (NxmlElement)要素, 属性名, 属性値 ) );
+                  }
+
+
+  // 属性を削除する
+  public boolean  属性を削除( Object 要素, String 属性名 ){
+                    if( ( 要素 instanceof NxmlElement )  &amp;&amp; !属性名.equals(&quot;ID&quot;) ){
+                      Vector c = ( (NxmlElement)要素 ).child;
+                      for( int i = 0; i &lt; c.size(); i++ ){
+                        if( ( c.get(i) instanceof NxmlAttribute ) &amp;&amp; ( (NxmlAttribute)( c.get(i) ) ).name.equals( 属性名 ) ){
+                          ( (NxmlAttribute)( c.get(i) ) ).suicide();
+                          return( true );
+                        }
+                      }
+                      return ( false );
+                    }
+                    return( false );
+                  }
+
+
+
+  // 属性の値をセットする(外部での使用不可)
+  private boolean XsetAttributeValue( NxmlElement element, String name, String val ){
+                    if( element instanceof NxmlElement ){
+                      Vector c = ( (NxmlElement)element ).child;
+                      for( int i = 0; i &lt; c.size(); i++ ){
+                        if( ( c.get(i) instanceof NxmlAttribute ) &amp;&amp; ( (NxmlAttribute)( c.get(i) ) ).name.equals( name ) ){
+                          ( (NxmlAttribute)( c.get(i) ) ).value = val;
+                          return( true );
+                        }
+                      }
+                      return ( false );
+                    }
+                    return( false );
+                  }
+
+
+  // NxmlDocumentのデータの基本単位クラス
+  class NxmlNode{
+    NxmlElement parent;                   // 親ノード
+    String name;                                // 名前
+    String value;                               // 値
+    public void save( BufferedWriter dout ){}    // ストリームにXML文書を出力
+    public void suicide(){}                      // データを消去してメモリを開放する
+  }//~NxmlNode
+
+  // NxmlNodeの実装クラス
+  class NxmlElement extends NxmlNode{
+    Vector      child;
+
+    //コンストラクタ ( 既存の要素をコピー )
+    NxmlElement( NxmlElement pnt,  NxmlElement e ){
+      parent = pnt;
+      child = new Vector();
+      name = e.name;
+      value = null;
+      for( int i = 0; i &lt; e.child.size(); i++ ){
+        Object o = e.child.get(i);
+        if( o instanceof NxmlAttribute ) new NxmlAttribute( this, ((NxmlAttribute)o).name, ((NxmlAttribute)o).value );
+        else if( o instanceof NxmlElement ) new NxmlElement( this, (NxmlElement)o );
+      }
+      if( parent != null) parent.child.add( this );
+    }
+
+    //コンストラクタ ( 名前から新しく作る )
+    NxmlElement( NxmlElement pnt,  String nam ){
+      parent = pnt;
+      child = new Vector();
+      name = nam;
+      value = null;
+      if( parent != null) parent.child.add( this );
+    }
+
+    //コンストラクタ ( ファイルからXML文書を読み込んでデータを構成する )
+    NxmlElement( NxmlElement pnt,  File fil ){
+      char c;
+      parent = pnt;
+      child = new Vector();
+      try{
+      BufferedReader din = new BufferedReader( new FileReader( fil ) );
+      if( din.markSupported() ){
+        din.readLine();
+        din.readLine();
+        while( ( ( c = getchar( din ) ) != &apos;\0&apos; ) &amp;&amp; ( c != &apos;&lt;&apos; ) ) { }
+        if(  c != &apos;\0&apos; ) Parse( din );
+      }
+      if( parent != null) parent.child.add( this );
+      din.close();
+      } catch( IOException ie ){}
+    }
+
+    //コンストラクタ ( 入力ストリームからXML文書を読み込んでデータを構成する )
+    NxmlElement( NxmlElement pnt, BufferedReader din ){
+      parent = pnt;
+      child = new Vector();
+      Parse( din );
+      if( parent != null) parent.child.add( this );
+    }
+
+    //ファイルにXML文書を出力
+    public void save( File fil ){
+      try{
+      BufferedWriter dout = new BufferedWriter( new FileWriter( fil ) );
+      dout.write(&quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;Shift_JIS\&quot; ?&gt;\n&quot;);
+      dout.write(&quot;&lt;!-- なんちゃってXML version 0.1( ObjectEditor専用 ) --&gt;\n&quot; );
+      save( dout );
+      dout.close();
+      } catch( IOException ie ){ return; }
+    }
+
+    //ストリームにXML文書を出力
+    public void save( BufferedWriter dout ){
+      int i;
+      char c;
+
+      try{
+      dout.write( &quot;&lt;&quot; + name + &quot;&gt;\n&quot; );
+      for( i = 0; i &lt; child.size(); i++ ){
+        ( (NxmlNode)child.get(i) ).save( dout );
+      }
+      dout.write( &quot;&lt;/&quot; + name + &quot;&gt;\n&quot; );
+      } catch( IOException ie ){ return; }
+    }
+
+    // データを消去してメモリを開放する
+    public void suicide(){
+      name = null;
+      for( int i = 0; i &lt; child.size(); i++ ){
+        ((NxmlNode)child .get(i)).suicide();
+      }
+      child.clear();
+      child = null;
+      if( parent != null ) parent.child.remove( this );
+      parent = null;
+    }
+
+    //子を持っていなければ要素を縮退させて属性にする
+    public NxmlNode validate(){
+      if( child.size() == 0 ) return( new NxmlAttribute( this ) );
+      else{
+        value = null;
+        return( this );
+      }
+    }
+
+    // ストリームからXML文書を読み込む
+    private void Parse( BufferedReader din ){
+      char c;
+      String s;
+
+      try{
+      if( ( ( c = getchar( din ) ) == &apos;\0&apos; ) || ( c == &apos;/&apos; ) ) return;
+      name = String.valueOf( c );
+      while( ( c = getchar( din ) ) != &apos;\0&apos; &amp;&amp; ( c != &apos;&gt;&apos; ) ) name = name + String.valueOf( c );
+      if( c == &apos;\0&apos; ) return;
+      value = &quot;&quot;;
+      while( true ){
+        while( ( ( c = getchar( din ) ) != &apos;\0&apos; ) &amp;&amp; ( c != &apos;&lt;&apos; ) ){
+          if( c == &apos;&amp;&apos; ){
+            char b;
+            String enty = &quot;&quot;;
+            while( ( ( b = getchar( din ) ) != &apos;\0&apos; ) &amp;&amp; ( b != &apos;;&apos; ) ){
+              enty = enty + String.valueOf( b );
+            }
+            if( b == &apos;\0&apos; ) return;
+            if( enty.equals( &quot;amp&quot; ) )       c = &apos;&amp;&apos;;
+            else if( enty.equals( &quot;lt&quot; ) )   c = &apos;&lt;&apos;;
+            else if( enty.equals( &quot;gt&quot; ) )   c = &apos;&gt;&apos;;
+            else if( enty.equals( &quot;quot&quot; ) ) c = &apos;\&quot;&apos;;
+            else if( enty.equals( &quot;apos&quot; ) ) c = &apos;\&apos;&apos;;
+          }
+          value = value + String.valueOf( c );
+        }
+        if( c == &apos;\0&apos; ) return;
+        din.mark(4);
+        if( ( c = getchar( din ) ) == &apos;\0&apos; ) return;
+        else if( c == &apos;/&apos; ){
+          while( ( ( c = getchar( din ) ) != &apos;\0&apos; ) &amp;&amp; ( c != &apos;&gt;&apos; ) ) {}
+          return;
+        }
+        else{
+          din.reset();
+          ( new NxmlElement( this, din ) ).validate();
+        }
+      }
+      } catch( IOException ie ){}
+    }
+
+    // ストリームから１文字読み込む
+    private char getchar( BufferedReader din ){
+      int c;
+      try{
+      if( ( c = din.read() ) != -1 ) return( (char)c ); else return( &apos;\0&apos; );
+      } catch( IOException ie ){  return(&apos;\0&apos;); }
+    }
+
+  } //~NxmlElement
+
+// NxmElementの属性クラス
+  class NxmlAttribute extends NxmlNode{
+
+    //コンストラクタ ( データを新規作成する )
+    NxmlAttribute( NxmlElement prnt, String nam, String val ){
+      parent = prnt;
+      name = nam;
+      value = val;
+      if( parent != null ) parent.child.add( this );
+    }
+
+    //コンストラクタ ( 要素のデータをコピーして縮退させる )
+    NxmlAttribute( NxmlElement alas ){
+      parent = alas.parent;
+      name = alas.name;
+      value = alas.value;
+      alas.suicide();
+      if( parent != null ) parent.child.add( this );
+    }
+
+    //ストリームにXML文書を出力
+    public void save( BufferedWriter dout ){
+      int i;
+      char c;
+
+      try{
+      dout.write( &quot;&lt;&quot; + name + &quot;&gt;&quot; );
+      for( i = 0; i &lt; value.length(); i++ ){
+        c = value.charAt( i );
+        if( c ==&apos;&lt;&apos; )        dout.write( &quot;&amp;lt;&quot; );
+        else if( c == &apos;&gt;&apos; )  dout.write( &quot;&amp;gt;&quot; );
+        else if( c == &apos;\&quot;&apos; ) dout.write( &quot;&amp;quot;&quot; );
+        else if( c == &apos;\&apos;&apos; ) dout.write( &quot;&amp;apos;&quot; );
+        else if( c == &apos;&amp;&apos; ) dout.write( &quot;&amp;amp;&quot; );
+        else dout.write( c );
+      } 
+      dout.write( &quot;&lt;/&quot; + name + &quot;&gt;\n&quot; );
+      } catch( IOException ie ){}
+    }
+
+    // データを消去してメモリを開放する
+    public void suicide(){
+      if( parent != null ) parent.child.remove( this );
+      parent = null;
+      name = null;
+      value = null;
+    }
+
+  }//~NxmlAttribute
+
+}// ~Nxml
+
+</codetext>
+</codeclip>

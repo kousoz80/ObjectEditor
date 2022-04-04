@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C13</ID>
+<x0>577</x0>
+<y0>15</y0>
+<width>181</width>
+<height>20</height>
+<codetext>RandomAccessFile WorkFile;       //　作業ファイル
+</codetext>
+</codeclip>

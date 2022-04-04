@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<aobject>
+<ID>GUI</ID><x0>100</x0><y0>100</y0><width>280</width><objectname>GUI</objectname><description>GUIオブジェクト
+</description>
+<state><ID>_SINIT</ID><x0>0</x0><y0>40</y0><width>70</width><height>40</height><text>  InitState</text><isinitstate>1</isinitstate></state>
+<pin><ID>_Pstart</ID><x0>400</x0><y0>100</y0><width>80</width><height>26</height><text>Start()</text><px>0</px><py>36</py></pin>
+<pin><ID>_PGUIout</ID><x0>0</x0><y0>84</y0><width>180</width><height>26</height><text>GUI_created(JFrame f)</text><px>0</px><py>54</py></pin>
+<pin><ID>_PGUIclosed</ID><x0>310</x0><y0>0</y0><width>180</width><height>26</height><text>GUI_closed()</text><px>100</px><py>6</py></pin>
+<action><ID>_Astart</ID><comp1name>_Pstart</comp1name><comp2name>_Ocreate</comp2name></action>
+<operation><ID>_Ocreate</ID><state1>_SINIT</state1><state2>_SINIT</state2><x0>220</x0><y0>40</y0><width>130</width><height>64</height><inconnectx0>0</inconnectx0><inconnecty0>30</inconnecty0><outconnectx0>0</outconnectx0><outconnecty0>30</outconnecty0><inpintext>in()</inpintext><inpinx0>90</inpinx0><inpiny0>43</inpiny0><inpinwidth>40</inpinwidth><inpinheight>20</inpinheight><outpintext>out()</outpintext><outpinx0>90</outpinx0><outpiny0>40</outpiny0><outpinwidth>40</outpinwidth><outpinheight>20</outpinheight><inpinlinkcount>1</inpinlinkcount><description>GUIを作成する
+</description><codetext>XGUI x = new XGUI();
+
+</codetext></operation>
+<pin><ID>_PT_AREA0</ID><x0>0</x0><y0>110</y0><width>200</width><height>26</height><text>T_AREA0_created(JTextArea t)</text><px>0</px><py>72</py></pin>
+<pin><ID>_PBUTTON1</ID><x0>0</x0><y0>138</y0><width>200</width><height>26</height><text>BUTTON1_created(JButton b)</text><px>0</px><py>90</py></pin>
+<pin><ID>_PABUTTON1</ID><x0>0</x0><y0>166</y0><width>200</width><height>26</height><text>BUTTON1_clicked()</text><px>0</px><py>108</py></pin>
+<pin><ID>_PBUTTON2</ID><x0>0</x0><y0>194</y0><width>200</width><height>26</height><text>BUTTON2_created(JButton b)</text><px>0</px><py>126</py></pin>
+<pin><ID>_PABUTTON2</ID><x0>0</x0><y0>222</y0><width>200</width><height>26</height><text>BUTTON2_clicked()</text><px>0</px><py>144</py></pin>
+<codeclip><ID>_CXSTART</ID><x0>0</x0><y0>0</y0><width>300</width><height>26</height><codetext> class XGUI extends JFrame implements WindowListener{
+ JPanel cnt;
+T_AREA0 IT_AREA0;
+ class T_AREA0 extends JTextArea{
+ JScrollPane scrl;
+  T_AREA0(){
+ setOpaque( true );
+ setName(  &quot;T_AREA0&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  51, 51, 51 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setText( &quot;Text&quot; );
+ scrl = new JScrollPane( this );
+ T_AREA0_created( this );
+}
+}
+BUTTON1 IBUTTON1;
+ class BUTTON1 extends JButton implements ActionListener{
+  BUTTON1(){
+ setOpaque( true );
+ setName(  &quot;BUTTON1&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 1, 12 ));
+ setForeground( new Color(  51, 51, 51 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;BUTTON1&quot; );
+ addActionListener( this );
+ BUTTON1_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ BUTTON1_clicked(); }
+}
+BUTTON2 IBUTTON2;
+ class BUTTON2 extends JButton implements ActionListener{
+  BUTTON2(){
+ setOpaque( true );
+ setName(  &quot;BUTTON2&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 1, 12 ));
+ setForeground( new Color(  51, 51, 51 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;BUTTON2&quot; );
+ addActionListener( this );
+ BUTTON2_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ BUTTON2_clicked(); }
+}
+ XGUI(){
+ setTitle(&quot;NoTitle&quot;);
+ cnt = new JPanel( new BorderLayout() );
+ cnt.setPreferredSize(  new  Dimension( 400, 298 ) );
+ ((Component)cnt).setBackground( new Color( 252, 253, 186 ) );
+ IT_AREA0 = new T_AREA0();
+ cnt.add( IT_AREA0.scrl, 0 );
+ cnt.getLayout().removeLayoutComponent( IT_AREA0.scrl );
+ (  IT_AREA0.scrl ).setBounds( 17, 15, 335, 207 );
+ IBUTTON1 = new BUTTON1();
+ cnt.add( IBUTTON1, 0 );
+ cnt.getLayout().removeLayoutComponent( IBUTTON1 );
+ IBUTTON1.setBounds( 28, 238, 140, 35 );
+ IBUTTON2 = new BUTTON2();
+ cnt.add( IBUTTON2, 0 );
+ cnt.getLayout().removeLayoutComponent( IBUTTON2 );
+ IBUTTON2.setBounds( 178, 238, 140, 35 );
+ setContentPane( cnt );
+ pack();
+ addWindowListener( this );
+ setVisible( true );
+ GUI_created( this );
+}
+ public void windowActivated( WindowEvent e ){}
+ public void windowClosed( WindowEvent e ){}
+ public void windowClosing( WindowEvent e ){ GUI_closed(); }
+ public void windowDeactivated( WindowEvent e ){}
+ public void windowDeiconified( WindowEvent e ){}
+ public void windowIconified( WindowEvent e ){}
+ public void windowOpened( WindowEvent e ){}
+}
+</codetext></codeclip>
+<ID_maker>25</ID_maker><height>166</height></aobject>

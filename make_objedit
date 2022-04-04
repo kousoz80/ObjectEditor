@@ -1,0 +1,5 @@
+rm classfiles/*
+echo javac:
+javac -d classfiles -classpath classfiles objecteditor.java
+echo jar:
+jar cfm objedit.jar objecteditor.mnf -C classfiles .

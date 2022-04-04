@@ -1,0 +1,3 @@
+#!/bin/sh
+cd $OBJEDIT_HOME
+java -jar A51Basic.jar

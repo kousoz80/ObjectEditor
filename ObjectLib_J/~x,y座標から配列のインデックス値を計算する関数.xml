@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C15</ID>
+<x0>402</x0>
+<y0>16</y0>
+<width>320</width>
+<height>40</height>
+<codetext>//(x,y)座標から配列のインデックス値を計算する関数
+int getIndex( int x, int y ){
+  return x + y * cols;
+}
+</codetext>
+</codeclip>

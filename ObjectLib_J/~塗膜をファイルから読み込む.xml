@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<operation>
+<ID>_O18</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>352</x0>
+<y0>84</y0>
+<width>135</width>
+<height>68</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(String s)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>47</inpiny0>
+<inpinwidth>65</inpinwidth>
+<inpinheight>21</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>塗膜をファイルから
+読み込む</description>
+<codetext>  RandomAccessFile WorkFile;       //　作業ファイル
+  int x, y, nn, p;
+  int xred, xgreen, xblue;
+
+  try{
+    WorkFile = new RandomAccessFile( file_name, &quot;rw&quot; );
+    WorkFile.seek(0);
+    width =  WorkFile.readInt();
+    height = WorkFile.readInt();
+    nn = width * height;
+    mm[] =  new double[ nn ];
+    xx[] =  new double[ nn ];
+    yy[] =  new double[ nn ];
+    vx[] =  new double[ nn ];
+    vy[] =  new double[ nn ];
+    fx[] =  new double[ nn ];
+    fy[] =  new double[ nn ];
+    k1[] =  new double[ nn ];
+    k2[] =  new double[ nn ];
+    u1[] =  new double[ nn ];
+    u2[] =  new double[ nn ];
+    pp[] =  new double[ nn ];
+    ss[] =  new double[ nn ];
+    color = new Vector();
+    for( y = 0;y &lt; height; y++){
+      for( x = 0; x &lt; width; x++ ){
+        p = getIndex( x, y );
+        mm[ p ] = WorkFile.readDouble();
+        k1[ p ] = WorkFile.readDouble();
+        k2[ p ] = WorkFile.readDouble();
+        u1[ p ] = WorkFile.readDouble();
+        u2[ p ] = WorkFile.readDouble();
+        xred    = WorkFile.readInt();
+        xgreen  = WorkFile.readInt();
+        xblue   = WorkFile.readInt();
+        color.add( new Color( xred, xgreen, xblue ) );
+      }
+    }
+    WorkFile.close();
+  } catch( Exception e ){}
+</codetext>
+</operation>

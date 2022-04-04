@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<aobject>
+<ID>_A0</ID>
+<x0>229</x0>
+<y0>60</y0>
+<width>284</width>
+<objectname>GUI</objectname>
+<description>GUIオブジェクト
+</description>
+<state>
+<ID>_SINIT</ID>
+<x0>0</x0>
+<y0>40</y0>
+<width>70</width>
+<height>40</height>
+<text>  InitState</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_Pstart</ID>
+<x0>400</x0>
+<y0>100</y0>
+<width>80</width>
+<height>26</height>
+<text>Start()</text>
+<px>0</px>
+<py>36</py>
+</pin>
+<pin>
+<ID>_PGUIout</ID>
+<x0>0</x0>
+<y0>84</y0>
+<width>180</width>
+<height>26</height>
+<text>GUI_created(AbsoluteLayout l)</text>
+<px>0</px>
+<py>54</py>
+</pin>
+<action>
+<ID>_Astart</ID>
+<comp1name>_Pstart</comp1name>
+<comp2name>_Ocreate</comp2name>
+</action>
+<operation>
+<ID>_Ocreate</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>220</x0>
+<y0>40</y0>
+<width>130</width>
+<height>64</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>43</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description></description>
+<codetext>// GUIを作成する
+XGUI x = new XGUI();
+
+</codetext>
+</operation>
+<pin>
+<ID>_PInput</ID>
+<x0>0</x0>
+<y0>110</y0>
+<width>200</width>
+<height>26</height>
+<text>Input_created(EditText e)</text>
+<px>0</px>
+<py>72</py>
+</pin>
+<pin>
+<ID>_PAEnterButton</ID>
+<x0>0</x0>
+<y0>138</y0>
+<width>200</width>
+<height>26</height>
+<text>EnterButton_clicked()</text>
+<px>0</px>
+<py>90</py>
+</pin>
+<pin>
+<ID>_PAStopButton</ID>
+<x0>0</x0>
+<y0>166</y0>
+<width>200</width>
+<height>26</height>
+<text>StopButton_clicked()</text>
+<px>2</px>
+<py>111</py>
+</pin>
+<pin>
+<ID>_Pdisp</ID>
+<x0>0</x0>
+<y0>194</y0>
+<width>200</width>
+<height>26</height>
+<text>disp_created(SurfaceView t)</text>
+<px>0</px>
+<py>126</py>
+</pin>
+<codeclip>
+<ID>_CXSTART</ID>
+<x0>0</x0>
+<y0>0</y0>
+<width>300</width>
+<height>26</height>
+<codetext> class XGUI{
+Input IInput;
+ class Input extends EditText{
+ Input(){
+ super(ACTIVITY);
+ setPadding(1, 1, 1, 1);
+ setTextSize( (float)input_fontsize ); setTextColor( Color.rgb( 51, 51, 51 ));
+ setBackgroundColor( Color.rgb( 220, 220, 220 ));
+ setText( &quot;&quot; );
+
+
+        addTextChangedListener( new TextWatcher() {
+
+    
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // TODO Auto-generated method stub
+                 }
+         
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // TODO Auto-generated method stub
+                 }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+              // TODO Auto-generated method stub
+              String str = ((SpannableStringBuilder)input.getText()).toString();
+              if( !str.equals(&quot;&quot;) ){
+                int pos = input.getSelectionEnd();
+                if( pos &gt; 0 ){
+                  GetchChar = str.substring( pos-1, pos).charAt(0);
+                  if( input_flg ){
+                    if( str.charAt( pos-1 ) == &apos;\n&apos; ){
+                      InputBuffer = str.substring( 0, pos-1 ) + &quot;\r&quot;;
+                      setText(&quot;&quot;);
+                             }
+                          }
+                  else setText(&quot;&quot;);
+                       }
+                    }  
+                 }
+            });
+
+
+ Input_created( this );
+}
+}
+ class xedit extends EditText{
+ xedit(){
+ super(ACTIVITY);
+ setGravity(Gravity.TOP|Gravity.LEFT);
+ setPadding(4, 4, 4, 4);
+ setTextSize( (float)edit_fontsize ); setTextColor( Color.rgb( 0, 0, 0 ));
+ setBackgroundColor( Color.rgb( 255, 255, 255 ));
+ setText( &quot;&quot; );
+}
+}
+EnterButton IEnterButton;
+ class EnterButton extends Button{
+ EnterButton(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( (float)enter_fontsize ); setTextColor( Color.rgb( 51, 51, 51 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;Enter&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {EnterButton_clicked();}} );
+}
+}
+StopButton IStopButton;
+ class StopButton extends Button{
+ StopButton(){
+ super(ACTIVITY);
+ setGravity(Gravity.CENTER|Gravity.CENTER);
+ setPadding(1, 1, 1, 1);
+ setTextSize( (float)stop_fontsize ); setTextColor( Color.rgb( 51, 51, 51 ));
+ setBackgroundColor( Color.rgb( 192, 192, 192 ));
+ setText( &quot;Stop&quot; );
+ setOnClickListener(new Button.OnClickListener(){ public void onClick(View v) {StopButton_clicked();}} );
+}
+}
+disp Idisp;
+ class disp extends SurfaceView implements SurfaceHolder.Callback{
+ private SurfaceHolder holder;
+
+ disp(){
+ super(ACTIVITY);
+ setPadding(1, 1, 1, 1);
+ holder = getHolder();
+ holder.addCallback(this);
+ disp_created( this );
+}
+
+ @Override
+  public void surfaceCreated(SurfaceHolder arg0){
+    disp_holder_created(arg0);
+  }
+
+  @Override
+  public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3){
+
+  }
+	
+  @Override
+  public void surfaceDestroyed(SurfaceHolder arg0){
+
+  }
+}
+ XGUI(){
+ AbsoluteLayout layout=new AbsoluteLayout(ACTIVITY);
+layout.setBackgroundColor(Color.rgb( 192, 192, 192));
+ACTIVITY.setContentView(layout);
+ACTIVITY.setTitle(&quot;A51Basic&quot;);
+
+ edit = new xedit();
+ edit.setLayoutParams( new AbsoluteLayout.LayoutParams( disp_width,disp_height,disp_x,disp_y ) );
+ layout.addView( edit );
+
+ IInput = new Input();
+ IInput.setLayoutParams( new AbsoluteLayout.LayoutParams( input_width,input_height,input_x,input_y ) );
+ layout.addView( IInput );
+ IEnterButton = new EnterButton();
+ IEnterButton.setLayoutParams( new AbsoluteLayout.LayoutParams( enter_width,enter_height,enter_x,enter_y ) );
+ layout.addView( IEnterButton );
+ IStopButton = new StopButton();
+ IStopButton.setLayoutParams( new AbsoluteLayout.LayoutParams( stop_width,stop_height,stop_x,stop_y ) );
+ layout.addView( IStopButton );
+ Idisp = new disp();
+ Idisp.setLayoutParams( new AbsoluteLayout.LayoutParams( disp_width,disp_height,disp_x,disp_y ) );
+ layout.addView( Idisp );
+
+Idisp.bringToFront(); 
+IInput.requestFocus(); 
+
+ GUI_created( layout );
+}
+}
+</codetext>
+</codeclip>
+<ID_maker>26</ID_maker>
+<height>182</height>
+<レイアウト>A51Basic
+720
+529
+192
+192
+192
+xxscale=1
+TEXTFIELD;Input;null;3;2;547;32;51;51;51;255;255;255;Dialog;12;1;1;1;EditText;
+BUTTON;EnterButton;Enter;555;1;80;32;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+BUTTON;StopButton;Stop;639;0;78;34;51;51;51;192;192;192;Dialog;12;null;0;0;1;0;1;Button;
+LABEL;disp;null;2;37;716;488;255;255;255;0;0;0;Monospaced;16;null;2;1;1;1;1;TextView;
+</レイアウト>
+<pin>
+<ID>_P24</ID>
+<x0>0</x0>
+<y0>222</y0>
+<width>248</width>
+<height>29</height>
+<text>disp_holder_created(SurfaceHolder h)</text>
+<px>0</px>
+<py>144</py>
+</pin>
+</aobject>

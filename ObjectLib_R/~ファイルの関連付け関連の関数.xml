@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C43</ID>
+<x0>87</x0>
+<y0>473</y0>
+<width>238</width>
+<height>40</height>
+<codetext>// ファイルの関連付け関連の関数
+// データは&quot;desktop.ini&quot;から読み込む
+
+
+/* ファイル名から拡張子を得る */
+//
+get_file_open_command:
+char* getExtension( char* name ){
+  int i;
+  for( i = strlen( name ) - 1; i &gt;= 0 &amp;&amp; name[ i ] != &apos;.&apos;; i-- ) ;
+  if( i &lt; 0 ) return &quot;&quot;;
+  return name + i + 1;
+}
+
+/* ファイル名に対応するアイコン番号を返す(対応する番号がなかったらデフォルトのアイコン番号(1)を返す) */
+//
+get_file_icon:
+
+int getIcon( char* file_name ){
+  char* extension;
+  char  buf[ 2 ];
+  int   i, n, fd;
+
+  extension = getExtension( file_name );
+  for( i = 0; i &lt; type_count &amp;&amp; strcmp( extension, file_type[ i ].extension ); i++ ) ;
+  if( i &lt; type_count ){
+    if( ( n = file_type[ i ].icon_no ) == LINK ){   /* ショートカットの場合 */
+      if( ( fd = open( file_name, O_RDONLY ) ) &lt; 0 ) return 1;
+      n = read( fd, buf, 2 );
+      close( fd );
+      if( n == 2 ) return 10 * ( buf[ 0 ] - &apos;0&apos; ) + ( buf[ 1 ] - &apos;0&apos; ); else return 1;
+    }
+    else return n;  /* 普通のファイルの場合 */
+  }
+  else return 1;
+}
+
+//
+get_file_type:
+
+//
+get_file_extention:
+</codetext>
+</codeclip>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C0</ID>
+<x0>110</x0>
+<y0>8</y0>
+<width>277</width>
+<height>52</height>
+<codetext>// コールバックのアダプタクラス
+adapter xadapter;
+class adapter  implements SurfaceHolder.Callback, Camera.PreviewCallback {
+
+adapter(){
+    SurfaceHolder xholder = camera_view.getHolder();
+    xholder.addCallback(this);
+    xholder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+}
+
+
+  @Override
+  public void surfaceCreated(SurfaceHolder xholder) {
+
+    camera = Camera.open(0);
+    try{
+      if( camera != null ){
+        camera.setPreviewDisplay(xholder);
+
+message_view.setText(&quot;camera init&quot;);
+
+       } 
+   }catch (IOException e) { message_view.setText(&quot;camera error&quot;); }
+  }
+
+
+  
+  @Override
+  public void surfaceDestroyed(SurfaceHolder xholder) {
+      if( camera != null ){
+        camera.stopPreview();
+        camera.setPreviewCallback(null);
+        camera.release();
+        camera = null;
+        }
+  }
+
+  
+  @Override
+  public void surfaceChanged(SurfaceHolder xholder, int format, int width, int height) {
+    if( camera != null ){
+      camera.stopPreview();
+
+	
+//  Camera.Parameters params = camera.getParameters();
+//  params.setPreviewSize( PictureWidth, PictureHeight );
+//  camera.setParameters(params);
+
+
+      message_view.append(&quot; start preview&quot;);
+    camera.startPreview();
+    }
+  }
+
+
+  // プレビュー画像の取得
+  public void onPreviewFrame(byte[] data, Camera camera){
+    if( camera != null  &amp;&amp; capture_ready){
+
+      //コールバック停止
+      camera.setPreviewCallback(null);
+
+      // 画像データの取得
+      for( int i = 0, y = 0, p = PictureWidth * PictureHeight; y &lt; PictureHeight; y+=2 ){
+        for( int x = 0; x &lt; PictureWidth; x+=2, i++, p+=2 ){
+          monitor[i] =  data[ x + y * PictureWidth ];
+          camera_buffer[i] = ((int)monitor[i] &amp; 0xff) | (((int)data[p] &amp; 0xff) &lt;&lt; 8) | (((int)data[p+1] &amp; 0xff) &lt;&lt; 16);
+        }
+      }
+
+      // コールバック再開
+      camera.setPreviewCallback(this);
+    }
+  } //~onPreviewFrame(byte[], Camera)
+
+}
+
+</codetext>
+</codeclip>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C10</ID>
+<x0>19</x0>
+<y0>231</y0>
+<width>100</width>
+<height>20</height>
+<codetext>// タスクバー
+ 
+  char task_bar$(Label.SIZE)
+  char clock$(Button.SIZE)
+  char clock_task$(TCB_SIZE),clock_stack$(1024)
+
+// タスクバーを作成する
+create_task_bar:
+  desktop, -&gt;Desktop.component com#=
+
+  // 本体を生成
+  task_bar, desktop, com#, &quot;&quot;, create_label 
+  task_bar, -&gt;Label.component com0#=
+  0, com0#, -&gt;Component.x#=
+  screen_height#, FONT_HEIGHT+4, - com0#, -&gt;Component.y#=
+  screen_width#, com0#, -&gt;Component.width#=
+  FONT_HEIGHT+4, com0#, -&gt;Component.height#=
+  RAISED_BORDER, com0#, -&gt;Component.border#=
+  TRUE, com0#, -&gt;Component.is_visible#=
+
+  // 時計を生成
+  clock, desktop, com0#, &quot;&quot;, create_button 
+  clock, -&gt;Button.component com1#=
+  screen_width#,  FONT_WIDTH*7, -  com1#, -&gt;Component.x#=
+  2, com1#, -&gt;Component.y#=
+  FONT_WIDTH*6, com1#, -&gt;Component.width#=
+  FONT_HEIGHT+2, com1#, -&gt;Component.height#=
+  LOWED_BORDER, com1#, -&gt;Component.border#=
+  TRUE, com1#, -&gt;Component.is_visible#=
+
+  // 時計の時刻表示タスクを生成する
+  clock_task, clock_loop, clock_stack+1016, create_task
+  &quot;*clock&quot;, clock_task+CMD_LINE, strcpy
+
+  end
+
+
+// 時計の時刻を表示する
+disp_clock:
+  char tim_val$(20),tim_buf$(12)
+
+/ rcx=tim_val/
+/ rdx=time_cap/
+/ rax=__runtime_service/
+/ rax=(rax)/
+/ rax=0x18(rax)/
+/ call (rax)/
+
+  tim_val$(4), dec tim_buf, strcpy
+  &quot;:&quot;, tim_buf, strcat
+  tim_val$(5), dec tim_buf, strcat
+  tim_buf, clock, set_text_button
+  end
+
+
+ .data
+time_cap:
+ data 0x100000001
+ data 0x0
+  end
+
+
+// 時計の時刻表示タスク
+clock_loop:
+  disp_clock
+  1000, wait
+  if gui_is_running#&lt;&gt;0 goto clock_loop
+  exit_task
+  end
+
+</codetext>
+</codeclip>

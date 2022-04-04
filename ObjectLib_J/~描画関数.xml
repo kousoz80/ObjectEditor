@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C5</ID>
+<x0>740</x0>
+<y0>48</y0>
+<width>99</width>
+<height>19</height>
+<codetext>// 描画関数
+
+    // 実際に画面に表示する
+    public void _disp(){
+      if( sufaceHolder != null){
+        Canvas cv = sufaceHolder.lockCanvas();
+        cv.drawBitmap( bitmap, 0, 0, null);
+        sufaceHolder.unlockCanvasAndPost(cv);
+      }
+    }
+  
+  
+    public void disp_cls(){
+      paint.setStyle(Paint.Style.FILL);
+      paint.setColor(Color.rgb(bak_r,bak_g,bak_b));
+      bmp_canvas.drawRect(0, 0, width, height, paint);
+      posx=0;
+      posy=0;
+      paint.setColor(Color.rgb(for_r, for_g, for_b));
+      bmp_canvas.drawLine(posx+3, posy, posx+3, posy+fontsize, paint);    
+    }
+
+
+    public void disp_puts( String s ){
+      for( int i = 0; i &lt; s.length(); i++ ){
+        disp_putc( s.charAt( i ) );
+      }
+    }
+
+    public void disp_putc( char c ){
+      paint.setColor(Color.rgb(bak_r, bak_g, bak_b));
+      paint.setStrokeWidth(3);
+      bmp_canvas.drawLine(posx+3, posy, posx+3, posy+fontsize, paint);    
+      if( c == &apos;\r&apos; ){}
+      else if( c == &apos;\n&apos; ){
+        posx = 0;
+        posy += stepy;
+        if( posy &gt;= height-stepy-1 ){
+          bmp_canvas.drawBitmap(bitmap, matrix, paint);
+          posy -= stepy;
+          paint.setStyle(Paint.Style.FILL);
+          paint.setColor(Color.rgb(bak_r,bak_g,bak_b));
+          bmp_canvas.drawRect(0, posy, width, height, paint);
+        }
+      }
+      else{
+        int textwidth;
+        if( ( c&lt;=&apos;\u007e&apos; )||
+            ( c==&apos;\u00a5&apos; )||
+            ( c==&apos;\u203e&apos; )||
+            ( c&gt;=&apos;\uff61&apos; &amp;&amp; c&lt;=&apos;\uff9f&apos; )
+          )  textwidth = stepx/2+2;
+        else textwidth = stepx;
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.rgb(bak_r,bak_g,bak_b));
+        bmp_canvas.drawRect(posx, posy, posx+textwidth-1, posy+stepy-1, paint);
+        paint.setTypeface(Typeface.create(Typeface.MONOSPACE, Typeface.NORMAL));
+        paint.setAntiAlias(false);
+        paint.setColor(Color.rgb(for_r,for_g,for_b));
+        paint.setTextSize(fontsize);
+        bmp_canvas.drawText(c+&quot;&quot;, posx, posy+fontsize, paint);
+        posx += textwidth;
+        if( posx &gt;= width ){
+          posx = 0;
+          posy += stepy;
+          if( posy &gt;= height-stepy-1 ){
+            bmp_canvas.drawBitmap(bitmap, matrix, paint);
+            posy -= stepy;
+            paint.setStyle(Paint.Style.FILL);
+            paint.setColor(Color.rgb(bak_r,bak_g,bak_b));
+            bmp_canvas.drawRect(0, posy, width, height, paint);
+          }
+        }
+      }
+      paint.setColor(Color.rgb(for_r, for_g, for_b));
+      bmp_canvas.drawLine(posx+3, posy, posx+3, posy+fontsize, paint);    
+    }
+
+
+    public void disp_color1( int c ){
+      for_r = ( c &gt;&gt; 16 ) &amp; 0xff;
+      for_g = ( c &gt;&gt; 8  ) &amp; 0xff;
+      for_b = c &amp; 0xff;
+    }
+
+
+    public void disp_color2( int c1, int c2 ){
+      for_r = ( c1 &gt;&gt; 16 ) &amp; 0xff;
+      for_g = ( c1 &gt;&gt; 8  ) &amp; 0xff;
+      for_b = c1 &amp; 0xff;
+      bak_r = ( c2 &gt;&gt; 16 ) &amp; 0xff;
+      bak_g = ( c2 &gt;&gt; 8  ) &amp; 0xff;
+      bak_b = c2 &amp; 0xff;
+    }
+
+
+    public void disp_screen1( int wid, int hei ){
+      if( sufaceHolder != null){
+        Canvas cv = sufaceHolder.lockCanvas();
+        paint.setColor(Color.BLACK);
+        paint.setStyle(Style.FILL);
+        cv.drawRect(0, 0, disp.getWidth()-1, disp.getHeight()-1, paint);
+        sufaceHolder.unlockCanvasAndPost(cv);
+     }
+      width  = wid;
+      height = hei;
+      bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+      bmp_canvas = new Canvas(bitmap);
+      bmp_canvas.drawColor(Color.BLACK);
+      disp_cls();_disp();
+    }
+
+
+    public void disp_screen2( int wid, int hei, int fnt ){
+      if( sufaceHolder != null){
+        Canvas cv = sufaceHolder.lockCanvas();
+        paint.setColor(Color.BLACK);
+        paint.setStyle(Style.FILL);
+        cv.drawRect(0, 0, disp.getWidth()-1, disp.getHeight()-1, paint);
+        sufaceHolder.unlockCanvasAndPost(cv);
+      }
+      width  = wid;
+      height = hei;
+      fontsize = fnt;
+      stepx = stepy = fontsize + 3;
+      matrix = new Matrix();
+      matrix.postTranslate(0, -stepy);
+      bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+      bmp_canvas = new Canvas(bitmap);
+      bmp_canvas.drawColor(Color.BLACK);
+      disp_cls();_disp();
+    }
+
+    public void disp_locate( int x, int y ){
+      paint.setColor(Color.rgb(bak_r, bak_g, bak_b));
+      bmp_canvas.drawLine(posx+3, posy, posx+3, posy+fontsize, paint);    
+      posx=x * stepx;
+      posy=y * stepy;
+      paint.setColor(Color.rgb(for_r, for_g, for_b));
+      bmp_canvas.drawLine(posx+3, posy, posx+3, posy+fontsize, paint);    
+    }
+
+    public void disp_pset( int x, int y ){
+      paint.setColor(Color.rgb(for_r, for_g, for_b));
+      bmp_canvas.drawPoint(x, y, paint);
+    }
+
+    public void disp_line( int x0, int y0, int x1, int y1 ){
+      paint.setColor(Color.rgb(for_r, for_g, for_b));
+      paint.setStrokeWidth(1);
+      bmp_canvas.drawLine(x0, y0, x1, y1, paint);
+    }
+
+    public void disp_box( int x0, int y0, int x1, int y1 ){
+      paint.setColor(Color.rgb(for_r, for_g, for_b));
+      paint.setStyle(Style.STROKE);
+      paint.setStrokeWidth(1);
+      bmp_canvas.drawRect(x0, y0, x1, y1, paint);
+    }
+
+
+    public void disp_boxf( int x0, int y0, int x1, int y1 ){
+      paint.setColor(Color.rgb(for_r, for_g, for_b));
+      paint.setStyle(Style.FILL);
+      bmp_canvas.drawRect(x0, y0, x1, y1, paint);
+    }
+
+
+    public void disp_circle( int x0, int y0, int x1, int y1 ){
+      paint.setColor(Color.rgb(for_r, for_g, for_b));
+      paint.setStyle(Style.STROKE);
+      paint.setStrokeWidth(1);
+      RectF ovalF = new RectF(x0, y0, x1, y1);
+      bmp_canvas.drawOval(ovalF, paint);
+    }
+
+
+    public void disp_circlef( int x0, int y0, int x1, int y1 ){
+      paint.setColor(Color.rgb(for_r, for_g, for_b));
+      paint.setStyle(Style.FILL);
+      RectF ovalF = new RectF(x0, y0, x1, y1);
+      bmp_canvas.drawOval(ovalF, paint);
+    }
+
+    public void disp_image( int x, int y, String file ){
+      try{
+        FileInputStream in = new FileInputStream(new File(file));
+        bmp_canvas.drawBitmap(BitmapFactory.decodeStream( in ), x, y, null);
+        in.close();
+      }catch(Exception e){}
+    }
+
+
+    public void disp_start( String cmd ){
+      Runtime runtime = Runtime.getRuntime();
+      try {            //実行するコマンドを指定
+        runtime.exec(cmd);
+      } catch (IOException e) {} 
+    }
+
+
+    public void disp_exec( String cmd ){
+      Runtime runtime = Runtime.getRuntime();
+      Process process;
+      String  line = &quot;&quot;;
+      BufferedReader reader;
+      try {            //実行するコマンドを指定
+        process = runtime.exec(cmd);
+        reader = new BufferedReader( new InputStreamReader(process.getInputStream()));
+        while ((line = reader.readLine()) != null) {
+          disp_puts( line + &quot;\n&quot; );_disp();
+        }
+        reader.close();
+        process.waitFor();
+      } catch (IOException e) {} catch (InterruptedException e) {}
+    }
+
+
+    public String disp_time(){
+      String s = (new SimpleDateFormat(&quot;HH:mm:ss&quot; , Locale.US)).format(new Date());
+      return s;
+    }
+
+
+    public String disp_date(){
+      String s = (new SimpleDateFormat(&quot;yy/MM/dd&quot;, Locale.US)).format(new Date());
+      return s;
+    }
+
+
+    /* 1行入力 */
+    public String disp_gets(){
+      String ret;
+      input_flg = true;
+      while( InputBuffer.equals(&quot;&quot;) ){
+        try{
+          Thread.sleep(100, 0);
+        }catch( InterruptedException e ){}
+      }
+      ret = new String( InputBuffer );
+      disp_puts( InputBuffer+&quot;\n&quot; );
+      InputBuffer = &quot;&quot;;
+      input_flg = false;
+      return ret;
+    }
+
+
+    // キー入力を調べる
+    public char disp_inkey(){
+      char ch = GetchChar;
+      GetchChar = &apos;\0&apos;;
+      if( ch == &apos;\n&apos; ) ch = &apos;\r&apos;;
+      return ch;
+    }
+
+
+    // １文字入力
+    public char disp_getch(){
+      char ch = GetchChar;
+      GetchChar = &apos;\0&apos;;
+      while( (ch = GetchChar) == &apos;\0&apos; ){
+        try{
+          Thread.sleep(100, 0);
+        }catch( InterruptedException e ){}
+      }
+      return ch;
+    }
+
+
+    // メディアファイルを再生する
+    public void disp_play( String fname ){
+      MediaPlayer mp = new MediaPlayer();
+      try {
+        mp.setDataSource( fname );
+        mp.prepare();
+      }
+      catch (IllegalArgumentException e) {}
+      catch (SecurityException e) {}
+      catch (IllegalStateException e) {}
+      catch (IOException e) {}
+      mp.start();
+    }
+
+    // モード切り替え
+    public void disp_prog_mode( boolean mode ){
+      prog_mode = mode;
+      handler.post(new Runnable(){
+        @Override
+        public void run(){
+          if( prog_mode ){
+a51basic.save_edit();
+            edit.bringToFront(); 
+            edit.requestFocus();
+            edit.setSelection(0); 
+              }
+          else{
+a51basic.load_edit();
+            disp.bringToFront(); 
+            input.requestFocus(); 
+              }
+            }
+        });
+    }
+
+
+
+</codetext>
+</codeclip>

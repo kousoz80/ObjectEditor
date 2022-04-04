@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<aobject>
+<ID>_A85</ID>
+<x0>564</x0>
+<y0>203</y0>
+<width>192</width>
+<height>51</height>
+<ID_maker>14</ID_maker>
+<objectname>ColorSelector</objectname>
+<description></description>
+<action>
+<ID>_AX12</ID>
+<comp1name>_PX1</comp1name>
+<comp2name>_OX11</comp2name>
+</action>
+<pin>
+<ID>_PX13</ID>
+<x0>142</x0>
+<y0>22</y0>
+<width>54</width>
+<height>22</height>
+<text>cansel()</text>
+<px>134</px>
+<py>0</py>
+</pin>
+<state>
+<ID>_SINIT</ID>
+<x0>151</x0>
+<y0>89</y0>
+<width>70</width>
+<height>40</height>
+<text> InitialState</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_PX1</ID>
+<x0>373</x0>
+<y0>249</y0>
+<width>60</width>
+<height>24</height>
+<text>request()</text>
+<px>129</px>
+<py>14</py>
+</pin>
+<codeclip>
+<ID>_CX3</ID>
+<x0>27</x0>
+<y0>43</y0>
+<width>162</width>
+<height>21</height>
+<codetext>innerSelector selector;
+class innerSelector  implements ActionListener{
+JColorChooser chooser;
+innerSelector(){
+chooser = new JColorChooser();
+canselListener c = new canselListener();
+dialog = JColorChooser.createDialog(new JLabel(&quot;dummy&quot;),&quot;Color Selector&quot;,false,chooser,this,c);
+}
+public void actionPerformed(ActionEvent e){returnColor(chooser.getColor());}
+}
+class canselListener implements ActionListener{
+public void actionPerformed(ActionEvent e){cansel();}
+}
+</codetext>
+</codeclip>
+<operation>
+<ID>_OX5</ID>
+<state1>_SINIT</state1>
+<state2>_SX8</state2>
+<x0>238</x0>
+<y0>147</y0>
+<width>98</width>
+<height>66</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>0</inconnecty0>
+<outconnectx0>80</outconnectx0>
+<outconnecty0>1</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>20</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>0</inpinlinkcount>
+<description>初期化する</description>
+<codetext>selector = new innerSelector();
+</codetext>
+</operation>
+<pin>
+<ID>_PX6</ID>
+<x0>28</x0>
+<y0>22</y0>
+<width>115</width>
+<height>23</height>
+<text>returnColor(Color c)</text>
+<px>67</px>
+<py>28</py>
+</pin>
+<codeclip>
+<ID>_CX7</ID>
+<x0>27</x0>
+<y0>63</y0>
+<width>103</width>
+<height>18</height>
+<codetext>JDialog dialog;
+</codetext>
+</codeclip>
+<state>
+<ID>_SX8</ID>
+<x0>348</x0>
+<y0>89</y0>
+<width>70</width>
+<height>40</height>
+<text>    State1</text>
+<isinitstate>0</isinitstate>
+</state>
+<operation>
+<ID>_OX11</ID>
+<state1>_SX8</state1>
+<state2>_SX8</state2>
+<x0>424</x0>
+<y0>146</y0>
+<width>100</width>
+<height>75</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>0</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>0</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>56</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>ダイアログを
+表示する</description>
+<codetext>dialog.setVisible(true);
+</codetext>
+</operation>
+</aobject>

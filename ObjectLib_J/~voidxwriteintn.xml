@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C39</ID>
+<x0>14</x0>
+<y0>3</y0>
+<width>126</width>
+<height>26</height>
+<codetext>void xwrite( int n ){
+  int i;
+  try{
+
+  if( n == 0 ){
+    WorkFile.seek(0);
+    WorkFile.writeInt(NumberOfStars);
+  }
+  else{
+    WorkFile.seek( 4 + 3 * 8 * NumberOfStars * n );
+  }
+  for( i = 0;i &lt; NumberOfStars; i++){
+    WorkFile.writeDouble(px[i]);
+  }
+  for( i = 0;i &lt; NumberOfStars; i++){
+    WorkFile.writeDouble(py[i]);
+  }
+  for( i = 0;i &lt; NumberOfStars; i++){
+    WorkFile.writeDouble(pz[i]);
+  }
+
+  } catch( IOException e ){}
+}
+</codetext>
+</codeclip>

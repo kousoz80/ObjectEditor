@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+<meta charset="utf-8"/>
+<title>ObjectEditor ver 1.0 User's Manual</title>
+</head>
+<body bgcolor="#ffffff">
+<h3><a name="#gaiyou">概要</a></h3>
+<h4><a name="#setuzokuzu">接続図</a>(回路図)</h4>
+<p>
+皆さんはどのようにしてプログラムを作っていますか？<br>
+必要に応じて場当たり的にプログラムを作るのもひとつの方法ですが、大きなプログラムになるとそうはいかなくなってきます。<br>
+Javaに限らず、プログラムはテキストの形で記述するのが普通で、ひとめ見ただけでプログラムの各部分の依存関係を把握することは、たとえ小さなプログラムでも容易でない場合があります。<br>
+そこでプログラムを機能や構造によりいくつかの部分(オブジェクト)にわけてそれらの関連を図で表すと比較的容易に把握することができます。
+</p>
+<p>
+<img align="baseline" alt="オブジェクトを図形で表現" border="0" hspace="0" src="data/obj-expressin.gif">
+</p>
+<p>
+しかし大きなプログラムになると数多くのオブジェクトが存在し、それらの相互のデータの流れをひとつずつ書いていたら、やはり全体の把握が難しくなってきます。
+ </p>
+<p>
+<img align="baseline" alt="たくさんのオブジェクト" border="0" hspace="0" src="data/many-obj.gif">
+</p>
+<p>
+そこでピンという概念を導入して、互いに関連する数個のオブジェクトをまとめて１つの親オブジェクトを作り、親オブジェクトの外にアクセスするためにピンを経由するようにするとオブジェクトの間の記述を簡単にできます。(いわゆる構造化分析に近い考え方です)
+</p>
+<p>
+<img align="baseline" alt="見やすくしたオブジェクト" border="0" hspace="0" src="data/easy-see-obj.gif">
+</p>
+<p>
+またメソッドの呼び出しのなかには例えば"close()"や"repaint()"のようにメソッド呼び出しだけが存在し、実質的なデータを持たないものも数多くあります。そのようなメソッド呼び出しはデータの流れだけでは表現できないので、
+</p>
+<p>
+<strong>信号 = メソッド呼び出し + データ</strong>  
+</p>
+<p>
+という概念を導入してオブジェクト間の関連をより明確に表現できるようにしました。</p>
+<p>
+※この接続図は構造化分析におけるデータフロー図と多少差異はありますが、同じような考えかたでシステムを分析・設計することができます。<br>
+これからJavaなどオブジェクト指向プログラミングを始められる方はその前に(ほんの少しだけ)構造化分析・設計の本を読むことをお勧めします。多分役に立つと思いますので．．．
+</p>
+<p>
+<a name="#joutaizu"><strong>状態図</strong></a><br>
+接続図の説明で大きなオブジェクトはより小さなオブジェクトに分割できることを示しましたが、プログラムの大きさが有限である以上、この分割には限りがあり、いつかは"最小のオブジェクト"に到達します。<br>
+このようなオブジェクトの働きを表現するにはどうすればよいでしょうか？<br>
+皆さんもご存知のように、この世に存在するものすべては、なんらかの"状態"にあります。<br>
+この"状態"に着目して物(オブジェクト)の振る舞いを記述する方法のひとつに状態遷移図があります。<br>
+状態遷移図の例(水の三態)を下図に示します。
+</p>
+<p>
+<img align="baseline" alt="水の三態" border="0" hspace="0" src="data/mass-state-model.gif">
+</p>
+<p>
+この状態遷移図に上で述べたピンと信号の概念を適用すると次のようになります。
+</p>
+<p>
+ある状態から別の状態への遷移はピンからの信号によって引き起こされます。また遷移が完了するとピンに信号を出力します。遷移の種類は次の５種類に分類されます。
+</p>
+<p>
+<img align="baseline" alt="遷移の種類" border="0" hspace="0" src="data/transition-type.gif">
+</p>
+<p>
+(1) ピンからの信号によって遷移して完了したときピンに信号を出力する<br>
+(2)ピンからの信号によって遷移して完了しても信号を出力しない<br>
+(3)信号なし(自動的)に遷移して完了したときピンに信号を出力する<br>
+(4)信号なし(自動的)に遷移して完了しても信号を出力しない<br>
+(5)複数のピンから信号を受け取り、遷移後に複数のピンに信号を出力する
+</p>
+<p>
+<strong><a name="#shiyouhou"></a>使用法</strong>
+</p>
+<p>
+<strong>インストールの前に</strong>
+</p>
+<p>
+必要なソフト<br>
+(1) JRE, 
+JDK&nbsp;(必須、Java実行環境、コンパイラなど)<br>
+Oracle社のサイトからダウンロード<br>
+<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a><br>
+
+<br>
+（Javaだけで十分という方は<a href="#oe_install">ObjectEditorのインストール</a>へ）<br><br>
+ (2)&nbsp;C++ コンパイラ 
+(C++のプログラム開発に必要)<br>
+<span dir="auto">MinGW（GCC）<br>
+<a href="http://sourceforge.jp/projects/mingw/">http://sourceforge.jp/projects/mingw/</a><br>
+<br>
+MinGWの設定は金子邦彦先生のテキストが参考になりました、ありがとうございました<br>
+<a href="http://www.kkaneko.com/rinkou/cygwin/mingw.html">http://www.kkaneko.com/rinkou/cygwin/mingw.html</a><br>
+</span><br>
+（android開発はしないという方は<a href="#oe_install">ObjectEditorのインストール</a>へ）<br>
+
+   <br>
+(3) ADBドライバ 
+(以下はandoroid開発に必要)<br>
+android端末製造元からダウンロード<br>
+<br>
+ドライバが見つからないときにはこのページを参考にしました（ひろも様ありがとうございました）<br><a href="http://www.teradas.net/archives/8088/">http://www.teradas.net/archives/8088/</a><br>
+
+
+  
+<br>
+(4) android SDK<br>
+<a href="http://developer.android.com/sdk/index.html">http://developer.android.com/sdk/index.html</a>からダウンロード<br>
+<br>
+このSDKにはeclipseが含まれています。eclipseはかなり高機能な開発ツールで、大抵のことはこれひとつで十分です。<br>
+もしeclipseで満足だと思うのでしたら、そちらを使用したほうがよいと思います。<br><br>
+
+<br>
+
+
+ 
+<br><br>
+
+その他、プログラミング言語のヘルプファイルや使いやすいテキストエディタもあると便利です。<br>
+</p>
+<p><a name="#oe_install"></a><strong>ObjectEditorのインストール</strong>
+</p>
+<p>
+圧縮ファイルを適当な場所で解凍して下さい、フォルダ"ObjectEdhitor10"が作成されてファイルが展開されます。
+</p>
+<p>
+<a name="#tenkaizu"></a>
+(展開図)<br><strong><img align="baseline" alt="ファイルの一覧" border="0" hspace="0" src="data/files.gif"></strong>
+</p>
+<p>
+<strong>アンインストール</strong>
+</p>
+<p>
+フォルダ"ObjectEditor10"を削除してください。
+</p>
+<p>
+<strong>実行</strong>
+</p>
+<p>
+ファイル"objedit.jar"をダブルクリックするか、コマンドプロンプトで"javaw -jar  objedit.jar"とタイプして実行してください。<br>
+<font style="BACKGROUND-COLOR: #ffffff">
+プログラムを実行すると新規作成のダイアログが出るので、作成するプログラムの種類(Java or C++)を選択します。<br>
+そうすると接続図エディタが起動します。このときオブジェクトの名前(つまりアプリケーションの名前)の入力欄が選択状態になるので、アプリケーション名を入力します(デフォルトは"NewApplication")
+</font>
+</p>
+<p>
+<font style="BACKGROUND-COLOR: #ffffff">
+<strong><a name="#setuzokuzueditor"></a>接続図エディタ</strong>
+</font>
+</p>
+<p>
+<font style="BACKGROUND-COLOR: #ffffff">
+（起動直後の画面、赤い文字は説明です）
+</font>
+<br>
+<img align="baseline" alt="オブジェクトエディタの起動画面" border="0" hspace="0" src="data/objedit.gif">
+</p>
+<p>
+<strong><a name="#xobject"></a>xobject( compleX object )</strong>
+</p>
+<p>
+xobjectはプログラムやデータの集まりを一つのコンポーネントで表現したものです<br>
+名前が書いてあるボタンをクリックするとオブジェクトを記述するための接続図エディタが起動します。<br>
+<img align="baseline" alt="xobject" border="0" hspace="0" src="data/xobject.gif">
+</p>
+<p>
+<strong><a name="#aobject"></a>aobject( Atomic object )</strong>
+</p>
+<p>
+aobjectもxobjectと同様にプログラムやデータの集まりですが、ボタンをクリックしたとき状態図エディタが起動するところが違います。<br>
+<img align="baseline" alt="aobject" border="0" hspace="0" src="data/aobject.gif">
+</p>
+<p>
+<strong><a name="#pin"></a>pin</strong>
+</p>
+<p>
+オブジェクトが他のオブジェクトとデータをやり取りするときに使います。pinの表示はJavaのメソッド呼出しのフォーマットに準じます。<br>
+またpinを作成するとき、同時にエディタで編集しているオブジェクト上にもpinが作られます。この２つのpinは同一のものとして取り扱われます。<br>
+<img align="baseline" alt="pinの例" border="0" hspace="0" src="data/pin.gif">
+</p>
+<p>
+<strong><a name="#signal"></a><br>
+信号線</strong>
+</p>
+<p>
+信号線はpinの間のデータの流れ※を表現します。
+</p>
+<p>
+<br>
+<img align="baseline" alt="信号線の例" border="0" hspace="0" src="data/signal.gif">
+</p>
+<p>
+※信号線の中には(1)のようにデータを含まないものがあるので、以後は"データの流れ"と呼ばずに"信号"と呼ぶことにします。
+</p>
+<p>
+&nbsp;信号の伝わる順序
+</p>
+<p>
+信号線のつけかたによって信号の伝わりかたが異なってくる場合があります。
+</p>
+<p>
+<br>
+<img align="baseline" alt="信号の伝わる順序" border="0" hspace="0" src="data/signal-order.gif">
+</p>
+<p>
+信号の伝わる順序が重要な場合は(1)のような使い方は避けた法がよいでしょう。
+</p>
+<p>
+<strong><a name="#uobject"></a>uobject( Uni-functional object )</strong>
+</p>
+<p>
+uobjectも<a href="#xobject">xobject</a>や<a href="#aobject">aobject</a>と同じくプログラムやデータの集まりですが、このオブジェクトでは、直接Javaソースコードを記述します。<br>
+またuobjectのpinの数は、入力用および出力用がそれぞれ最大で１つに制限されており、その動作は入力用のpinに信号が到達すると記述されているJavaのコードを実行し、必要に応じて出力用のpinに信号を出すという、単一の関数によく似た振る舞いをします。
+</p>
+<p>
+<br>
+<img align="baseline" alt="uobject" border="0" hspace="0" src="data/uobject.gif">
+</p>
+<p>
+<a name="#uobject_conditional"></a>
+<a name="#utox"></a>
+&nbsp;またuobjectはxobjectに変換することができます。この機能はuobjectを機能拡張するときに便利です。<br>
+まず、編集メニューの"Xオブジェクトに変換"を選択してから、変換したいuobjectをクリックするとxobjectに変換されます。
+</p>
+<p>
+<br>
+<img align="baseline" alt="" border="0" hspace="0" src="data/uobjtoxobj.gif">
+</p>
+<p>
+<strong><a name="#codeclip"></a>codeclip</strong>
+</p>
+<p>
+codeclipはソースコードの断片で直接Javaソースプログラムに挿入されます。<br>
+これはプロパティ変数や関数の定義など、接続図エディタや状態遷移図エディタで表現できない部分を記述するため設けられました。
+</p>
+<p>
+<br>
+<img align="baseline" alt="codeclip" border="0" hspace="0" src="data/codeclip.gif">
+</p>
+<p>
+codeclipはソースコードの一部となるので基本的にはJavaプログラムのすべての表現が使えます。
+</p>
+<p>
+<a name="#balloon"></a>
+<a name="#group"></a>
+<strong>コンポーネントのグループ</strong>
+</p>
+<p>
+コンポーネントの集合を表すコンポーネントです。単独で使うのはあまり意味がありません。ツールメニューの"グループ"を選択して編集画面をクリックすると貼り付けられます。<br>
+移動や大きさを変えたりする方法は他の種類のコンポーネントと同じです。
+</p>
+<p>
+<br>
+<img align="baseline" alt="グループの例" border="0" hspace="0" src="data/group.gif">&nbsp;
+</p>
+<p>
+<a name="#grouptox"></a>
+グループはxobjectに変換することができます。編集メニューの"Xオブジェクトに変換"を選択してグループをクリックするとxobjectに変換され、信号の出入り口には自動的にpinが設置されます。
+</p>
+<p>
+<br>
+<img align="baseline" alt="グループをxobjectに変換する" border="0" hspace="0" src="data/grouptox.gif">
+</p>
+<p>
+<a name="#xtogroup"></a>
+逆にxobjectをグループに変換することもできます。編集メニューの"グループに変換"を選択してxobjectをクリックするとグループに変換されます。
+</p>
+<p>
+<br>
+<img align="baseline" alt="xobjectをグループに変換する" border="0" hspace="0" src="data/xtogroup.gif">
+</p>
+<p>
+<a name="#optpin"></a>
+上で説明したグループを扱う操作を組み合わせると、オブジェクトを自在にばらしたり、組み合わせたりすることができるので、プログラムの開発･デバッグがより簡単になります。
+</p>
+<p>
+<a name="#relation"></a>
+<a name="#stateeditor"></a>
+<strong>状態図エディタ</strong>
+</p>
+<p>
+aobjectの名前の書いてあるボタンをクリックすると状態図エディタがオブジェクトの情報を読み込んで起動します。
+</p>
+<p>
+<img align="baseline" alt="状態遷移図エディタ" border="0" hspace="0" src="data/stateeditor.gif">
+</p>
+
+<p>
+<strong><a name="#state"></a>状態</strong>
+</p>
+<p>
+名前の通りaobjectの状態を表現します。単独で使うことはあまりありません。後述の遷移とともに使います。
+</p>
+
+<p>
+<br>
+<img align="baseline" alt="状態" border="0" hspace="0" src="data/state.gif">
+</p>
+<p>
+<strong><a name="#transition"></a>遷移</strong>
+</p>
+<p>
+遷移はオブジェクトのある状態から別の状態への移り変わりを表現します。その動作は<a href="#uobject">uobject</a>とよくにていますが、実行の流れが状態によって決められているところが異なります。
+</p>
+<p>
+<br>
+<img align="baseline" alt="遷移" border="0" hspace="0" src="data/transition.gif">
+</p>
+<p>
+また遷移についている赤紫色の矢印をクリックして付け替えたい状態をクリックすると付け替えることができます。
+</p>
+<p>
+<br>
+<img align="baseline" alt="状態を付け替える" border="0" hspace="0" src="data/transition2.gif">
+</p>
+<p>
+<strong><a name="#parts_table"></a>部品棚</strong>
+</p>
+<p>
+部品棚では<a href="#uobject">uobject</a>と<a href="#transition">遷移</a>は同じ種類のコンポーネントとして取り扱われます。これにより、uobjectを遷移として使ったり、その逆の使い方をすることができます。
+</p>
+<p>
+<br>
+<img align="baseline" alt="部品棚" border="0" hspace="0" src="data/parts-table.gif"></p>
+<p>
+<a name="#texteditor"></a>
+<strong>テキストエディタ</strong>
+</p>
+<p>
+<br>
+<img align="baseline" alt="テキストエディタ" border="0" hspace="0" src="data/texteditor.gif">
+</p>
+<p>
+<a name="#messagewindow"></a>
+<strong>メッセージウィンドウ</strong>
+</p>
+<p>
+<br>
+<img align="baseline" alt="コンパイル・実行結果の表示" border="0" hspace="0" src="data/message-window.gif">
+</p>
+<p>
+<a name="#setting"></a>
+<strong>プロパティの設定ウィンドウ</strong>
+</p>
+<p>
+プロパティには大きく分けて"デフォルトのプロパティ"と"プロジェクトのプロパティ"の２つがあります。<br>
+"デフォルトのプロパティ"はプロジェクトを新規作成するときにセットされるプロパティですべてのプロジェクトで共通です。<br>
+それに対して"プロジェクトのプロパティ"はプロジェクトファイルを開いたときにセットされ、その内容はインポートするライブラリやコンパイル方法など基本的にはプロジェクトごとに異なるものです。
+</p>
+<p>
+設定ボタンをクリックするとプロジェクトのプロパティの設定ウィンドウが開きます。<br>
+現在の設定内容をプロジェクトのプロパティに反映させたければ"OK"を、取り消したいときは"キャンセル"を<br>
+設定内容をデフォルトのプロパティに設定したいときは"デフォルトに設定"を、設定内容を新規作成の状態に戻したければ"デフォルトに戻す"をそれぞれクリックして下さい。<br>
+<img align="baseline" alt="設定ウィンドウ" border="0" hspace="0" src="data/setting.gif">&nbsp;
+<br><br>
+<font color="#ff0000">※初期状態では設定をWindows 
+XPに適合させてあります。他のOSで使用する場合にはこの設定ウィンドウを使用して<br>
+設定を変更してください。
+<br></font>
+<a name="#guidesigner"></a>
+<strong><br>
+GUIデザイナー</strong>
+
+</p>
+<p>
+<img align="baseline" alt="GUI-Designer" border="0" hspace="0" src="data/guidesigner.gif">
+</p>
+<p>
+<a name="#menueditor"></a>
+<strong>メニューエディタ</strong></p>
+<p>
+<br>
+<img align="baseline" alt="メニューエディタ" border="0" hspace="0" src="data/menueditor.gif">
+</p>
+<p>
+<strong>例題</strong>
+</p>
+<p>
+<a name="#sample1"></a>
+<strong>1.Hello World(コンソールアプリケーション)</strong>
+</p>
+<p>
+最初はコンソールに"こんにちは"と表示するプログラムをつくります。
+</p>
+<p>
+(1) まずuobjectを貼り付けます。
+</p>
+<p>
+(2) 次にオブジェクトの青いところをクリックして<a href="#texteditor">テキストエディタ</a> を起動し、Javaプログラムを入力します。Javaについて分からないところがあれば、エディタの"？"がついているボタンをクリックすると、Javaのヘルプが表示されます。
+</p>
+<p>
+(4) 最後に"Start()"と表示されているpinとuobjectを信号線で結ぶとプログラムが完成します。このとき信号線の向きに注意して下さい。<br>
+これの意味するところは、アプリケーションプログラムは始動するとまず"Start()"とかいてあるpinに信号が出力されるように設定されているので、この信号でuobjectに動作の指示を出しているわけです。
+</p>
+<p>
+できあがったプログラムのコンパイル･実行の様子を下に示します。
+</p>
+<p>
+<img align="baseline" alt="例題１" border="0" hspace="0" src="data/sample1.gif">
+</p>
+<p>
+<a name="#sample2"></a>
+<strong>2.Hello World(GUIアプリケーション/ラベルを使う)</strong>
+ </p>
+<p>
+次はGUIプログラミング( Graphical User Interface:早い話がウィンドウを使ったプログラム）に挑戦してみましょう。<br>
+ここではラベルに"こんにちは"と表示するプログラムを作ってみます。ObjectEditorを起動後、最初に<a href="#guidesigner">GUIデザイナー</a>を起動してウィンドウのレイアウトをデザインします。
+</p>
+<p>
+<img align="baseline" alt="ＧＵＩをデザインする" border="0" hspace="0" src="data/sample2-1.gif">
+</p>
+<p>
+デザインしたら"変換"ボタンをクリックしてGUIオブジェクトを作成してからGUIデザイナーを終了します。<br>
+あとはStartピンとGUIオブジェクトのStartピンを信号線で結ぶとプログラムは完成します。
+</p>
+<p>
+<img align="baseline" alt="実行のようす" border="0" hspace="0" src="data/sample2-2.gif">
+</p>
+<p>
+GUIオブジェクトのレイアウトを変更したいときは、GUIオブジェクトの"GUI"と書いてあるボタンをクリックしてGUIオブジェクトを開いてから、GUIデザイナーの起動ボタンをクリックして下さい。
+</p>
+<p>
+<a name="#sample3"></a>
+<strong>3.ボタンを使う</strong>
+</p>
+<p>
+今度はボタンを使うプログラムをつくります。２つのボタンをクリックするたびにラベルにメッセージを表示します。<br>
+レイアウト
+</p>
+<p>
+<img align="baseline" alt="例題３のレイアウト" border="0" hspace="0" src="data/sample3-1.gif">
+</p>
+<p>
+接続図
+</p>
+<p>
+<img align="baseline" alt="例題３の接続図" border="0" hspace="0" src="data/sample3-2.gif">
+</p>
+<p>
+<a name="#sample4"></a>
+</p>
+<h3>&nbsp;</h3>
+<p>
+<a name="#compileerror"></a>
+<strong><br>
+androidプログラムについて<br>
+</strong>
+（1）androidプログラムのデバッグには実機をＵＳＢ接続する必要があります<br><br>
+（2）コンパイルする前にプラットフォームの"android.jar"ファイルを作業フォルダにコピーする必要があります<br><br>
+<img align="baseline" alt="android.jar" border="0" hspace="0" src="data/android-jar.jpg">
+
+ 
+<br>
+<br>
+
+<br>
+<br>
+<a name="#henkou"></a>
+<strong>変更履歴<br></strong>
+2018.10(ver1.2.2)githubに登録<br>
+<br>
+2014.03(ver1.0)android開発に対応、uobjectや遷移に直接コードを記述するように仕様変更<br>
+また吹き出しなど使用頻度の少ないコンポーネントを削除<br>
+<br>
+2005.12(ver0.9)プロジェクトファイルの導入 ／ ユーザーインターフェースを改良 ／ 一括印刷に対応した。<br>
+また吹き出しやコンポーネントのグループを追加した。(Wakamoto様 いつもありがとうございます)<br>
+<br>
+2004.8(ver0.8.1)インストールする場所によってはソースコードが正しく表示されないことがある不具合を修正。<br>
+<br>
+2004.8(ver0.8)インストールのときの面倒な設定が必要なくなった。<br>
+またver0.7での配布ファイルの不具合を修正した。<br>
+<br>
+2004. 8(ver 0.7) Windows 2000/XPに対応。またユーザーインターフェースに若干の改良を加えた。<br>
+(Wakamoto様ありがとうございます)<br>
+<br>
+2003. 8(ver 0.6) C++のソース生成機能を追加。 またオブジェクト上のピンをダイレクトに(オブジェクトを開くことなく)追加、削除したり名前を変更することができるようになった。 <br>
+<br>
+2003. 6(ver 0.5) ファイル形式をXMLに変更、ソースコード生成機能のバグ修正＆改良。またライブラリにはXMLパーサを追加。 <br>
+<br>
+2003. 5(ver0.4) 
+オブジェクトの種類にuobjectを追加、部品棚の導入、印刷、テキストエディタ等の機能(THX.黒須様)を追加。またGUIデザイナーにメニューエディタの機能を追加。 
+</p>
+<p>
+2003. 1(ver0.3) 全体の機能やデザインを統合開発環境風に変更。GUI上でコンパイル･実行ができるようにした。また状態遷移図エディタにおいては条件遷移に対応。<br>
+<br>
+2002.9(ver 0.2) GUIレイアウトデザイン機能を追加。またファイル形式を変更して大きなサイズのプログラムを作成できるようにした。 <br>
+<br>
+2002.5(ver 0.1) 初版完成
+</p>
+<h3>最後に</h3>
+<p>
+本ソフトをご利用いただきありがとうございます。<br>
+ご意見、ご要望、バグ報告などございましたら以下のアドレスまでメールをお送りくだされば幸いです。<br>
+(次のバージョンに反映させたいので)<br>
+<br>
+kousoz80&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="mailto:rscqr931@yahoo.co.jp">rscqr931@yahoo.co.jp</a><br>
+</p>
+</body>
+</html>

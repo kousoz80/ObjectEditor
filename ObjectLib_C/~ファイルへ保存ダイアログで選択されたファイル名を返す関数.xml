@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C17</ID>
+<x0>7</x0>
+<y0>355</y0>
+<width>366</width>
+<height>21</height>
+<codetext>//ファイルへ保存ダイアログで選択されたファイル名を返す関数
+char* showSaveDialog( char* title ){
+  OPENFILENAME ofname;
+  static char file_name[MAX_PATH] = &quot;\0&quot;;
+
+  memset(&amp;ofname,0,sizeof(OPENFILENAME));
+  memset(file_name,0,MAX_PATH);
+
+  ofname.lStructSize=76;
+  ofname.hwndOwner=NULL;
+  ofname.lpstrFilter=NULL;
+  ofname.lpstrFile=file_name;
+  ofname.nMaxFile=MAX_PATH;
+  ofname.Flags=OFN_FILEMUSTEXIST;
+  ofname.lpstrTitle=title;
+
+ if( GetSaveFileName(&amp;ofname) ) return file_name;
+ return NULL;
+}
+</codetext>
+</codeclip>

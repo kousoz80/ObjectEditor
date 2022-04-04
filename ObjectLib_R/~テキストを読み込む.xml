@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C20</ID>
+<x0>45</x0>
+<y0>364</y0>
+<width>292</width>
+<height>196</height>
+<codetext>// テキストを読み込む
+file_open:
+  char infile$(FILE_SIZE),buf$(65536)
+  pp#=
+  pp#, infile, ropen tt#=
+  if tt#=ERROR then end
+  65536, buf, infile, _read tt#=
+  infile, rclose
+  NULL, buf$(tt#)=
+  buf, textarea, set_textarea_text
+  desktop, -&gt;Desktop.component repaint
+  end
+</codetext>
+</codeclip>

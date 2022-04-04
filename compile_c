@@ -1,0 +1,2 @@
+gcc -o test test.c
+echo コンパイル終了

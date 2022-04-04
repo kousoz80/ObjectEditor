@@ -1,0 +1,1070 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<xobject>
+<ID>_X33</ID>
+<x0>552</x0>
+<y0>385</y0>
+<width>107</width>
+<height>50</height>
+<ID_maker>1</ID_maker>
+<objectname>塗膜設計</objectname>
+<description></description>
+<aobject>
+<ID>_A0</ID>
+<x0>31</x0>
+<y0>23</y0>
+<width>280</width>
+<objectname>GUI</objectname>
+<description>GUIオブジェクト
+</description>
+<state>
+<ID>_SINIT</ID>
+<x0>0</x0>
+<y0>40</y0>
+<width>70</width>
+<height>40</height>
+<text>  InitState</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_Pstart</ID>
+<x0>400</x0>
+<y0>100</y0>
+<width>80</width>
+<height>26</height>
+<text>Start()</text>
+<px>0</px>
+<py>36</py>
+</pin>
+<pin>
+<ID>_PGUIout</ID>
+<x0>0</x0>
+<y0>84</y0>
+<width>180</width>
+<height>26</height>
+<text>GUI_created(JFrame f)</text>
+<px>0</px>
+<py>54</py>
+</pin>
+<pin>
+<ID>_PGUIclosed</ID>
+<x0>310</x0>
+<y0>0</y0>
+<width>180</width>
+<height>26</height>
+<text>GUI_closed()</text>
+<px>100</px>
+<py>6</py>
+</pin>
+<action>
+<ID>_Astart</ID>
+<comp1name>_Pstart</comp1name>
+<comp2name>_Ocreate</comp2name>
+</action>
+<operation>
+<ID>_Ocreate</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>220</x0>
+<y0>40</y0>
+<width>130</width>
+<height>64</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>43</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>GUIを作成する
+</description>
+<codetext>XGUI x = new XGUI();
+
+</codetext>
+</operation>
+<pin>
+<ID>_Pscreen</ID>
+<x0>0</x0>
+<y0>110</y0>
+<width>200</width>
+<height>26</height>
+<text>screen_created(JLabel l)</text>
+<px>0</px>
+<py>72</py>
+</pin>
+<pin>
+<ID>_PPscreen</ID>
+<x0>0</x0>
+<y0>138</y0>
+<width>200</width>
+<height>26</height>
+<text>screen_paint(Graphics g)</text>
+<px>0</px>
+<py>90</py>
+</pin>
+<pin>
+<ID>_PLABEL1</ID>
+<x0>0</x0>
+<y0>166</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL1_created(JLabel l)</text>
+<px>0</px>
+<py>108</py>
+</pin>
+<pin>
+<ID>_PPLABEL1</ID>
+<x0>0</x0>
+<y0>194</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL1_paint(Graphics g)</text>
+<px>0</px>
+<py>126</py>
+</pin>
+<pin>
+<ID>_Pwidth</ID>
+<x0>0</x0>
+<y0>222</y0>
+<width>200</width>
+<height>26</height>
+<text>width_created(JTextField t)</text>
+<px>0</px>
+<py>144</py>
+</pin>
+<pin>
+<ID>_PAwidth</ID>
+<x0>0</x0>
+<y0>250</y0>
+<width>200</width>
+<height>26</height>
+<text>width_input(String s)</text>
+<px>0</px>
+<py>162</py>
+</pin>
+<pin>
+<ID>_PLABEL3</ID>
+<x0>0</x0>
+<y0>278</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL3_created(JLabel l)</text>
+<px>0</px>
+<py>180</py>
+</pin>
+<pin>
+<ID>_PPLABEL3</ID>
+<x0>0</x0>
+<y0>306</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL3_paint(Graphics g)</text>
+<px>0</px>
+<py>198</py>
+</pin>
+<pin>
+<ID>_Pheight</ID>
+<x0>0</x0>
+<y0>334</y0>
+<width>200</width>
+<height>26</height>
+<text>height_created(JTextField t)</text>
+<px>0</px>
+<py>216</py>
+</pin>
+<pin>
+<ID>_PAheight</ID>
+<x0>0</x0>
+<y0>362</y0>
+<width>200</width>
+<height>26</height>
+<text>height_input(String s)</text>
+<px>0</px>
+<py>234</py>
+</pin>
+<pin>
+<ID>_Pnew_tomaku</ID>
+<x0>0</x0>
+<y0>390</y0>
+<width>200</width>
+<height>26</height>
+<text>new_tomaku_created(JButton b)</text>
+<px>0</px>
+<py>252</py>
+</pin>
+<pin>
+<ID>_PAnew_tomaku</ID>
+<x0>0</x0>
+<y0>418</y0>
+<width>200</width>
+<height>26</height>
+<text>new_tomaku_clicked()</text>
+<px>0</px>
+<py>270</py>
+</pin>
+<pin>
+<ID>_Psave_tomaku</ID>
+<x0>0</x0>
+<y0>446</y0>
+<width>200</width>
+<height>26</height>
+<text>save_tomaku_created(JButton b)</text>
+<px>0</px>
+<py>288</py>
+</pin>
+<pin>
+<ID>_PAsave_tomaku</ID>
+<x0>0</x0>
+<y0>474</y0>
+<width>200</width>
+<height>26</height>
+<text>save_tomaku_clicked()</text>
+<px>0</px>
+<py>306</py>
+</pin>
+<pin>
+<ID>_Pload_tomaku</ID>
+<x0>0</x0>
+<y0>502</y0>
+<width>200</width>
+<height>26</height>
+<text>load_tomaku_created(JButton b)</text>
+<px>0</px>
+<py>324</py>
+</pin>
+<pin>
+<ID>_PAload_tomaku</ID>
+<x0>0</x0>
+<y0>530</y0>
+<width>200</width>
+<height>26</height>
+<text>load_tomaku_clicked()</text>
+<px>0</px>
+<py>342</py>
+</pin>
+<pin>
+<ID>_PLABEL9</ID>
+<x0>0</x0>
+<y0>558</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL9_created(JLabel l)</text>
+<px>0</px>
+<py>360</py>
+</pin>
+<pin>
+<ID>_PPLABEL9</ID>
+<x0>0</x0>
+<y0>586</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL9_paint(Graphics g)</text>
+<px>0</px>
+<py>378</py>
+</pin>
+<pin>
+<ID>_PLABEL10</ID>
+<x0>0</x0>
+<y0>614</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL10_created(JLabel l)</text>
+<px>0</px>
+<py>396</py>
+</pin>
+<pin>
+<ID>_PPLABEL10</ID>
+<x0>0</x0>
+<y0>642</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL10_paint(Graphics g)</text>
+<px>0</px>
+<py>414</py>
+</pin>
+<pin>
+<ID>_PLABEL11</ID>
+<x0>0</x0>
+<y0>670</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL11_created(JLabel l)</text>
+<px>0</px>
+<py>432</py>
+</pin>
+<pin>
+<ID>_PPLABEL11</ID>
+<x0>0</x0>
+<y0>698</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL11_paint(Graphics g)</text>
+<px>0</px>
+<py>450</py>
+</pin>
+<pin>
+<ID>_PLABEL12</ID>
+<x0>0</x0>
+<y0>726</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL12_created(JLabel l)</text>
+<px>0</px>
+<py>468</py>
+</pin>
+<pin>
+<ID>_PPLABEL12</ID>
+<x0>0</x0>
+<y0>754</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL12_paint(Graphics g)</text>
+<px>0</px>
+<py>486</py>
+</pin>
+<pin>
+<ID>_PLABEL13</ID>
+<x0>0</x0>
+<y0>782</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL13_created(JLabel l)</text>
+<px>0</px>
+<py>504</py>
+</pin>
+<pin>
+<ID>_PPLABEL13</ID>
+<x0>0</x0>
+<y0>810</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL13_paint(Graphics g)</text>
+<px>0</px>
+<py>522</py>
+</pin>
+<pin>
+<ID>_Pweight</ID>
+<x0>0</x0>
+<y0>838</y0>
+<width>200</width>
+<height>26</height>
+<text>weight_created(JTextField t)</text>
+<px>0</px>
+<py>540</py>
+</pin>
+<pin>
+<ID>_PAweight</ID>
+<x0>0</x0>
+<y0>866</y0>
+<width>200</width>
+<height>26</height>
+<text>weight_input(String s)</text>
+<px>0</px>
+<py>558</py>
+</pin>
+<pin>
+<ID>_Pn_module</ID>
+<x0>0</x0>
+<y0>894</y0>
+<width>200</width>
+<height>26</height>
+<text>n_module_created(JTextField t)</text>
+<px>0</px>
+<py>576</py>
+</pin>
+<pin>
+<ID>_PAn_module</ID>
+<x0>0</x0>
+<y0>922</y0>
+<width>200</width>
+<height>26</height>
+<text>n_module_input(String s)</text>
+<px>0</px>
+<py>594</py>
+</pin>
+<pin>
+<ID>_Ps_module</ID>
+<x0>0</x0>
+<y0>950</y0>
+<width>200</width>
+<height>26</height>
+<text>s_module_created(JTextField t)</text>
+<px>0</px>
+<py>612</py>
+</pin>
+<pin>
+<ID>_PAs_module</ID>
+<x0>0</x0>
+<y0>978</y0>
+<width>200</width>
+<height>26</height>
+<text>s_module_input(String s)</text>
+<px>0</px>
+<py>630</py>
+</pin>
+<pin>
+<ID>_Pv_module</ID>
+<x0>0</x0>
+<y0>1006</y0>
+<width>200</width>
+<height>26</height>
+<text>v_module_created(JTextField t)</text>
+<px>0</px>
+<py>648</py>
+</pin>
+<pin>
+<ID>_PAv_module</ID>
+<x0>0</x0>
+<y0>1034</y0>
+<width>200</width>
+<height>26</height>
+<text>v_module_input(String s)</text>
+<px>0</px>
+<py>666</py>
+</pin>
+<pin>
+<ID>_Pcolor</ID>
+<x0>0</x0>
+<y0>1062</y0>
+<width>200</width>
+<height>26</height>
+<text>color_created(JButton b)</text>
+<px>0</px>
+<py>684</py>
+</pin>
+<pin>
+<ID>_PAcolor</ID>
+<x0>0</x0>
+<y0>1090</y0>
+<width>200</width>
+<height>26</height>
+<text>color_clicked()</text>
+<px>0</px>
+<py>702</py>
+</pin>
+<pin>
+<ID>_PLABEL20</ID>
+<x0>0</x0>
+<y0>1118</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL20_created(JLabel l)</text>
+<px>0</px>
+<py>720</py>
+</pin>
+<pin>
+<ID>_PPLABEL20</ID>
+<x0>0</x0>
+<y0>1146</y0>
+<width>200</width>
+<height>26</height>
+<text>LABEL20_paint(Graphics g)</text>
+<px>0</px>
+<py>738</py>
+</pin>
+<pin>
+<ID>_Pname</ID>
+<x0>0</x0>
+<y0>1174</y0>
+<width>200</width>
+<height>26</height>
+<text>name_created(JTextField t)</text>
+<px>0</px>
+<py>756</py>
+</pin>
+<pin>
+<ID>_PAname</ID>
+<x0>0</x0>
+<y0>1202</y0>
+<width>200</width>
+<height>26</height>
+<text>name_input(String s)</text>
+<px>0</px>
+<py>774</py>
+</pin>
+<pin>
+<ID>_Psave_paint</ID>
+<x0>0</x0>
+<y0>1230</y0>
+<width>200</width>
+<height>26</height>
+<text>save_paint_created(JButton b)</text>
+<px>0</px>
+<py>792</py>
+</pin>
+<pin>
+<ID>_PAsave_paint</ID>
+<x0>0</x0>
+<y0>1258</y0>
+<width>200</width>
+<height>26</height>
+<text>save_paint_clicked()</text>
+<px>0</px>
+<py>810</py>
+</pin>
+<pin>
+<ID>_Pload_paint</ID>
+<x0>0</x0>
+<y0>1286</y0>
+<width>200</width>
+<height>26</height>
+<text>load_paint_created(JButton b)</text>
+<px>0</px>
+<py>828</py>
+</pin>
+<pin>
+<ID>_PAload_paint</ID>
+<x0>0</x0>
+<y0>1314</y0>
+<width>200</width>
+<height>26</height>
+<text>load_paint_clicked()</text>
+<px>0</px>
+<py>846</py>
+</pin>
+<pin>
+<ID>_Pgo_symyulation</ID>
+<x0>0</x0>
+<y0>1342</y0>
+<width>200</width>
+<height>26</height>
+<text>go_symyulation_created(JButton b)</text>
+<px>0</px>
+<py>864</py>
+</pin>
+<pin>
+<ID>_PAgo_symyulation</ID>
+<x0>0</x0>
+<y0>1370</y0>
+<width>200</width>
+<height>26</height>
+<text>go_symyulation_clicked()</text>
+<px>0</px>
+<py>882</py>
+</pin>
+<codeclip>
+<ID>_CXSTART</ID>
+<x0>0</x0>
+<y0>0</y0>
+<width>300</width>
+<height>26</height>
+<codetext> class XGUI extends JFrame implements WindowListener{
+ JPanel cnt;
+screen Iscreen;
+ class screen extends JLabel{
+  screen(){
+ setOpaque( true );
+ setName(  &quot;screen&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  102, 102, 153 ));
+ setBackground( new Color(  0, 0, 0 ));
+ setHorizontalAlignment( 4 );
+ setVerticalAlignment( 0 );
+ setText( &quot;&quot; );
+ screen_created( this );
+}
+ public void paintComponent( Graphics g ){ super.paintComponent(g);
+screen_paint(g);
+}
+}
+LABEL1 ILABEL1;
+ class LABEL1 extends JLabel{
+  LABEL1(){
+ setOpaque( true );
+ setName(  &quot;LABEL1&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  102, 255, 102 ));
+ setHorizontalAlignment( 2 );
+ setVerticalAlignment( 0 );
+ setText( &quot;幅&quot; );
+ LABEL1_created( this );
+}
+ public void paintComponent( Graphics g ){ super.paintComponent(g);
+LABEL1_paint(g);
+}
+}
+width Iwidth;
+ class width extends JTextField implements ActionListener{
+  width(){
+ setOpaque( true );
+ setName(  &quot;width&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setText( &quot;100&quot; );
+ addActionListener( this );
+ width_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ width_input( getText() ); }
+}
+LABEL3 ILABEL3;
+ class LABEL3 extends JLabel{
+  LABEL3(){
+ setOpaque( true );
+ setName(  &quot;LABEL3&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  102, 255, 102 ));
+ setHorizontalAlignment( 2 );
+ setVerticalAlignment( 0 );
+ setText( &quot;高さ&quot; );
+ LABEL3_created( this );
+}
+ public void paintComponent( Graphics g ){ super.paintComponent(g);
+LABEL3_paint(g);
+}
+}
+height Iheight;
+ class height extends JTextField implements ActionListener{
+  height(){
+ setOpaque( true );
+ setName(  &quot;height&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setText( &quot;40&quot; );
+ addActionListener( this );
+ height_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ height_input( getText() ); }
+}
+new_tomaku Inew_tomaku;
+ class new_tomaku extends JButton implements ActionListener{
+  new_tomaku(){
+ setOpaque( true );
+ setName(  &quot;new_tomaku&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;新しい塗膜&quot; );
+ addActionListener( this );
+ new_tomaku_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ new_tomaku_clicked(); }
+}
+save_tomaku Isave_tomaku;
+ class save_tomaku extends JButton implements ActionListener{
+  save_tomaku(){
+ setOpaque( true );
+ setName(  &quot;save_tomaku&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;塗膜を保存&quot; );
+ addActionListener( this );
+ save_tomaku_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ save_tomaku_clicked(); }
+}
+load_tomaku Iload_tomaku;
+ class load_tomaku extends JButton implements ActionListener{
+  load_tomaku(){
+ setOpaque( true );
+ setName(  &quot;load_tomaku&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;塗膜の読込&quot; );
+ addActionListener( this );
+ load_tomaku_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ load_tomaku_clicked(); }
+}
+LABEL9 ILABEL9;
+ class LABEL9 extends JLabel{
+  LABEL9(){
+ setOpaque( true );
+ setName(  &quot;LABEL9&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 16 ));
+ setForeground( new Color(  0, 0, 255 ));
+ setBackground( new Color(  102, 255, 102 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;&lt;&lt;塗料のプロパティ&gt;&gt;&quot; );
+ LABEL9_created( this );
+}
+ public void paintComponent( Graphics g ){ super.paintComponent(g);
+LABEL9_paint(g);
+}
+}
+LABEL10 ILABEL10;
+ class LABEL10 extends JLabel{
+  LABEL10(){
+ setOpaque( true );
+ setName(  &quot;LABEL10&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  102, 255, 102 ));
+ setHorizontalAlignment( 2 );
+ setVerticalAlignment( 0 );
+ setText( &quot;体積弾性率&quot; );
+ LABEL10_created( this );
+}
+ public void paintComponent( Graphics g ){ super.paintComponent(g);
+LABEL10_paint(g);
+}
+}
+LABEL11 ILABEL11;
+ class LABEL11 extends JLabel{
+  LABEL11(){
+ setOpaque( true );
+ setName(  &quot;LABEL11&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  102, 255, 102 ));
+ setHorizontalAlignment( 2 );
+ setVerticalAlignment( 0 );
+ setText( &quot;比重&quot; );
+ LABEL11_created( this );
+}
+ public void paintComponent( Graphics g ){ super.paintComponent(g);
+LABEL11_paint(g);
+}
+}
+LABEL12 ILABEL12;
+ class LABEL12 extends JLabel{
+  LABEL12(){
+ setOpaque( true );
+ setName(  &quot;LABEL12&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  102, 255, 102 ));
+ setHorizontalAlignment( 2 );
+ setVerticalAlignment( 0 );
+ setText( &quot;剛性率&quot; );
+ LABEL12_created( this );
+}
+ public void paintComponent( Graphics g ){ super.paintComponent(g);
+LABEL12_paint(g);
+}
+}
+LABEL13 ILABEL13;
+ class LABEL13 extends JLabel{
+  LABEL13(){
+ setOpaque( true );
+ setName(  &quot;LABEL13&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  102, 255, 102 ));
+ setHorizontalAlignment( 2 );
+ setVerticalAlignment( 0 );
+ setText( &quot;粘性率&quot; );
+ LABEL13_created( this );
+}
+ public void paintComponent( Graphics g ){ super.paintComponent(g);
+LABEL13_paint(g);
+}
+}
+weight Iweight;
+ class weight extends JTextField implements ActionListener{
+  weight(){
+ setOpaque( true );
+ setName(  &quot;weight&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setText( &quot;1&quot; );
+ addActionListener( this );
+ weight_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ weight_input( getText() ); }
+}
+n_module In_module;
+ class n_module extends JTextField implements ActionListener{
+  n_module(){
+ setOpaque( true );
+ setName(  &quot;n_module&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setText( &quot;0.1&quot; );
+ addActionListener( this );
+ n_module_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ n_module_input( getText() ); }
+}
+s_module Is_module;
+ class s_module extends JTextField implements ActionListener{
+  s_module(){
+ setOpaque( true );
+ setName(  &quot;s_module&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setText( &quot;0.03&quot; );
+ addActionListener( this );
+ s_module_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ s_module_input( getText() ); }
+}
+v_module Iv_module;
+ class v_module extends JTextField implements ActionListener{
+  v_module(){
+ setOpaque( true );
+ setName(  &quot;v_module&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setText( &quot;0.01&quot; );
+ addActionListener( this );
+ v_module_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ v_module_input( getText() ); }
+}
+color Icolor;
+ class color extends JButton implements ActionListener{
+  color(){
+ setOpaque( true );
+ setName(  &quot;color&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;色&quot; );
+ addActionListener( this );
+ color_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ color_clicked(); }
+}
+LABEL20 ILABEL20;
+ class LABEL20 extends JLabel{
+  LABEL20(){
+ setOpaque( true );
+ setName(  &quot;LABEL20&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  102, 255, 102 ));
+ setHorizontalAlignment( 2 );
+ setVerticalAlignment( 0 );
+ setText( &quot;塗料名&quot; );
+ LABEL20_created( this );
+}
+ public void paintComponent( Graphics g ){ super.paintComponent(g);
+LABEL20_paint(g);
+}
+}
+name Iname;
+ class name extends JTextField implements ActionListener{
+  name(){
+ setOpaque( true );
+ setName(  &quot;name&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setText( &quot;no-name&quot; );
+ addActionListener( this );
+ name_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ name_input( getText() ); }
+}
+save_paint Isave_paint;
+ class save_paint extends JButton implements ActionListener{
+  save_paint(){
+ setOpaque( true );
+ setName(  &quot;save_paint&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;塗料を保存&quot; );
+ addActionListener( this );
+ save_paint_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ save_paint_clicked(); }
+}
+load_paint Iload_paint;
+ class load_paint extends JButton implements ActionListener{
+  load_paint(){
+ setOpaque( true );
+ setName(  &quot;load_paint&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;塗料の読込&quot; );
+ addActionListener( this );
+ load_paint_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ load_paint_clicked(); }
+}
+go_symyulation Igo_symyulation;
+ class go_symyulation extends JButton implements ActionListener{
+  go_symyulation(){
+ setOpaque( true );
+ setName(  &quot;go_symyulation&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;シミュレーション画面へ&quot; );
+ addActionListener( this );
+ go_symyulation_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ go_symyulation_clicked(); }
+}
+ XGUI(){
+ setTitle(&quot;塗膜設計&quot;);
+ cnt = new JPanel( new BorderLayout() );
+ cnt.setPreferredSize(  new  Dimension( 464, 404 ) );
+ ((Component)cnt).setBackground( new Color( 102, 255, 102 ) );
+ Iscreen = new screen();
+ cnt.add( Iscreen, 0 );
+ cnt.getLayout().removeLayoutComponent( Iscreen );
+ Iscreen.setBounds( 3, 1, 456, 251 );
+ ILABEL1 = new LABEL1();
+ cnt.add( ILABEL1, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL1 );
+ ILABEL1.setBounds( 2, 255, 28, 26 );
+ Iwidth = new width();
+ cnt.add( Iwidth, 0 );
+ cnt.getLayout().removeLayoutComponent( Iwidth );
+ Iwidth.setBounds( 32, 254, 42, 28 );
+ ILABEL3 = new LABEL3();
+ cnt.add( ILABEL3, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL3 );
+ ILABEL3.setBounds( 77, 255, 32, 27 );
+ Iheight = new height();
+ cnt.add( Iheight, 0 );
+ cnt.getLayout().removeLayoutComponent( Iheight );
+ Iheight.setBounds( 110, 254, 44, 29 );
+ Inew_tomaku = new new_tomaku();
+ cnt.add( Inew_tomaku, 0 );
+ cnt.getLayout().removeLayoutComponent( Inew_tomaku );
+ Inew_tomaku.setBounds( 155, 255, 106, 28 );
+ Isave_tomaku = new save_tomaku();
+ cnt.add( Isave_tomaku, 0 );
+ cnt.getLayout().removeLayoutComponent( Isave_tomaku );
+ Isave_tomaku.setBounds( 261, 255, 99, 28 );
+ Iload_tomaku = new load_tomaku();
+ cnt.add( Iload_tomaku, 0 );
+ cnt.getLayout().removeLayoutComponent( Iload_tomaku );
+ Iload_tomaku.setBounds( 360, 255, 98, 28 );
+ ILABEL9 = new LABEL9();
+ cnt.add( ILABEL9, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL9 );
+ ILABEL9.setBounds( 9, 294, 184, 30 );
+ ILABEL10 = new LABEL10();
+ cnt.add( ILABEL10, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL10 );
+ ILABEL10.setBounds( 79, 329, 66, 30 );
+ ILABEL11 = new LABEL11();
+ cnt.add( ILABEL11, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL11 );
+ ILABEL11.setBounds( 2, 329, 29, 29 );
+ ILABEL12 = new LABEL12();
+ cnt.add( ILABEL12, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL12 );
+ ILABEL12.setBounds( 182, 329, 41, 30 );
+ ILABEL13 = new LABEL13();
+ cnt.add( ILABEL13, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL13 );
+ ILABEL13.setBounds( 264, 330, 39, 29 );
+ Iweight = new weight();
+ cnt.add( Iweight, 0 );
+ cnt.getLayout().removeLayoutComponent( Iweight );
+ Iweight.setBounds( 32, 331, 43, 27 );
+ In_module = new n_module();
+ cnt.add( In_module, 0 );
+ cnt.getLayout().removeLayoutComponent( In_module );
+ In_module.setBounds( 146, 330, 34, 29 );
+ Is_module = new s_module();
+ cnt.add( Is_module, 0 );
+ cnt.getLayout().removeLayoutComponent( Is_module );
+ Is_module.setBounds( 224, 330, 39, 28 );
+ Iv_module = new v_module();
+ cnt.add( Iv_module, 0 );
+ cnt.getLayout().removeLayoutComponent( Iv_module );
+ Iv_module.setBounds( 305, 330, 48, 30 );
+ Icolor = new color();
+ cnt.add( Icolor, 0 );
+ cnt.getLayout().removeLayoutComponent( Icolor );
+ Icolor.setBounds( 371, 330, 77, 29 );
+ ILABEL20 = new LABEL20();
+ cnt.add( ILABEL20, 0 );
+ cnt.getLayout().removeLayoutComponent( ILABEL20 );
+ ILABEL20.setBounds( 208, 300, 43, 26 );
+ Iname = new name();
+ cnt.add( Iname, 0 );
+ cnt.getLayout().removeLayoutComponent( Iname );
+ Iname.setBounds( 253, 300, 113, 26 );
+ Isave_paint = new save_paint();
+ cnt.add( Isave_paint, 0 );
+ cnt.getLayout().removeLayoutComponent( Isave_paint );
+ Isave_paint.setBounds( 8, 364, 112, 30 );
+ Iload_paint = new load_paint();
+ cnt.add( Iload_paint, 0 );
+ cnt.getLayout().removeLayoutComponent( Iload_paint );
+ Iload_paint.setBounds( 136, 364, 126, 31 );
+ Igo_symyulation = new go_symyulation();
+ cnt.add( Igo_symyulation, 0 );
+ cnt.getLayout().removeLayoutComponent( Igo_symyulation );
+ Igo_symyulation.setBounds( 274, 364, 176, 32 );
+ setContentPane( cnt );
+ pack();
+ addWindowListener( this );
+ setVisible( true );
+ GUI_created( this );
+}
+ public void windowActivated( WindowEvent e ){}
+ public void windowClosed( WindowEvent e ){}
+ public void windowClosing( WindowEvent e ){ GUI_closed(); }
+ public void windowDeactivated( WindowEvent e ){}
+ public void windowDeiconified( WindowEvent e ){}
+ public void windowIconified( WindowEvent e ){}
+ public void windowOpened( WindowEvent e ){}
+}
+</codetext>
+</codeclip>
+<ID_maker>66</ID_maker>
+<height>904</height>
+<レイアウト>塗膜設計
+464
+404
+102
+255
+102
+LABEL;screen;null;3;1;456;251;102;102;153;0;0;0;Dialog;12;null;4;0;
+LABEL;LABEL1;幅;2;255;28;26;0;0;0;102;255;102;Dialog;12;null;2;0;
+TEXTFIELD;width;100;32;254;42;28;0;0;0;255;255;255;Dialog;12;
+LABEL;LABEL3;高さ;77;255;32;27;0;0;0;102;255;102;Dialog;12;null;2;0;
+TEXTFIELD;height;40;110;254;44;29;0;0;0;255;255;255;Dialog;12;
+BUTTON;new_tomaku;新しい塗膜;155;255;106;28;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;save_tomaku;塗膜を保存;261;255;99;28;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;load_tomaku;塗膜の読込;360;255;98;28;0;0;0;192;192;192;Dialog;12;null;0;0;
+LABEL;LABEL9;&lt;&lt;塗料のプロパティ&gt;&gt;;9;294;184;30;0;0;255;102;255;102;Dialog;16;null;0;0;
+LABEL;LABEL10;体積弾性率;79;329;66;30;0;0;0;102;255;102;Dialog;12;null;2;0;
+LABEL;LABEL11;比重;2;329;29;29;0;0;0;102;255;102;Dialog;12;null;2;0;
+LABEL;LABEL12;剛性率;182;329;41;30;0;0;0;102;255;102;Dialog;12;null;2;0;
+LABEL;LABEL13;粘性率;264;330;39;29;0;0;0;102;255;102;Dialog;12;null;2;0;
+TEXTFIELD;weight;1;32;331;43;27;0;0;0;255;255;255;Dialog;12;
+TEXTFIELD;n_module;0.1;146;330;34;29;0;0;0;255;255;255;Dialog;12;
+TEXTFIELD;s_module;0.03;224;330;39;28;0;0;0;255;255;255;Dialog;12;
+TEXTFIELD;v_module;0.01;305;330;48;30;0;0;0;255;255;255;Dialog;12;
+BUTTON;color;色;371;330;77;29;0;0;0;192;192;192;Dialog;12;null;0;0;
+LABEL;LABEL20;塗料名;208;300;43;26;0;0;0;102;255;102;Dialog;12;null;2;0;
+TEXTFIELD;name;no-name;253;300;113;26;0;0;0;255;255;255;Dialog;12;
+BUTTON;save_paint;塗料を保存;8;364;112;30;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;load_paint;塗料の読込;136;364;126;31;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;go_symyulation;シミュレーション画面へ;274;364;176;32;0;0;0;192;192;192;Dialog;12;null;0;0;
+</レイアウト>
+</aobject>
+</xobject>

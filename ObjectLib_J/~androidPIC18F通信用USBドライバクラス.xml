@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C23</ID>
+<x0>119</x0>
+<y0>6</y0>
+<width>316</width>
+<height>48</height>
+<codetext>// android &lt;---&gt; PIC18F 通信用USBドライバクラス
+UsbIO usbio;
+class UsbIO{
+	
+	static final String ACTION_USB_PERMISSION        = &quot;com.android.example.USB_PERMISSION&quot;;
+	static final String PACKAGE_USB_QUIET_PERMISSION = &quot;com.example.usb_quiet_permission&quot;;
+	static final String CLASS_USB_QUIET_PERMISSION   = &quot;com.example.usb_quiet_permission.MainActivity&quot;;
+
+	static String usb_directory = &quot;/dev/bus/usb/001&quot;;
+	static String usb_hub = &quot;001&quot;;
+	static String su_command = &quot;su&quot;;
+	static String busreset_command = &quot;busreset&quot;;
+	static String exit_command = &quot;exit&quot;;
+
+	public boolean AutoConnect = false;
+	public int VendorID        = 0x04d8;  // MICROCHIP
+	public int ProductID       = 0x000a;  // USB-CDC
+	public int UserID          = -1;
+	public int MaxPacketSize   = 64;
+	public int ThreadInterval  = 100;
+	public int ThreadSync      = 10;
+	public int ReceiveTimeOut  = 100;
+	public int DeviceInterval  = 250;
+	public UsbDeviceConnection mConnection = null;
+
+	Activity activity = null;
+	BroadcastReceiver broadcastReciever = null;
+	UsbDataReceiveListener usbDataReceiveListener = null;
+	DataReceiveThread dataReceiveThread = null;
+	boolean ThreadRunning = false;
+	
+	UsbManager   mUsbManager    = null;
+	UsbDevice    mDevice        = null;
+	UsbInterface mInterfaceData = null;
+	UsbEndpoint  mEndpointIn    = null;
+	UsbEndpoint  mEndpointOut   = null;
+
+
+	//	開始処理
+	public UsbIO( Activity act, boolean auto ){
+		activity = act;
+		AutoConnect = auto;
+		mUsbManager = (UsbManager)activity.getSystemService( Context.USB_SERVICE );
+
+		// ユーザーIDを得る
+		try {
+			PackageManager  pm = activity.getPackageManager();
+			ApplicationInfo ai = pm.getApplicationInfo( activity.getPackageName(), 0 );
+			UserID = ai.uid;
+		}
+		catch ( Exception e ){
+			Log.d(&quot;usbio&quot;, &quot;error: get application info&quot; );
+			e.printStackTrace();
+		}
+
+		// インテントの受信処理
+		broadcastReciever = new BroadcastReceiver() {
+
+			public void onReceive( Context context, Intent intent) {
+				String action = intent.getAction();
+
+				if( action.equals( ACTION_USB_PERMISSION ) ){
+					UsbDevice device = (UsbDevice)intent.getParcelableExtra( UsbManager.EXTRA_DEVICE );
+					synchronized (this) {
+						if( intent.getBooleanExtra( UsbManager.EXTRA_PERMISSION_GRANTED, false ) )  open( device );
+					}
+					Log.d(&quot;usbio&quot;, &quot;DEVICE_GRANTED&quot; );
+				}
+
+				else if( action.equals( UsbManager.ACTION_USB_DEVICE_ATTACHED ) ){
+					UsbDevice device = (UsbDevice)intent.getParcelableExtra( UsbManager.EXTRA_DEVICE );
+					open( device );
+					Log.d(&quot;usbio&quot;, &quot;DEVICE_ATTACHED&quot; );
+				}
+
+				else if( action.equals( UsbManager.ACTION_USB_DEVICE_DETACHED ) ){
+					close();
+					Log.d(&quot;usbio&quot;, &quot;DEVICE_DETACHED&quot; );
+				}
+
+			}
+		};
+
+		// USB接続インテントの受信処理登録
+		activity.registerReceiver( broadcastReciever, new IntentFilter( UsbManager.ACTION_USB_DEVICE_ATTACHED ) );
+
+		// USB切断インテントの受信処理登録
+		activity.registerReceiver( broadcastReciever, new IntentFilter( UsbManager.ACTION_USB_DEVICE_DETACHED ) );
+		
+		// USBデバイスパーミッションインテントの受信処理登録
+		activity.registerReceiver( broadcastReciever, new IntentFilter( ACTION_USB_PERMISSION ) );
+
+		// USBデータ受信スレッドの起動
+		ThreadRunning = true;
+		dataReceiveThread = new DataReceiveThread();
+		dataReceiveThread.start();
+	}
+
+
+	// 終了処理
+	public void finish(){
+		close();
+		removeUsbDataRecieveListener();
+		if( broadcastReciever != null ) activity.unregisterReceiver(broadcastReciever);
+		broadcastReciever = null;
+		ThreadRunning = false;
+		try{
+			dataReceiveThread.join();
+		} catch(InterruptedException e ){Log.d(&quot;usbio&quot;, &quot;thread-join:interrupt&quot;);}
+	}
+
+
+	// USBデバイスを開く
+	void open(UsbDevice device) {
+
+		if( device != null ){
+			mDevice = device;
+			UsbDeviceConnection connection = mUsbManager.openDevice( mDevice );
+			if( connection != null ){
+				mConnection = connection;
+				for( int i = 0; i &lt; mDevice.getInterfaceCount(); i++ ){
+					UsbInterface usbInterface = mDevice.getInterface(i);
+					for( int j = 0; j &lt; usbInterface.getEndpointCount(); j++ ){
+						UsbEndpoint endPoint = usbInterface.getEndpoint(j);
+
+						switch(endPoint.getType()){
+
+						case UsbConstants.USB_ENDPOINT_XFER_BULK:
+							mInterfaceData = usbInterface;
+							if( endPoint.getDirection() == UsbConstants.USB_DIR_IN ) mEndpointIn = endPoint; else  mEndpointOut = endPoint;
+							break;
+
+						case UsbConstants.USB_ENDPOINT_XFER_CONTROL:
+							break;
+
+						case UsbConstants.USB_ENDPOINT_XFER_INT:
+							break;
+
+						case UsbConstants.USB_ENDPOINT_XFER_ISOC:
+							break;
+
+						}
+					}
+				}
+				mConnection.claimInterface( mInterfaceData, true );     // データ転送用インターフェースを使用
+			}
+			else close();
+		}
+		else close();
+	}
+
+
+	// USBデバイスを閉じる
+	void close() {
+		if( mConnection != null ){
+			if( mInterfaceData != null ) mConnection.releaseInterface(mInterfaceData);
+			mConnection.close();
+		}
+		mDevice        = null;
+		mConnection    = null;
+		mInterfaceData = null;
+		mEndpointIn    = null;
+		mEndpointOut   = null;
+	}
+
+
+	// USBデバイスの使用許可ダイアログを呼び出す
+	public void getPermission(){
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(activity,0, new Intent(ACTION_USB_PERMISSION), 0);
+		for (UsbDevice device : mUsbManager.getDeviceList().values()) {
+			if( device.getVendorId()== VendorID &amp;&amp; device.getProductId() == ProductID &amp;&amp; !mUsbManager.hasPermission(device) ){
+				mUsbManager.requestPermission( device, pendingIntent );
+			}
+		}
+	}
+
+
+	// USBデバイスの使用許可アプリを呼び出す
+
+	/*
+	// 以下のコードをコンパイルしてシステムアプリとしてインストールしておくこと
+	package com.example.usb_quiet_permission;
+
+	import android.os.Bundle;
+	import android.app.Activity;
+	import android.content.Context;
+	import android.content.Intent;
+	import android.hardware.usb.UsbDevice;
+	import android.hardware.usb.UsbManager;
+	import android.util.Log;
+	import android.os.IBinder;
+	import android.os.ServiceManager;
+	import android.hardware.usb.IUsbManager;
+
+	public class MainActivity extends Activity {
+
+		static final String ACTION_USB_PERMISSION = &quot;com.android.example.USB_PERMISSION&quot;;
+		UsbManager mUsbManager;
+		Intent intent0, intent1;
+		UsbDevice device = null;
+		int user_id = -1;
+
+		@Override
+		protected void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			mUsbManager = (UsbManager)getSystemService( Context.USB_SERVICE );
+			intent0 = getIntent();
+			device = (UsbDevice)intent0.getParcelableExtra(UsbManager.EXTRA_DEVICE);
+			user_id = intent0.getIntExtra(&quot;UsbUserID&quot;, -1 );
+
+			// USBデバイスの使用許可を得る
+			if( device != null ){
+				intent1 = new Intent(ACTION_USB_PERMISSION);
+				try{
+					intent1.putExtra(UsbManager.EXTRA_DEVICE, device);
+					intent1.putExtra(UsbManager.EXTRA_PERMISSION_GRANTED, true);
+					IBinder b = ServiceManager.getService( Context.USB_SERVICE );
+					IUsbManager service = IUsbManager.Stub.asInterface(b);
+					service.grantDevicePermission( device, user_id );
+					sendBroadcast( intent1 );
+				}
+				catch(Exception e){
+					Log.d(&quot;UsbQuietPermission&quot;, &quot;error&quot;);
+					e.printStackTrace();
+				} 
+			}
+			finish();
+		}
+	}
+
+	*/
+
+	public void setPermission(){
+		for (UsbDevice device : mUsbManager.getDeviceList().values()) {
+			if( device.getVendorId()== VendorID &amp;&amp; device.getProductId() == ProductID &amp;&amp; !mUsbManager.hasPermission(device) ){
+				Intent intent = new Intent();
+				intent.setClassName( PACKAGE_USB_QUIET_PERMISSION, CLASS_USB_QUIET_PERMISSION );
+				intent.putExtra(UsbManager.EXTRA_DEVICE, device);
+				intent.putExtra( &quot;UsbUserID&quot;, UserID );
+				activity.startActivity( intent );
+			}
+		}
+	}
+
+
+	// USBデバイスをリセットする
+
+	/*
+	// 以下のコードをコンパイルして得られた実行ファイル(ファイル名は&quot;busreset&quot;とする)を
+	// パスの通してあるディレクトリにコピーしておくこと
+	#include &lt;stdio.h&gt;
+	#include &lt;unistd.h&gt;
+	#include &lt;fcntl.h&gt;
+	#include &lt;errno.h&gt;
+	#include &lt;sys/ioctl.h&gt;
+
+	#include &lt;linux/usbdevice_fs.h&gt;
+
+
+	int main(int argc, char **argv){
+		char *filename;
+		int fd;
+		int ret;
+
+		if(argc != 2){
+			fprintf(stderr, &quot;Usage: busreset &lt;device name&gt;\n&quot;);
+			return 1;
+		}
+		filename = argv[1];
+
+		fd = open(filename, O_WRONLY);
+		if(fd &lt; 0){
+			fprintf(stderr, &quot;USBデバイスを開くことが出来ません\n&quot;);
+			return 1;
+		}
+
+		ret = ioctl(fd, USBDEVFS_RESET, 0);
+		if(ret &lt; 0){
+			fprintf(stderr, &quot;ioctrl()でエラーが発生しました\n&quot;);
+			return 1;
+		}
+
+		close(fd);
+		return 0;
+	}
+
+	*/
+
+	public void reset(){
+		File usb_dir = new File(usb_directory);
+		File dev[] = usb_dir.listFiles();
+		int n = dev.length;
+		if( n &gt; 1 ){
+			try{
+				int i = 0;
+				String dev_name = &quot;&quot;;
+				while( dev[i].isDirectory() || ( dev_name = dev[i].getName()).equals(usb_hub) ) i++;
+				Process process = Runtime.getRuntime().exec(su_command);
+				DataOutputStream cmd = new DataOutputStream( process.getOutputStream());
+				cmd.writeBytes(busreset_command + &quot; &quot; + usb_directory + &quot;/&quot; + dev_name + &quot;\n&quot;);
+				cmd.flush();
+				cmd.writeBytes(exit_command + &quot;\n&quot;);
+				cmd.flush();
+				process.waitFor();
+				cmd.close();
+				process.destroy();
+			}
+			catch(Exception e){
+				Log.d(&quot;usbio&quot;, &quot;reset: Error&quot; );
+				e.printStackTrace();
+			}
+		}
+	}
+
+
+	// USBデータ送信
+	public void sendData( byte[] buffer, int size ){
+		if( mDevice != null &amp;&amp; mConnection != null &amp;&amp; mEndpointOut != null ){
+			if( mConnection.bulkTransfer( mEndpointOut, buffer, size, mEndpointOut.getInterval() ) &lt; 0 ) close();
+		}
+	}
+
+
+	// USBデータ受信リスナー
+	public interface UsbDataReceiveListener extends EventListener{
+		void receiveData( byte[] buffer, int size );
+	}
+
+
+	// USBデータ受信リスナーの設定
+	public void setUsbDataRecieveListener(UsbDataReceiveListener listener){
+		usbDataReceiveListener = listener;
+	}
+
+
+	// USBデータ受信リスナーの削除
+	public void removeUsbDataRecieveListener(){
+		usbDataReceiveListener = null;
+	}
+
+
+	// USBデータ受信スレッド
+	class DataReceiveThread extends Thread {
+		public void run() {
+			while( ThreadRunning ){
+				try{
+					// 受信処理
+					if( mDevice != null &amp;&amp; mConnection != null &amp;&amp; mEndpointIn != null ){
+						byte[] buffer = new byte[MaxPacketSize];
+						int size = mConnection.bulkTransfer( mEndpointIn, buffer, MaxPacketSize, ReceiveTimeOut );
+						if( usbDataReceiveListener != null ) usbDataReceiveListener.receiveData( buffer, size );
+						try{
+							Thread.sleep(ThreadSync);
+						} catch(InterruptedException e ){Log.d(&quot;usbio&quot;, &quot;receive-thread:interrupt&quot;);}
+					}
+
+					// 接続の回復処理
+					else{
+						Log.d(&quot;usbio&quot;, &quot;receive-thread:no response&quot; );
+						Log.d(&quot;usbio&quot;, &quot;device=&quot;+mDevice );
+						Log.d(&quot;usbio&quot;, &quot;connection=&quot;+mConnection );
+						Log.d(&quot;usbio&quot;, &quot;endpoint=&quot;+mEndpointIn );
+						Log.d(&quot;usbio&quot;, &quot;receive-thread:recovering connection&quot; );
+						Log.d(&quot;usbio&quot;, &quot;autoConnect=&quot;+AutoConnect );
+
+						// USBデバイスの認識待ち時間
+						try{
+							Thread.sleep(DeviceInterval);
+						} catch(InterruptedException e ){Log.d(&quot;usbio&quot;, &quot;receive-thread:interrupt&quot;);}
+
+						// 自動接続の場合はUSBデバイスの接続許可用アプリを呼び出す
+						if( AutoConnect ) setPermission();
+
+						// 自動接続でない場合はUSBデバイスの接続許可ダイアログを呼び出す
+						else getPermission();
+					}
+
+					try{
+						Thread.sleep(ThreadInterval);
+					} catch(InterruptedException e ){Log.d(&quot;usbio&quot;, &quot;receive-thread:interrupt&quot;);}
+				}
+
+				// エラー処理
+				catch( Exception ex ){
+					Log.d(&quot;usbio&quot;, &quot;receive-thread: Error&quot; );
+					ex.printStackTrace();
+				}
+
+			}
+		}
+
+	}//~DataReceiveThread
+
+} //~UsbIO
+</codetext>
+</codeclip>

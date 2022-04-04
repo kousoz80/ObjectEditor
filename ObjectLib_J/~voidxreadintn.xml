@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C17</ID>
+<x0>14</x0>
+<y0>25</y0>
+<width>126</width>
+<height>22</height>
+<codetext>void xread( int n ){
+  int i;
+  if( WorkFile != null ){
+    try{
+
+    if( n &gt;= 0 ){
+      WorkFile.seek( 4 + 3 * 8 * NumberOfStars * n );
+      for( i = 0;i &lt; NumberOfStars; i++){
+        px[i] = WorkFile.readDouble();
+      }
+      for( i = 0;i &lt; NumberOfStars; i++){
+        py[i] = WorkFile.readDouble();
+      }
+      for( i = 0;i &lt; NumberOfStars; i++){
+        pz[i] = WorkFile.readDouble();
+      }
+    }
+
+    } catch( IOException e ){}
+  }
+}
+</codetext>
+</codeclip>

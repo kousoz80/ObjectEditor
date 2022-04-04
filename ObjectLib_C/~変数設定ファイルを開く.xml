@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<operation>
+<ID>_O18</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>189</x0>
+<y0>54</y0>
+<width>125</width>
+<height>68</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>40</outconnecty0>
+<inpintext>in(EScrollBar* s)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>46</inpiny0>
+<inpinwidth>105</inpinwidth>
+<inpinheight>22</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>変数設定
+ファイルを開く
+</description>
+<codetext>scrollbar = s;
+if( ( WorkFile = fopen( FileName, &quot;r+b&quot; ) ) == NULL ){
+  System::exit(0);
+  return;
+}
+fseek( WorkFile, 0, SEEK_SET );
+fread( (void*)&amp;NumberOfStars, 4, 1, WorkFile );
+fread( (void*)&amp;max, 4, 1, WorkFile );
+px = new double[NumberOfStars];
+py = new double[NumberOfStars];
+pz = new double[NumberOfStars];
+xread(0);
+</codetext>
+</operation>

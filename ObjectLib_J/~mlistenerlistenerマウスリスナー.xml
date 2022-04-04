@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C24</ID>
+<x0>131</x0>
+<y0>33</y0>
+<width>243</width>
+<height>22</height>
+<codetext>mlistener listener;//マウスリスナー
+class mlistener implements MouseListener, MouseMotionListener{
+  Component com;
+  mlistener(Component c){
+    com = c;
+    com.addMouseListener(this);
+    com.addMouseMotionListener(this);
+  }
+  public void mouseClicked(MouseEvent e){}
+  public void mouseEntered(MouseEvent e){}
+  public void mouseExited(MouseEvent e){}
+  public void mousePressed(MouseEvent e){ pressed( com, e.getX(), e.getY()); }
+  public void mouseReleased(MouseEvent e){released( com, e.getX(), e.getY());}
+  public void mouseDragged(MouseEvent e){ drugged( com, e.getX(), e.getY()); }
+  public void mouseMoved(MouseEvent e){}
+}
+</codetext>
+</codeclip>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<codeclip>
+<ID>_C80</ID>
+<x0>547</x0>
+<y0>6</y0>
+<width>379</width>
+<height>183</height>
+<codetext>keyinput_listener listener;
+class keyinput_listener implements DocumentListener{
+  String s;
+  boolean allow = true;
+  public void caretPositionChanged(InputMethodEvent e){
+  }
+     public void changedUpdate(DocumentEvent e){}//属性が変更されたときの処理
+     public void insertUpdate(DocumentEvent e){
+//System.out.println(&quot;key&quot;);
+       if( allow &amp;&amp; (s = input_field.getText()).length() &gt; 0 ){
+         allow = false;
+         InputKey = (int)(byte)s.charAt(0);
+         clear_flg = true;
+         allow = true;
+       }
+     }//ドキュメントに挿入された時の処理
+     public void removeUpdate(DocumentEvent e){}//ドキュメントから削除されたときの処理
+
+}
+</codetext>
+</codeclip>

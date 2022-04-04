@@ -1,0 +1,2839 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!-- なんちゃってXML version 0.1( ObjectEditor専用 ) -->
+<xobject>
+<ID>project</ID>
+<x0>0</x0>
+<y0>0</y0>
+<width>200</width>
+<height>100</height>
+<ID_maker>36</ID_maker>
+<objectname>電卓</objectname>
+<description>新規のアプリケーション</description>
+<codeclip>
+<ID>_CSTART</ID>
+<x0>32</x0>
+<y0>28</y0>
+<width>80</width>
+<height>24</height>
+<codetext> String[] ARGS;
+</codetext>
+</codeclip>
+<pin>
+<ID>_PSTART</ID>
+<x0>34</x0>
+<y0>58</y0>
+<width>55</width>
+<height>24</height>
+<text>Start()</text>
+<px>50</px>
+<py>50</py>
+</pin>
+<aobject>
+<ID>_A32</ID>
+<x0>304</x0>
+<y0>43</y0>
+<width>121</width>
+<height>50</height>
+<ID_maker>3</ID_maker>
+<objectname>プログラム終了</objectname>
+<description>プログラムを終了させるオブジェクト</description>
+<state>
+<ID>_SINIT</ID>
+<x0>10</x0>
+<y0>10</y0>
+<width>70</width>
+<height>40</height>
+<text>  初期状態</text>
+<isinitstate>1</isinitstate>
+</state>
+<operation>
+<ID>_O0</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>122</x0>
+<y0>61</y0>
+<width>130</width>
+<height>90</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>68</inpiny0>
+<inpinwidth>39</inpinwidth>
+<inpinheight>22</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>プログラムを
+終了する</description>
+<codetext>System.exit(0);
+</codetext>
+</operation>
+<pin>
+<ID>_P1</ID>
+<x0>317</x0>
+<y0>96</y0>
+<width>60</width>
+<height>30</height>
+<text>終了する()</text>
+<px>10</px>
+<py>31</py>
+</pin>
+<action>
+<ID>_A2</ID>
+<comp1name>_P1</comp1name>
+<comp2name>_O0</comp2name>
+</action>
+</aobject>
+<aobject>
+<ID>_A7</ID>
+<x0>512</x0>
+<y0>55</y0>
+<width>183</width>
+<height>432</height>
+<ID_maker>48</ID_maker>
+<objectname>メインコントロール</objectname>
+<description>電卓の制御プログラム
+</description>
+<state>
+<ID>_SINIT</ID>
+<x0>22</x0>
+<y0>55</y0>
+<width>89</width>
+<height>47</height>
+<text>      初期状態</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_P0</ID>
+<x0>420</x0>
+<y0>94</y0>
+<width>60</width>
+<height>30</height>
+<text>数字(int d)</text>
+<px>4</px>
+<py>141</py>
+</pin>
+<pin>
+<ID>_P1</ID>
+<x0>551</x0>
+<y0>403</y0>
+<width>91</width>
+<height>27</height>
+<text>演算(String op)</text>
+<px>0</px>
+<py>286</py>
+</pin>
+<pin>
+<ID>_P2</ID>
+<x0>290</x0>
+<y0>59</y0>
+<width>124</width>
+<height>28</height>
+<text>表示は(Component c)</text>
+<px>6</px>
+<py>40</py>
+</pin>
+<state>
+<ID>_S39</ID>
+<x0>251</x0>
+<y0>391</y0>
+<width>72</width>
+<height>42</height>
+<text>    計算状態</text>
+<isinitstate>0</isinitstate>
+</state>
+<pin>
+<ID>_P4</ID>
+<x0>671</x0>
+<y0>126</y0>
+<width>52</width>
+<height>30</height>
+<text>小数点()</text>
+<px>3</px>
+<py>232</py>
+</pin>
+<operation>
+<ID>_O40</ID>
+<state1>_S30</state1>
+<state2>_S39</state2>
+<x0>298</x0>
+<y0>273</y0>
+<width>118</width>
+<height>64</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>0</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>46</outconnecty0>
+<inpintext>in(String op)</inpintext>
+<inpinx0>38</inpinx0>
+<inpiny0>44</inpiny0>
+<inpinwidth>80</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>計算状態に遷移
+する</description>
+<codetext>演算子 = op;
+</codetext>
+</operation>
+<operation>
+<ID>_O41</ID>
+<state1>_S21</state1>
+<state2>_S39</state2>
+<x0>447</x0>
+<y0>273</y0>
+<width>118</width>
+<height>64</height>
+<inconnectx0>26</inconnectx0>
+<inconnecty0>4</inconnecty0>
+<outconnectx0>2</outconnectx0>
+<outconnecty0>49</outconnecty0>
+<inpintext>in(String op)</inpintext>
+<inpinx0>38</inpinx0>
+<inpiny0>44</inpiny0>
+<inpinwidth>80</inpinwidth>
+<inpinheight>21</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>計算状態に遷移
+する</description>
+<codetext>演算子 = op;
+</codetext>
+</operation>
+<operation>
+<ID>_O42</ID>
+<state1>_S22</state1>
+<state2>_S39</state2>
+<x0>614</x0>
+<y0>272</y0>
+<width>118</width>
+<height>64</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>0</inconnecty0>
+<outconnectx0>5</outconnectx0>
+<outconnecty0>53</outconnecty0>
+<inpintext>in(String op)</inpintext>
+<inpinx0>40</inpinx0>
+<inpiny0>44</inpiny0>
+<inpinwidth>79</inpinwidth>
+<inpinheight>21</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>計算状態に遷移
+する</description>
+<codetext>演算子 = op;
+</codetext>
+</operation>
+<action>
+<ID>_A43</ID>
+<comp1name>_P1</comp1name>
+<comp2name>_O40</comp2name>
+</action>
+<codeclip>
+<ID>_C9</ID>
+<x0>148</x0>
+<y0>16</y0>
+<width>107</width>
+<height>21</height>
+<codetext>JTextField 表示;
+</codetext>
+</codeclip>
+<operation>
+<ID>_O17</ID>
+<state1>_SINIT</state1>
+<state2>_S30</state2>
+<x0>137</x0>
+<y0>45</y0>
+<width>130</width>
+<height>73</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>25</inconnecty0>
+<outconnectx0>71</outconnectx0>
+<outconnecty0>55</outconnecty0>
+<inpintext>in(Component c)</inpintext>
+<inpinx0>29</inpinx0>
+<inpiny0>52</inpiny0>
+<inpinwidth>101</inpinwidth>
+<inpinheight>21</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>表示を取得
+初期設定</description>
+<codetext>表示 = (JTextField)c;
+レジスタ = 0;
+レジスタ0 = 0;
+メモリ = 0;
+桁 = 1;
+演算子 = &quot;&quot;;
+演算子0 = &quot;&quot;;
+表示.setText(レジスタ+&quot;&quot;);
+</codetext>
+</operation>
+<action>
+<ID>_A18</ID>
+<comp1name>_P2</comp1name>
+<comp2name>_O17</comp2name>
+</action>
+<codeclip>
+<ID>_C19</ID>
+<x0>10</x0>
+<y0>187</y0>
+<width>110</width>
+<height>70</height>
+<codetext>String 演算子;
+double レジスタ;
+double メモリ;
+double 桁;
+String 演算子0;
+double レジスタ0;
+
+</codetext>
+</codeclip>
+<state>
+<ID>_S21</ID>
+<x0>422</x0>
+<y0>201</y0>
+<width>90</width>
+<height>44</height>
+<text>  整数入力状態</text>
+<isinitstate>0</isinitstate>
+</state>
+<state>
+<ID>_S22</ID>
+<x0>530</x0>
+<y0>199</y0>
+<width>90</width>
+<height>45</height>
+<text>  小数入力状態</text>
+<isinitstate>0</isinitstate>
+</state>
+<operation>
+<ID>_O24</ID>
+<state1>_S21</state1>
+<state2>_S21</state2>
+<x0>515</x0>
+<y0>62</y0>
+<width>103</width>
+<height>49</height>
+<inconnectx0>2</inconnectx0>
+<inconnecty0>32</inconnecty0>
+<outconnectx0>3</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in(int d)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>30</inpiny0>
+<inpinwidth>47</inpinwidth>
+<inpinheight>19</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>整数部を入力</description>
+<codetext>レジスタ = レジスタ * 10. + d;
+表示.setText(レジスタ + &quot;&quot; );
+</codetext>
+</operation>
+<action>
+<ID>_A25</ID>
+<comp1name>_P0</comp1name>
+<comp2name>_O24</comp2name>
+</action>
+<operation>
+<ID>_O26</ID>
+<state1>_S21</state1>
+<state2>_S22</state2>
+<x0>641</x0>
+<y0>54</y0>
+<width>126</width>
+<height>53</height>
+<inconnectx0>1</inconnectx0>
+<inconnecty0>40</inconnecty0>
+<outconnectx0>2</outconnectx0>
+<outconnecty0>38</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>87</inpinx0>
+<inpiny0>33</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>小数入力状態に
+遷移する</description>
+<codetext>桁 = 1;
+</codetext>
+</operation>
+<action>
+<ID>_A27</ID>
+<comp1name>_P4</comp1name>
+<comp2name>_O26</comp2name>
+</action>
+<operation>
+<ID>_O28</ID>
+<state1>_S22</state1>
+<state2>_S22</state2>
+<x0>660</x0>
+<y0>164</y0>
+<width>94</width>
+<height>70</height>
+<inconnectx0>3</inconnectx0>
+<inconnecty0>49</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>49</outconnecty0>
+<inpintext>in(int d)</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>32</inpiny0>
+<inpinwidth>49</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>小数部を入力</description>
+<codetext>桁 = 桁 / 10.0;
+レジスタ = レジスタ + d * 桁;
+表示.setText(レジスタ+&quot;&quot;);
+</codetext>
+</operation>
+<action>
+<ID>_A29</ID>
+<comp1name>_P0</comp1name>
+<comp2name>_O28</comp2name>
+</action>
+<state>
+<ID>_S30</ID>
+<x0>170</x0>
+<y0>165</y0>
+<width>95</width>
+<height>45</height>
+<text>    初期入力状態</text>
+<isinitstate>0</isinitstate>
+</state>
+<operation>
+<ID>_O31</ID>
+<state1>_S30</state1>
+<state2>_S21</state2>
+<x0>312</x0>
+<y0>132</y0>
+<width>104</width>
+<height>58</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>28</inconnecty0>
+<outconnectx0>89</outconnectx0>
+<outconnecty0>9</outconnecty0>
+<inpintext>in(int d)</inpintext>
+<inpinx0>57</inpinx0>
+<inpiny0>34</inpiny0>
+<inpinwidth>47</inpinwidth>
+<inpinheight>24</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>整数部(1桁目)
+を入力</description>
+<codetext>レジスタ = d;
+表示.setText(レジスタ+&quot;&quot;);
+
+</codetext>
+</operation>
+<action>
+<ID>_A32</ID>
+<comp1name>_P0</comp1name>
+<comp2name>_O31</comp2name>
+</action>
+<action>
+<ID>_A44</ID>
+<comp1name>_P1</comp1name>
+<comp2name>_O41</comp2name>
+</action>
+<action>
+<ID>_A45</ID>
+<comp1name>_P1</comp1name>
+<comp2name>_O42</comp2name>
+</action>
+<operation>
+<ID>_O46</ID>
+<state1>_S39</state1>
+<state2>_S30</state2>
+<x0>172</x0>
+<y0>272</y0>
+<width>108</width>
+<height>66</height>
+<inconnectx0>35</inconnectx0>
+<inconnecty0>49</inconnecty0>
+<outconnectx0>36</outconnectx0>
+<outconnecty0>1</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>20</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>0</inpinlinkcount>
+<description>計算する</description>
+<codetext>if( 演算子.equals(&quot;+/-&quot;) )       レジスタ = -レジスタ;
+else if( 演算子.equals(&quot;C&quot;) )    レジスタ = 0.0;
+else if( 演算子.equals(&quot;M+&quot;) )   メモリ += レジスタ;
+else if( 演算子.equals(&quot;Mr&quot;) ){  レジスタ = メモリ; メモリ = 0.0; }
+else{
+  if( 演算子0.equals(&quot;+&quot;) )     レジスタ = レジスタ0 + レジスタ;
+  else if( 演算子0.equals(&quot;-&quot;) )レジスタ = レジスタ0 - レジスタ;
+  else if( 演算子0.equals(&quot;*&quot;) )レジスタ = レジスタ0 * レジスタ;
+  else if( 演算子0.equals(&quot;/&quot;) )レジスタ = レジスタ0 / レジスタ;
+  演算子0   = 演算子;
+  レジスタ0 = レジスタ;
+}
+表示.setText(レジスタ+&quot;&quot;);
+
+</codetext>
+</operation>
+</aobject>
+<aobject>
+<ID>_A6</ID>
+<x0>305</x0>
+<y0>311</y0>
+<width>172</width>
+<height>212</height>
+<ID_maker>40</ID_maker>
+<objectname>演算子に変換</objectname>
+<description>演算キーを演算子に変換</description>
+<state>
+<ID>_SINIT</ID>
+<x0>151</x0>
+<y0>222</y0>
+<width>70</width>
+<height>40</height>
+<text>  初期状態</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_P18</ID>
+<x0>31</x0>
+<y0>293</y0>
+<width>60</width>
+<height>30</height>
+<text>足す()</text>
+<px>0</px>
+<py>135</py>
+</pin>
+<pin>
+<ID>_P1</ID>
+<x0>34</x0>
+<y0>339</y0>
+<width>60</width>
+<height>30</height>
+<text>引く()</text>
+<px>0</px>
+<py>150</py>
+</pin>
+<pin>
+<ID>_P2</ID>
+<x0>38</x0>
+<y0>387</y0>
+<width>60</width>
+<height>30</height>
+<text>かける()</text>
+<px>0</px>
+<py>168</py>
+</pin>
+<pin>
+<ID>_P3</ID>
+<x0>37</x0>
+<y0>431</y0>
+<width>60</width>
+<height>30</height>
+<text>割る()</text>
+<px>0</px>
+<py>184</py>
+</pin>
+<pin>
+<ID>_P4</ID>
+<x0>626</x0>
+<y0>250</y0>
+<width>113</width>
+<height>30</height>
+<text>演算子(String op)</text>
+<px>32</px>
+<py>30</py>
+</pin>
+<operation>
+<ID>_O6</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>367</x0>
+<y0>272</y0>
+<width>142</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(String s)</outpintext>
+<outpinx0>65</outpinx0>
+<outpiny0>27</outpiny0>
+<outpinwidth>77</outpinwidth>
+<outpinheight>18</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>&quot;+&quot;を出力</description>
+<codetext>s=&quot;+&quot;;
+</codetext>
+</operation>
+<operation>
+<ID>_O7</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>367</x0>
+<y0>318</y0>
+<width>142</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>27</inpiny0>
+<inpinwidth>33</inpinwidth>
+<inpinheight>19</inpinheight>
+<outpintext>out(String s)</outpintext>
+<outpinx0>70</outpinx0>
+<outpiny0>25</outpiny0>
+<outpinwidth>72</outpinwidth>
+<outpinheight>21</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>&quot;-&quot;を出力</description>
+<codetext>s=&quot;-&quot;;
+</codetext>
+</operation>
+<operation>
+<ID>_O8</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>368</x0>
+<y0>364</y0>
+<width>145</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>28</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(String s)</outpintext>
+<outpinx0>70</outpinx0>
+<outpiny0>27</outpiny0>
+<outpinwidth>75</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>&quot;*&quot;を出力</description>
+<codetext>s=&quot;*&quot;;
+</codetext>
+</operation>
+<operation>
+<ID>_O9</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>369</x0>
+<y0>411</y0>
+<width>147</width>
+<height>44</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>25</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(String s)</outpintext>
+<outpinx0>73</outpinx0>
+<outpiny0>24</outpiny0>
+<outpinwidth>75</outpinwidth>
+<outpinheight>21</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>&quot;/&quot;を出力</description>
+<codetext>s=&quot;/&quot;;
+</codetext>
+</operation>
+<action>
+<ID>_A19</ID>
+<comp1name>_P18</comp1name>
+<comp2name>_O6</comp2name>
+</action>
+<action>
+<ID>_A11</ID>
+<comp1name>_O6</comp1name>
+<comp2name>_P4</comp2name>
+</action>
+<action>
+<ID>_A12</ID>
+<comp1name>_O7</comp1name>
+<comp2name>_P4</comp2name>
+</action>
+<action>
+<ID>_A13</ID>
+<comp1name>_O8</comp1name>
+<comp2name>_P4</comp2name>
+</action>
+<action>
+<ID>_A14</ID>
+<comp1name>_O9</comp1name>
+<comp2name>_P4</comp2name>
+</action>
+<action>
+<ID>_A15</ID>
+<comp1name>_P1</comp1name>
+<comp2name>_O7</comp2name>
+</action>
+<action>
+<ID>_A16</ID>
+<comp1name>_P2</comp1name>
+<comp2name>_O8</comp2name>
+</action>
+<action>
+<ID>_A17</ID>
+<comp1name>_P3</comp1name>
+<comp2name>_O9</comp2name>
+</action>
+<pin>
+<ID>_P20</ID>
+<x0>27</x0>
+<y0>63</y0>
+<width>60</width>
+<height>30</height>
+<text>符号反転()</text>
+<px>0</px>
+<py>56</py>
+</pin>
+<pin>
+<ID>_P21</ID>
+<x0>25</x0>
+<y0>111</y0>
+<width>73</width>
+<height>29</height>
+<text>メモリ加算()</text>
+<px>0</px>
+<py>72</py>
+</pin>
+<pin>
+<ID>_P22</ID>
+<x0>26</x0>
+<y0>157</y0>
+<width>73</width>
+<height>30</height>
+<text>メモリ呼出()</text>
+<px>0</px>
+<py>89</py>
+</pin>
+<pin>
+<ID>_P23</ID>
+<x0>28</x0>
+<y0>202</y0>
+<width>60</width>
+<height>30</height>
+<text>クリア()</text>
+<px>0</px>
+<py>104</py>
+</pin>
+<pin>
+<ID>_P24</ID>
+<x0>28</x0>
+<y0>250</y0>
+<width>63</width>
+<height>29</height>
+<text>イコール()</text>
+<px>0</px>
+<py>120</py>
+</pin>
+<operation>
+<ID>_O25</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>366</x0>
+<y0>42</y0>
+<width>142</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(String s)</outpintext>
+<outpinx0>65</outpinx0>
+<outpiny0>27</outpiny0>
+<outpinwidth>77</outpinwidth>
+<outpinheight>18</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>&quot;+/-&quot;を出力</description>
+<codetext>s=&quot;+/-&quot;;
+</codetext>
+</operation>
+<operation>
+<ID>_O26</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>366</x0>
+<y0>89</y0>
+<width>142</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(String s)</outpintext>
+<outpinx0>65</outpinx0>
+<outpiny0>27</outpiny0>
+<outpinwidth>77</outpinwidth>
+<outpinheight>18</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>&quot;M+&quot;を出力</description>
+<codetext>s=&quot;M+&quot;;
+</codetext>
+</operation>
+<operation>
+<ID>_O27</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>366</x0>
+<y0>136</y0>
+<width>142</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(String s)</outpintext>
+<outpinx0>65</outpinx0>
+<outpiny0>27</outpiny0>
+<outpinwidth>77</outpinwidth>
+<outpinheight>18</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>&quot;Mr&quot;を出力</description>
+<codetext>s=&quot;Mr&quot;;
+</codetext>
+</operation>
+<operation>
+<ID>_O28</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>366</x0>
+<y0>181</y0>
+<width>142</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(String s)</outpintext>
+<outpinx0>65</outpinx0>
+<outpiny0>27</outpiny0>
+<outpinwidth>77</outpinwidth>
+<outpinheight>18</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>&quot;C&quot;を出力</description>
+<codetext>s=&quot;C&quot;;
+</codetext>
+</operation>
+<operation>
+<ID>_O29</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>366</x0>
+<y0>229</y0>
+<width>142</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(String s)</outpintext>
+<outpinx0>65</outpinx0>
+<outpiny0>27</outpiny0>
+<outpinwidth>77</outpinwidth>
+<outpinheight>18</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>&quot;=&quot;を出力</description>
+<codetext>s=&quot;=&quot;;
+</codetext>
+</operation>
+<action>
+<ID>_A30</ID>
+<comp1name>_P20</comp1name>
+<comp2name>_O25</comp2name>
+</action>
+<action>
+<ID>_A31</ID>
+<comp1name>_P21</comp1name>
+<comp2name>_O26</comp2name>
+</action>
+<action>
+<ID>_A32</ID>
+<comp1name>_P22</comp1name>
+<comp2name>_O27</comp2name>
+</action>
+<action>
+<ID>_A33</ID>
+<comp1name>_P23</comp1name>
+<comp2name>_O28</comp2name>
+</action>
+<action>
+<ID>_A34</ID>
+<comp1name>_P24</comp1name>
+<comp2name>_O29</comp2name>
+</action>
+<action>
+<ID>_A35</ID>
+<comp1name>_O25</comp1name>
+<comp2name>_P4</comp2name>
+</action>
+<action>
+<ID>_A36</ID>
+<comp1name>_O29</comp1name>
+<comp2name>_P4</comp2name>
+</action>
+<action>
+<ID>_A37</ID>
+<comp1name>_O28</comp1name>
+<comp2name>_P4</comp2name>
+</action>
+<action>
+<ID>_A38</ID>
+<comp1name>_O27</comp1name>
+<comp2name>_P4</comp2name>
+</action>
+<action>
+<ID>_A39</ID>
+<comp1name>_O26</comp1name>
+<comp2name>_P4</comp2name>
+</action>
+</aobject>
+<aobject>
+<ID>_A5</ID>
+<x0>306</x0>
+<y0>117</y0>
+<width>121</width>
+<height>165</height>
+<ID_maker>42</ID_maker>
+<objectname>数字に変換</objectname>
+<description>数字キーを0-9の数字に変換</description>
+<state>
+<ID>_SINIT</ID>
+<x0>28</x0>
+<y0>227</y0>
+<width>70</width>
+<height>40</height>
+<text>  初期状態</text>
+<isinitstate>1</isinitstate>
+</state>
+<operation>
+<ID>_O0</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>238</x0>
+<y0>0</y0>
+<width>131</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(int d)</outpintext>
+<outpinx0>75</outpinx0>
+<outpiny0>27</outpiny0>
+<outpinwidth>56</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>0を出力</description>
+<codetext>d=0;
+</codetext>
+</operation>
+<pin>
+<ID>_P1</ID>
+<x0>157</x0>
+<y0>23</y0>
+<width>45</width>
+<height>23</height>
+<text>key0()</text>
+<px>0</px>
+<py>24</py>
+</pin>
+<action>
+<ID>_A2</ID>
+<comp1name>_P1</comp1name>
+<comp2name>_O0</comp2name>
+</action>
+<pin>
+<ID>_P3</ID>
+<x0>578</x0>
+<y0>214</y0>
+<width>66</width>
+<height>29</height>
+<text>数字(int d)</text>
+<px>52</px>
+<py>79</py>
+</pin>
+<action>
+<ID>_A15</ID>
+<comp1name>_O0</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+<operation>
+<ID>_O5</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>238</x0>
+<y0>46</y0>
+<width>130</width>
+<height>45</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>1</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(int d)</outpintext>
+<outpinx0>75</outpinx0>
+<outpiny0>26</outpiny0>
+<outpinwidth>56</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>1を出力</description>
+<codetext>d=1;
+</codetext>
+</operation>
+<action>
+<ID>_A6</ID>
+<comp1name>_O5</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+<operation>
+<ID>_O7</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>237</x0>
+<y0>90</y0>
+<width>131</width>
+<height>45</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>1</inpinx0>
+<inpiny0>25</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(int d)</outpintext>
+<outpinx0>75</outpinx0>
+<outpiny0>25</outpiny0>
+<outpinwidth>56</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>2を出力</description>
+<codetext>d=2;
+</codetext>
+</operation>
+<operation>
+<ID>_O8</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>237</x0>
+<y0>134</y0>
+<width>133</width>
+<height>44</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>34</inpinwidth>
+<inpinheight>19</inpinheight>
+<outpintext>out(int d)</outpintext>
+<outpinx0>77</outpinx0>
+<outpiny0>24</outpiny0>
+<outpinwidth>56</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>3を出力</description>
+<codetext>d=3;
+</codetext>
+</operation>
+<operation>
+<ID>_O9</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>236</x0>
+<y0>175</y0>
+<width>134</width>
+<height>47</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>1</inpinx0>
+<inpiny0>27</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(int d)</outpintext>
+<outpinx0>79</outpinx0>
+<outpiny0>27</outpiny0>
+<outpinwidth>56</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>4を出力</description>
+<codetext>d=4;
+</codetext>
+</operation>
+<operation>
+<ID>_O10</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>237</x0>
+<y0>221</y0>
+<width>134</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>27</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(int d)</outpintext>
+<outpinx0>78</outpinx0>
+<outpiny0>26</outpiny0>
+<outpinwidth>56</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>5を出力</description>
+<codetext>d=5;
+</codetext>
+</operation>
+<operation>
+<ID>_O11</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>238</x0>
+<y0>266</y0>
+<width>133</width>
+<height>45</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(int d)</outpintext>
+<outpinx0>78</outpinx0>
+<outpiny0>26</outpiny0>
+<outpinwidth>56</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>6を出力</description>
+<codetext>d=6;
+</codetext>
+</operation>
+<operation>
+<ID>_O12</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>241</x0>
+<y0>403</y0>
+<width>133</width>
+<height>43</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>1</inpinx0>
+<inpiny0>24</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(int d)</outpintext>
+<outpinx0>77</outpinx0>
+<outpiny0>24</outpiny0>
+<outpinwidth>56</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>9を出力</description>
+<codetext>d=9;
+</codetext>
+</operation>
+<operation>
+<ID>_O13</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>239</x0>
+<y0>312</y0>
+<width>133</width>
+<height>45</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(int d)</outpintext>
+<outpinx0>77</outpinx0>
+<outpiny0>26</outpiny0>
+<outpinwidth>56</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>7を出力</description>
+<codetext>d=7;
+</codetext>
+</operation>
+<operation>
+<ID>_O14</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>240</x0>
+<y0>358</y0>
+<width>133</width>
+<height>46</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>0</inpinx0>
+<inpiny0>26</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out(int d)</outpintext>
+<outpinx0>78</outpinx0>
+<outpiny0>26</outpiny0>
+<outpinwidth>56</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>8を出力</description>
+<codetext>d=8;
+</codetext>
+</operation>
+<pin>
+<ID>_P16</ID>
+<x0>161</x0>
+<y0>153</y0>
+<width>45</width>
+<height>23</height>
+<text>key3()</text>
+<px>0</px>
+<py>65</py>
+</pin>
+<pin>
+<ID>_P17</ID>
+<x0>160</x0>
+<y0>109</y0>
+<width>45</width>
+<height>23</height>
+<text>key2()</text>
+<px>0</px>
+<py>52</py>
+</pin>
+<pin>
+<ID>_P18</ID>
+<x0>159</x0>
+<y0>70</y0>
+<width>45</width>
+<height>23</height>
+<text>key1()</text>
+<px>0</px>
+<py>38</py>
+</pin>
+<action>
+<ID>_A19</ID>
+<comp1name>_P18</comp1name>
+<comp2name>_O5</comp2name>
+</action>
+<action>
+<ID>_A20</ID>
+<comp1name>_P17</comp1name>
+<comp2name>_O7</comp2name>
+</action>
+<action>
+<ID>_A21</ID>
+<comp1name>_O7</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+<action>
+<ID>_A22</ID>
+<comp1name>_P16</comp1name>
+<comp2name>_O8</comp2name>
+</action>
+<action>
+<ID>_A23</ID>
+<comp1name>_O8</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+<pin>
+<ID>_P24</ID>
+<x0>171</x0>
+<y0>319</y0>
+<width>45</width>
+<height>23</height>
+<text>key7()</text>
+<px>0</px>
+<py>120</py>
+</pin>
+<pin>
+<ID>_P25</ID>
+<x0>179</x0>
+<y0>413</y0>
+<width>45</width>
+<height>23</height>
+<text>key9()</text>
+<px>0</px>
+<py>146</py>
+</pin>
+<pin>
+<ID>_P26</ID>
+<x0>165</x0>
+<y0>233</y0>
+<width>45</width>
+<height>23</height>
+<text>key5()</text>
+<px>0</px>
+<py>92</py>
+</pin>
+<pin>
+<ID>_P27</ID>
+<x0>165</x0>
+<y0>190</y0>
+<width>45</width>
+<height>23</height>
+<text>key4()</text>
+<px>0</px>
+<py>79</py>
+</pin>
+<pin>
+<ID>_P28</ID>
+<x0>168</x0>
+<y0>279</y0>
+<width>45</width>
+<height>23</height>
+<text>key6()</text>
+<px>0</px>
+<py>106</py>
+</pin>
+<pin>
+<ID>_P29</ID>
+<x0>176</x0>
+<y0>362</y0>
+<width>45</width>
+<height>23</height>
+<text>key8()</text>
+<px>0</px>
+<py>133</py>
+</pin>
+<action>
+<ID>_A30</ID>
+<comp1name>_P27</comp1name>
+<comp2name>_O9</comp2name>
+</action>
+<action>
+<ID>_A31</ID>
+<comp1name>_P26</comp1name>
+<comp2name>_O10</comp2name>
+</action>
+<action>
+<ID>_A32</ID>
+<comp1name>_O9</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+<action>
+<ID>_A33</ID>
+<comp1name>_O10</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+<action>
+<ID>_A34</ID>
+<comp1name>_P28</comp1name>
+<comp2name>_O11</comp2name>
+</action>
+<action>
+<ID>_A35</ID>
+<comp1name>_O11</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+<action>
+<ID>_A36</ID>
+<comp1name>_P24</comp1name>
+<comp2name>_O13</comp2name>
+</action>
+<action>
+<ID>_A37</ID>
+<comp1name>_O13</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+<action>
+<ID>_A38</ID>
+<comp1name>_P29</comp1name>
+<comp2name>_O14</comp2name>
+</action>
+<action>
+<ID>_A39</ID>
+<comp1name>_O14</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+<action>
+<ID>_A40</ID>
+<comp1name>_P25</comp1name>
+<comp2name>_O12</comp2name>
+</action>
+<action>
+<ID>_A41</ID>
+<comp1name>_O12</comp1name>
+<comp2name>_P3</comp2name>
+</action>
+</aobject>
+<aobject>
+<ID>_A4</ID>
+<x0>34</x0>
+<y0>91</y0>
+<width>229</width>
+<height>427</height>
+<ID_maker>52</ID_maker>
+<objectname>GUI</objectname>
+<description>This is a GUI Object.
+</description>
+<state>
+<ID>_SINIT</ID>
+<x0>0</x0>
+<y0>40</y0>
+<width>70</width>
+<height>40</height>
+<text>  InitState</text>
+<isinitstate>1</isinitstate>
+</state>
+<pin>
+<ID>_Pstart</ID>
+<x0>400</x0>
+<y0>100</y0>
+<width>80</width>
+<height>26</height>
+<text>Start()</text>
+<px>0</px>
+<py>36</py>
+</pin>
+<pin>
+<ID>_PGUIout</ID>
+<x0>0</x0>
+<y0>84</y0>
+<width>180</width>
+<height>26</height>
+<text>GUI_created( JFrame f )</text>
+<px>281</px>
+<py>0</py>
+</pin>
+<pin>
+<ID>_PGUIclosed</ID>
+<x0>316</x0>
+<y0>0</y0>
+<width>180</width>
+<height>26</height>
+<text>GUI_closed()</text>
+<px>151</px>
+<py>37</py>
+</pin>
+<operation>
+<ID>_Ocreate</ID>
+<state1>_SINIT</state1>
+<state2>_SINIT</state2>
+<x0>220</x0>
+<y0>40</y0>
+<width>130</width>
+<height>64</height>
+<inconnectx0>0</inconnectx0>
+<inconnecty0>30</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>30</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>90</inpinx0>
+<inpiny0>43</inpiny0>
+<inpinwidth>40</inpinwidth>
+<inpinheight>20</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>1</inpinlinkcount>
+<description>
+Create GUI
+</description>
+<codetext>
+ XGUI x = new XGUI();
+</codetext>
+</operation>
+<action>
+<ID>_Astart</ID>
+<comp1name>_Pstart</comp1name>
+<comp2name>_Ocreate</comp2name>
+</action>
+<pin>
+<ID>_Pボタン0</ID>
+<x0>0</x0>
+<y0>110</y0>
+<width>200</width>
+<height>26</height>
+<text>ボタン0_created( Component c )</text>
+<px>351</px>
+<py>52</py>
+</pin>
+<pin>
+<ID>_PAボタン0</ID>
+<x0>0</x0>
+<y0>138</y0>
+<width>200</width>
+<height>26</height>
+<text>ボタン0_clicked()</text>
+<px>0</px>
+<py>50</py>
+</pin>
+<pin>
+<ID>_P表示</ID>
+<x0>0</x0>
+<y0>166</y0>
+<width>200</width>
+<height>26</height>
+<text>表示_created( Component c )</text>
+<px>54</px>
+<py>4</py>
+</pin>
+<pin>
+<ID>_PA表示</ID>
+<x0>0</x0>
+<y0>194</y0>
+<width>200</width>
+<height>26</height>
+<text>表示_input( String txt )</text>
+<px>336</px>
+<py>118</py>
+</pin>
+<pin>
+<ID>_Pボタン1</ID>
+<x0>0</x0>
+<y0>222</y0>
+<width>200</width>
+<height>26</height>
+<text>ボタン1_created( Component c )</text>
+<px>293</px>
+<py>132</py>
+</pin>
+<pin>
+<ID>_PAボタン1</ID>
+<x0>0</x0>
+<y0>250</y0>
+<width>200</width>
+<height>26</height>
+<text>ボタン1_clicked()</text>
+<px>0</px>
+<py>64</py>
+</pin>
+<pin>
+<ID>_Pボタン2</ID>
+<x0>0</x0>
+<y0>278</y0>
+<width>200</width>
+<height>26</height>
+<text>ボタン2_created( Component c )</text>
+<px>316</px>
+<py>171</py>
+</pin>
+<pin>
+<ID>_PAボタン2</ID>
+<x0>0</x0>
+<y0>306</y0>
+<width>200</width>
+<height>26</height>
+<text>ボタン2_clicked()</text>
+<px>0</px>
+<py>78</py>
+</pin>
+<pin>
+<ID>_Pボタン4</ID>
+<x0>0</x0>
+<y0>334</y0>
+<width>200</width>
+<height>26</height>
+<text>ボタン4_created( Component c )</text>
+<px>325</px>
+<py>211</py>
+</pin>
+<pin>
+<ID>_PAボタン4</ID>
+<x0>0</x0>
+<y0>362</y0>
+<width>200</width>
+<height>26</height>
+<text>ボタン4_clicked()</text>
+<px>0</px>
+<py>105</py>
+</pin>
+<pin>
+<ID>_Pボタン5</ID>
+<x0>0</x0>
+<y0>390</y0>
+<width>200</width>
+<height>26</height>
+<text>ボタン5_created( Component c )</text>
+<px>315</px>
+<py>248</py>
+</pin>
+<pin>
+<ID>_PAボタン5</ID>
+<x0>0</x0>
+<y0>418</y0>
+<width>200</width>
+<height>26</height>
+<text>ボタン5_clicked()</text>
+<px>0</px>
+<py>118</py>
+</pin>
+<pin>
+<ID>_Pボタン6</ID>
+<x0>0</x0>
+<y0>446</y0>
+<width>200</width>
+<height>26</height>
+<text>ボタン6_created( Component c )</text>
+<px>356</px>
+<py>283</py>
+</pin>
+<pin>
+<ID>_PAボタン6</ID>
+<x0>0</x0>
+<y0>474</y0>
+<width>200</width>
+<height>26</height>
+<text>ボタン6_clicked()</text>
+<px>0</px>
+<py>132</py>
+</pin>
+<pin>
+<ID>_Pボタン7</ID>
+<x0>0</x0>
+<y0>502</y0>
+<width>200</width>
+<height>26</height>
+<text>ボタン7_created( Component c )</text>
+<px>262</px>
+<py>299</py>
+</pin>
+<pin>
+<ID>_PAボタン7</ID>
+<x0>0</x0>
+<y0>530</y0>
+<width>200</width>
+<height>26</height>
+<text>ボタン7_clicked()</text>
+<px>0</px>
+<py>146</py>
+</pin>
+<pin>
+<ID>_Pボタン8</ID>
+<x0>0</x0>
+<y0>558</y0>
+<width>200</width>
+<height>26</height>
+<text>ボタン8_created( Component c )</text>
+<px>249</px>
+<py>346</py>
+</pin>
+<pin>
+<ID>_PAボタン8</ID>
+<x0>0</x0>
+<y0>586</y0>
+<width>200</width>
+<height>26</height>
+<text>ボタン8_clicked()</text>
+<px>0</px>
+<py>159</py>
+</pin>
+<pin>
+<ID>_Pボタン9</ID>
+<x0>0</x0>
+<y0>614</y0>
+<width>200</width>
+<height>26</height>
+<text>ボタン9_created( Component c )</text>
+<px>309</px>
+<py>460</py>
+</pin>
+<pin>
+<ID>_PAボタン9</ID>
+<x0>0</x0>
+<y0>642</y0>
+<width>200</width>
+<height>26</height>
+<text>ボタン9_clicked()</text>
+<px>0</px>
+<py>172</py>
+</pin>
+<pin>
+<ID>_Pボタン3</ID>
+<x0>0</x0>
+<y0>670</y0>
+<width>200</width>
+<height>26</height>
+<text>ボタン3_created( Component c )</text>
+<px>359</px>
+<py>444</py>
+</pin>
+<pin>
+<ID>_PAボタン3</ID>
+<x0>0</x0>
+<y0>698</y0>
+<width>200</width>
+<height>26</height>
+<text>ボタン3_clicked()</text>
+<px>1</px>
+<py>91</py>
+</pin>
+<pin>
+<ID>_P小数点ボタン</ID>
+<x0>0</x0>
+<y0>726</y0>
+<width>200</width>
+<height>26</height>
+<text>小数点ボタン_created( Component c )</text>
+<px>337</px>
+<py>467</py>
+</pin>
+<pin>
+<ID>_PA小数点ボタン</ID>
+<x0>0</x0>
+<y0>754</y0>
+<width>200</width>
+<height>26</height>
+<text>小数点ボタン_clicked()</text>
+<px>0</px>
+<py>196</py>
+</pin>
+<pin>
+<ID>_P符号反転ボタン</ID>
+<x0>0</x0>
+<y0>782</y0>
+<width>200</width>
+<height>26</height>
+<text>符号反転ボタン_created( Component c )</text>
+<px>296</px>
+<py>503</py>
+</pin>
+<pin>
+<ID>_PA符号反転ボタン</ID>
+<x0>0</x0>
+<y0>810</y0>
+<width>200</width>
+<height>26</height>
+<text>符号反転ボタン_clicked()</text>
+<px>0</px>
+<py>276</py>
+</pin>
+<pin>
+<ID>_Pメモリ加算ボタン</ID>
+<x0>0</x0>
+<y0>838</y0>
+<width>200</width>
+<height>26</height>
+<text>メモリ加算ボタン_created( Component c )</text>
+<px>298</px>
+<py>535</py>
+</pin>
+<pin>
+<ID>_PAメモリ加算ボタン</ID>
+<x0>0</x0>
+<y0>866</y0>
+<width>200</width>
+<height>26</height>
+<text>メモリ加算ボタン_clicked()</text>
+<px>0</px>
+<py>292</py>
+</pin>
+<pin>
+<ID>_Pメモリ呼出ボタン</ID>
+<x0>0</x0>
+<y0>894</y0>
+<width>200</width>
+<height>26</height>
+<text>メモリ呼出ボタン_created( Component c )</text>
+<px>313</px>
+<py>574</py>
+</pin>
+<pin>
+<ID>_PAメモリ呼出ボタン</ID>
+<x0>0</x0>
+<y0>922</y0>
+<width>200</width>
+<height>26</height>
+<text>メモリ呼出ボタン_clicked()</text>
+<px>0</px>
+<py>309</py>
+</pin>
+<pin>
+<ID>_Pクリアボタン</ID>
+<x0>0</x0>
+<y0>950</y0>
+<width>200</width>
+<height>26</height>
+<text>クリアボタン_created( Component c )</text>
+<px>283</px>
+<py>608</py>
+</pin>
+<pin>
+<ID>_PAクリアボタン</ID>
+<x0>0</x0>
+<y0>978</y0>
+<width>200</width>
+<height>26</height>
+<text>クリアボタン_clicked()</text>
+<px>1</px>
+<py>324</py>
+</pin>
+<pin>
+<ID>_Pイコールボタン</ID>
+<x0>0</x0>
+<y0>1006</y0>
+<width>200</width>
+<height>26</height>
+<text>イコールボタン_created( Component c )</text>
+<px>314</px>
+<py>631</py>
+</pin>
+<pin>
+<ID>_PAイコールボタン</ID>
+<x0>0</x0>
+<y0>1034</y0>
+<width>200</width>
+<height>26</height>
+<text>イコールボタン_clicked()</text>
+<px>0</px>
+<py>340</py>
+</pin>
+<pin>
+<ID>_P加算ボタン</ID>
+<x0>0</x0>
+<y0>1062</y0>
+<width>200</width>
+<height>26</height>
+<text>加算ボタン_created( Component c )</text>
+<px>306</px>
+<py>666</py>
+</pin>
+<pin>
+<ID>_PA加算ボタン</ID>
+<x0>0</x0>
+<y0>1090</y0>
+<width>200</width>
+<height>26</height>
+<text>加算ボタン_clicked()</text>
+<px>1</px>
+<py>355</py>
+</pin>
+<pin>
+<ID>_P減算ボタン</ID>
+<x0>0</x0>
+<y0>1118</y0>
+<width>200</width>
+<height>26</height>
+<text>減算ボタン_created( Component c )</text>
+<px>386</px>
+<py>702</py>
+</pin>
+<pin>
+<ID>_PA減算ボタン</ID>
+<x0>0</x0>
+<y0>1146</y0>
+<width>200</width>
+<height>26</height>
+<text>減算ボタン_clicked()</text>
+<px>0</px>
+<py>370</py>
+</pin>
+<pin>
+<ID>_P乗算ボタン</ID>
+<x0>0</x0>
+<y0>1174</y0>
+<width>200</width>
+<height>26</height>
+<text>乗算ボタン_created( Component c )</text>
+<px>361</px>
+<py>750</py>
+</pin>
+<pin>
+<ID>_PA乗算ボタン</ID>
+<x0>0</x0>
+<y0>1202</y0>
+<width>200</width>
+<height>26</height>
+<text>乗算ボタン_clicked()</text>
+<px>0</px>
+<py>388</py>
+</pin>
+<pin>
+<ID>_P除算ボタン</ID>
+<x0>0</x0>
+<y0>1230</y0>
+<width>200</width>
+<height>26</height>
+<text>除算ボタン_created( Component c )</text>
+<px>390</px>
+<py>775</py>
+</pin>
+<pin>
+<ID>_PA除算ボタン</ID>
+<x0>0</x0>
+<y0>1258</y0>
+<width>200</width>
+<height>26</height>
+<text>除算ボタン_clicked()</text>
+<px>0</px>
+<py>404</py>
+</pin>
+<codeclip>
+<ID>_CGUI</ID>
+<x0>0</x0>
+<y0>0</y0>
+<width>300</width>
+<height>28</height>
+<codetext> class XGUI extends JFrame implements WindowListener{
+ JPanel cnt;
+ボタン0 Iボタン0;
+ class ボタン0 extends JButton implements ActionListener{
+  ボタン0(){
+ setOpaque( true );
+ setName(  &quot;ボタン0&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;0&quot; );
+ addActionListener( this );
+ ボタン0_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ ボタン0_clicked(); }
+}
+表示 I表示;
+ class 表示 extends JTextField implements ActionListener{
+  表示(){
+ setOpaque( true );
+ setName(  &quot;表示&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  255, 255, 255 ));
+ setText( &quot;&quot; );
+ addActionListener( this );
+ 表示_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ 表示_input( getText() ); }
+}
+ボタン1 Iボタン1;
+ class ボタン1 extends JButton implements ActionListener{
+  ボタン1(){
+ setOpaque( true );
+ setName(  &quot;ボタン1&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;1&quot; );
+ addActionListener( this );
+ ボタン1_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ ボタン1_clicked(); }
+}
+ボタン2 Iボタン2;
+ class ボタン2 extends JButton implements ActionListener{
+  ボタン2(){
+ setOpaque( true );
+ setName(  &quot;ボタン2&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;2&quot; );
+ addActionListener( this );
+ ボタン2_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ ボタン2_clicked(); }
+}
+ボタン4 Iボタン4;
+ class ボタン4 extends JButton implements ActionListener{
+  ボタン4(){
+ setOpaque( true );
+ setName(  &quot;ボタン4&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;4&quot; );
+ addActionListener( this );
+ ボタン4_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ ボタン4_clicked(); }
+}
+ボタン5 Iボタン5;
+ class ボタン5 extends JButton implements ActionListener{
+  ボタン5(){
+ setOpaque( true );
+ setName(  &quot;ボタン5&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;5&quot; );
+ addActionListener( this );
+ ボタン5_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ ボタン5_clicked(); }
+}
+ボタン6 Iボタン6;
+ class ボタン6 extends JButton implements ActionListener{
+  ボタン6(){
+ setOpaque( true );
+ setName(  &quot;ボタン6&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;6&quot; );
+ addActionListener( this );
+ ボタン6_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ ボタン6_clicked(); }
+}
+ボタン7 Iボタン7;
+ class ボタン7 extends JButton implements ActionListener{
+  ボタン7(){
+ setOpaque( true );
+ setName(  &quot;ボタン7&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;7&quot; );
+ addActionListener( this );
+ ボタン7_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ ボタン7_clicked(); }
+}
+ボタン8 Iボタン8;
+ class ボタン8 extends JButton implements ActionListener{
+  ボタン8(){
+ setOpaque( true );
+ setName(  &quot;ボタン8&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;8&quot; );
+ addActionListener( this );
+ ボタン8_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ ボタン8_clicked(); }
+}
+ボタン9 Iボタン9;
+ class ボタン9 extends JButton implements ActionListener{
+  ボタン9(){
+ setOpaque( true );
+ setName(  &quot;ボタン9&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;9&quot; );
+ addActionListener( this );
+ ボタン9_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ ボタン9_clicked(); }
+}
+ボタン3 Iボタン3;
+ class ボタン3 extends JButton implements ActionListener{
+  ボタン3(){
+ setOpaque( true );
+ setName(  &quot;ボタン3&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;3&quot; );
+ addActionListener( this );
+ ボタン3_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ ボタン3_clicked(); }
+}
+小数点ボタン I小数点ボタン;
+ class 小数点ボタン extends JButton implements ActionListener{
+  小数点ボタン(){
+ setOpaque( true );
+ setName(  &quot;小数点ボタン&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;.&quot; );
+ addActionListener( this );
+ 小数点ボタン_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ 小数点ボタン_clicked(); }
+}
+符号反転ボタン I符号反転ボタン;
+ class 符号反転ボタン extends JButton implements ActionListener{
+  符号反転ボタン(){
+ setOpaque( true );
+ setName(  &quot;符号反転ボタン&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 10 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;+/-&quot; );
+ addActionListener( this );
+ 符号反転ボタン_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ 符号反転ボタン_clicked(); }
+}
+メモリ加算ボタン Iメモリ加算ボタン;
+ class メモリ加算ボタン extends JButton implements ActionListener{
+  メモリ加算ボタン(){
+ setOpaque( true );
+ setName(  &quot;メモリ加算ボタン&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;M+&quot; );
+ addActionListener( this );
+ メモリ加算ボタン_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ メモリ加算ボタン_clicked(); }
+}
+メモリ呼出ボタン Iメモリ呼出ボタン;
+ class メモリ呼出ボタン extends JButton implements ActionListener{
+  メモリ呼出ボタン(){
+ setOpaque( true );
+ setName(  &quot;メモリ呼出ボタン&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;Mr&quot; );
+ addActionListener( this );
+ メモリ呼出ボタン_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ メモリ呼出ボタン_clicked(); }
+}
+クリアボタン Iクリアボタン;
+ class クリアボタン extends JButton implements ActionListener{
+  クリアボタン(){
+ setOpaque( true );
+ setName(  &quot;クリアボタン&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;Ｃ&quot; );
+ addActionListener( this );
+ クリアボタン_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ クリアボタン_clicked(); }
+}
+イコールボタン Iイコールボタン;
+ class イコールボタン extends JButton implements ActionListener{
+  イコールボタン(){
+ setOpaque( true );
+ setName(  &quot;イコールボタン&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;=&quot; );
+ addActionListener( this );
+ イコールボタン_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ イコールボタン_clicked(); }
+}
+加算ボタン I加算ボタン;
+ class 加算ボタン extends JButton implements ActionListener{
+  加算ボタン(){
+ setOpaque( true );
+ setName(  &quot;加算ボタン&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;+&quot; );
+ addActionListener( this );
+ 加算ボタン_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ 加算ボタン_clicked(); }
+}
+減算ボタン I減算ボタン;
+ class 減算ボタン extends JButton implements ActionListener{
+  減算ボタン(){
+ setOpaque( true );
+ setName(  &quot;減算ボタン&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;-&quot; );
+ addActionListener( this );
+ 減算ボタン_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ 減算ボタン_clicked(); }
+}
+乗算ボタン I乗算ボタン;
+ class 乗算ボタン extends JButton implements ActionListener{
+  乗算ボタン(){
+ setOpaque( true );
+ setName(  &quot;乗算ボタン&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;x&quot; );
+ addActionListener( this );
+ 乗算ボタン_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ 乗算ボタン_clicked(); }
+}
+除算ボタン I除算ボタン;
+ class 除算ボタン extends JButton implements ActionListener{
+  除算ボタン(){
+ setOpaque( true );
+ setName(  &quot;除算ボタン&quot; );
+ setFont( new Font( &quot;Dialog&quot;, 0, 12 ));
+ setForeground( new Color(  0, 0, 0 ));
+ setBackground( new Color(  192, 192, 192 ));
+ setHorizontalAlignment( 0 );
+ setVerticalAlignment( 0 );
+ setText( &quot;÷&quot; );
+ addActionListener( this );
+ 除算ボタン_created( this );
+}
+ public void actionPerformed( ActionEvent e ){ 除算ボタン_clicked(); }
+}
+ XGUI(){
+ setTitle(&quot;電卓&quot;);
+ cnt = new JPanel( new BorderLayout() );
+ cnt.setPreferredSize(  new  Dimension( 233, 152 ) );
+ ((Component)cnt).setBackground( new Color( 255, 204, 204 ) );
+ Iボタン0 = new ボタン0();
+ cnt.add( Iボタン0, 0 );
+ cnt.getLayout().removeLayoutComponent( Iボタン0 );
+ Iボタン0.setBounds( 0, 120, 42, 28 );
+ I表示 = new 表示();
+ cnt.add( I表示, 0 );
+ cnt.getLayout().removeLayoutComponent( I表示 );
+ I表示.setBounds( 0, 0, 229, 27 );
+ Iボタン1 = new ボタン1();
+ cnt.add( Iボタン1, 0 );
+ cnt.getLayout().removeLayoutComponent( Iボタン1 );
+ Iボタン1.setBounds( 0, 90, 42, 28 );
+ Iボタン2 = new ボタン2();
+ cnt.add( Iボタン2, 0 );
+ cnt.getLayout().removeLayoutComponent( Iボタン2 );
+ Iボタン2.setBounds( 43, 90, 41, 28 );
+ Iボタン4 = new ボタン4();
+ cnt.add( Iボタン4, 0 );
+ cnt.getLayout().removeLayoutComponent( Iボタン4 );
+ Iボタン4.setBounds( 0, 59, 42, 29 );
+ Iボタン5 = new ボタン5();
+ cnt.add( Iボタン5, 0 );
+ cnt.getLayout().removeLayoutComponent( Iボタン5 );
+ Iボタン5.setBounds( 43, 59, 41, 29 );
+ Iボタン6 = new ボタン6();
+ cnt.add( Iボタン6, 0 );
+ cnt.getLayout().removeLayoutComponent( Iボタン6 );
+ Iボタン6.setBounds( 85, 59, 46, 29 );
+ Iボタン7 = new ボタン7();
+ cnt.add( Iボタン7, 0 );
+ cnt.getLayout().removeLayoutComponent( Iボタン7 );
+ Iボタン7.setBounds( 0, 29, 42, 28 );
+ Iボタン8 = new ボタン8();
+ cnt.add( Iボタン8, 0 );
+ cnt.getLayout().removeLayoutComponent( Iボタン8 );
+ Iボタン8.setBounds( 43, 29, 41, 28 );
+ Iボタン9 = new ボタン9();
+ cnt.add( Iボタン9, 0 );
+ cnt.getLayout().removeLayoutComponent( Iボタン9 );
+ Iボタン9.setBounds( 85, 29, 45, 28 );
+ Iボタン3 = new ボタン3();
+ cnt.add( Iボタン3, 0 );
+ cnt.getLayout().removeLayoutComponent( Iボタン3 );
+ Iボタン3.setBounds( 85, 90, 46, 28 );
+ I小数点ボタン = new 小数点ボタン();
+ cnt.add( I小数点ボタン, 0 );
+ cnt.getLayout().removeLayoutComponent( I小数点ボタン );
+ I小数点ボタン.setBounds( 43, 120, 42, 28 );
+ I符号反転ボタン = new 符号反転ボタン();
+ cnt.add( I符号反転ボタン, 0 );
+ cnt.getLayout().removeLayoutComponent( I符号反転ボタン );
+ I符号反転ボタン.setBounds( 86, 120, 46, 28 );
+ Iメモリ加算ボタン = new メモリ加算ボタン();
+ cnt.add( Iメモリ加算ボタン, 0 );
+ cnt.getLayout().removeLayoutComponent( Iメモリ加算ボタン );
+ Iメモリ加算ボタン.setBounds( 177, 29, 51, 28 );
+ Iメモリ呼出ボタン = new メモリ呼出ボタン();
+ cnt.add( Iメモリ呼出ボタン, 0 );
+ cnt.getLayout().removeLayoutComponent( Iメモリ呼出ボタン );
+ Iメモリ呼出ボタン.setBounds( 177, 59, 51, 29 );
+ Iクリアボタン = new クリアボタン();
+ cnt.add( Iクリアボタン, 0 );
+ cnt.getLayout().removeLayoutComponent( Iクリアボタン );
+ Iクリアボタン.setBounds( 177, 90, 51, 28 );
+ Iイコールボタン = new イコールボタン();
+ cnt.add( Iイコールボタン, 0 );
+ cnt.getLayout().removeLayoutComponent( Iイコールボタン );
+ Iイコールボタン.setBounds( 177, 120, 51, 28 );
+ I加算ボタン = new 加算ボタン();
+ cnt.add( I加算ボタン, 0 );
+ cnt.getLayout().removeLayoutComponent( I加算ボタン );
+ I加算ボタン.setBounds( 131, 29, 45, 28 );
+ I減算ボタン = new 減算ボタン();
+ cnt.add( I減算ボタン, 0 );
+ cnt.getLayout().removeLayoutComponent( I減算ボタン );
+ I減算ボタン.setBounds( 132, 59, 44, 29 );
+ I乗算ボタン = new 乗算ボタン();
+ cnt.add( I乗算ボタン, 0 );
+ cnt.getLayout().removeLayoutComponent( I乗算ボタン );
+ I乗算ボタン.setBounds( 132, 90, 44, 28 );
+ I除算ボタン = new 除算ボタン();
+ cnt.add( I除算ボタン, 0 );
+ cnt.getLayout().removeLayoutComponent( I除算ボタン );
+ I除算ボタン.setBounds( 134, 120, 42, 28 );
+ setContentPane( cnt );
+ pack();
+ addWindowListener( this );
+ GUI_created( this );
+ setVisible( true );
+}
+ public void windowActivated( WindowEvent e ){}
+ public void windowClosed( WindowEvent e ){}
+ public void windowClosing( WindowEvent e ){ GUI_closed(); }
+ public void windowDeactivated( WindowEvent e ){}
+ public void windowDeiconified( WindowEvent e ){}
+ public void windowIconified( WindowEvent e ){}
+ public void windowOpened( WindowEvent e ){}
+}
+</codetext>
+</codeclip>
+<レイアウト>電卓
+233
+152
+255
+204
+204
+BUTTON;ボタン0;0;0;120;42;28;0;0;0;192;192;192;Dialog;12;null;0;0;
+TEXTFIELD;表示;null;0;0;229;27;0;0;0;255;255;255;Dialog;12;
+BUTTON;ボタン1;1;0;90;42;28;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;ボタン2;2;43;90;41;28;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;ボタン4;4;0;59;42;29;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;ボタン5;5;43;59;41;29;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;ボタン6;6;85;59;46;29;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;ボタン7;7;0;29;42;28;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;ボタン8;8;43;29;41;28;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;ボタン9;9;85;29;45;28;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;ボタン3;3;85;90;46;28;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;小数点ボタン;.;43;120;42;28;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;符号反転ボタン;+/-;86;120;46;28;0;0;0;192;192;192;Dialog;10;null;0;0;
+BUTTON;メモリ加算ボタン;M+;177;29;51;28;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;メモリ呼出ボタン;Mr;177;59;51;29;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;クリアボタン;Ｃ;177;90;51;28;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;イコールボタン;=;177;120;51;28;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;加算ボタン;+;131;29;45;28;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;減算ボタン;-;132;59;44;29;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;乗算ボタン;x;132;90;44;28;0;0;0;192;192;192;Dialog;12;null;0;0;
+BUTTON;除算ボタン;÷;134;120;42;28;0;0;0;192;192;192;Dialog;12;null;0;0;
+</レイアウト>
+</aobject>
+<relation>
+<ID>_R33</ID>
+<pin1name>_A4(_PGUIclosed)</pin1name>
+<pin2name>_A32(_P1)</pin2name>
+</relation>
+<relation>
+<ID>_R30</ID>
+<pin1name>_A6(_P4)</pin1name>
+<pin2name>_A7(_P1)</pin2name>
+</relation>
+<relation>
+<ID>_R29</ID>
+<pin1name>_A5(_P3)</pin1name>
+<pin2name>_A7(_P0)</pin2name>
+</relation>
+<relation>
+<ID>_R28</ID>
+<pin1name>_A4(_PA除算ボタン)</pin1name>
+<pin2name>_A6(_P3)</pin2name>
+</relation>
+<relation>
+<ID>_R27</ID>
+<pin1name>_A4(_PA乗算ボタン)</pin1name>
+<pin2name>_A6(_P2)</pin2name>
+</relation>
+<relation>
+<ID>_R26</ID>
+<pin1name>_A4(_PA減算ボタン)</pin1name>
+<pin2name>_A6(_P1)</pin2name>
+</relation>
+<relation>
+<ID>_R25</ID>
+<pin1name>_A4(_PA加算ボタン)</pin1name>
+<pin2name>_A6(_P18)</pin2name>
+</relation>
+<relation>
+<ID>_R24</ID>
+<pin1name>_A4(_PAイコールボタン)</pin1name>
+<pin2name>_A6(_P24)</pin2name>
+</relation>
+<relation>
+<ID>_R23</ID>
+<pin1name>_A4(_PAクリアボタン)</pin1name>
+<pin2name>_A6(_P23)</pin2name>
+</relation>
+<relation>
+<ID>_R22</ID>
+<pin1name>_A4(_PAメモリ呼出ボタン)</pin1name>
+<pin2name>_A6(_P22)</pin2name>
+</relation>
+<relation>
+<ID>_R21</ID>
+<pin1name>_A4(_PAメモリ加算ボタン)</pin1name>
+<pin2name>_A6(_P21)</pin2name>
+</relation>
+<relation>
+<ID>_R20</ID>
+<pin1name>_A4(_PA符号反転ボタン)</pin1name>
+<pin2name>_A6(_P20)</pin2name>
+</relation>
+<relation>
+<ID>_R19</ID>
+<pin1name>_A4(_P表示)</pin1name>
+<pin2name>_A7(_P2)</pin2name>
+</relation>
+<relation>
+<ID>_R18</ID>
+<pin1name>_A4(_PA小数点ボタン)</pin1name>
+<pin2name>_A7(_P4)</pin2name>
+</relation>
+<relation>
+<ID>_R17</ID>
+<pin1name>_A4(_PAボタン9)</pin1name>
+<pin2name>_A5(_P25)</pin2name>
+</relation>
+<relation>
+<ID>_R16</ID>
+<pin1name>_A4(_PAボタン8)</pin1name>
+<pin2name>_A5(_P29)</pin2name>
+</relation>
+<relation>
+<ID>_R15</ID>
+<pin1name>_A4(_PAボタン7)</pin1name>
+<pin2name>_A5(_P24)</pin2name>
+</relation>
+<relation>
+<ID>_R14</ID>
+<pin1name>_A4(_PAボタン6)</pin1name>
+<pin2name>_A5(_P28)</pin2name>
+</relation>
+<relation>
+<ID>_R13</ID>
+<pin1name>_A4(_PAボタン5)</pin1name>
+<pin2name>_A5(_P26)</pin2name>
+</relation>
+<relation>
+<ID>_R12</ID>
+<pin1name>_A4(_PAボタン4)</pin1name>
+<pin2name>_A5(_P27)</pin2name>
+</relation>
+<relation>
+<ID>_R11</ID>
+<pin1name>_A4(_PAボタン3)</pin1name>
+<pin2name>_A5(_P16)</pin2name>
+</relation>
+<relation>
+<ID>_R10</ID>
+<pin1name>_A4(_PAボタン2)</pin1name>
+<pin2name>_A5(_P17)</pin2name>
+</relation>
+<relation>
+<ID>_R9</ID>
+<pin1name>_A4(_PAボタン1)</pin1name>
+<pin2name>_A5(_P18)</pin2name>
+</relation>
+<relation>
+<ID>_R8</ID>
+<pin1name>_A4(_PAボタン0)</pin1name>
+<pin2name>_A5(_P1)</pin2name>
+</relation>
+<relation>
+<ID>_R35</ID>
+<pin1name>_PSTART</pin1name>
+<pin2name>_A4(_Pstart)</pin2name>
+</relation>
+<プロパティ>
+<ID>properties</ID>
+<LookandFeel>javax.swing.plaf.metal.MetalLookAndFeel</LookandFeel>
+<MainWinx0>0</MainWinx0>
+<MainWiny0>0</MainWiny0>
+<MainWinWidth>1024</MainWinWidth>
+<MainWinHeight>740</MainWinHeight>
+<MesgWinx0>0</MesgWinx0>
+<MesgWiny0>0</MesgWiny0>
+<MesgWinWidth>1032</MesgWinWidth>
+<MesgWinHeight>745</MesgWinHeight>
+<FileWinx0>36</FileWinx0>
+<FileWiny0>478</FileWiny0>
+<FileWinWidth>578</FileWinWidth>
+<FileWinHeight>262</FileWinHeight>
+<EditWinx0>347</EditWinx0>
+<EditWiny0>0</EditWiny0>
+<EditWinWidth>676</EditWinWidth>
+<EditWinHeight>541</EditWinHeight>
+<PropWinx0>1</PropWinx0>
+<PropWiny0>1</PropWiny0>
+<PropWinWidth>615</PropWinWidth>
+<PropWinHeight>448</PropWinHeight>
+<DividerLocation1>2</DividerLocation1>
+<DividerLocation2>2</DividerLocation2>
+<ToolBarVisible>1</ToolBarVisible>
+<ViewSourceAtCompile>0</ViewSourceAtCompile>
+<NoSourceCreate>0</NoSourceCreate>
+<JavaEditCommand>leafpad</JavaEditCommand>
+<JavaViewCommand></JavaViewCommand>
+<HelpCommand>xdg-open ./help/manual.html</HelpCommand>
+<ApplicationType>0</ApplicationType>
+<CompileCommand0>./compile_java</CompileCommand0>
+<RunCommand0>./run_java</RunCommand0>
+<GUIDesignerCommand0>java -jar guidsin.jar -java</GUIDesignerCommand0>
+<ImportFiles0> import java.awt.*;
+ import java.awt.event.*;
+ import javax.swing.*;
+ import javax.swing.event.*;
+ import javax.swing.tree.*;
+ import java.io.*;
+ import java.net.*;
+ import java.util.*;
+import java.awt.geom.*;
+import java.awt.print.*;
+import javax.swing.border.*;
+import javax.swing.filechooser.*;
+ import javax.swing.*;
+ import javax.swing.event.*;
+ import javax.swing.tree.*;
+ import java.io.*;
+ import java.net.*;
+ import java.util.*;
+import java.awt.image.BufferedImage;
+import javax.sound.sampled.*;
+
+class Starter{
+  public static void main( String args[] ){
+    %AppName% ap = new %AppName%();
+    ap.ARGS = args;
+    ap.Start();
+  }
+}
+</ImportFiles0>
+<ProgramStartupCode0> String[] ARGS;
+</ProgramStartupCode0>
+<NativeHelpCommand0></NativeHelpCommand0>
+<CompileCommand1></CompileCommand1>
+<RunCommand1></RunCommand1>
+<GUIDesignerCommand1>java -jar guidsin.jar -applet</GUIDesignerCommand1>
+<ImportFiles1> import java.awt.*;
+ import java.awt.event.*;
+ import java.applet.*;
+ import javax.swing.*;
+ import javax.swing.event.*;
+ import javax.swing.tree.*;
+ import java.io.*;
+ import java.net.*;
+ import java.util.*;
+ public class javatext extends Applet {
+   %AppName% ap;
+   public void init() {
+     ap = new %AppName%();
+     ap.APPLET = this;
+     ap.Start();
+   }
+ }
+</ImportFiles1>
+<ProgramStartupCode1> Applet APPLET;
+</ProgramStartupCode1>
+<NativeHelpCommand1></NativeHelpCommand1>
+<CompileCommand2></CompileCommand2>
+<RunCommand2></RunCommand2>
+<GUIDesignerCommand2></GUIDesignerCommand2>
+<ImportFiles2>#include &lt;stdio.h&gt;
+
+void Startup();
+</ImportFiles2>
+<ProgramStartupCode2>int main(){
+ Startup();
+ %AppName%::Start();
+ }
+</ProgramStartupCode2>
+<NativeHelpCommand2></NativeHelpCommand2>
+<CompileCommand3></CompileCommand3>
+<RunCommand3></RunCommand3>
+<GUIDesignerCommand3>java -jar guidsin.jar -cpp</GUIDesignerCommand3>
+<ImportFiles3>#include &lt;stdio.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;math.h&gt;
+#include &quot;Ekagen.h&quot;
+void Startup();
+</ImportFiles3>
+<ProgramStartupCode3>void Emain(){
+Startup();
+%AppName%::Start();
+}
+</ProgramStartupCode3>
+<NativeHelpCommand3></NativeHelpCommand3>
+<MoveStep>8</MoveStep>
+<ImageEditCommand></ImageEditCommand>
+<CompilerFileName>javac.exe</CompilerFileName>
+<CompileCommand4>./compile_android Test com example test</CompileCommand4>
+<RunCommand4>./run_android Test com example test</RunCommand4>
+<GUIDesignerCommand4>java -jar guidsin.jar -android</GUIDesignerCommand4>
+<ImportFiles4>package com.example.test;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.View;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.widget.Button;
+import android.view.SurfaceHolder;
+import android.view.SurfaceHolder.Callback;
+import android.view.SurfaceView;
+import android.widget.EditText;
+import android.text.SpannableStringBuilder;
+import android.text.TextWatcher;
+import android.text.Editable;
+import android.graphics.Matrix;
+import android.graphics.Typeface;
+import android.graphics.RectF;
+import android.graphics.BitmapFactory;
+import java.io.*;
+ import java.net.*;
+import java.util.*;
+import java.text.SimpleDateFormat;
+import android.media.MediaPlayer;
+import android.os.Handler;
+import android.content.res.Configuration;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.app.Activity;
+import android.graphics.Color;
+
+import android.widget.AbsoluteLayout;
+import android.widget.*;
+import android.view.Gravity;
+import android.view.View.OnClickListener;
+
+import android.hardware.Camera;
+
+public class HelloWorld extends Activity {
+  public void onCreate(Bundle bundle) {
+    super.onCreate(bundle);
+    %AppName% ap = new %AppName%();
+    ap.ACTIVITY = this;
+    ap.Start();
+  }
+}
+</ImportFiles4>
+<ProgramStartupCode4>Activity ACTIVITY;
+</ProgramStartupCode4>
+<NativeHelpCommand4>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    package=&quot;com.example.test&quot;
+    android:versionCode=&quot;1&quot;
+    android:versionName=&quot;1.0&quot; &gt;
+
+    
+    
+  &lt;uses-permission android:name=&quot;android.permission.CAMERA&quot; /&gt; 
+  &lt;uses-feature android:name=&quot;android.hardware.camera&quot; /&gt; 
+  &lt;uses-feature android:name=&quot;android.hardware.usb.host&quot; /&gt; 
+  &lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot;/&gt;
+  &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt; 
+  &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;
+
+  &lt;uses-sdk android:minSdkVersion=&quot;3&quot; android:targetSdkVersion=&quot;21&quot;/&gt;
+  
+ 
+    &lt;application android:label=&quot;@string/app_name&quot; &gt;
+        &lt;activity
+            android:name=&quot;HelloWorld&quot;
+            android:label=&quot;@string/app_name&quot; &gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+
+                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+            &lt;/intent-filter&gt;
+        &lt;/activity&gt;
+    &lt;/application&gt;
+
+&lt;/manifest&gt;
+</NativeHelpCommand4>
+<HtmlEditCommand></HtmlEditCommand>
+<CompileCommand5></CompileCommand5>
+<RunCommand5></RunCommand5>
+<GUIDesignerCommand5></GUIDesignerCommand5>
+<ImportFiles5></ImportFiles5>
+<ProgramStartupCode5>gosub @_PSTART
+end
+</ProgramStartupCode5>
+<NativeHelpCommand5></NativeHelpCommand5>
+<NoOptimizePin>0</NoOptimizePin>
+<CompileCommand6>./compile_c</CompileCommand6>
+<RunCommand6>./run_c</RunCommand6>
+<GUIDesignerCommand6></GUIDesignerCommand6>
+<ImportFiles6>#include &lt;setjmp.h&gt;
+#include &lt;pthread.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdarg.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;math.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netdb.h&gt;
+
+#include &lt;X11/Xlib.h&gt;
+#include &lt;X11/Xutil.h&gt;
+#include &lt;X11/Xlocale.h&gt; /* ロケール用ヘッダーファイル */
+#include &lt;X11/xpm.h&gt;
+#include &lt;sys/time.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;termios.h&gt;
+#include &lt;errno.h&gt;
+</ImportFiles6>
+<ProgramStartupCode6>int ARGC; char** ARGV;
+int main( int argc, char** argv ){
+  ARGC=argc;
+  ARGV=argv;
+  _PSTART();
+}
+</ProgramStartupCode6>
+<NativeHelpCommand6></NativeHelpCommand6>
+</プロパティ>
+</xobject>

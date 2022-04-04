@@ -1,0 +1,43 @@
+echo clean:
+rm -r classes/*
+rm -r build/*
+rm -r src/*
+rm -r apk/*
+rm -r res/drawable/*
+rm -r res/raw/*
+
+echo create manifest:
+java -jar replace.jar HelloWorld $1 AndroidManifest.xml tmp
+java -jar replace.jar com.example.test $2.$3.$4 tmp AndroidManifest.xml
+
+echo copy source:
+java -jar replace.jar HelloWorld $1 javatext.java tmp
+java -jar replace.jar com.example.test $2.$3.$4 tmp src/$1.java 
+java -jar replace.jar HelloWorld $1 BootCompletedReceiver.java tmp
+java -jar replace.jar com.example.test $2.$3.$4 tmp src/BootCompletedReceiver.java 
+
+echo copy icon
+mkdir res/drawable
+cp ic_launcher.png res/drawable
+
+echo set app_name:
+java -jar replace.jar Test $1 strings.xml res/values/strings.xml
+
+echo create project:
+aapt p -f -v -M AndroidManifest.xml -F build/resources.res -I android.jar -S res/ -J src
+
+echo javac:
+javac -d classes ./src/$1.java ./src/BootCompletedReceiver.java ./src/R.java 
+
+echo dx:
+dx --dex --verbose --no-strict --output=build/classes.dex classes/$2
+
+echo build apk:
+aapt package -f -M AndroidManifest.xml -S res/ -I android.jar -F $APK_DIR/$1.apk
+aapt add $APK_DIR/$1.apk classes.dex
+
+
+echo signer:
+jarsigner -verbose -keystore debug.keystore -storepass android -sigalg MD5withRSA -digestalg SHA1 /apk/$1.apk androiddebugkey
+
+echo compile end
