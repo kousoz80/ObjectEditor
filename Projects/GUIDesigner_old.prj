@@ -7,7 +7,7 @@
 <width>200</width>
 <height>100</height>
 <ID_maker>2</ID_maker>
-<objectname>GUIDesigner</objectname>
+<objectname>GUIDesigner_old</objectname>
 <description>新規のアプリケーション</description>
 <codeclip>
 <ID>_CSTART</ID>
@@ -30,8 +30,8 @@
 </pin>
 <xobject>
 <ID>_X0</ID>
-<x0>141</x0>
-<y0>40</y0>
+<x0>203</x0>
+<y0>75</y0>
 <width>148</width>
 <height>60</height>
 <ID_maker>146</ID_maker>
@@ -66865,24 +66865,12 @@ int j = 0;
 double scale = Double.parseDouble(xxscale.getText());
 
 Container cnt =ウィンドウ.getContentPane();
-int xxwid = cnt.getWidth();
-int xxhei = cnt.getHeight();
 
 StringBuffer guideclare = new StringBuffer(&quot; class XGUI{\n&quot;);
-StringBuffer guiconstruct   = new StringBuffer(&quot; XGUI(){\n AbsoluteLayout layout=new AbsoluteLayout(ACTIVITY);\n double scale=&quot;+scale+&quot;;\n&quot;);
+StringBuffer guiconstruct   = new StringBuffer(&quot; XGUI(){\n AbsoluteLayout layout=new AbsoluteLayout(ACTIVITY);\n&quot;);
 Color col = ((Component)cnt).getBackground();
 guiconstruct.append(&quot;layout.setBackgroundColor(Color.rgb( &quot; + col.getRed() + &quot;, &quot; + col.getGreen() + &quot;, &quot; + col.getBlue() +  &quot;));\n&quot;);
 guiconstruct.append(&quot;ACTIVITY.setContentView(layout);\n&quot;);
-
-if(scale==0){
-guiconstruct.append(&quot; int bars_height=100;\n&quot;);
-guiconstruct.append(&quot; Point size = new Point();\n&quot;);
-guiconstruct.append(&quot; ACTIVITY.getWindowManager().getDefaultDisplay().getRealSize(size);\n&quot;);
-guiconstruct.append(&quot; double wscl=(double)size.x/&quot; +xxwid+&quot;;\n&quot;);
-guiconstruct.append(&quot; double hscl=(double)(size.y-bars_height)/&quot;+xxhei+&quot;;\n&quot;);
-guiconstruct.append(&quot; scale = wscl&lt;hscl? wscl:hscl;\n&quot;);
-}
-
 guiconstruct.append(&quot;ACTIVITY.setTitle(\&quot;&quot; + editwindow.getTitle() + &quot;\&quot;);\n&quot;);
 
 
@@ -66912,10 +66900,10 @@ for( i=cnt.getComponentCount()-1;i&gt;=0;i--){
       Font f = lbl.getFont();
       String txt = lbl.getText();
 
-      int x0 = lbl.getX();
-      int y0 = lbl.getY();
-      int wid = lbl.getWidth();
-      int hei = lbl.getHeight();
+      int x0 = (int)(lbl.getX()*scale);
+      int y0 = (int)(lbl.getY()*scale);
+      int wid = (int)(lbl.getWidth()*scale);
+      int hei = (int)(lbl.getHeight()*scale);
       int ax = lbl.getHorizontalAlignment();
       String sax=&quot;&quot;;
       if( ax == javax.swing.SwingConstants.LEFT )   sax = &quot;Gravity.LEFT&quot;;
@@ -66944,7 +66932,7 @@ for( i=cnt.getComponentCount()-1;i&gt;=0;i--){
       guideclare.append( &quot;}\n&quot; );
 
       guiconstruct.append( &quot; I&quot; + name + &quot; = new &quot; + name + &quot;();\n&quot; );
-      guiconstruct.append( &quot; I&quot; + name  + &quot;.setLayoutParams( new AbsoluteLayout.LayoutParams( (int)(scale*&quot; + wid + &quot;),(int)(scale*&quot; + hei + &quot;),(int)(scale*&quot; + x0 + &quot;),(int)(scale*&quot; + y0 +&quot;)));\n&quot; );
+      guiconstruct.append( &quot; I&quot; + name  + &quot;.setLayoutParams( new AbsoluteLayout.LayoutParams( &quot; + wid + &quot;,&quot; + hei + &quot;,&quot; + x0 + &quot;,&quot; + y0 +&quot; ) );\n&quot; );
       guiconstruct.append( &quot; layout.addView( I&quot; + name + &quot; );\n&quot; );
       if( lbl.print_created_pin)  xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_P&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_created(TextView t)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
 
@@ -66956,10 +66944,10 @@ for( i=cnt.getComponentCount()-1;i&gt;=0;i--){
       String name = lbl.getName();
       if( name == null || name.equals(&quot;&quot;) ) name = &quot;SUR&quot;+ i;
 
-      int x0 = lbl.getX();
-      int y0 = lbl.getY();
-      int wid = lbl.getWidth();
-      int hei = lbl.getHeight();
+      int x0 = (int)(lbl.getX()*scale);
+      int y0 = (int)(lbl.getY()*scale);
+      int wid = (int)(lbl.getWidth()*scale);
+      int hei = (int)(lbl.getHeight()*scale);
       guideclare.append(   name + &quot; I&quot;+name+&quot;;\n&quot; );
       guideclare.append( &quot; class &quot; + name + &quot; extends &quot; + lbl.super_class[AppTyp] + &quot;{\n&quot; );
       guideclare.append( &quot; &quot;  + name + &quot;(){\n super(ACTIVITY);\n&quot; );
@@ -66968,7 +66956,7 @@ for( i=cnt.getComponentCount()-1;i&gt;=0;i--){
       guideclare.append( &quot;}\n&quot; );
 
       guiconstruct.append( &quot; I&quot; + name + &quot; = new &quot; + name + &quot;();\n&quot; );
-      guiconstruct.append( &quot; I&quot; + name  + &quot;.setLayoutParams( new AbsoluteLayout.LayoutParams( (int)(scale*&quot; + wid + &quot;),(int)(scale*&quot; + hei + &quot;),(int)(scale*&quot; + x0 + &quot;),(int)(scale*&quot; + y0 +&quot;)));\n&quot; );
+      guiconstruct.append( &quot; I&quot; + name  + &quot;.setLayoutParams( new AbsoluteLayout.LayoutParams( &quot; + wid + &quot;,&quot; + hei + &quot;,&quot; + x0 + &quot;,&quot; + y0 +&quot; ) );\n&quot; );
       guiconstruct.append( &quot; layout.addView( I&quot; + name + &quot; );\n&quot; );
       if( lbl.print_created_pin)  xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_P&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_created(SurfaceView s)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
     }
@@ -66984,10 +66972,10 @@ for( i=cnt.getComponentCount()-1;i&gt;=0;i--){
     Font f = btn.getFont();
     String txt = btn.getText();
 
-    int x0 = btn.getX();
-    int y0 = btn.getY();
-    int wid = btn.getWidth();
-    int hei  = btn.getHeight();
+    int x0 = (int)(btn.getX()*scale);
+    int y0 = (int)(btn.getY()*scale);
+    int wid = (int)(btn.getWidth()*scale);
+    int hei  = (int)(btn.getHeight()*scale);
     int ax = btn.getHorizontalAlignment();
     String sax=&quot;&quot;;
     if( ax == javax.swing.SwingConstants.LEFT )   sax = &quot;Gravity.LEFT&quot;;
@@ -67013,8 +67001,8 @@ for( i=cnt.getComponentCount()-1;i&gt;=0;i--){
     guideclare.append( &quot;}\n&quot; );
     guideclare.append( &quot;}\n&quot; );
 
-      guiconstruct.append( &quot; I&quot; + name + &quot; = new &quot; + name + &quot;();\n&quot; );
-      guiconstruct.append( &quot; I&quot; + name  + &quot;.setLayoutParams( new AbsoluteLayout.LayoutParams( (int)(scale*&quot; + wid + &quot;),(int)(scale*&quot; + hei + &quot;),(int)(scale*&quot; + x0 + &quot;),(int)(scale*&quot; + y0 +&quot;)));\n&quot; );
+    guiconstruct.append( &quot; I&quot; + name + &quot; = new &quot; + name + &quot;();\n&quot; );
+    guiconstruct.append( &quot; I&quot; + name  + &quot;.setLayoutParams( new AbsoluteLayout.LayoutParams( &quot; + wid + &quot;,&quot; + hei + &quot;,&quot; + x0 + &quot;,&quot; + y0 +&quot; ) );\n&quot; );
     guiconstruct.append( &quot; layout.addView( I&quot; + name + &quot; );\n&quot; );
     if( btn.print_created_pin)  xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_P&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_created(Button b)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
     if( btn.print_clicked_pin) xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_PA&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_clicked()&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
@@ -67028,10 +67016,10 @@ for( i=cnt.getComponentCount()-1;i&gt;=0;i--){
     Color  bcol = fld.getBackground();
     Font f = fld.getFont();
     String txt = fld.getText();
-    int x0 = fld.getX();
-    int y0 = fld.getY();
-    int wid = fld.getWidth();
-    int hei  = fld.getHeight();
+    int x0 = (int)(fld.getX()*scale);
+    int y0 = (int)(fld.getY()*scale);
+    int wid = (int)(fld.getWidth()*scale);
+    int hei  = (int)(fld.getHeight()*scale);
     guideclare.append(   name + &quot; I&quot;+name+&quot;;\n&quot; );
     guideclare.append( &quot; class &quot;+ name +&quot; extends &quot; + fld.super_class[AppTyp] + &quot;{\n&quot; );
     guideclare.append( &quot; &quot;  + name + &quot;(){\n super(ACTIVITY);\n&quot; );
@@ -67045,8 +67033,8 @@ for( i=cnt.getComponentCount()-1;i&gt;=0;i--){
     guideclare.append( &quot;}\n&quot; );
     guideclare.append( &quot;}\n&quot; );
 
-      guiconstruct.append( &quot; I&quot; + name + &quot; = new &quot; + name + &quot;();\n&quot; );
-      guiconstruct.append( &quot; I&quot; + name  + &quot;.setLayoutParams( new AbsoluteLayout.LayoutParams( (int)(scale*&quot; + wid + &quot;),(int)(scale*&quot; + hei + &quot;),(int)(scale*&quot; + x0 + &quot;),(int)(scale*&quot; + y0 +&quot;)));\n&quot; );
+    guiconstruct.append( &quot; I&quot; + name + &quot; = new &quot; + name + &quot;();\n&quot; );
+    guiconstruct.append( &quot; I&quot; + name  + &quot;.setLayoutParams( new AbsoluteLayout.LayoutParams( &quot; + wid + &quot;,&quot; + hei + &quot;,&quot; + x0 + &quot;,&quot; + y0 +&quot; ) );\n&quot; );
     guiconstruct.append( &quot; layout.addView( I&quot; + name + &quot; );\n&quot; );
     if( fld.print_created_pin)  xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_P&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_created(EditText e)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
   }
@@ -67057,10 +67045,10 @@ for( i=cnt.getComponentCount()-1;i&gt;=0;i--){
     if( name == null || name.equals(&quot;&quot;) ) name = &quot;CHK&quot;+ i;
     Color  fcol = chk.getForeground();
     Color  bcol = chk.getBackground();
-    int x0 = chk.getX();
-    int y0 = chk.getY();
-    int wid = chk.getWidth();
-    int hei  = chk.getHeight();
+    int x0 = (int)(chk.getX()*scale);
+    int y0 = (int)(chk.getY()*scale);
+    int wid = (int)(chk.getWidth()*scale);
+    int hei  = (int)(chk.getHeight()*scale);
     boolean sl = chk.isSelected();
     guideclare.append(   name + &quot; I&quot;+name+&quot;;\n&quot; );
     guideclare.append( &quot; class &quot;+ name +&quot; extends &quot; + chk.super_class[AppTyp] + &quot;{\n&quot; );
@@ -67073,8 +67061,8 @@ for( i=cnt.getComponentCount()-1;i&gt;=0;i--){
     guideclare.append( &quot;}\n&quot; );
     guideclare.append( &quot;}\n&quot; );
 
-      guiconstruct.append( &quot; I&quot; + name + &quot; = new &quot; + name + &quot;();\n&quot; );
-      guiconstruct.append( &quot; I&quot; + name  + &quot;.setLayoutParams( new AbsoluteLayout.LayoutParams( (int)(scale*&quot; + wid + &quot;),(int)(scale*&quot; + hei + &quot;),(int)(scale*&quot; + x0 + &quot;),(int)(scale*&quot; + y0 +&quot;)));\n&quot; );
+    guiconstruct.append( &quot; I&quot; + name + &quot; = new &quot; + name + &quot;();\n&quot; );
+    guiconstruct.append( &quot; I&quot; + name + &quot;.setLayoutParams( new AbsoluteLayout.LayoutParams( &quot; + wid + &quot;,&quot; + hei + &quot;,&quot; + x0 + &quot;,&quot; + y0 +&quot; ) );\n&quot; );
     guiconstruct.append( &quot; layout.addView( I&quot; + name + &quot; );\n&quot; );
     if( chk.print_created_pin)  xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_P&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_created(CheckBox c)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
   }
@@ -67087,10 +67075,10 @@ for( i=cnt.getComponentCount()-1;i&gt;=0;i--){
     Color  bcol = ara.getBackground();
     Font f = ara.getFont();
     String txt = ara.getText();
-    int x0 = ara.getX();
-    int y0 = ara.getY();
-    int wid = ara.getWidth();
-    int hei  = ara.getHeight();
+    int x0 = (int)(ara.getX()*scale);
+    int y0 = (int)(ara.getY()*scale);
+    int wid = (int)(ara.getWidth()*scale);
+    int hei  = (int)(ara.getHeight()*scale);
     guideclare.append(   name + &quot; I&quot;+name+&quot;;\n&quot; );
     guideclare.append( &quot; class &quot;+ name +&quot; extends &quot; + ara.super_class[AppTyp] + &quot;{\n&quot; );
     guideclare.append( &quot; &quot;  + name + &quot;(){\n super(ACTIVITY);\n&quot; );
@@ -67105,8 +67093,8 @@ for( i=cnt.getComponentCount()-1;i&gt;=0;i--){
     guideclare.append( &quot;}\n&quot; );
     guideclare.append( &quot;}\n&quot; );
 
-      guiconstruct.append( &quot; I&quot; + name + &quot; = new &quot; + name + &quot;();\n&quot; );
-      guiconstruct.append( &quot; I&quot; + name  + &quot;.setLayoutParams( new AbsoluteLayout.LayoutParams( (int)(scale*&quot; + wid + &quot;),(int)(scale*&quot; + hei + &quot;),(int)(scale*&quot; + x0 + &quot;),(int)(scale*&quot; + y0 +&quot;)));\n&quot; );
+    guiconstruct.append( &quot; I&quot; + name + &quot; = new &quot; + name + &quot;();\n&quot; );
+    guiconstruct.append( &quot; I&quot; + name  + &quot;.setLayoutParams( new AbsoluteLayout.LayoutParams( &quot; + wid + &quot;,&quot; + hei + &quot;,&quot; + x0 + &quot;,&quot; + y0 +&quot; ) );\n&quot; );
     guiconstruct.append( &quot; layout.addView( I&quot; + name + &quot; );\n&quot; );
     if( ara.print_created_pin)  xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_P&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_created(EditText e)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
   }
@@ -67116,10 +67104,10 @@ for( i=cnt.getComponentCount()-1;i&gt;=0;i--){
     String name = lst.getName();
     if( name == null || name.equals(&quot;&quot;) ) name = &quot;LST&quot;+ i;
     Color  bcol = lst.getBackground();
-    int x0 = lst.getX();
-    int y0 = lst.getY();
-    int wid = lst.getWidth();
-    int hei  = lst.getHeight();
+    int x0 = (int)(lst.getX()*scale);
+    int y0 = (int)(lst.getY()*scale);
+    int wid = (int)(lst.getWidth()*scale);
+    int hei  = (int)(lst.getHeight()*scale);
     guideclare.append(   name + &quot; I&quot;+name+&quot;;\n&quot; );
     guideclare.append( &quot; class &quot;+ name +&quot; extends &quot; + lst.super_class[AppTyp] + &quot;{\n&quot; );
     guideclare.append( &quot; &quot;  + name + &quot;(){\n super(ACTIVITY);\n&quot; );
@@ -67130,8 +67118,9 @@ for( i=cnt.getComponentCount()-1;i&gt;=0;i--){
     guideclare.append( &quot;}\n&quot; );
     guideclare.append( &quot;}\n&quot; );
 
-      guiconstruct.append( &quot; I&quot; + name + &quot; = new &quot; + name + &quot;();\n&quot; );
-      guiconstruct.append( &quot; I&quot; + name  + &quot;.setLayoutParams( new AbsoluteLayout.LayoutParams( (int)(scale*&quot; + wid + &quot;),(int)(scale*&quot; + hei + &quot;),(int)(scale*&quot; + x0 + &quot;),(int)(scale*&quot; + y0 +&quot;)));\n&quot; );
+    guiconstruct.append( &quot; I&quot; + name + &quot; = new &quot; + name + &quot;();\n&quot; );
+    guiconstruct.append( &quot; I&quot; + name  + &quot;.setLayoutParams( new AbsoluteLayout.LayoutParams( &quot; + wid + &quot;,&quot; + hei + &quot;,&quot; + x0 + &quot;,&quot; + y0 +&quot; ) );\n&quot; );
+    guiconstruct.append( &quot; layout.addView( I&quot; + name + &quot; );\n&quot; );
     if( lst.print_created_pin)  xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_P&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_created(ListView l)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
   }
 
@@ -67143,10 +67132,10 @@ for( i=cnt.getComponentCount()-1;i&gt;=0;i--){
     Color  bcol = sld.getBackground();
     int minval = sld.getMinimum();
     int maxval = sld.getMaximum();
-    int x0 = sld.getX();
-    int y0 = sld.getY();
-    int wid = sld.getWidth();
-    int hei  = sld.getHeight();
+    int x0 = (int)(sld.getX() * scale);
+    int y0 = (int)(sld.getY() * scale);
+    int wid = (int)(sld.getWidth()* scale);
+    int hei  = (int)(sld.getHeight() * scale);
 
     guideclare.append(   name + &quot; I&quot;+name+&quot;;\n&quot; );
     guideclare.append( &quot; class &quot;+ name +&quot; extends &quot; + sld.super_class[AppTyp] + &quot;{\n&quot; );
@@ -67166,8 +67155,8 @@ for( i=cnt.getComponentCount()-1;i&gt;=0;i--){
     guideclare.append( &quot;}\n&quot; );
     guideclare.append( &quot;}\n&quot; );
 
-      guiconstruct.append( &quot; I&quot; + name + &quot; = new &quot; + name + &quot;();\n&quot; );
-      guiconstruct.append( &quot; I&quot; + name  + &quot;.setLayoutParams( new AbsoluteLayout.LayoutParams( (int)(scale*&quot; + wid + &quot;),(int)(scale*&quot; + hei + &quot;),(int)(scale*&quot; + x0 + &quot;),(int)(scale*&quot; + y0 +&quot;)));\n&quot; );
+    guiconstruct.append( &quot; I&quot; + name + &quot; = new &quot; + name + &quot;();\n&quot; );
+    guiconstruct.append( &quot; I&quot; + name  + &quot;.setLayoutParams( new AbsoluteLayout.LayoutParams( &quot; + wid + &quot;,&quot; + hei + &quot;,&quot; + x0 + &quot;,&quot; + y0 +&quot; ) );\n&quot; );
     guiconstruct.append( &quot; layout.addView( I&quot; + name + &quot; );\n&quot; );
     if( sld.print_created_pin)  xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_P&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_created(SeekBar b)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
     if( sld.print_changed_pin) xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_PA&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_changed(int val)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
@@ -67181,10 +67170,10 @@ for( i=cnt.getComponentCount()-1;i&gt;=0;i--){
     Color  bcol = sld.getBackground();
     int minval = sld.getMinimum();
     int maxval = sld.getMaximum();
-    int x0 = sld.getX();
-    int y0 = sld.getY();
-    int wid = sld.getWidth();
-    int hei  = sld.getHeight();
+    int x0 = (int)(sld.getX() * scale);
+    int y0 = (int)(sld.getY() * scale);
+    int wid = (int)(sld.getWidth() * scale);
+    int hei  = (int)(sld.getHeight() * scale);
 
     guideclare.append(   name + &quot; I&quot;+name+&quot;;\n&quot; );
     guideclare.append( &quot; class &quot;+ name +&quot; extends &quot; + sld.super_class[AppTyp] + &quot;{\n&quot; );
@@ -67204,8 +67193,8 @@ for( i=cnt.getComponentCount()-1;i&gt;=0;i--){
     guideclare.append( &quot;}\n&quot; );
     guideclare.append( &quot;}\n&quot; );
 
-      guiconstruct.append( &quot; I&quot; + name + &quot; = new &quot; + name + &quot;();\n&quot; );
-      guiconstruct.append( &quot; I&quot; + name  + &quot;.setLayoutParams( new AbsoluteLayout.LayoutParams( (int)(scale*&quot; + wid + &quot;),(int)(scale*&quot; + hei + &quot;),(int)(scale*&quot; + x0 + &quot;),(int)(scale*&quot; + y0 +&quot;)));\n&quot; );
+    guiconstruct.append( &quot; I&quot; + name + &quot; = new &quot; + name + &quot;();\n&quot; );
+    guiconstruct.append( &quot; I&quot; + name  + &quot;.setLayoutParams( new AbsoluteLayout.LayoutParams( &quot; + wid + &quot;,&quot; + hei + &quot;,&quot; + x0 + &quot;,&quot; + y0 +&quot; ) );\n&quot; );
     guiconstruct.append( &quot; layout.addView( I&quot; + name + &quot; );\n&quot; );
     if( sld.print_created_pin)  xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_P&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_created(SeekBar b)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
     if( sld.print_changed_pin) xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_PA&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_changed(int val)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
