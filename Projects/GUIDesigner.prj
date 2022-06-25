@@ -66875,11 +66875,11 @@ guiconstruct.append(&quot;layout.setBackgroundColor(Color.rgb( &quot; + col.getR
 guiconstruct.append(&quot;ACTIVITY.setContentView(layout);\n&quot;);
 
 if(scale==0){
-guiconstruct.append(&quot; int bars_height=100;\n&quot;);
+guiconstruct.append(&quot; int content_top = 150;\n&quot;);
 guiconstruct.append(&quot; Point size = new Point();\n&quot;);
-guiconstruct.append(&quot; ACTIVITY.getWindowManager().getDefaultDisplay().getRealSize(size);\n&quot;);
+guiconstruct.append(&quot; ACTIVITY.getWindowManager().getDefaultDisplay().getSize(size);\n&quot;);
 guiconstruct.append(&quot; double wscl=(double)size.x/&quot; +xxwid+&quot;;\n&quot;);
-guiconstruct.append(&quot; double hscl=(double)(size.y-bars_height)/&quot;+xxhei+&quot;;\n&quot;);
+guiconstruct.append(&quot; double hscl=(double)(size.y-content_top)/&quot;+xxhei+&quot;;\n&quot;);
 guiconstruct.append(&quot; scale = wscl&lt;hscl? wscl:hscl;\n&quot;);
 }
 
