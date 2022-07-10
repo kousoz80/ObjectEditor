@@ -1,5 +1,6 @@
-//オブジェクトエディタver1.2.5
-// 変更点：アイコンを導入
+//オブジェクトエディタver1.2.6
+// 変更点：ビルドスクリプトを取り込んだ
+//       マルチ言語に対応
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
@@ -17,7 +18,7 @@ import javax.imageio.ImageIO;
 
 //アプリケーションのクラス
 class App1{
-  static final String VERSION_STRING =" ObjectEditor version 1.2.4";
+  static final String VERSION_STRING =" ObjectEditor version 1.2.6";
       
 
 // 主体オブジェクト
@@ -71,6 +72,7 @@ class App1{
                                    "basファイル(bas)/bas", 
                                    "実行ファイル(exe)/exe", 
                                    "実行ファイル(efi)/efi", 
+                                   ""
   };
 
   String   ProjectFileMode    =    "プロジェクトファイル(prj)/prj";
@@ -84,6 +86,7 @@ class App1{
                                    "Test.bas",
                                    "Test.exe",
                                    "Test.efi",
+                                   ""
   };
 
   String[] AppTypes ={
@@ -95,6 +98,7 @@ class App1{
                                    "(Basicアプリケーション)",
                                    "(C言語 アプリケーション)",
                                    "(oregengo-R言語 アプリケーション)",
+                                   "マルチ言語アプリケーション"
   };
 
 
@@ -113,28 +117,29 @@ class App1{
 
   boolean ToolBarVisible;
   boolean ViewSourceAtCompile;  
-  boolean NoSourceCreate;
+  boolean OpenCompileDialog;
   boolean NoOptimizePin;
 
   DefaultMutableTreeNode mae_node; //ひとつ前のオブジェクトを示すノード
 
   String LookandFeel;
   String JavaEditCommand;
+  String ScriptExecCommand;
   String ImageEditCommand;
   String JavaViewCommand;
   String HtmlEditCommand;
   String HelpCommand;
 
 // ここより下はアプリケーションの種類( Javaアプリケーション or アプレット )ごとに存在する
-  int ApplicationType = 0;   //アプリケーションの種類( 0:Javaアプリケーション / 1:アプレット/2: C++コンソール/3:C++ Windows /4:android/5:Basic/6:C言語/7:oregengo-R
+  int ApplicationType = 0;   //アプリケーションの種類( 0:Javaアプリケーション / 1:アプレット/2: C++コンソール/3:C++ Windows /4:android/5:Basic/6:C言語/7:oregengo-R/8:マルチ言語環境
 
-  String[] CompileCommand     = { "", "", "", "", "", "", "", "" };
-  String[] RunCommand         = { "", "", "", "", "", "","", "" };
-  String[] GUIDesignerCommand = { "", "", "", "", "", "","", "" };
-  String[] ImportFiles        = { "", "", "", "", "", "","",  "" };
-  String[] ProgramStartupCode = { "", "", "", "", "", "","",  "" };
-  String[] NativeHelpCommand  = { "", "", "", "", "" , "", "", ""};
-  String[] IDF_LocalVariable ={ "","","","","","","","" };
+  String[] CompileCommand     = { "", "", "", "", "", "", "", "","" };
+  String[] RunCommand         = { "", "", "", "", "", "","", "","" };
+  String[] GUIDesignerCommand = { "", "", "", "", "", "","", "","" };
+  String[] ImportFiles        = { "", "", "", "", "", "","",  "","" };
+  String[] ProgramStartupCode = { "", "", "", "", "", "","",  "","" };
+  String[] NativeHelpCommand  = { "", "", "", "", "" , "", "", "",""};
+  String[] IDF_LocalVariable ={ "","","","","","","","","" };
 
   // 共通メソッドを記述
 
@@ -151,7 +156,10 @@ class App1{
     xml.属性値をセット( project, "objectname", "NewApplication" );
     xml.属性値をセット( project, "description", "新規のアプリケーション" );
 
+    int apptyp = ApplicationType;
     loadProperty();
+    ApplicationType = apptyp;  // loadProperty()で書き換えられたApplicationTypeを元に戻す
+
     ImageDir = CurrentDir;
 
     if( ApplicationType < 2 || ApplicationType == 4 ){
@@ -241,7 +249,7 @@ class App1{
     
     ToolBarVisible = true;
     ViewSourceAtCompile = false;
-    NoSourceCreate = false;
+    OpenCompileDialog = false;
     NoOptimizePin = false;
     LookandFeel =UIManager.getSystemLookAndFeelClassName();
   
@@ -269,6 +277,7 @@ class App1{
     DividerLocation2 = 24;
     MoveStep = 32;
     JavaEditCommand = "";
+    ScriptExecCommand = "";
     ImageEditCommand = "";
     JavaViewCommand = "";
     HtmlEditCommand = "notepad NewApplication.html";
@@ -428,14 +437,15 @@ class App1{
     MoveStep = parseInt( ((t=xml.属性値( properties, "MoveStep" ))==null)?"32":t );
     ToolBarVisible = int2boolean( parseInt( xml.属性値( properties, "ToolBarVisible" ) ) );
     ViewSourceAtCompile = int2boolean( parseInt( xml.属性値( properties, "ViewSourceAtCompile" ) ) );
-    NoSourceCreate = int2boolean( parseInt( xml.属性値( properties, "NoSourceCreate" ) ) );
+    OpenCompileDialog = int2boolean( parseInt( xml.属性値( properties, "OpenCompileDialog" ) ) );
     NoOptimizePin = int2boolean( parseInt( xml.属性値( properties, "NoOptimizePin" ) ) );
     JavaEditCommand = ((t=xml.属性値( properties, "JavaEditCommand" ))==null?"":t);
+    ScriptExecCommand = ((t=xml.属性値( properties, "ScriptExecCommand" ))==null?"":t);
     ImageEditCommand = ((t=xml.属性値( properties, "ImageEditCommand" ))==null?"":t);
     JavaViewCommand = ((t=xml.属性値( properties, "JavaViewCommand" ))==null?"":t);
     HtmlEditCommand = ((t=xml.属性値( properties, "HtmlEditCommand" ))==null?"":t);
     HelpCommand = ((t=xml.属性値( properties, "HelpCommand" ))==null?"":t);
-//    ApplicationType = parseInt( xml.属性値( properties, "ApplicationType" ) );
+    ApplicationType = parseInt( xml.属性値( properties, "ApplicationType" ) );
 
     CompileCommand[0] = ((t=xml.属性値( properties, "CompileCommand0" ))==null?"":t);
     RunCommand[0] = ((t=xml.属性値( properties, "RunCommand0" ))==null?"":t);
@@ -581,9 +591,10 @@ class App1{
     xml.属性値をセット( properties, "MoveStep", "" + MoveStep );
     xml.属性値をセット( properties, "ToolBarVisible", "" + boolean2int(ToolBarVisible) );
     xml.属性値をセット( properties, "ViewSourceAtCompile", "" + boolean2int(ViewSourceAtCompile) );
-    xml.属性値をセット( properties, "NoSourceCreate", "" + boolean2int(NoSourceCreate) );
+    xml.属性値をセット( properties, "OpenCompileDialog", "" + boolean2int(OpenCompileDialog) );
     xml.属性値をセット( properties, "NoOptimizePin", "" + boolean2int(NoOptimizePin) );
     xml.属性値をセット( properties, "JavaEditCommand", JavaEditCommand );
+    xml.属性値をセット( properties, "ScriptExecCommand", ScriptExecCommand );
     xml.属性値をセット( properties, "ImageEditCommand", ImageEditCommand );
     xml.属性値をセット( properties, "JavaViewCommand", JavaViewCommand );
     xml.属性値をセット( properties, "HtmlEditCommand", HtmlEditCommand );
@@ -661,6 +672,7 @@ class App1{
 	    SwingUtilities.updateComponentTreeUI(filewindow);
   	    SwingUtilities.updateComponentTreeUI(initialdialog);
   	    SwingUtilities.updateComponentTreeUI(inputdialog);
+  	    SwingUtilities.updateComponentTreeUI(dialog1);
   	    SwingUtilities.updateComponentTreeUI(dialog2);
   	    SwingUtilities.updateComponentTreeUI(dialog3);
     } catch( Exception ex ) {}
@@ -690,6 +702,8 @@ class App1{
         Process p=null;
         int ExitCode;
         
+//System.out.println("execute: command="+s);
+
         try{
           p = java.lang.Runtime.getRuntime().exec(s);
         } catch( Exception ie ){ reportError(s+"は実行できません\n" ); }
@@ -889,6 +903,130 @@ class App1{
        else  buf = buf + "_" + xml.属性値( elem, "inpintext" ) ;
     }
     return buf;
+  }
+
+
+  // プロジェクトをコンパイルする
+  public void compile_project(Object top_element){
+
+          // マルチ言語環境
+          if(ApplicationType == 8){
+            Vector lst = xml.子要素のリスト(top_element, "xobject"); // プロジェクトオブジェクト以外は無視する
+            for(int i = 0; i < lst.size(); i++){
+              Object proj = lst.get(i);
+              Object prop = xml.子要素(proj, "properties");
+              if(prop != null){
+                Object prop0 = properties;
+                properties = prop;
+                syncProperty();
+                compile_project(proj);
+                properties = prop0;
+                syncProperty();
+			  }
+		    }
+            return;
+	      }
+
+          boolean selected = true;
+          String target = "\"noname\"";
+          if(OpenCompileDialog){
+            XFileFilter filter = new XFileFilter( ExectableFileMode[ApplicationType] );
+            JFileChooser xchooser = new JFileChooser( CurrentDir );
+            xchooser.setFileFilter(filter);
+            xchooser.setSelectedFile( new XFile( CurrentDir, SelectedFile[ApplicationType]) );
+            selected = (xchooser.showDialog(objecteditor.gui, "実行ファイルの生成") == JFileChooser.APPROVE_OPTION);
+            if(selected) target = " \""  + xchooser.getSelectedFile().getAbsolutePath() +  "\"";
+          }
+          if(selected) {
+            SourceFile[ApplicationType].Xdelete();
+
+            // Java
+            if( ApplicationType == 0 || ApplicationType == 1 || ApplicationType == 4 ){
+              String s = ImportFiles[ApplicationType]
+                       + compile_JAVA( top_element, true, new Vector() );
+              s = Xreplace( s, "%AppName%", xml.属性値( top_element, "objectname" ) );
+              SourceFile[ApplicationType].Xappend( s );
+
+              // android Java
+              if( ApplicationType == 4 ){
+                try{
+                  BufferedWriter dout = new BufferedWriter( new FileWriter( new File("AndroidManifest.xml") ) );
+                  dout.write( NativeHelpCommand[4]  );
+                  dout.close();
+                } catch( IOException e ){  }
+              }
+            }
+
+            // C++
+            else  if( ApplicationType ==2 || ApplicationType == 3 ){
+              StringBuffer clsbuf  = new StringBuffer("");
+              StringBuffer funcbuf = new StringBuffer("");
+              StringBuffer initbuf = new StringBuffer("");
+              compile_CPP( top_element, clsbuf, funcbuf, initbuf, new Vector() );
+              String s = ImportFiles[ApplicationType]
+                       + clsbuf.toString() + "\n"
+                       + funcbuf.toString()
+                       + "\nvoid Startup(){\n" + initbuf.toString() +" \n}\n"
+                       + ProgramStartupCode[ApplicationType];
+              s = Xreplace( s, "%AppName%", xml.属性値( top_element, "objectname" ) );
+              SourceFile[ApplicationType].Xappend( s );
+            } 
+
+            // Basic
+            else  if( ApplicationType == 5 ){
+              StringBuffer clsbuf  = new StringBuffer("");
+              StringBuffer funcbuf = new StringBuffer("");
+              StringBuffer initbuf = new StringBuffer("");
+              compile_BASIC( top_element, clsbuf, funcbuf, initbuf, new Vector() );
+              String s = ImportFiles[ApplicationType]
+                       + clsbuf.toString() 
+                       + initbuf.toString()
+                       + ProgramStartupCode[ApplicationType]
+                       + funcbuf.toString();
+              s = Xreplace( s, "%AppName%", xml.属性値( top_element, "objectname" ) );
+              SourceFile[ApplicationType].Xappend( s );
+            } 
+
+            // C言語
+            else  if( ApplicationType == 6 ){
+              StringBuffer clsbuf  = new StringBuffer("");
+              StringBuffer funcbuf = new StringBuffer("");
+              StringBuffer initbuf = new StringBuffer("");
+              compile_C( top_element, clsbuf, funcbuf, initbuf, new Vector() );
+              String s = ImportFiles[ApplicationType]
+                       + clsbuf.toString() 
+                       + initbuf.toString()
+                       + ProgramStartupCode[ApplicationType]
+                       + funcbuf.toString();
+              s = Xreplace( s, "%AppName%", xml.属性値( top_element, "objectname" ) );
+              SourceFile[ApplicationType].Xappend( s );
+            } 
+
+            // oregengo-R
+            else  if( ApplicationType == 7 ){
+              StringBuffer clsbuf  = new StringBuffer("");
+              StringBuffer funcbuf = new StringBuffer("");
+              StringBuffer initbuf = new StringBuffer("");
+              compile_oregengo_R( top_element, clsbuf, funcbuf, initbuf, new Vector() );
+              String s = ImportFiles[ApplicationType]
+                       + clsbuf.toString() 
+                       + "\n_INIT_STATES:\n"+initbuf.toString()+"\n end\n"
+                       + ProgramStartupCode[ApplicationType]
+                       + funcbuf.toString();
+              s = Xreplace( s, "%AppName%", xml.属性値( top_element, "objectname" ) );
+              SourceFile[ApplicationType].Xappend( s );
+            } 
+            else ;
+            if(ViewSourceAtCompile){
+              execute( JavaViewCommand + " " + SourceFile[ApplicationType].getName(), false );
+            }
+            XFile cf = new XFile( "classfiles" );
+            if( cf.isDirectory() ) cf.Xdelete();
+            cf.mkdir();
+            String cmd = Xreplace( CompileCommand[ApplicationType], "$1", target );
+            messagewindow.execcommand("コンパイルします．\n", "\nコンパイルできません\n", cmd);
+		  }
+
   }
 
   // C++プログラムを作成する
@@ -2259,6 +2397,7 @@ class App1{
                       new XFile("test.bas"),
                       new XFile("test.c"),
                       new XFile("test.r"),
+                      new XFile("test"),
                     };
 
     ObjectLib =     new XFile[] {
@@ -2270,6 +2409,7 @@ class App1{
                       new XFile("ObjectLib_B"),
                       new XFile("ObjectLib_C"),
                       new XFile("ObjectLib_R"),
+                      new XFile("Projects"),
                     };
 
     CurrentDir   =  new XFile( "." );
@@ -2354,7 +2494,30 @@ class App1{
 
     // 新しいpathに内容を変更する
     public void Login( Xnode nod ){
+
+//System.out.println("application type="+ApplicationType);
+//System.out.println("guidesigner command="+GUIDesignerCommand[ ApplicationType ]);
+
+      Object elem = nod.element;
+
+//System.out.println("login");
+//String objname = xml.属性値( elem, "objectname" );
+//System.out.println("objectname="+objname);
+
+      Object prop = xml.子要素(elem, "properties");
+      if(prop != null ){
+
+//System.out.println("exist properties");
+
+//        properties_bak = properties;
+        properties = prop;
+        syncProperty();
+      }
+//      else properties_bak = null;
        
+//System.out.println("application type="+ApplicationType);
+//System.out.println("guidesigner command="+GUIDesignerCommand[ ApplicationType ]);
+
       //内容をロードする
       node = nod;
       element = node.element;
@@ -2366,6 +2529,9 @@ class App1{
       gui.setobjectname( xml.属性値( element, "objectname" ) );
       gui.setdescription( xml.属性値( element, "description" ) );
        
+
+
+
       //Loginモードでコンポーネントを生成する
       Vector v;
       int i, nn;
@@ -2428,6 +2594,21 @@ class App1{
     //内容をセーブして内容を消去する
     public void Logout(){
       int i;
+
+
+//System.out.println("application type="+ApplicationType);
+//System.out.println("guidesigner command="+GUIDesignerCommand[ ApplicationType ]);
+//System.out.println("logout");
+
+
+//      if(properties_bak != null ){
+//        properties = properties_bak;
+//        syncProperty();
+//        properties_bak = null;
+//      }
+
+//System.out.println("application type="+ApplicationType);
+//System.out.println("guidesigner command="+GUIDesignerCommand[ ApplicationType ]);
 
       MainWinx0 = gui.getLocation().x;
       MainWiny0 = gui.getLocation().y;
@@ -2545,6 +2726,8 @@ class App1{
         xml.属性値をセット( obj, "y0", "" + yp );
       }
 
+      restoreProperty();
+//      properties_bak = null;
       Logout();
       Login( cnode );
       return( obj );
@@ -2607,6 +2790,8 @@ class App1{
         xml.属性値をセット( ic, "y0", "" + yp );
       }
 
+      restoreProperty();
+//      properties_bak = null;
       Logout();
       Login( cnode );
     }
@@ -2634,9 +2819,27 @@ class App1{
       }
     }
 
+//  プロジェクトを貼り付ける
+    private void paste_project(int xp, int yp){
+      XFileFilter filter = new XFileFilter( ProjectFileMode );
+      JFileChooser xchooser = new JFileChooser( ProjectDir );
+      xchooser.setFileFilter(filter);
+      xchooser.setDialogTitle( "プロジェクトを貼り付ける" );
+   
+      int retval = xchooser.showOpenDialog(objecteditor.gui );
+      if(retval == JFileChooser.APPROVE_OPTION) {
+        File f;
+        if( ( f = xchooser.getSelectedFile() ).isFile() ){
+          LoadObject(new XFile(f), xp, yp);
+        }
+      }
+    }
+
 //  確認のダイアログを表示後、プロジェクトを保存する
     private int saveWithDialog(){
       Xnode cnode = node;
+      restoreProperty();
+//      properties_bak = null;
       Logout();
       Login( cnode );
       String pname = xml.属性値( project, "objectname" );
@@ -2648,6 +2851,8 @@ class App1{
 // プロジェクトを保存する
     private void save(){
       Xnode cnode = node;
+      restoreProperty();
+//      properties_bak = null;
       Logout();
       Login( cnode );
       XFileFilter filter = new XFileFilter( ProjectFileMode );
@@ -2658,8 +2863,9 @@ class App1{
     
       int retval = xchooser.showSaveDialog(objecteditor.gui );
       if(retval == JFileChooser.APPROVE_OPTION) {
-        restoreProperty();
         cnode = node;
+        restoreProperty();
+//        properties_bak = null;
         Logout();
         ProjectFile = new XFile( xchooser.getSelectedFile() );
         saveProject();
@@ -2689,26 +2895,27 @@ class App1{
 
     //コマンドを受け取る
     public void CommandReceived( String command ){
-      if(command.equals("CRE_XOBJ")) mode = command;
-      if(command.equals("CRE_AOBJ")) mode = command;
-      if(command.equals("CRE_OP"))   mode = command;
-      if(command.equals("CRE_PIN"))  mode = command;
-      if(command.equals("CRE_REL"))  mode = command;
-      if(command.equals("DEL_OBJ"))  mode = command;
-      if(command.equals("CRE_CODE")) mode = command;
-      if(command.equals("CRE_KJG"))  mode = command;
-      if(command.equals("CRE_ICO"))  mode = command;
-      if(command.equals("CUT"))      mode = command;
-      if(command.equals("COPY"))     mode = command;
-      if(command.equals("PASTE"))    mode = command;
-      if(command.equals("TOX"))      mode = command;
-      if(command.equals("TOGROUP"))  mode = command;
-      if(command.equals("GUIDSIN"))  mode = command;
+      if(command.equals("CRE_XOBJ"))   mode = command;
+      if(command.equals("CRE_AOBJ"))   mode = command;
+      if(command.equals("CRE_OP"))     mode = command;
+      if(command.equals("CRE_PIN"))    mode = command;
+      if(command.equals("CRE_REL"))    mode = command;
+      if(command.equals("DEL_OBJ"))    mode = command;
+      if(command.equals("CRE_CODE"))   mode = command;
+      if(command.equals("CRE_KJG"))    mode = command;
+      if(command.equals("CRE_ICO"))    mode = command;
+      if(command.equals("CUT"))        mode = command;
+      if(command.equals("COPY"))       mode = command;
+      if(command.equals("PASTE"))      mode = command;
+      if(command.equals("TOX"))        mode = command;
+      if(command.equals("TOGROUP"))    mode = command;
+      if(command.equals("GUIDSIN"))    mode = command;
+      if(command.equals("PASTE_PROJ")) mode = command;
 
-      if(command.equals("UPALL"))     treetool.upALL();
-      if(command.equals("DOWNALL"))   treetool.downALL();
-      if(command.equals("LEFTALL"))   treetool.leftALL();
-      if(command.equals("RIGHTALL"))  treetool.rightALL();
+      if(command.equals("UPALL"))      treetool.upALL();
+      if(command.equals("DOWNALL"))    treetool.downALL();
+      if(command.equals("LEFTALL"))    treetool.leftALL();
+      if(command.equals("RIGHTALL"))   treetool.rightALL();
 
       if(command.equals("FILEWIN")){
         filewindow.setVisible(true);
@@ -2737,6 +2944,7 @@ gui.buttonreset();
       if(command.equals("SAVEDIRECT")){
       Xnode cnode = node;
       restoreProperty();
+//      properties_bak = null;
       Logout();
       ProjectFile = new XFile( ProjectDir, xml.属性値( project, "objectname" ) + ".prj" );
       saveProject();;
@@ -2781,106 +2989,20 @@ gui.buttonreset();
       }
 
       if(command.equals("COMPILE")){
-        XFileFilter filter = new XFileFilter( ExectableFileMode[ApplicationType] );
-        JFileChooser xchooser = new JFileChooser( CurrentDir );
-        xchooser.setFileFilter(filter);
-        xchooser.setSelectedFile( new XFile( CurrentDir, SelectedFile[ApplicationType]) );
-      
-        int retval = xchooser.showDialog(objecteditor.gui, "実行ファイルの生成");
-        if(retval == JFileChooser.APPROVE_OPTION) {
-          Process p=null;
-          if(!NoSourceCreate){
-            Xnode cnode = node;
-            Logout();
-            SourceFile[ApplicationType].Xdelete();
-            if( ApplicationType == 0 || ApplicationType == 1 || ApplicationType == 4 ){
-              String s = ImportFiles[ApplicationType]
-                       + compile_JAVA( treetool.top.element, true, new Vector() );
-              s = Xreplace( s, "%AppName%", xml.属性値( project, "objectname" ) );
-              SourceFile[ApplicationType].Xappend( s );
-              if( ApplicationType == 4 ){
-                try{
-                  BufferedWriter dout = new BufferedWriter( new FileWriter( new File("AndroidManifest.xml") ) );
-                  dout.write( NativeHelpCommand[4]  );
-                  dout.close();
-                } catch( IOException e ){  }
-              }
-            }
-            else  if( ApplicationType ==2 || ApplicationType == 3 ){
-              StringBuffer clsbuf  = new StringBuffer("");
-              StringBuffer funcbuf = new StringBuffer("");
-              StringBuffer initbuf = new StringBuffer("");
-              compile_CPP( treetool.top.element, clsbuf, funcbuf, initbuf, new Vector() );
-              String s = ImportFiles[ApplicationType]
-                       + clsbuf.toString() + "\n"
-                       + funcbuf.toString()
-                       + "\nvoid Startup(){\n" + initbuf.toString() +" \n}\n"
-                       + ProgramStartupCode[ApplicationType];
-              s = Xreplace( s, "%AppName%", xml.属性値( project, "objectname" ) );
-              SourceFile[ApplicationType].Xappend( s );
-            } 
-            else  if( ApplicationType == 5 ){
-              StringBuffer clsbuf  = new StringBuffer("");
-              StringBuffer funcbuf = new StringBuffer("");
-              StringBuffer initbuf = new StringBuffer("");
-              compile_BASIC( treetool.top.element, clsbuf, funcbuf, initbuf, new Vector() );
-              String s = ImportFiles[ApplicationType]
-                       + clsbuf.toString() 
-                       + initbuf.toString()
-                       + ProgramStartupCode[ApplicationType]
-                       + funcbuf.toString();
-              s = Xreplace( s, "%AppName%", xml.属性値( project, "objectname" ) );
-              SourceFile[ApplicationType].Xappend( s );
-            } 
-            else  if( ApplicationType == 6 ){
-              StringBuffer clsbuf  = new StringBuffer("void _SINIT();\n");
-              StringBuffer funcbuf = new StringBuffer("");
-              StringBuffer initbuf = new StringBuffer("void _SINIT(){\n");
-              compile_C( treetool.top.element, clsbuf, funcbuf, initbuf, new Vector() );
-              String s = ImportFiles[ApplicationType]
-                       + clsbuf.toString() 
-                       + initbuf.toString() + "\n}\n"
-                       + ProgramStartupCode[ApplicationType]
-                       + funcbuf.toString();
-              s = Xreplace( s, "%AppName%", xml.属性値( project, "objectname" ) );
-              SourceFile[ApplicationType].Xappend( s );
-            } 
-            else  if( ApplicationType == 7 ){
-              StringBuffer clsbuf  = new StringBuffer("");
-              StringBuffer funcbuf = new StringBuffer("");
-              StringBuffer initbuf = new StringBuffer("");
-              compile_oregengo_R( treetool.top.element, clsbuf, funcbuf, initbuf, new Vector() );
-              String s = ImportFiles[ApplicationType]
-                       + clsbuf.toString() 
-                       + "\n_INIT_STATES:\n"+initbuf.toString()+"\n end\n"
-                       + ProgramStartupCode[ApplicationType]
-                       + funcbuf.toString();
-              s = Xreplace( s, "%AppName%", xml.属性値( project, "objectname" ) );
-              SourceFile[ApplicationType].Xappend( s );
-            } 
-            else ;
-            Login( cnode );
-          }
-          if( ViewSourceAtCompile ){
-            execute( JavaViewCommand + " " + SourceFile[ApplicationType].getName(), false );
-          }
-          XFile cf = new XFile( "classfiles" );
-          if( cf.isDirectory() ) cf.Xdelete();
-          cf.mkdir();
           messagewindow.clearText();
-          messagewindow.execcommand(
-            "コンパイルします．\n",
-            "\nコンパイルできません\n",
-            CompileCommand[ApplicationType] + " \""  + xchooser.getSelectedFile().getAbsolutePath() +  "\"" 
-          );
-
-        }
+          Xnode cnode = node;
+          Logout();
+          Login( treetool.top );
+          restoreProperty();
+          Logout();
+          compile_project(treetool.top.element);
+          Login( cnode );
 System.gc();
 gui.buttonreset();
       }
       
       if(command.equals("RUN")){
-        messagewindow.execcommand( "実行します\n", "\n実行できません\n", RunCommand[ApplicationType] );
+        messagewindow.execcommand("実行します\n", "\n実行できません\n", RunCommand[ApplicationType]);
 gui.buttonreset();
 
       }
@@ -2921,11 +3043,19 @@ gui.buttonreset();
     //  プログラム初期化
     public void clear_all( int mode ){
       if( mode >= 0 ){
+		int mode0 = mode;
         Logout();
-        ApplicationType = mode;
+        ApplicationType = mode0;
         newProject();
         syncProperty();
+
+//System.out.println("clear all1:ApplicationType="+ApplicationType);
+
         initialise();
+
+        ApplicationType = mode0; // プロジェクト新規作成の際にApplicationTypeが書き換えられてしまうので
+//System.out.println("clear all2:ApplicationType="+ApplicationType);
+
         setlookandfeel();
         gui.resize();
         gui.name.setCaretPosition(0);
@@ -2936,11 +3066,17 @@ gui.buttonreset();
         open();
       }
 System.gc();
+
+//System.out.println("clear all3:ApplicationType="+ApplicationType);
+
     }
 
 
     // マウスで位置データを与える
     public void mousePointed( int xp, int yp ){
+
+
+//System.out.println("mode="+mode);
 
       // create xobject
       if( mode.equals("CRE_XOBJ")){
@@ -3031,6 +3167,24 @@ gui.buttonreset();
         if( ( obj = LoadObject( GUIDesignerWork, xp, yp ) ) != null ){
            xml.属性値をセット( obj,"レイアウト", LayoutData.toTextString() );
         }
+        mode = "NOP";
+gui.buttonreset();
+      }
+
+      // プロジェクトを貼り付ける
+      else if( mode.equals("PASTE_PROJ")){
+
+//System.out.println("paste project: ApplicationType="+ApplicationType);
+
+        if(ApplicationType == 8){
+          paste_project(xp, yp);
+        }
+        else{
+
+//System.out.println("dailog1.age");
+
+          dialog1.age("マルチ言語アプリケーション専用です");
+	    }
         mode = "NOP";
 gui.buttonreset();
       }
@@ -3284,6 +3438,7 @@ gui.buttonreset();
               JMenuItem kjgroup;
 
               JMenuItem guidsin;
+              JMenuItem proj;
 
           JMenu editmenu;
               JMenuItem delete;
@@ -3496,12 +3651,18 @@ gui.buttonreset();
 
         toolmenu.addSeparator();
      
-        guidsin = new JMenuItem("GUIデザイナ", KeyEvent.VK_G);
+        guidsin = new JMenuItem("GUIデザイナ", KeyEvent.VK_D);
         guidsin.setFont( font );
         guidsin.setActionCommand("GUIDSIN");
         guidsin.setAccelerator( KeyStroke.getKeyStroke( KeyEvent.VK_G, ActionEvent.CTRL_MASK ) );
         guidsin.addActionListener(this);
         toolmenu.add(guidsin);
+
+        proj = new JMenuItem("プロジェクトの貼り付け(P)", KeyEvent.VK_P);
+        proj.setFont( font );
+        proj.setActionCommand("PASTE_PROJ");
+        proj.addActionListener(this);
+        toolmenu.add(proj);
 
         //編集メニューを生成
         editmenu = new JMenu("編集(E)");
@@ -3535,12 +3696,6 @@ gui.buttonreset();
 
         editmenu.addSeparator();
      
-//        optpin = new JMenuItem("ピンを最適化(O)", KeyEvent.VK_O);
-//        optpin.setFont( font );
-//        optpin.setActionCommand("OPTPIN");
-//        optpin.addActionListener(this);
-//        editmenu.add(optpin);
-
         tox = new JMenuItem("Ｘオブジェクトに変換(X)", KeyEvent.VK_X);
         tox.setFont( font );
         tox.setActionCommand("TOX");
@@ -6168,21 +6323,21 @@ gui.buttonreset();
 
     //コマンドを受け取る
     public void CommandReceived( String command ){
-      if(command.equals("CRE_STA"))  mode = command;
-      if(command.equals("CRE_OP"))   mode = command;
-      if(command.equals("CRE_PIN"))  mode = command;
-      if(command.equals("CRE_ACT"))  mode = command;
-      if(command.equals("CRE_CODE")) mode = command;
-      if(command.equals("CRE_ICO"))  mode = command;
-      if(command.equals("DEL_OBJ"))  mode = command;
-      if(command.equals("CUT"))      mode = command;
-      if(command.equals("COPY"))     mode = command;
-      if(command.equals("PASTE"))    mode = command;
+      if(command.equals("CRE_STA"))    mode = command;
+      if(command.equals("CRE_OP"))     mode = command;
+      if(command.equals("CRE_PIN"))    mode = command;
+      if(command.equals("CRE_ACT"))    mode = command;
+      if(command.equals("CRE_CODE"))   mode = command;
+      if(command.equals("CRE_ICO"))    mode = command;
+      if(command.equals("DEL_OBJ"))    mode = command;
+      if(command.equals("CUT"))        mode = command;
+      if(command.equals("COPY"))       mode = command;
+      if(command.equals("PASTE"))      mode = command;
 
-      if(command.equals("UPALL"))     treetool.upALL();
-      if(command.equals("DOWNALL"))   treetool.downALL();
-      if(command.equals("LEFTALL"))   treetool.leftALL();
-      if(command.equals("RIGHTALL"))  treetool.rightALL();
+      if(command.equals("UPALL"))      treetool.upALL();
+      if(command.equals("DOWNALL"))    treetool.downALL();
+      if(command.equals("LEFTALL"))    treetool.leftALL();
+      if(command.equals("RIGHTALL"))   treetool.rightALL();
 
       if(command.equals("FILEWIN")){
        filewindow.setVisible(true);
@@ -6190,99 +6345,20 @@ gui.buttonreset();
       }
 
       if(command.equals("COMPILE")){
-        XFileFilter filter = new XFileFilter( ExectableFileMode[ApplicationType] );
-        JFileChooser xchooser = new JFileChooser( CurrentDir );
-        xchooser.setFileFilter(filter);
-        xchooser.setSelectedFile( new XFile( CurrentDir, SelectedFile[ApplicationType]) );
-      
-        int retval = xchooser.showDialog(objecteditor.gui, "実行ファイルの生成");
-        if(retval == JFileChooser.APPROVE_OPTION) {
-          Process p=null;
-          if(!NoSourceCreate){
-            Anode cnode = node;
-            Logout();
-            SourceFile[ApplicationType].Xdelete();
-            if( ApplicationType == 0 || ApplicationType == 1 || ApplicationType == 4 ){
-              String s = ImportFiles[ApplicationType]
-                       + compile_JAVA( treetool.top.element, true, new Vector() );
-              s = Xreplace( s, "%AppName%", xml.属性値( project, "objectname" ) );
-              SourceFile[ApplicationType].Xappend( s );
-            }
-            else  if( ApplicationType ==2 || ApplicationType == 3 ){
-              StringBuffer clsbuf  = new StringBuffer("");
-              StringBuffer funcbuf = new StringBuffer("");
-              StringBuffer initbuf = new StringBuffer("");
-              compile_CPP( treetool.top.element, clsbuf, funcbuf, initbuf, new Vector() );
-              String s = ImportFiles[ApplicationType]
-                       + clsbuf.toString() + "\n"
-                       + funcbuf.toString()
-                       + "\nvoid Startup(){\n" + initbuf.toString() +" \n}\n"
-                       + ProgramStartupCode[ApplicationType];
-              s = Xreplace( s, "%AppName%", xml.属性値( project, "objectname" ) );
-              SourceFile[ApplicationType].Xappend( s );
-            } 
-            else  if( ApplicationType == 5 ){
-              StringBuffer clsbuf  = new StringBuffer("");
-              StringBuffer funcbuf = new StringBuffer("");
-              StringBuffer initbuf = new StringBuffer("");
-              compile_BASIC( treetool.top.element, clsbuf, funcbuf, initbuf, new Vector() );
-              String s = ImportFiles[ApplicationType]
-                       + clsbuf.toString() 
-                       + initbuf.toString()
-                       + ProgramStartupCode[ApplicationType]
-                       + funcbuf.toString();
-              s = Xreplace( s, "%AppName%", xml.属性値( project, "objectname" ) );
-              SourceFile[ApplicationType].Xappend( s );
-            } 
-            else  if( ApplicationType == 6 ){
-              StringBuffer clsbuf  = new StringBuffer("");
-              StringBuffer funcbuf = new StringBuffer("");
-              StringBuffer initbuf = new StringBuffer("");
-              compile_C( treetool.top.element, clsbuf, funcbuf, initbuf, new Vector() );
-              String s = ImportFiles[ApplicationType]
-                       + clsbuf.toString() 
-                       + initbuf.toString()
-                       + ProgramStartupCode[ApplicationType]
-                       + funcbuf.toString();
-              s = Xreplace( s, "%AppName%", xml.属性値( project, "objectname" ) );
-              SourceFile[ApplicationType].Xappend( s );
-            } 
-            else  if( ApplicationType == 7 ){
-              StringBuffer clsbuf  = new StringBuffer("");
-              StringBuffer funcbuf = new StringBuffer("");
-              StringBuffer initbuf = new StringBuffer("");
-              compile_oregengo_R( treetool.top.element, clsbuf, funcbuf, initbuf, new Vector() );
-              String s = ImportFiles[ApplicationType]
-                       + clsbuf.toString() 
-                       + "\n_INIT_STATES:\n"+initbuf.toString()+"\n end\n"
-                       + ProgramStartupCode[ApplicationType]
-                       + funcbuf.toString();
-              s = Xreplace( s, "%AppName%", xml.属性値( project, "objectname" ) );
-              SourceFile[ApplicationType].Xappend( s );
-            } 
-            else ;
-            Login( cnode );
-          }
-          if( ViewSourceAtCompile ){
-            execute( JavaViewCommand + " " + SourceFile[ApplicationType].getName(), false );
-          }
-          XFile cf = new XFile( "classfiles" );
-          if( cf.isDirectory() ) cf.Xdelete();
-          cf.mkdir();
           messagewindow.clearText();
-          messagewindow.execcommand(
-            "コンパイルします．\n",
-            "\nコンパイルできません\n",
-            CompileCommand[ApplicationType] + " \""  + xchooser.getSelectedFile().getAbsolutePath() +  "\"" 
-          );
-
-        }
+          Anode cnode = node;
+          Logout();
+          objecteditor.Login( treetool.top );
+          restoreProperty();
+          objecteditor.Logout();
+          compile_project(treetool.top.element);
+          Login( cnode );
 System.gc();
 gui.buttonreset();
       }
       
       if(command.equals("RUN")){
-        messagewindow.execcommand( "実行します\n", "\n実行できません\n", RunCommand[ApplicationType] );
+        messagewindow.execcommand("実行します\n", "\n実行できません\n", RunCommand[ApplicationType]);
 gui.buttonreset();
       }
       
@@ -8922,12 +8998,14 @@ gui.buttonreset();
 
     int i;
     JCheckBox      viewsourceatcompile;
-    JCheckBox      nosourcecreate;
+    JCheckBox      opencompiledialog;
     JCheckBox      nooptimizepin;
     JLabel         Llookandfeels;
     JComboBox      lookandfeels;
     JLabel         Ljavaeditcommand;
     JTextField     javaeditcommand;
+    JLabel         Lscript_exec_command;
+    JTextField     script_exec_command;
     JLabel         Limgeditcommand;
     JTextField     imgeditcommand;
     JLabel         Ljavaviewcommand;
@@ -8939,119 +9017,119 @@ gui.buttonreset();
     JPanel         properties;
         
     JLabel         Lcompilecommand0;
-    JTextField     compilecommand0;
+    TextButton     compilecommand0;
     JLabel         Lruncommand0;
-    JTextField     runcommand0;
+    TextButton     runcommand0;
     JLabel         Lguidesignercommand0;
-    JTextField     guidesignercommand0;
+    TextButton     guidesignercommand0;
     JLabel         Limportfiles0;
-    JTextArea      importfiles0;
+    TextButton      importfiles0;
     JLabel         Lprogramstartupcode0;
-    JTextArea      programstartupcode0;
-    JTextField     nativehelpcommand0;
+    TextButton      programstartupcode0;
     JLabel         Lnativehelpcommand0;
+    TextButton     nativehelpcommand0;
     JPanel         properties0;
 
     JLabel         Lcompilecommand1;
-    JTextField     compilecommand1;
+    TextButton     compilecommand1;
     JLabel         Lruncommand1;
-    JTextField     runcommand1;
+    TextButton     runcommand1;
     JLabel         Lguidesignercommand1;
-    JTextField     guidesignercommand1;
+    TextButton     guidesignercommand1;
     JLabel         Limportfiles1;
-    JTextArea      importfiles1;
+    TextButton     importfiles1;
     JLabel         Lprogramstartupcode1;
-    JTextArea      programstartupcode1;
-    JTextField     nativehelpcommand1;
+    TextButton      programstartupcode1;
     JLabel         Lnativehelpcommand1;
+    TextButton     nativehelpcommand1;
     JPanel         properties1;
 
     JLabel         Lcompilecommand2;
-    JTextField     compilecommand2;
+    TextButton     compilecommand2;
     JLabel         Lruncommand2;
-    JTextField     runcommand2;
+    TextButton     runcommand2;
     JLabel         Lguidesignercommand2;
-    JTextField     guidesignercommand2;
+    TextButton     guidesignercommand2;
     JLabel         Limportfiles2;
-    JTextArea      importfiles2;
+    TextButton      importfiles2;
     JLabel         Lprogramstartupcode2;
-    JTextArea      programstartupcode2;
-    JTextField     nativehelpcommand2;
+    TextButton      programstartupcode2;
     JLabel         Lnativehelpcommand2;
+    TextButton     nativehelpcommand2;
     JPanel         properties2;
 
     JLabel         Lcompilecommand3;
-    JTextField     compilecommand3;
+    TextButton     compilecommand3;
     JLabel         Lruncommand3;
-    JTextField     runcommand3;
+    TextButton     runcommand3;
     JLabel         Lguidesignercommand3;
-    JTextField     guidesignercommand3;
+    TextButton     guidesignercommand3;
     JLabel         Limportfiles3;
-    JTextArea      importfiles3;
+    TextButton      importfiles3;
     JLabel         Lprogramstartupcode3;
-    JTextArea      programstartupcode3;
-    JTextField     nativehelpcommand3;
+    TextButton      programstartupcode3;
     JLabel         Lnativehelpcommand3;
+    TextButton     nativehelpcommand3;
     JPanel         properties3;
 
     JLabel         Lcompilecommand4;
-    JTextField     compilecommand4;
+    TextButton     compilecommand4;
     JLabel         Lruncommand4;
-    JTextField     runcommand4;
+    TextButton     runcommand4;
     JLabel         Lguidesignercommand4;
-    JTextField     guidesignercommand4;
+    TextButton     guidesignercommand4;
     JLabel         Limportfiles4;
-    JTextArea      importfiles4;
+    TextButton      importfiles4;
     JLabel         Lprogramstartupcode4;
-    JTextArea      programstartupcode4;
-    JTextArea      nativehelpcommand4;
+    TextButton      programstartupcode4;
     JLabel         Lnativehelpcommand4;
+    TextButton      nativehelpcommand4;
     JPanel         properties4;
 
     JLabel         Lidf_localvariable5;
-    JTextField   idf_localvariable5;
+    TextButton   idf_localvariable5;
     JLabel         Lcompilecommand5;
-    JTextField     compilecommand5;
+    TextButton     compilecommand5;
     JLabel         Lruncommand5;
-    JTextField     runcommand5;
+    TextButton     runcommand5;
     JLabel         Lguidesignercommand5;
-    JTextField     guidesignercommand5;
+    TextButton     guidesignercommand5;
     JLabel         Limportfiles5;
-    JTextArea      importfiles5;
+    TextButton      importfiles5;
     JLabel         Lprogramstartupcode5;
-    JTextArea      programstartupcode5;
-    JTextField     nativehelpcommand5;
+    TextButton      programstartupcode5;
     JLabel         Lnativehelpcommand5;
+    TextButton     nativehelpcommand5;
     JPanel         properties5;
 
     JLabel         Lcompilecommand6;
-    JTextField     compilecommand6;
+    TextButton     compilecommand6;
     JLabel         Lruncommand6;
-    JTextField     runcommand6;
+    TextButton     runcommand6;
     JLabel         Lguidesignercommand6;
-    JTextField     guidesignercommand6;
+    TextButton     guidesignercommand6;
     JLabel         Limportfiles6;
-    JTextArea      importfiles6;
+    TextButton      importfiles6;
     JLabel         Lprogramstartupcode6;
-    JTextArea      programstartupcode6;
-    JTextField     nativehelpcommand6;
+    TextButton      programstartupcode6;
     JLabel         Lnativehelpcommand6;
+    TextButton     nativehelpcommand6;
     JPanel         properties6;
 
     JLabel         Lidf_localvariable7;
-    JTextField   idf_localvariable7;
+    TextButton   idf_localvariable7;
     JLabel         Lcompilecommand7;
-    JTextField     compilecommand7;
+    TextButton     compilecommand7;
     JLabel         Lruncommand7;
-    JTextField     runcommand7;
+    TextButton     runcommand7;
     JLabel         Lguidesignercommand7;
-    JTextField     guidesignercommand7;
+    TextButton     guidesignercommand7;
     JLabel         Limportfiles7;
-    JTextArea      importfiles7;
+    TextButton      importfiles7;
     JLabel         Lprogramstartupcode7;
-    JTextArea      programstartupcode7;
-    JTextField     nativehelpcommand7;
+    TextButton      programstartupcode7;
     JLabel         Lnativehelpcommand7;
+    TextButton     nativehelpcommand7;
     JPanel         properties7;
 
     JTabbedPane    tproperties;
@@ -9070,10 +9148,12 @@ gui.buttonreset();
       JTabbedPane tproperties = new JTabbedPane();
 
       viewsourceatcompile  = new JCheckBox("コンパイル時にソースファイルを開く",ViewSourceAtCompile);
-      nosourcecreate       = new JCheckBox("ソースファイルを生成しない",NoSourceCreate);
+      opencompiledialog    = new JCheckBox("コンパイル時にファイル選択ダイアログを開く",OpenCompileDialog);
       nooptimizepin       = new JCheckBox("Xオブジェクト展開時にピンを整理しない",NoOptimizePin);
       Ljavaeditcommand     = new JLabel("プログラムを編集するコマンド(外部のエディタを使用しないときは空にしておく)");
       javaeditcommand      = new JTextField(JavaEditCommand);
+      Lscript_exec_command  = new JLabel("スクリプトを実行するコマンド");
+      script_exec_command  = new JTextField(ScriptExecCommand);
       Limgeditcommand     = new JLabel("アイコンを編集するコマンド");
       imgeditcommand      = new JTextField(ImageEditCommand);
       Ljavaviewcommand     = new JLabel("コンパイル時にソースファイルを開くコマンド");
@@ -9086,117 +9166,117 @@ gui.buttonreset();
       lookandfeels         = new JComboBox();
 
       Lcompilecommand0     = new JLabel("コンパイラを起動するコマンド");
-      compilecommand0      = new JTextField(CompileCommand[0]);
+      compilecommand0      = new TextButton(CompileCommand[0]);
       Lruncommand0         = new JLabel("作成したプログラムを起動するコマンド");
-      runcommand0          = new JTextField(RunCommand[0]);
+      runcommand0          = new TextButton(RunCommand[0]);
       Lguidesignercommand0 = new JLabel("GUIデザイナを起動するコマンド");
-      guidesignercommand0  = new JTextField(GUIDesignerCommand[0]);
+      guidesignercommand0  = new TextButton(GUIDesignerCommand[0]);
       Limportfiles0        = new JLabel("インポートするパッケージ & スタートアップコード");
-      importfiles0         = new JTextArea(ImportFiles[0]);
+      importfiles0         = new TextButton(ImportFiles[0]);
       Lprogramstartupcode0 = new JLabel("グローバル宣言など");
-      programstartupcode0  = new JTextArea(ProgramStartupCode[0]);
+      programstartupcode0  = new TextButton(ProgramStartupCode[0]);
       Lnativehelpcommand0  = new JLabel("Javaのヘルプファイルを開くコマンド");
-      nativehelpcommand0   = new JTextField(NativeHelpCommand[0]);
+      nativehelpcommand0   = new TextButton(NativeHelpCommand[0]);
 
       Lcompilecommand1     = new JLabel("コンパイラを起動するコマンド");
-      compilecommand1      = new JTextField(CompileCommand[1]);
+      compilecommand1      = new TextButton(CompileCommand[1]);
       Lruncommand1         = new JLabel("作成したプログラムを起動するコマンド");
-      runcommand1          = new JTextField(RunCommand[1]);
+      runcommand1          = new TextButton(RunCommand[1]);
       Lguidesignercommand1 = new JLabel("GUIデザイナを起動するコマンド");
-      guidesignercommand1  = new JTextField(GUIDesignerCommand[1]);
+      guidesignercommand1  = new TextButton(GUIDesignerCommand[1]);
       Limportfiles1        = new JLabel("インポートするパッケージ & スタートアップコード");
-      importfiles1         = new JTextArea(ImportFiles[1]);
+      importfiles1         = new TextButton(ImportFiles[1]);
       Lprogramstartupcode1 = new JLabel("グローバル宣言など");
-      programstartupcode1  = new JTextArea(ProgramStartupCode[1]);
+      programstartupcode1  = new TextButton(ProgramStartupCode[1]);
       Lnativehelpcommand1  = new JLabel("アプレットのヘルプファイルを開くコマンド");
-      nativehelpcommand1   = new JTextField(NativeHelpCommand[1]);
+      nativehelpcommand1   = new TextButton(NativeHelpCommand[1]);
 
       Lcompilecommand2     = new JLabel("コンパイラを起動するコマンド");
-      compilecommand2      = new JTextField(CompileCommand[2]);
+      compilecommand2      = new TextButton(CompileCommand[2]);
       Lruncommand2         = new JLabel("作成したプログラムを起動するコマンド");
-      runcommand2          = new JTextField(RunCommand[2]);
+      runcommand2          = new TextButton(RunCommand[2]);
       Lguidesignercommand2 = new JLabel("GUIデザイナを起動するコマンド");
-      guidesignercommand2  = new JTextField(GUIDesignerCommand[2]);
+      guidesignercommand2  = new TextButton(GUIDesignerCommand[2]);
       Limportfiles2        = new JLabel("インクルード宣言など");
-      importfiles2         = new JTextArea(ImportFiles[2]);
+      importfiles2         = new TextButton(ImportFiles[2]);
       Lprogramstartupcode2 = new JLabel("スタートアップコード");
-      programstartupcode2  = new JTextArea(ProgramStartupCode[2]);
+      programstartupcode2  = new TextButton(ProgramStartupCode[2]);
       Lnativehelpcommand2  = new JLabel("C++のヘルプファイルを開くコマンド");
-      nativehelpcommand2   = new JTextField(NativeHelpCommand[2]);
+      nativehelpcommand2   = new TextButton(NativeHelpCommand[2]);
 
       Lcompilecommand3     = new JLabel("コンパイラを起動するコマンド");
-      compilecommand3      = new JTextField(CompileCommand[3]);
+      compilecommand3      = new TextButton(CompileCommand[3]);
       Lruncommand3         = new JLabel("作成したプログラムを起動するコマンド");
-      runcommand3          = new JTextField(RunCommand[3]);
+      runcommand3          = new TextButton(RunCommand[3]);
       Lguidesignercommand3 = new JLabel("GUIデザイナを起動するコマンド");
-      guidesignercommand3  = new JTextField(GUIDesignerCommand[3]);
+      guidesignercommand3  = new TextButton(GUIDesignerCommand[3]);
       Limportfiles3        = new JLabel("インクルード宣言など");
-      importfiles3         = new JTextArea(ImportFiles[3]);
+      importfiles3         = new TextButton(ImportFiles[3]);
       Lprogramstartupcode3 = new JLabel("スタートアップコード");
-      programstartupcode3  = new JTextArea(ProgramStartupCode[3]);
+      programstartupcode3  = new TextButton(ProgramStartupCode[3]);
       Lnativehelpcommand3  = new JLabel("C++のヘルプファイルを開くコマンド");
-      nativehelpcommand3   = new JTextField(NativeHelpCommand[3]);
+      nativehelpcommand3   = new TextButton(NativeHelpCommand[3]);
 
       Lcompilecommand4     = new JLabel("コンパイラを起動するコマンド");
-      compilecommand4      = new JTextField(CompileCommand[4]);
+      compilecommand4      = new TextButton(CompileCommand[4]);
       Lruncommand4         = new JLabel("作成したプログラムを起動するコマンド");
-      runcommand4          = new JTextField(RunCommand[4]);
+      runcommand4          = new TextButton(RunCommand[4]);
       Lguidesignercommand4 = new JLabel("GUIデザイナを起動するコマンド");
-      guidesignercommand4  = new JTextField(GUIDesignerCommand[4]);
+      guidesignercommand4  = new TextButton(GUIDesignerCommand[4]);
       Limportfiles4        = new JLabel("インポートするパッケージ & スタートアップコード");
-      importfiles4         = new JTextArea(ImportFiles[4]);
+      importfiles4         = new TextButton(ImportFiles[4]);
       Lprogramstartupcode4 = new JLabel("グローバル宣言など");
-      programstartupcode4  = new JTextArea(ProgramStartupCode[4]);
+      programstartupcode4  = new TextButton(ProgramStartupCode[4]);
       Lnativehelpcommand4  = new JLabel("androidマニフェスト");
-      nativehelpcommand4   = new JTextArea(NativeHelpCommand[4]);
+      nativehelpcommand4   = new TextButton(NativeHelpCommand[4]);
 
       Lidf_localvariable5     = new JLabel("局所変数の識別子");
-      idf_localvariable5     = new JTextField(IDF_LocalVariable[5]);
+      idf_localvariable5     = new TextButton(IDF_LocalVariable[5]);
       Lcompilecommand5     = new JLabel("コンパイラを起動するコマンド");
-      compilecommand5      = new JTextField(CompileCommand[5]);
+      compilecommand5      = new TextButton(CompileCommand[5]);
       Lruncommand5         = new JLabel("作成したプログラムを起動するコマンド");
-      runcommand5          = new JTextField(RunCommand[5]);
+      runcommand5          = new TextButton(RunCommand[5]);
       Lguidesignercommand5 = new JLabel("GUIデザイナを起動するコマンド");
-      guidesignercommand5  = new JTextField(GUIDesignerCommand[5]);
+      guidesignercommand5  = new TextButton(GUIDesignerCommand[5]);
       Limportfiles5        = new JLabel("変数宣言など");
-      importfiles5         = new JTextArea(ImportFiles[5]);
+      importfiles5         = new TextButton(ImportFiles[5]);
       Lprogramstartupcode5 = new JLabel("スタートアップコード");
-      programstartupcode5  = new JTextArea(ProgramStartupCode[5]);
+      programstartupcode5  = new TextButton(ProgramStartupCode[5]);
       Lnativehelpcommand5  = new JLabel("Basicのヘルプファイルを開くコマンド");
-      nativehelpcommand5   = new JTextField(NativeHelpCommand[5]);
+      nativehelpcommand5   = new TextButton(NativeHelpCommand[5]);
 
       Lcompilecommand6     = new JLabel("コンパイラを起動するコマンド");
-      compilecommand6      = new JTextField(CompileCommand[6]);
+      compilecommand6      = new TextButton(CompileCommand[6]);
       Lruncommand6         = new JLabel("作成したプログラムを起動するコマンド");
-      runcommand6          = new JTextField(RunCommand[6]);
+      runcommand6          = new TextButton(RunCommand[6]);
       Lguidesignercommand6 = new JLabel("GUIデザイナを起動するコマンド");
-      guidesignercommand6  = new JTextField(GUIDesignerCommand[6]);
+      guidesignercommand6  = new TextButton(GUIDesignerCommand[6]);
       Limportfiles6        = new JLabel("インクルード宣言など");
-      importfiles6         = new JTextArea(ImportFiles[6]);
+      importfiles6         = new TextButton(ImportFiles[6]);
       Lprogramstartupcode6 = new JLabel("スタートアップコード");
-      programstartupcode6  = new JTextArea(ProgramStartupCode[6]);
+      programstartupcode6  = new TextButton(ProgramStartupCode[6]);
       Lnativehelpcommand6  = new JLabel("C言語のヘルプファイルを開くコマンド");
-      nativehelpcommand6   = new JTextField(NativeHelpCommand[6]);
+      nativehelpcommand6   = new TextButton(NativeHelpCommand[6]);
 
       Lidf_localvariable7     = new JLabel("局所変数の識別子");
-      idf_localvariable7     = new JTextField(IDF_LocalVariable[7]);
+      idf_localvariable7     = new TextButton(IDF_LocalVariable[7]);
       Lcompilecommand7     = new JLabel("コンパイラを起動するコマンド");
-      compilecommand7      = new JTextField(CompileCommand[7]);
+      compilecommand7      = new TextButton(CompileCommand[7]);
       Lruncommand7         = new JLabel("作成したプログラムを起動するコマンド");
-      runcommand7          = new JTextField(RunCommand[7]);
+      runcommand7          = new TextButton(RunCommand[7]);
       Lguidesignercommand7 = new JLabel("GUIデザイナを起動するコマンド");
-      guidesignercommand7  = new JTextField(GUIDesignerCommand[7]);
+      guidesignercommand7  = new TextButton(GUIDesignerCommand[7]);
       Limportfiles7        = new JLabel("変数宣言など");
-      importfiles7         = new JTextArea(ImportFiles[7]);
+      importfiles7         = new TextButton(ImportFiles[7]);
       Lprogramstartupcode7 = new JLabel("スタートアップコード");
-      programstartupcode7  = new JTextArea(ProgramStartupCode[7]);
+      programstartupcode7  = new TextButton(ProgramStartupCode[7]);
       Lnativehelpcommand7  = new JLabel("oregengo-Rのヘルプファイルを開くコマンド");
-      nativehelpcommand7   = new JTextField(NativeHelpCommand[7]);
+      nativehelpcommand7   = new TextButton(NativeHelpCommand[7]);
 
       properties = new JPanel();
       properties.setLayout(new BoxLayout( properties, BoxLayout.Y_AXIS) );
       properties.add(viewsourceatcompile);
-      properties.add(nosourcecreate);
+      properties.add(opencompiledialog);
       properties.add(nooptimizepin);
       lookandfeels.setAlignmentX(JComponent.LEFT_ALIGNMENT);
       properties.add(Llookandfeels);
@@ -9206,6 +9286,8 @@ gui.buttonreset();
       }
       properties.add(Ljavaeditcommand);
       properties.add(javaeditcommand);
+      properties.add(Lscript_exec_command);
+      properties.add(script_exec_command);
       properties.add(Limgeditcommand);
       properties.add(imgeditcommand);
       properties.add(Ljavaviewcommand);
@@ -9215,7 +9297,7 @@ gui.buttonreset();
       properties.add(Lhelpcommand);
       properties.add(helpcommand);
       JScrollPane sx = new JScrollPane(properties);
-      sx.setPreferredSize(new Dimension(600,200) );
+//      sx.setPreferredSize(new Dimension(600,200) );
 
       properties0 = new JPanel();
       properties0.setLayout(new BoxLayout( properties0, BoxLayout.Y_AXIS) );
@@ -9228,15 +9310,11 @@ gui.buttonreset();
       properties0.add(Lnativehelpcommand0);
       properties0.add(nativehelpcommand0);
       properties0.add(Limportfiles0);
-      JScrollPane s00 = new JScrollPane(importfiles0);
-      s00.setPreferredSize( new Dimension( 560, 64 ));
-      properties0.add(s00);
+      properties0.add(importfiles0);
       properties0.add( Lprogramstartupcode0);
-      JScrollPane s01 = new JScrollPane(programstartupcode0);
-      s01.setPreferredSize( new Dimension( 560, 64 ));
-      properties0.add(s01);
+      properties0.add( programstartupcode0);
       JScrollPane s02 = new JScrollPane(properties0);
-      s02.setPreferredSize(new Dimension(600,200) );
+//      s02.setPreferredSize(new Dimension(600,200) );
 
       properties1 = new JPanel();
       properties1.setLayout(new BoxLayout( properties1, BoxLayout.Y_AXIS) );
@@ -9249,15 +9327,11 @@ gui.buttonreset();
       properties1.add(Lnativehelpcommand1);
       properties1.add(nativehelpcommand1);
       properties1.add( Limportfiles1);
-      JScrollPane s10 = new JScrollPane(importfiles1);
-      s10.setPreferredSize( new Dimension( 560, 64 ));
-      properties1.add(s10);
+      properties1.add( importfiles1);
       properties1.add( Lprogramstartupcode1);
-      JScrollPane s11 = new JScrollPane(programstartupcode1);
-      s11.setPreferredSize( new Dimension( 560, 64 ));
-      properties1.add(s11);
+      properties1.add( programstartupcode1);
       JScrollPane s12 = new JScrollPane(properties1);
-      s12.setPreferredSize(new Dimension(600,200) );
+//      s12.setPreferredSize(new Dimension(600,200) );
 
       properties2 = new JPanel();
       properties2.setLayout(new BoxLayout( properties2, BoxLayout.Y_AXIS) );
@@ -9270,15 +9344,11 @@ gui.buttonreset();
       properties2.add(Lnativehelpcommand2);
       properties2.add(nativehelpcommand2);
       properties2.add(Limportfiles2);
-      JScrollPane s20 = new JScrollPane(importfiles2);
-      s20.setPreferredSize( new Dimension( 560, 64 ));
-      properties2.add(s20);
+      properties2.add(importfiles2);
       properties2.add( Lprogramstartupcode2);
-      JScrollPane s21 = new JScrollPane(programstartupcode2);
-      s21.setPreferredSize( new Dimension( 560, 64 ));
-      properties2.add(s21);
+      properties2.add( programstartupcode2);
       JScrollPane s22 = new JScrollPane(properties2);
-      s22.setPreferredSize(new Dimension(600,200) );
+//      s22.setPreferredSize(new Dimension(600,200) );
 
       properties3 = new JPanel();
       properties3.setLayout(new BoxLayout( properties3, BoxLayout.Y_AXIS) );
@@ -9291,15 +9361,11 @@ gui.buttonreset();
       properties3.add(Lnativehelpcommand3);
       properties3.add(nativehelpcommand3);
       properties3.add( Limportfiles3);
-      JScrollPane s30 = new JScrollPane(importfiles3);
-      s30.setPreferredSize( new Dimension( 560, 64 ));
-      properties3.add(s30);
+      properties3.add( importfiles3);
       properties3.add( Lprogramstartupcode3);
-      JScrollPane s31 = new JScrollPane(programstartupcode3);
-      s31.setPreferredSize( new Dimension( 560, 64 ));
-      properties3.add(s31);
+      properties3.add( programstartupcode3);
       JScrollPane s32 = new JScrollPane(properties3);
-      s32.setPreferredSize(new Dimension(600,200) );
+//      s32.setPreferredSize(new Dimension(600,200) );
 
       properties4 = new JPanel();
       properties4.setLayout(new BoxLayout( properties4, BoxLayout.Y_AXIS) );
@@ -9310,19 +9376,13 @@ gui.buttonreset();
       properties4.add( Lguidesignercommand4);
       properties4.add( guidesignercommand4);
       properties4.add(Lnativehelpcommand4);
-      JScrollPane s4x = new JScrollPane(nativehelpcommand4);
-      s4x.setPreferredSize( new Dimension( 560, 64 ));
-      properties4.add(s4x);
+      properties4.add(nativehelpcommand4);
       properties4.add( Limportfiles4);
-      JScrollPane s40 = new JScrollPane(importfiles4);
-      s40.setPreferredSize( new Dimension( 560, 64 ));
-      properties4.add(s40);
+      properties4.add( importfiles4);
       properties4.add( Lprogramstartupcode4);
-      JScrollPane s41 = new JScrollPane(programstartupcode4);
-      s41.setPreferredSize( new Dimension( 560, 64 ));
-      properties4.add(s41);
+      properties4.add( programstartupcode4);
       JScrollPane s42 = new JScrollPane(properties4);
-      s42.setPreferredSize(new Dimension(600,160) );
+//      s42.setPreferredSize(new Dimension(600,160) );
 
       properties5 = new JPanel();
       properties5.setLayout(new BoxLayout( properties5, BoxLayout.Y_AXIS) );
@@ -9337,15 +9397,11 @@ gui.buttonreset();
       properties5.add(Lnativehelpcommand5);
       properties5.add(nativehelpcommand5);
       properties5.add( Limportfiles5);
-      JScrollPane s50 = new JScrollPane(importfiles5);
-      s50.setPreferredSize( new Dimension( 560, 64 ));
-      properties5.add(s50);
+      properties5.add( importfiles5);
       properties5.add( Lprogramstartupcode5);
-      JScrollPane s51 = new JScrollPane(programstartupcode5);
-      s51.setPreferredSize( new Dimension( 560, 64 ));
-      properties5.add(s51);
+      properties5.add( programstartupcode5);
       JScrollPane s52 = new JScrollPane(properties5);
-      s52.setPreferredSize(new Dimension(600,200) );
+//      s52.setPreferredSize(new Dimension(600,200) );
 
       properties6 = new JPanel();
       properties6.setLayout(new BoxLayout( properties6, BoxLayout.Y_AXIS) );
@@ -9358,15 +9414,11 @@ gui.buttonreset();
       properties6.add(Lnativehelpcommand6);
       properties6.add(nativehelpcommand6);
       properties6.add( Limportfiles6);
-      JScrollPane s60 = new JScrollPane(importfiles6);
-      s60.setPreferredSize( new Dimension( 560, 64 ));
-      properties6.add(s60);
+      properties6.add( importfiles6);
       properties6.add( Lprogramstartupcode6);
-      JScrollPane s61 = new JScrollPane(programstartupcode6);
-      s61.setPreferredSize( new Dimension( 560, 64 ));
-      properties6.add(s61);
+      properties6.add( programstartupcode6);
       JScrollPane s62 = new JScrollPane(properties6);
-      s62.setPreferredSize(new Dimension(600,200) );
+//      s62.setPreferredSize(new Dimension(600,200) );
 
       properties7 = new JPanel();
       properties7.setLayout(new BoxLayout( properties7, BoxLayout.Y_AXIS) );
@@ -9381,15 +9433,11 @@ gui.buttonreset();
       properties7.add(Lnativehelpcommand7);
       properties7.add(nativehelpcommand7);
       properties7.add( Limportfiles7);
-      JScrollPane s70 = new JScrollPane(importfiles7);
-      s70.setPreferredSize( new Dimension( 560, 64 ));
-      properties7.add(s70);
+      properties7.add( importfiles7);
       properties7.add( Lprogramstartupcode7);
-      JScrollPane s71 = new JScrollPane(programstartupcode7);
-      s71.setPreferredSize( new Dimension( 560, 64 ));
-      properties7.add(s71);
+      properties7.add( programstartupcode7);
       JScrollPane s72 = new JScrollPane(properties7);
-      s72.setPreferredSize(new Dimension(600,200) );
+//      s72.setPreferredSize(new Dimension(600,200) );
 
       yesbutton     = new JButton("OK");;
       yesbutton.setActionCommand("YES");
@@ -9440,72 +9488,73 @@ gui.buttonreset();
 
       else if( !e.getActionCommand().equals("NO") ){
         ViewSourceAtCompile = viewsourceatcompile.isSelected();
-        NoSourceCreate = nosourcecreate.isSelected();
+        OpenCompileDialog = opencompiledialog.isSelected();
         NoOptimizePin = nooptimizepin.isSelected();
         JavaEditCommand = javaeditcommand.getText();
+        ScriptExecCommand = script_exec_command.getText();
         ImageEditCommand = imgeditcommand.getText();
         JavaViewCommand = javaviewcommand.getText();
         HtmlEditCommand = htmleditcommand.getText();
         HelpCommand = helpcommand.getText();
         LookandFeel = (String)(lookandfeels.getSelectedItem());
 
-        CompileCommand[0] = compilecommand0.getText();
-        RunCommand[0] = runcommand0.getText();
-        GUIDesignerCommand[0] = guidesignercommand0.getText();
-        ImportFiles[0] = importfiles0.getText();
-        ProgramStartupCode[0] = programstartupcode0.getText();
+        CompileCommand[0] = compilecommand0.get_text();
+        RunCommand[0] = runcommand0.get_text();
+        GUIDesignerCommand[0] = guidesignercommand0.get_text();
+        ImportFiles[0] = importfiles0.get_text();
+        ProgramStartupCode[0] = programstartupcode0.get_text();
         NativeHelpCommand[0] = nativehelpcommand0.getText();
 
-        CompileCommand[1] = compilecommand1.getText();
-        RunCommand[1] = runcommand1.getText();
-        GUIDesignerCommand[1] = guidesignercommand1.getText();
-        ImportFiles[1] = importfiles1.getText();
-        ProgramStartupCode[1] = programstartupcode1.getText();
-        NativeHelpCommand[1] = nativehelpcommand1.getText();
+        CompileCommand[1] = compilecommand1.get_text();
+        RunCommand[1] = runcommand1.get_text();
+        GUIDesignerCommand[1] = guidesignercommand1.get_text();
+        ImportFiles[1] = importfiles1.get_text();
+        ProgramStartupCode[1] = programstartupcode1.get_text();
+        NativeHelpCommand[1] = nativehelpcommand1.get_text();
 
-        CompileCommand[2] = compilecommand2.getText();
-        RunCommand[2] = runcommand2.getText();
-        GUIDesignerCommand[2] = guidesignercommand2.getText();
-        ImportFiles[2] = importfiles2.getText();
-        ProgramStartupCode[2] = programstartupcode2.getText();
-        NativeHelpCommand[2] = nativehelpcommand2.getText();
+        CompileCommand[2] = compilecommand2.get_text();
+        RunCommand[2] = runcommand2.get_text();
+        GUIDesignerCommand[2] = guidesignercommand2.get_text();
+        ImportFiles[2] = importfiles2.get_text();
+        ProgramStartupCode[2] = programstartupcode2.get_text();
+        NativeHelpCommand[2] = nativehelpcommand2.get_text();
 
-        CompileCommand[3] = compilecommand3.getText();
-        RunCommand[3] = runcommand3.getText();
-        GUIDesignerCommand[3] = guidesignercommand3.getText();
-        ImportFiles[3] = importfiles3.getText();
-        ProgramStartupCode[3] = programstartupcode3.getText();
-        NativeHelpCommand[3] = nativehelpcommand3.getText();
+        CompileCommand[3] = compilecommand3.get_text();
+        RunCommand[3] = runcommand3.get_text();
+        GUIDesignerCommand[3] = guidesignercommand3.get_text();
+        ImportFiles[3] = importfiles3.get_text();
+        ProgramStartupCode[3] = programstartupcode3.get_text();
+        NativeHelpCommand[3] = nativehelpcommand3.get_text();
 
-        CompileCommand[4] = compilecommand4.getText();
-        RunCommand[4] = runcommand4.getText();
-        GUIDesignerCommand[4] = guidesignercommand4.getText();
-        ImportFiles[4] = importfiles4.getText();
-        ProgramStartupCode[4] = programstartupcode4.getText();
-        NativeHelpCommand[4] = nativehelpcommand4.getText();
+        CompileCommand[4] = compilecommand4.get_text();
+        RunCommand[4] = runcommand4.get_text();
+        GUIDesignerCommand[4] = guidesignercommand4.get_text();
+        ImportFiles[4] = importfiles4.get_text();
+        ProgramStartupCode[4] = programstartupcode4.get_text();
+        NativeHelpCommand[4] = nativehelpcommand4.get_text();
 
-        IDF_LocalVariable[5] = idf_localvariable5.getText();
-        CompileCommand[5] = compilecommand5.getText();
-        RunCommand[5] = runcommand5.getText();
-        GUIDesignerCommand[5] = guidesignercommand5.getText();
-        ImportFiles[5] = importfiles5.getText();
-        ProgramStartupCode[5] = programstartupcode5.getText();
-        NativeHelpCommand[5] = nativehelpcommand5.getText();
+        IDF_LocalVariable[5] = idf_localvariable5.get_text();
+        CompileCommand[5] = compilecommand5.get_text();
+        RunCommand[5] = runcommand5.get_text();
+        GUIDesignerCommand[5] = guidesignercommand5.get_text();
+        ImportFiles[5] = importfiles5.get_text();
+        ProgramStartupCode[5] = programstartupcode5.get_text();
+        NativeHelpCommand[5] = nativehelpcommand5.get_text();
 
-        CompileCommand[6] = compilecommand6.getText();
-        RunCommand[6] = runcommand6.getText();
-        GUIDesignerCommand[6] = guidesignercommand6.getText();
-        ImportFiles[6] = importfiles6.getText();
-        ProgramStartupCode[6] = programstartupcode6.getText();
-        NativeHelpCommand[6] = nativehelpcommand6.getText();
+        CompileCommand[6] = compilecommand6.get_text();
+        RunCommand[6] = runcommand6.get_text();
+        GUIDesignerCommand[6] = guidesignercommand6.get_text();
+        ImportFiles[6] = importfiles6.get_text();
+        ProgramStartupCode[6] = programstartupcode6.get_text();
+        NativeHelpCommand[6] = nativehelpcommand6.get_text();
 
-        IDF_LocalVariable[7] = idf_localvariable7.getText();
-        CompileCommand[7] = compilecommand7.getText();
-        RunCommand[7] = runcommand7.getText();
-        GUIDesignerCommand[7] = guidesignercommand7.getText();
-        ImportFiles[7] = importfiles7.getText();
-        ProgramStartupCode[7] = programstartupcode7.getText();
-        NativeHelpCommand[7] = nativehelpcommand7.getText();
+        IDF_LocalVariable[7] = idf_localvariable7.get_text();
+        CompileCommand[7] = compilecommand7.get_text();
+        RunCommand[7] = runcommand7.get_text();
+        GUIDesignerCommand[7] = guidesignercommand7.get_text();
+        ImportFiles[7] = importfiles7.get_text();
+        ProgramStartupCode[7] = programstartupcode7.get_text();
+        NativeHelpCommand[7] = nativehelpcommand7.get_text();
 
         restoreProperty();
         setlookandfeel();
@@ -9522,9 +9571,10 @@ gui.buttonreset();
 
     private void recall(){
       viewsourceatcompile.setSelected(ViewSourceAtCompile);
-      nosourcecreate.setSelected(NoSourceCreate);
+      opencompiledialog.setSelected(OpenCompileDialog);
       nooptimizepin.setSelected(NoOptimizePin);
       javaeditcommand.setText(JavaEditCommand);
+      script_exec_command.setText(ScriptExecCommand);
       imgeditcommand.setText(ImageEditCommand);
       javaviewcommand.setText(JavaViewCommand);
       htmleditcommand.setText(HtmlEditCommand);
@@ -9532,63 +9582,63 @@ gui.buttonreset();
       for( i = 0; i < lookandfeels.getItemCount() && !( LookandFeel.equals((String)(lookandfeels.getItemAt(i)))) ; i++) ;
       lookandfeels.setSelectedIndex( (i >= lookandfeels.getItemCount())? 0 : i );
 
-      compilecommand0.setText(CompileCommand[0]);
-      runcommand0.setText(RunCommand[0]);
-      guidesignercommand0.setText(GUIDesignerCommand[0]);
-      importfiles0.setText(ImportFiles[0]);
-      programstartupcode0.setText(ProgramStartupCode[0]);
-      nativehelpcommand0.setText(NativeHelpCommand[0]);
+      compilecommand0.set_text(CompileCommand[0]);
+      runcommand0.set_text(RunCommand[0]);
+      guidesignercommand0.set_text(GUIDesignerCommand[0]);
+      importfiles0.set_text(ImportFiles[0]);
+      programstartupcode0.set_text(ProgramStartupCode[0]);
+      nativehelpcommand0.set_text(NativeHelpCommand[0]);
 
-      compilecommand1.setText(CompileCommand[1]);
-      runcommand1.setText(RunCommand[1]);
-      guidesignercommand1.setText(GUIDesignerCommand[1]);
-      importfiles1.setText(ImportFiles[1]);
-      programstartupcode1.setText(ProgramStartupCode[1]);
-      nativehelpcommand1.setText(NativeHelpCommand[1]);
+      compilecommand1.set_text(CompileCommand[1]);
+      runcommand1.set_text(RunCommand[1]);
+      guidesignercommand1.set_text(GUIDesignerCommand[1]);
+      importfiles1.set_text(ImportFiles[1]);
+      programstartupcode1.set_text(ProgramStartupCode[1]);
+      nativehelpcommand1.set_text(NativeHelpCommand[1]);
 
-      compilecommand2.setText(CompileCommand[2]);
-      runcommand2.setText(RunCommand[2]);
-      guidesignercommand2.setText(GUIDesignerCommand[2]);
-      importfiles2.setText(ImportFiles[2]);
-      programstartupcode2.setText(ProgramStartupCode[2]);
-      nativehelpcommand2.setText(NativeHelpCommand[2]);
+      compilecommand2.set_text(CompileCommand[2]);
+      runcommand2.set_text(RunCommand[2]);
+      guidesignercommand2.set_text(GUIDesignerCommand[2]);
+      importfiles2.set_text(ImportFiles[2]);
+      programstartupcode2.set_text(ProgramStartupCode[2]);
+      nativehelpcommand2.set_text(NativeHelpCommand[2]);
 
-      compilecommand3.setText(CompileCommand[3]);
-      runcommand3.setText(RunCommand[3]);
-      guidesignercommand3.setText(GUIDesignerCommand[3]);
-      importfiles3.setText(ImportFiles[3]);
-      programstartupcode3.setText(ProgramStartupCode[3]);
-      nativehelpcommand3.setText(NativeHelpCommand[3]);
+      compilecommand3.set_text(CompileCommand[3]);
+      runcommand3.set_text(RunCommand[3]);
+      guidesignercommand3.set_text(GUIDesignerCommand[3]);
+      importfiles3.set_text(ImportFiles[3]);
+      programstartupcode3.set_text(ProgramStartupCode[3]);
+      nativehelpcommand3.set_text(NativeHelpCommand[3]);
 
-      compilecommand4.setText(CompileCommand[4]);
-      runcommand4.setText(RunCommand[4]);
-      guidesignercommand4.setText(GUIDesignerCommand[4]);
-      importfiles4.setText(ImportFiles[4]);
-      programstartupcode4.setText(ProgramStartupCode[4]);
-      nativehelpcommand4.setText(NativeHelpCommand[4]);
+      compilecommand4.set_text(CompileCommand[4]);
+      runcommand4.set_text(RunCommand[4]);
+      guidesignercommand4.set_text(GUIDesignerCommand[4]);
+      importfiles4.set_text(ImportFiles[4]);
+      programstartupcode4.set_text(ProgramStartupCode[4]);
+      nativehelpcommand4.set_text(NativeHelpCommand[4]);
 
-      idf_localvariable5.setText(IDF_LocalVariable[5]);
-      compilecommand5.setText(CompileCommand[5]);
-      runcommand5.setText(RunCommand[5]);
-      guidesignercommand5.setText(GUIDesignerCommand[5]);
-      importfiles5.setText(ImportFiles[5]);
-      programstartupcode5.setText(ProgramStartupCode[5]);
-      nativehelpcommand5.setText(NativeHelpCommand[5]);
+      idf_localvariable5.set_text(IDF_LocalVariable[5]);
+      compilecommand5.set_text(CompileCommand[5]);
+      runcommand5.set_text(RunCommand[5]);
+      guidesignercommand5.set_text(GUIDesignerCommand[5]);
+      importfiles5.set_text(ImportFiles[5]);
+      programstartupcode5.set_text(ProgramStartupCode[5]);
+      nativehelpcommand5.set_text(NativeHelpCommand[5]);
 
-      compilecommand6.setText(CompileCommand[6]);
-      runcommand6.setText(RunCommand[6]);
-      guidesignercommand6.setText(GUIDesignerCommand[6]);
-      importfiles6.setText(ImportFiles[6]);
-      programstartupcode6.setText(ProgramStartupCode[6]);
-      nativehelpcommand6.setText(NativeHelpCommand[6]);
+      compilecommand6.set_text(CompileCommand[6]);
+      runcommand6.set_text(RunCommand[6]);
+      guidesignercommand6.set_text(GUIDesignerCommand[6]);
+      importfiles6.set_text(ImportFiles[6]);
+      programstartupcode6.set_text(ProgramStartupCode[6]);
+      nativehelpcommand6.set_text(NativeHelpCommand[6]);
 
-      idf_localvariable7.setText(IDF_LocalVariable[7]);
-      compilecommand7.setText(CompileCommand[7]);
-      runcommand7.setText(RunCommand[7]);
-      guidesignercommand7.setText(GUIDesignerCommand[7]);
-      importfiles7.setText(ImportFiles[7]);
-      programstartupcode7.setText(ProgramStartupCode[7]);
-      nativehelpcommand7.setText(NativeHelpCommand[7]);
+      idf_localvariable7.set_text(IDF_LocalVariable[7]);
+      compilecommand7.set_text(CompileCommand[7]);
+      runcommand7.set_text(RunCommand[7]);
+      guidesignercommand7.set_text(GUIDesignerCommand[7]);
+      importfiles7.set_text(ImportFiles[7]);
+      programstartupcode7.set_text(ProgramStartupCode[7]);
+      nativehelpcommand7.set_text(NativeHelpCommand[7]);
 
     }
 
@@ -9686,12 +9736,20 @@ gui.buttonreset();
       setVisible(true);
       txtappend( smsg );
       try{
-        p = java.lang.Runtime.getRuntime().exec( cmd );
+        if("".equals(ScriptExecCommand)){
+          p = java.lang.Runtime.getRuntime().exec( cmd );
+	    }
+        else{
+          if(FTmpTextFile.isFile() || FTmpTextFile.isDirectory() ) FTmpTextFile.Xdelete();
+          FTmpTextFile.Xappend(cmd);
+          p = java.lang.Runtime.getRuntime().exec(ScriptExecCommand+" "+TmpTextFile);
+	    }
         IOPipe pip1 = new IOPipe( p.getErrorStream() );
         IOPipe pip2 = new IOPipe( p.getInputStream() );
         pip1.start(); 
         pip2.start(); 
-      } catch( IOException ie ){ messagewindow.txtappend( emsg ); }
+        int ret = p.waitFor();
+      } catch( Exception ie ){ messagewindow.txtappend( ie+"\n"+emsg ); }
     }
 
     // I/O Pipe
@@ -10001,6 +10059,66 @@ gui.buttonreset();
     public void windowOpened(WindowEvent e)     {   }
 
   }//~TextEditor
+
+  class TextButton extends JButton implements ActionListener{
+    String text;
+
+    TextButton(){
+      text = "";
+      setText("     ");
+      setHorizontalAlignment(SwingConstants.LEFT);
+      setVerticalAlignment(SwingConstants.TOP);
+      setBackground( Color.white );
+      addActionListener(this);
+    }
+
+    TextButton(String s){
+      set_text(s);
+      setHorizontalAlignment(SwingConstants.LEFT);
+      setVerticalAlignment(SwingConstants.TOP);
+      setBackground( Color.white );
+      addActionListener(this);
+    }
+
+    // 文字列を得る
+    public String get_text(){
+      return text;
+    }
+
+    // 文字列をセットする
+    public void set_text(String s){
+      text = s;
+      String ss = getFirstLine(s);
+      if(ss.length() < 40){
+        ss = (ss+"                                        ").substring(0,40);
+      }
+      setText(ss);
+    }
+
+    // 編集する
+    public void edit(){
+      if( JavaEditCommand.equals("") ){ set_text( texteditor.start(text) ); }
+      else{
+        if( FTmpTextFile.isFile() || FTmpTextFile.isDirectory() ) FTmpTextFile.Xdelete();
+        FTmpTextFile.Xappend(text);
+        execute( JavaEditCommand+" "+TmpTextFile, true );
+        try{
+          BufferedReader din = new BufferedReader( new FileReader( FTmpTextFile ) );
+          String line;
+          String code = "";
+          while((line=din.readLine())!=null){
+            code = code + line + "\n";
+          }
+          din.close();
+          set_text(code);
+        } catch( IOException ie ){ reportError("編集できません．\n"); }
+      }
+    } 
+
+    public void actionPerformed( ActionEvent e ){
+      edit();
+    }
+  }//~TextButton
 
   class TreeTool extends JPanel implements ActionListener{
     Thread     mythread = null;
@@ -11232,6 +11350,7 @@ gui.buttonreset();
     JRadioButton crebasic;
     JRadioButton creclang;
     JRadioButton creoregengo;
+    JRadioButton cremultigengo;
     JRadioButton fileopen;
 
     InitialDialog(){
@@ -11246,6 +11365,7 @@ gui.buttonreset();
       crebasic = new JRadioButton("Basicアプリケーションを作成");
       creclang = new JRadioButton("C言語アプリケーションを作成");
       creoregengo = new JRadioButton("oregengo-Rアプリケーションを作成");
+      cremultigengo = new JRadioButton("マルチ言語アプリケーションを作成");
       fileopen = new JRadioButton("プロジェクトファイルを開く");
       creapplication.setSelected(true);
       creapplet.setSelected(false);
@@ -11255,6 +11375,7 @@ gui.buttonreset();
       crebasic.setSelected(false);
       creclang.setSelected(false);
       creoregengo.setSelected(false);
+      cremultigengo.setSelected(false);
       fileopen.setSelected(false);
       ButtonGroup g = new ButtonGroup();
       g.add(creapplication);
@@ -11265,6 +11386,7 @@ gui.buttonreset();
       g.add(crebasic);
       g.add(creclang);
       g.add(creoregengo);
+      g.add(cremultigengo);
       g.add(fileopen);
       creapplication.setSelected( ApplicationType == 0 );
       creapplet.setSelected( ApplicationType == 1 );
@@ -11274,6 +11396,7 @@ gui.buttonreset();
       crebasic.setSelected( ApplicationType == 5 );
       creclang.setSelected( ApplicationType == 6 );
       creoregengo.setSelected( ApplicationType == 7 );
+      cremultigengo.setSelected( ApplicationType == 8 );
       JPanel p1 = new JPanel( );
       p1.setLayout( new BoxLayout( p1, BoxLayout.Y_AXIS ) ); 
       p1.add( creapplication );
@@ -11284,6 +11407,7 @@ gui.buttonreset();
       p1.add( crebasic );
       p1.add( creclang );
       p1.add( creoregengo );
+      p1.add( cremultigengo );
       p1.add( fileopen );
       JButton ok = new JButton( "OK" );
       JButton can  = new JButton( "キャンセル"  );
@@ -11313,6 +11437,7 @@ gui.buttonreset();
       crebasic.setSelected( ApplicationType == 5 );
       creclang.setSelected( ApplicationType == 6 );
       creoregengo.setSelected( ApplicationType == 7 );
+      cremultigengo.setSelected( ApplicationType == 8 );
       fileopen.setSelected(false);
 
       // ウィンドウの中央をもとめる
@@ -11343,6 +11468,7 @@ gui.buttonreset();
         else if( crebasic.isSelected() ) mode = 5;
         else if( creclang.isSelected() ) mode = 6;
         else if( creoregengo.isSelected() ) mode = 7;
+        else if( cremultigengo.isSelected() ) mode = 8;
         else if( fileopen.isSelected() ) mode = -2;
       } 
       else if( e.getActionCommand().equals( "CAN" ) )mode = -1;
