@@ -1,7 +1,7 @@
 # ObjectEditor
   
 ## [起動画面]
-<img src="image/?raw=true" width="100%">  
+<img src="image/kidou.png?raw=true" width="100%">  
 
   
 ## 最初に
