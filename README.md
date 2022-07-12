@@ -34,17 +34,17 @@ Javaに限らず、プログラムはテキストの形で記述するのが普�
 そこでプログラムを機能や構造によりいくつかの部分(オブジェクト)にわけてそれらの関連を図で表すと比較的容易に把握することができます。  
 
 オブジェクトを図形で表現
-<img src="image/obj-expressin.gif?raw=true" width="100%">  
+<img src="image/obj-expressin.png?raw=true" width="100%">  
 
 しかし大きなプログラムになると数多くのオブジェクトが存在し、それらの相互のデータの流れをひとつずつ書いていたら、やはり全体の把握が難しくなってきます。  
 
 たくさんのオブジェクト
-<img src="image/MANY-OBJ.GIF?raw=true" width="100%">  
+<img src="image/MANY-OBJ.png?raw=true" width="100%">  
 
 そこでピンという概念を導入して、互いに関連する数個のオブジェクトをまとめて１つの親オブジェクトを作り、親オブジェクトの外にアクセスするためにピンを経由するようにするとオブジェクトの間の記述を簡単にできます。(いわゆる構造化分析に近い考え方です)  
 
 見やすくしたオブジェクト  
-<img src="image/easy-see-obj.gif?raw=true" width="100%">  
+<img src="image/easy-see-obj.png?raw=true" width="100%">  
 
 またメソッドの呼び出しのなかには例えば"close()"や"repaint()"のようにメソッド呼び出しだけが存在し、実質的なデータを持たないものも数多くあります。そのようなメソッド呼び出しはデータの流れだけでは表現できないので、  
 
@@ -63,14 +63,14 @@ Javaに限らず、プログラムはテキストの形で記述するのが普�
 状態遷移図の例(水の三態)を下図に示します。  
 
 水の三態  
-<img src="image/mass-state-model.gif?raw=true" width="100%">  
+<img src="image/mass-state-model.png?raw=true" width="100%">  
 
 この状態遷移図に上で述べたピンと信号の概念を適用すると次のようになります。  
 
 ある状態から別の状態への遷移はピンからの信号によって引き起こされます。また遷移が完了するとピンに信号を出力します。遷移の種類は次の５種類に分類されます。  
 
 遷移の種類  
-<img src="image/transition-type.gif?raw=true" width="100%">  
+<img src="image/transition-type.png?raw=true" width="100%">  
 
 (1) ピンからの信号によって遷移して完了したときピンに信号を出力する  
 (2)ピンからの信号によって遷移して完了しても信号を出力しない  
@@ -83,27 +83,27 @@ Javaに限らず、プログラムはテキストの形で記述するのが普�
 
 （起動直後の画面、赤い文字は説明です）  
 オブジェクトエディタの起動画面  
-<img src="image/OBJEDIT.GIF?raw=true" width="100%">  
+<img src="image/OBJEDIT.png?raw=true" width="100%">  
 
 ### xobject( compleX object )  
 
 xobjectはプログラムやデータの集まりを一つのコンポーネントで表現したものです  
 名前が書いてあるボタンをクリックするとオブジェクトを記述するための接続図エディタが起動します。  
 xobject  
-<img src="image/XOBJECT.GIF?raw=true" width="100%">  
+<img src="image/XOBJECT.png?raw=true" width="100%">  
 
 ### aobject( Atomic object )  
 
 aobjectもxobjectと同様にプログラムやデータの集まりですが、ボタンをクリックしたとき状態図エディタが起動するところが違います。  
 aobject  
-<img src="image/AOBJECT.GIF?raw=true" width="100%">  
+<img src="image/AOBJECT.png?raw=true" width="100%">  
 
 ### pin  
 
 オブジェクトが他のオブジェクトとデータをやり取りするときに使います。pinの表示はJavaのメソッド呼出しのフォーマットに準じます。  
 またpinを作成するとき、同時にエディタで編集しているオブジェクト上にもpinが作られます。この２つのpinは同一のものとして取り扱われます。  
 pinの例  
-<img src="image/PIN.GIF?raw=true" width="100%">  
+<img src="image/PIN.png?raw=true" width="100%">  
 
 
 ### 信号線  
@@ -112,7 +112,7 @@ pinの例
 
 
 信号線の例  
-<img src="image/SIGNAL.GIF?raw=true" width="100%">  
+<img src="image/SIGNAL.png?raw=true" width="100%">  
 
 ※信号線の中には(1)のようにデータを含まないものがあるので、以後は"データの流れ"と呼ばずに"信号"と呼ぶことにします。  
 
@@ -122,7 +122,7 @@ pinの例
 
 
 信号の伝わる順序  
-<img src="image/signal-order.gif?raw=true" width="100%">  
+<img src="image/signal-order.png?raw=true" width="100%">  
 
 信号の伝わる順序が重要な場合は(1)のような使い方は避けた法がよいでしょう。  
 
@@ -133,7 +133,7 @@ uobjectもxobjectやaobjectと同じくプログラムやデータの集まり�
 
 
 uobject  
-<img src="image/UOBJECT.GIF?raw=true" width="100%">  
+<img src="image/UOBJECT.png?raw=true" width="100%">  
 
  またuobjectはxobjectに変換することができます。この機能はuobjectを機能拡張するときに便利です。  
 まず、編集メニューの"Xオブジェクトに変換"を選択してから、変換したいuobjectをクリックするとxobjectに変換されます。  
@@ -146,7 +146,7 @@ codeclipはソースコードの断片で直接Javaソースプログラムに�
 
 
 codeclip  
-<img src="image/CODECLIP.GIF?raw=true" width="100%">  
+<img src="image/CODECLIP.png?raw=true" width="100%">  
 
 codeclipはソースコードの一部となるので基本的にはJavaプログラムのすべての表現が使えます。  
 
@@ -157,19 +157,19 @@ codeclipはソースコードの一部となるので基本的にはJavaプロ�
 
 
 グループの例  
-<img src="image/GROUP.GIF?raw=true" width="100%">  
+<img src="image/GROUP.png?raw=true" width="100%">  
 
 グループはxobjectに変換することができます。編集メニューの"Xオブジェクトに変換"を選択してグループをクリックするとxobjectに変換され、信号の出入り口には自動的にpinが設置されます。  
 
 
 #### グループをxobjectに変換する  
-<img src="image/GROUPTOX.GIF?raw=true" width="100%">  
+<img src="image/GROUPTOX.png?raw=true" width="100%">  
 
 逆にxobjectをグループに変換することもできます。編集メニューの"グループに変換"を選択してxobjectをクリックするとグループに変換されます。
 
 
 #### xobjectをグループに変換する  
-<img src="image/XTOGROUP.GIF?raw=true" width="100%">  
+<img src="image/XTOGROUP.png?raw=true" width="100%">  
 
 上で説明したグループを扱う操作を組み合わせると、オブジェクトを自在にばらしたり、組み合わせたりすることができるので、プログラムの開発･デバッグがより簡単になります。  
 
@@ -178,7 +178,7 @@ codeclipはソースコードの一部となるので基本的にはJavaプロ�
 aobjectの名前の書いてあるボタンをクリックすると状態図エディタがオブジェクトの情報を読み込んで起動します。  
 
 状態遷移図エディタ
-<img src="image/stateeditor.gif?raw=true" width="100%">  
+<img src="image/stateeditor.png?raw=true" width="100%">  
 
 ### 状態  
 
@@ -186,7 +186,7 @@ aobjectの名前の書いてあるボタンをクリックすると状態図エ�
 
 
 状態  
-<img src="image/STATE.GIF?raw=true" width="100%">  
+<img src="image/STATE.png?raw=true" width="100%">  
 
 ### 遷移  
 
@@ -194,13 +194,13 @@ aobjectの名前の書いてあるボタンをクリックすると状態図エ�
 
 
 遷移  
-<img src="image/transition.gif?raw=true" width="100%">  
+<img src="image/transition.png?raw=true" width="100%">  
 
 また遷移についている赤紫色の矢印をクリックして付け替えたい状態をクリックすると付け替えることができます。  
 
 
 状態を付け替える
-<img src="image/transition2.gif?raw=true" width="100%">  
+<img src="image/transition2.png?raw=true" width="100%">  
 
 ### 部品棚
 
@@ -208,19 +208,19 @@ aobjectの名前の書いてあるボタンをクリックすると状態図エ�
 
 
 部品棚  
-<img src="image/parts-table.gif?raw=true" width="100%">  
+<img src="image/parts-table.png?raw=true" width="100%">  
 
 ### テキストエディタ  
 
 
 テキストエディタ
-<img src="image/texteditor.gif?raw=true" width="100%">  
+<img src="image/texteditor.png?raw=true" width="100%">  
 
 ### メッセージウィンドウ  
 
 
 コンパイル・実行結果の表示  
-<img src="image/message-window.gif?raw=true" width="100%">  
+<img src="image/message-window.png?raw=true" width="100%">  
 
 ### プロパティの設定ウィンドウ  
 
@@ -232,19 +232,19 @@ aobjectの名前の書いてあるボタンをクリックすると状態図エ�
 現在の設定内容をプロジェクトのプロパティに反映させたければ"OK"を、取り消したいときは"キャンセル"を  
 設定内容をデフォルトのプロパティに設定したいときは"デフォルトに設定"を、設定内容を新規作成の状態に戻したければ"デフォルトに戻す"をそれぞれクリックして下さい。  
 設定ウィンドウ   
-<img src="image/SETTING.GIF?raw=true" width="100%">  
+<img src="image/SETTING.png?raw=true" width="100%">  
 
 
 ## GUIデザイナー  
 
 GUI-Designer  
-<img src="image/guidesigner.gif?raw=true" width="100%">  
+<img src="image/guidesigner.png?raw=true" width="100%">  
 
 ### メニューエディタ
 
 
 メニューエディタ  
-<img src="image/menueditor.gif?raw=true" width="100%">  
+<img src="image/menueditor.png?raw=true" width="100%">  
 
 ## 例題  
 
@@ -262,7 +262,7 @@ GUI-Designer
 できあがったプログラムのコンパイル･実行の様子を下に示します。  
 
 例題１  
-<img src="image/SAMPLE1.GIF?raw=true" width="100%">  
+<img src="image/SAMPLE1.png?raw=true" width="100%">  
 
 ### 2.Hello World(GUIアプリケーション/ラベルを使う)  
 
@@ -270,13 +270,13 @@ GUI-Designer
 ここではラベルに"こんにちは"と表示するプログラムを作ってみます。ObjectEditorを起動後、最初にGUIデザイナーを起動してウィンドウのレイアウトをデザインします。  
 
 ＧＵＩをデザインする  
-<img src="image/sample2-1.gif?raw=true" width="100%">  
+<img src="image/sample2-1.png?raw=true" width="100%">  
 
 デザインしたら"変換"ボタンをクリックしてGUIオブジェクトを作成してからGUIデザイナーを終了します。  
 あとはStartピンとGUIオブジェクトのStartピンを信号線で結ぶとプログラムは完成します。  
 
 実行のようす  
-<img src="image/sample2-2.gif?raw=true" width="100%">  
+<img src="image/sample2-2.png?raw=true" width="100%">  
 
 GUIオブジェクトのレイアウトを変更したいときは、GUIオブジェクトの"GUI"と書いてあるボタンをクリックしてGUIオブジェクトを開いてから、GUIデザイナーの起動ボタンをクリックして下さい。  
 
@@ -286,12 +286,12 @@ GUIオブジェクトのレイアウトを変更したいときは、GUIオブ�
 #### レイアウト  
 
 例題３のレイアウト  
-<img src="image/sample3-1.gif?raw=true" width="100%">  
+<img src="image/sample3-1.png?raw=true" width="100%">  
 
 #### 接続図  
 
 例題３の接続図  
-<img src="image/sample3-2.gif?raw=true" width="100%">  
+<img src="image/sample3-2.png?raw=true" width="100%">  
 
  
 
