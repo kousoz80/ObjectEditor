@@ -173,7 +173,7 @@ codeclipはソースコードの一部となるので基本的にはJavaプロ�
 
 aobjectの名前の書いてあるボタンをクリックすると状態図エディタがオブジェクトの情報を読み込んで起動します。  
 
-状態遷移図エディタ
+状態図エディタ
 <img src="image/stateeditor.png?raw=true" width="100%">  
 
 ### 状態  
