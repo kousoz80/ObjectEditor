@@ -1,12 +1,9 @@
-# ObjectEditor
-  
-
-  
-## 最初に  
+# ObjectEditor  
   
 起動画面  
 <img src="image/kidou.png?raw=true" width="100%">  
 
+## 最初に  
 実行に際して最低限必要となるのはJavaの開発環境です、
   
 OSはlinuxを想定しています。  
