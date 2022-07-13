@@ -1,28 +1,26 @@
 # ObjectEditor
   
-## [起動画面]
-<img src="image/kidou.png?raw=true" width="100%">  
 
   
-## 最初に
+## 最初に  
   
+起動画面  
+<img src="image/kidou.png?raw=true" width="100%">  
+
 実行に際して最低限必要となるのはJavaの開発環境です、
   
-OSはlinuxを想定しています。
+OSはlinuxを想定しています。  
+ダウンロード後、  
   
-ダウンロード後、
+$ cd ObjectEditor  
+$ ./objedit  
   
-$ cd ObjectEditor
+と入力するとプログラムが起動します。  
+もし起動時にエラーが出るようでしたら  
   
-$ ./objedit
+$ ./make_objedit  
   
-と入力するとプログラムが起動します。
-  
-もし起動時にエラーが出るようでしたら
-  
-$ ./make_objedit
-  
-と入力して再コンパイルして下さい。
+と入力して再コンパイルして下さい。  
   
   
 ## 概要  
@@ -137,6 +135,7 @@ uobject
 
  またuobjectはxobjectに変換することができます。この機能はuobjectを機能拡張するときに便利です。  
 まず、編集メニューの"Xオブジェクトに変換"を選択してから、変換したいuobjectをクリックするとxobjectに変換されます。  
+<img src="image/uobjtox.png?raw=true" width="100%">  
 
 
 ### codeclip  
