@@ -76,8 +76,8 @@ Javaに限らず、プログラムはテキストの形で記述するのが普�
 
 ## 接続図エディタ  
 
-（起動直後の画面、赤い文字は説明です）  
 接続図エディタの画面  
+（起動直後の画面、赤い文字は説明です）  
 <img src="image/OBJEDIT.png?raw=true" width="100%">  
 
 ### xobject( compleX object )  
