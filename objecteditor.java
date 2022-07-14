@@ -3005,6 +3005,7 @@ gui.buttonreset();
 	        }).start();
           }
           Login( treetool.top );
+          messagewindow.setVisible(true);
 System.gc();
 gui.buttonreset();
       }
@@ -6368,7 +6369,11 @@ gui.buttonreset();
 	          }
 	        }).start();
           }
+          treetool.currentnode = treetool.top;
           objecteditor.Login( treetool.top );
+          stateeditor.gui.setVisible(false);
+          objecteditor.gui.setVisible(true);
+          messagewindow.setVisible(true);
 System.gc();
 gui.buttonreset();
       }
