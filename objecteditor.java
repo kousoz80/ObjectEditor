@@ -2990,7 +2990,6 @@ gui.buttonreset();
 
       if(command.equals("COMPILE") ){
           messagewindow.clearText();
-          Xnode cnode = node;
           Logout();
           Login( treetool.top );
           restoreProperty();
@@ -3005,7 +3004,7 @@ gui.buttonreset();
 	          }
 	        }).start();
           }
-          Login( cnode );
+          Login( treetool.top );
 System.gc();
 gui.buttonreset();
       }
@@ -6355,7 +6354,6 @@ gui.buttonreset();
 
       if(command.equals("COMPILE")){
           messagewindow.clearText();
-          Anode cnode = node;
           Logout();
           objecteditor.Login( treetool.top );
           restoreProperty();
@@ -6370,7 +6368,7 @@ gui.buttonreset();
 	          }
 	        }).start();
           }
-          Login( cnode );
+          objecteditor.Login( treetool.top );
 System.gc();
 gui.buttonreset();
       }
