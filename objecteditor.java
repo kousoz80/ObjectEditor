@@ -38,7 +38,7 @@ class App1{
   Object         project = null;
   Object         properties = null;
   Object         clipboad = null;
-
+  boolean       compile_ready = true;
 
 //アプリケーションのプロパティ
 
@@ -2988,14 +2988,23 @@ gui.buttonreset();
 gui.buttonreset();
       }
 
-      if(command.equals("COMPILE")){
+      if(command.equals("COMPILE") ){
           messagewindow.clearText();
           Xnode cnode = node;
           Logout();
           Login( treetool.top );
           restoreProperty();
           Logout();
-          compile_project(treetool.top.element);
+          if(compile_ready){
+            new Thread(new Runnable() {
+              @Override
+	          public void run() {
+                compile_ready = false;
+                compile_project(treetool.top.element);
+                compile_ready = true;
+	          }
+	        }).start();
+          }
           Login( cnode );
 System.gc();
 gui.buttonreset();
@@ -6351,7 +6360,16 @@ gui.buttonreset();
           objecteditor.Login( treetool.top );
           restoreProperty();
           objecteditor.Logout();
-          compile_project(treetool.top.element);
+          if(compile_ready){
+            new Thread(new Runnable() {
+              @Override
+	          public void run() {
+                compile_ready = false;
+                compile_project(treetool.top.element);
+                compile_ready = true;
+	          }
+	        }).start();
+          }
           Login( cnode );
 System.gc();
 gui.buttonreset();
