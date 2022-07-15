@@ -403,6 +403,8 @@ class App1{
     xml.要素を保存( properties, SetupFile );
   }//~saveProperty()
 
+
+  // プロパティを現在の状態に反映させる
   public void syncProperty(){
 
     String t;
@@ -527,6 +529,7 @@ class App1{
 
   }//~syncProperty()
 
+  // 現在の状態をプロパティに反映させる
   public void restoreProperty(){
 
     if( objecteditor != null ){
@@ -661,6 +664,7 @@ class App1{
 
   }//~restoreProperty()
 
+  // lookandfeelを更新する
   public void setlookandfeel(){
     try{
       UIManager.setLookAndFeel(LookandFeel);
@@ -2989,12 +2993,10 @@ gui.buttonreset();
       }
 
       if(command.equals("COMPILE") ){
-          messagewindow.clearText();
-          Logout();
-          Login( treetool.top );
-          restoreProperty();
-          Logout();
           if(compile_ready){
+            messagewindow.clearText();
+            DefaultMutableTreeNode cnode = node;
+            treetool.changeNode(treetool.top);
             new Thread(new Runnable() {
               @Override
 	          public void run() {
@@ -3003,11 +3005,14 @@ gui.buttonreset();
                 compile_ready = true;
 	          }
 	        }).start();
-          }
-          Login( treetool.top );
-          messagewindow.setVisible(true);
+            treetool.changeNode(cnode);
+            messagewindow.setVisible(true);
 System.gc();
 gui.buttonreset();
+          }
+          else{
+            dialog1.age("まだコンパイル中です");
+	      }
       }
       
       if(command.equals("RUN")){
@@ -6354,28 +6359,28 @@ gui.buttonreset();
       }
 
       if(command.equals("COMPILE")){
+
+
+        if(compile_ready){
           messagewindow.clearText();
-          Logout();
-          objecteditor.Login( treetool.top );
-          restoreProperty();
-          objecteditor.Logout();
-          if(compile_ready){
-            new Thread(new Runnable() {
-              @Override
-	          public void run() {
-                compile_ready = false;
-                compile_project(treetool.top.element);
-                compile_ready = true;
-	          }
-	        }).start();
-          }
-          treetool.currentnode = treetool.top;
-          objecteditor.Login( treetool.top );
-          stateeditor.gui.setVisible(false);
-          objecteditor.gui.setVisible(true);
+          DefaultMutableTreeNode cnode = node;
+          treetool.changeNode(treetool.top);
+          new Thread(new Runnable() {
+            @Override
+            public void run() {
+              compile_ready = false;
+              compile_project(treetool.top.element);
+              compile_ready = true;
+	        }
+	      }).start();
+          treetool.changeNode(cnode);
           messagewindow.setVisible(true);
 System.gc();
 gui.buttonreset();
+        }
+        else{
+          dialog1.age("まだコンパイル中です");
+	    }
       }
       
       if(command.equals("RUN")){
@@ -10207,6 +10212,8 @@ gui.buttonreset();
         if( newnode == null ) return;
         if( ( newnode instanceof Xnode ) && ( !xml.要素の名前( ((Xnode)newnode).element ).equals("xobject") ) ) return;
         if( ( newnode instanceof Anode ) && ( !xml.要素の名前( ((Anode)newnode).element ).equals("aobject") ) ) return;
+
+        restoreProperty();// プロパティを現在の状態にあわせる
   
         DefaultMutableTreeNode bnode = currentnode; //ひとつ前のノード
         
@@ -10240,6 +10247,16 @@ gui.buttonreset();
         else{}
         tree.setSelectionPath( new TreePath( currentnode.getPath() ) );
         mae_node = bnode;  //ひとつ前のノードを保存
+
+        // プロパティを更新する
+        Object elem = ((ObjeditNode)currentnode).element;
+        while(true){
+          Object p = xml.子要素(elem, "poperties");
+          if(p != null){ properties = p; break; }
+          if(elem == project) break; // ここが有効になることは多分ない
+          elem = xml.親要素(elem);
+	    }
+        syncProperty(); // 現在の状態を更新したプロパティにあわせる
     }
 
 //  ピン配置を最適化する
