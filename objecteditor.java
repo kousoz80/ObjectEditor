@@ -407,12 +407,16 @@ class App1{
   // プロパティを現在の状態に反映させる
   public void syncProperty(){
 
+//System.out.println("sync property");
+
     String t;
     if( properties == null ) return;
 
     LookandFeel = xml.属性値( properties, "LookandFeel" );
     if( LookandFeel == null ) LookandFeel =UIManager.getSystemLookAndFeelClassName();
 
+
+//Syetem.out.println("sync property execute");
 
     MainWinx0 = parseInt( xml.属性値( properties, "MainWinx0" ) );
     MainWiny0 = parseInt( xml.属性値( properties, "MainWiny0" ) );
@@ -527,12 +531,18 @@ class App1{
 
     }
 
+//Syetem.out.println("sync property end");
   }//~syncProperty()
 
   // 現在の状態をプロパティに反映させる
   public void restoreProperty(){
 
+
+//Syetem.out.println("restotre property");
+
     if( objecteditor != null ){
+
+//Syetem.out.println("restotre property execute");
 
           MesgWinx0 = messagewindow.getLocation().x;
           MesgWiny0 = messagewindow.getLocation().y;
@@ -667,19 +677,36 @@ class App1{
   // lookandfeelを更新する
   public void setlookandfeel(){
     try{
+
+//Syetem.out.println("set look and feel");
+
       UIManager.setLookAndFeel(LookandFeel);
+//Syetem.out.println("objecteditor");
 	    SwingUtilities.updateComponentTreeUI(objecteditor.gui);
+//Syetem.out.println("stateeditor");
 	    SwingUtilities.updateComponentTreeUI(stateeditor.gui);
+//Syetem.out.println("texteditor");
 	    SwingUtilities.updateComponentTreeUI(texteditor);
+//Syetem.out.println("messagewindow");
 	    SwingUtilities.updateComponentTreeUI(messagewindow);
+//Syetem.out.println("propertywindow");
 	    SwingUtilities.updateComponentTreeUI(propertywindow);
+//Syetem.out.println("filewindow");
 	    SwingUtilities.updateComponentTreeUI(filewindow);
+//Syetem.out.println("initialdialog");
   	    SwingUtilities.updateComponentTreeUI(initialdialog);
+//Syetem.out.println("inputdialog");
   	    SwingUtilities.updateComponentTreeUI(inputdialog);
+//Syetem.out.println("dialog1");
   	    SwingUtilities.updateComponentTreeUI(dialog1);
+//Syetem.out.println("dialog2");
   	    SwingUtilities.updateComponentTreeUI(dialog2);
+//Syetem.out.println("dialog3");
   	    SwingUtilities.updateComponentTreeUI(dialog3);
-    } catch( Exception ex ) {}
+
+//Syetem.out.println("set look and feel end");
+
+    } catch( Exception ex ) {System.out.println("exception:\n"+ex);}
   }
   
 
@@ -913,124 +940,148 @@ class App1{
   // プロジェクトをコンパイルする
   public void compile_project(Object top_element){
 
-          // マルチ言語環境
-          if(ApplicationType == 8){
-            Vector lst = xml.子要素のリスト(top_element, "xobject"); // プロジェクトオブジェクト以外は無視する
-            for(int i = 0; i < lst.size(); i++){
-              Object proj = lst.get(i);
-              Object prop = xml.子要素(proj, "properties");
-              if(prop != null){
-                Object prop0 = properties;
-                properties = prop;
-                syncProperty();
-                compile_project(proj);
-                properties = prop0;
-                syncProperty();
-			  }
-		    }
-            return;
-	      }
+//Syetem.out.println("compile project:");
 
-          boolean selected = true;
-          String target = "\"noname\"";
-          if(OpenCompileDialog){
-            XFileFilter filter = new XFileFilter( ExectableFileMode[ApplicationType] );
-            JFileChooser xchooser = new JFileChooser( CurrentDir );
-            xchooser.setFileFilter(filter);
-            xchooser.setSelectedFile( new XFile( CurrentDir, SelectedFile[ApplicationType]) );
-            selected = (xchooser.showDialog(objecteditor.gui, "実行ファイルの生成") == JFileChooser.APPROVE_OPTION);
-            if(selected) target = " \""  + xchooser.getSelectedFile().getAbsolutePath() +  "\"";
-          }
-          if(selected) {
-            SourceFile[ApplicationType].Xdelete();
+    // 現在のプロパティを退避する
+    restoreProperty();
+    Object prop0 = properties;
 
-            // Java
-            if( ApplicationType == 0 || ApplicationType == 1 || ApplicationType == 4 ){
-              String s = ImportFiles[ApplicationType]
-                       + compile_JAVA( top_element, true, new Vector() );
-              s = Xreplace( s, "%AppName%", xml.属性値( top_element, "objectname" ) );
-              SourceFile[ApplicationType].Xappend( s );
+    // プロパティを更新する
+    Object elem = top_element;
+    while(true){
+      Object p = xml.子要素(elem, "properties");
+      if(p != null){
+        properties = p;
+        break;
+      }
+      if(elem == project) break; // ここが有効になることは多分ない
+      elem = xml.親要素(elem);
+    }
+    syncProperty(); // 現在の状態を更新したプロパティにあわせる
 
-              // android Java
-              if( ApplicationType == 4 ){
-                try{
-                  BufferedWriter dout = new BufferedWriter( new FileWriter( new File("AndroidManifest.xml") ) );
-                  dout.write( NativeHelpCommand[4]  );
-                  dout.close();
-                } catch( IOException e ){  }
-              }
-            }
+    // マルチ言語環境
+    if(ApplicationType == 8){
+      Vector lst = xml.子要素のリスト(top_element, "xobject"); // プロジェクトオブジェクト以外は無視する
+      for(int i = 0; i < lst.size(); i++){
+        Object proj = lst.get(i);
+        Object prop = xml.子要素(proj, "properties");
+        if(prop != null){
+          properties = prop;
+          syncProperty();
+          compile_project(proj);
+        }
+      }
+ 
+      // 退避したプロパティを元に戻す
+      properties = prop0;
+      syncProperty();
+      return;
+	}
 
-            // C++
-            else  if( ApplicationType ==2 || ApplicationType == 3 ){
-              StringBuffer clsbuf  = new StringBuffer("");
-              StringBuffer funcbuf = new StringBuffer("");
-              StringBuffer initbuf = new StringBuffer("");
-              compile_CPP( top_element, clsbuf, funcbuf, initbuf, new Vector() );
-              String s = ImportFiles[ApplicationType]
-                       + clsbuf.toString() + "\n"
-                       + funcbuf.toString()
-                       + "\nvoid Startup(){\n" + initbuf.toString() +" \n}\n"
-                       + ProgramStartupCode[ApplicationType];
-              s = Xreplace( s, "%AppName%", xml.属性値( top_element, "objectname" ) );
-              SourceFile[ApplicationType].Xappend( s );
-            } 
+    // マルチ言語環境以外のコンパイル処理
+    boolean selected = true;
+    String target = "\"noname\"";
+    if(OpenCompileDialog){
+      XFileFilter filter = new XFileFilter( ExectableFileMode[ApplicationType] );
+      JFileChooser xchooser = new JFileChooser( CurrentDir );
+      xchooser.setFileFilter(filter);
+      xchooser.setSelectedFile( new XFile( CurrentDir, SelectedFile[ApplicationType]) );
+      selected = (xchooser.showDialog(objecteditor.gui, "実行ファイルの生成") == JFileChooser.APPROVE_OPTION);
+      if(selected) target = " \""  + xchooser.getSelectedFile().getAbsolutePath() +  "\"";
+    }
+    if(selected) {
+      SourceFile[ApplicationType].Xdelete();
 
-            // Basic
-            else  if( ApplicationType == 5 ){
-              StringBuffer clsbuf  = new StringBuffer("");
-              StringBuffer funcbuf = new StringBuffer("");
-              StringBuffer initbuf = new StringBuffer("");
-              compile_BASIC( top_element, clsbuf, funcbuf, initbuf, new Vector() );
-              String s = ImportFiles[ApplicationType]
-                       + clsbuf.toString() 
-                       + initbuf.toString()
-                       + ProgramStartupCode[ApplicationType]
-                       + funcbuf.toString();
-              s = Xreplace( s, "%AppName%", xml.属性値( top_element, "objectname" ) );
-              SourceFile[ApplicationType].Xappend( s );
-            } 
+      // Java
+      if( ApplicationType == 0 || ApplicationType == 1 || ApplicationType == 4 ){
+        String s = ImportFiles[ApplicationType]
+                 + compile_JAVA( top_element, true, new Vector() );
+        s = Xreplace( s, "%AppName%", xml.属性値( top_element, "objectname" ) );
+        SourceFile[ApplicationType].Xappend( s );
 
-            // C言語
-            else  if( ApplicationType == 6 ){
-              StringBuffer clsbuf  = new StringBuffer("");
-              StringBuffer funcbuf = new StringBuffer("");
-              StringBuffer initbuf = new StringBuffer("");
-              compile_C( top_element, clsbuf, funcbuf, initbuf, new Vector() );
-              String s = ImportFiles[ApplicationType]
-                       + clsbuf.toString() 
-                       + initbuf.toString()
-                       + ProgramStartupCode[ApplicationType]
-                       + funcbuf.toString();
-              s = Xreplace( s, "%AppName%", xml.属性値( top_element, "objectname" ) );
-              SourceFile[ApplicationType].Xappend( s );
-            } 
+        // android Java
+        if( ApplicationType == 4 ){
+          try{
+            BufferedWriter dout = new BufferedWriter( new FileWriter( new File("AndroidManifest.xml") ) );
+            dout.write( NativeHelpCommand[4]  );
+            dout.close();
+          } catch( IOException e ){  }
+        }
+      }
 
-            // oregengo-R
-            else  if( ApplicationType == 7 ){
-              StringBuffer clsbuf  = new StringBuffer("");
-              StringBuffer funcbuf = new StringBuffer("");
-              StringBuffer initbuf = new StringBuffer("");
-              compile_oregengo_R( top_element, clsbuf, funcbuf, initbuf, new Vector() );
-              String s = ImportFiles[ApplicationType]
-                       + clsbuf.toString() 
-                       + "\n_INIT_STATES:\n"+initbuf.toString()+"\n end\n"
-                       + ProgramStartupCode[ApplicationType]
-                       + funcbuf.toString();
-              s = Xreplace( s, "%AppName%", xml.属性値( top_element, "objectname" ) );
-              SourceFile[ApplicationType].Xappend( s );
-            } 
-            else ;
-            if(ViewSourceAtCompile){
-              execute( JavaViewCommand + " " + SourceFile[ApplicationType].getName(), false );
-            }
-            XFile cf = new XFile( "classfiles" );
-            if( cf.isDirectory() ) cf.Xdelete();
-            cf.mkdir();
-            String cmd = Xreplace( CompileCommand[ApplicationType], "$1", target );
-            messagewindow.execcommand("コンパイルします．\n", "\nコンパイルできません\n", cmd);
-		  }
+      // C++
+      else  if( ApplicationType ==2 || ApplicationType == 3 ){
+        StringBuffer clsbuf  = new StringBuffer("");
+        StringBuffer funcbuf = new StringBuffer("");
+        StringBuffer initbuf = new StringBuffer("");
+        compile_CPP( top_element, clsbuf, funcbuf, initbuf, new Vector() );
+        String s = ImportFiles[ApplicationType]
+                 + clsbuf.toString() + "\n"
+                 + funcbuf.toString()
+                 + "\nvoid Startup(){\n" + initbuf.toString() +" \n}\n"
+                 + ProgramStartupCode[ApplicationType];
+        s = Xreplace( s, "%AppName%", xml.属性値( top_element, "objectname" ) );
+        SourceFile[ApplicationType].Xappend( s );
+      } 
 
+      // Basic
+      else  if( ApplicationType == 5 ){
+        StringBuffer clsbuf  = new StringBuffer("");
+        StringBuffer funcbuf = new StringBuffer("");
+        StringBuffer initbuf = new StringBuffer("");
+        compile_BASIC( top_element, clsbuf, funcbuf, initbuf, new Vector() );
+        String s = ImportFiles[ApplicationType]
+                 + clsbuf.toString() 
+                 + initbuf.toString()
+                 + ProgramStartupCode[ApplicationType]
+                 + funcbuf.toString();
+        s = Xreplace( s, "%AppName%", xml.属性値( top_element, "objectname" ) );
+        SourceFile[ApplicationType].Xappend( s );
+      } 
+
+      // C言語
+      else  if( ApplicationType == 6 ){
+        StringBuffer clsbuf  = new StringBuffer("");
+        StringBuffer funcbuf = new StringBuffer("");
+        StringBuffer initbuf = new StringBuffer("");
+        compile_C( top_element, clsbuf, funcbuf, initbuf, new Vector() );
+        String s = ImportFiles[ApplicationType]
+                 + clsbuf.toString() 
+                 + initbuf.toString()
+                 + ProgramStartupCode[ApplicationType]
+                 + funcbuf.toString();
+        s = Xreplace( s, "%AppName%", xml.属性値( top_element, "objectname" ) );
+        SourceFile[ApplicationType].Xappend( s );
+      } 
+
+      // oregengo-R
+      else  if( ApplicationType == 7 ){
+        StringBuffer clsbuf  = new StringBuffer("");
+        StringBuffer funcbuf = new StringBuffer("");
+        StringBuffer initbuf = new StringBuffer("");
+        compile_oregengo_R( top_element, clsbuf, funcbuf, initbuf, new Vector() );
+        String s = ImportFiles[ApplicationType]
+                 + clsbuf.toString() 
+                 + "\n_INIT_STATES:\n"+initbuf.toString()+"\n end\n"
+                 + ProgramStartupCode[ApplicationType]
+                 + funcbuf.toString();
+        s = Xreplace( s, "%AppName%", xml.属性値( top_element, "objectname" ) );
+        SourceFile[ApplicationType].Xappend( s );
+      } 
+      else {}
+      if(ViewSourceAtCompile){
+        execute( JavaViewCommand + " " + SourceFile[ApplicationType].getName(), false );
+      }
+      XFile cf = new XFile( "classfiles" );
+      if( cf.isDirectory() ) cf.Xdelete();
+      cf.mkdir();
+      String cmd = Xreplace( CompileCommand[ApplicationType], "$1", target );
+      messagewindow.execcommand("コンパイルします．\n", "\nコンパイルできません\n", cmd);
+    }
+
+    // 退避したプロパティを元に戻す
+    properties = prop0;
+    syncProperty();
   }
 
   // C++プログラムを作成する
@@ -2478,6 +2529,8 @@ class App1{
     // Objecteditorを初期化する
     public void initialise(){
     
+//Syetem.out.println("initialise");
+
       treetool     = new TreeTool( project );
       gui.display.setLeftComponent(treetool);
       treetool.validate();
@@ -2485,6 +2538,9 @@ class App1{
       mae_node = treetool.top;
       Login( treetool.top );
       if( filewindow != null ){
+		  
+//Syetem.out.println("modefy file window");
+		  
         boolean vis = filewindow.isVisible();
         FileWinx0 = filewindow.getLocation().x;
         FileWiny0 = filewindow.getLocation().y;
@@ -2494,33 +2550,33 @@ class App1{
         filewindow = new FileWindow();
         filewindow.setVisible( vis );
       }
+//Syetem.out.println("initialise end");
     }
 
     // 新しいpathに内容を変更する
     public void Login( Xnode nod ){
 
-//System.out.println("application type="+ApplicationType);
-//System.out.println("guidesigner command="+GUIDesignerCommand[ ApplicationType ]);
 
+      // プロパティを更新する
       Object elem = nod.element;
 
-//System.out.println("login");
-//String objname = xml.属性値( elem, "objectname" );
-//System.out.println("objectname="+objname);
 
-      Object prop = xml.子要素(elem, "properties");
-      if(prop != null ){
+//Syetem.out.println("login");
+//Syetem.out.println("object name="+ xml.属性値( elem, "objectname" ) );
 
-//System.out.println("exist properties");
+      while(true){
+        Object p = xml.子要素(elem, "properties");
+        if(p != null){
 
-//        properties_bak = properties;
-        properties = prop;
-        syncProperty();
+//Syetem.out.println("exist properties");
+
+          properties = p;
+          break;
+        }
+        if(elem == project) break; // ここが有効になることは多分ない
+        elem = xml.親要素(elem);
       }
-//      else properties_bak = null;
-       
-//System.out.println("application type="+ApplicationType);
-//System.out.println("guidesigner command="+GUIDesignerCommand[ ApplicationType ]);
+      syncProperty(); // 現在の状態を更新したプロパティにあわせる
 
       //内容をロードする
       node = nod;
@@ -2532,9 +2588,6 @@ class App1{
       ID_maker = parseInt( xml.属性値( element, "ID_maker" ) );
       gui.setobjectname( xml.属性値( element, "objectname" ) );
       gui.setdescription( xml.属性値( element, "description" ) );
-       
-
-
 
       //Loginモードでコンポーネントを生成する
       Vector v;
@@ -2593,26 +2646,16 @@ class App1{
       gui.setVisible();
       gui.buttonreset();
       mode = "NOP";
+
     }
      
     //内容をセーブして内容を消去する
     public void Logout(){
       int i;
 
+//Syetem.out.println("logout");
 
-//System.out.println("application type="+ApplicationType);
-//System.out.println("guidesigner command="+GUIDesignerCommand[ ApplicationType ]);
-//System.out.println("logout");
-
-
-//      if(properties_bak != null ){
-//        properties = properties_bak;
-//        syncProperty();
-//        properties_bak = null;
-//      }
-
-//System.out.println("application type="+ApplicationType);
-//System.out.println("guidesigner command="+GUIDesignerCommand[ ApplicationType ]);
+      restoreProperty();// プロパティを現在の状態にあわせる
 
       MainWinx0 = gui.getLocation().x;
       MainWiny0 = gui.getLocation().y;
@@ -2650,7 +2693,9 @@ class App1{
         else if( comp[i] instanceof ImgIcon )   ( (ImgIcon)comp[i] ).Logout();
       }
       
-    }
+//Syetem.out.println("logout end");
+
+ }
      
     //コンポーネントをすべて削除する
     public void removeallcomponents(){
@@ -2731,7 +2776,6 @@ class App1{
       }
 
       restoreProperty();
-//      properties_bak = null;
       Logout();
       Login( cnode );
       return( obj );
@@ -2802,6 +2846,9 @@ class App1{
 
 //  プロジェクトを開く
     private void open(){
+
+//Syetem.out.println("open");
+
       XFileFilter filter = new XFileFilter( ProjectFileMode );
       JFileChooser xchooser = new JFileChooser( ProjectDir );
       xchooser.setFileFilter(filter);
@@ -2821,6 +2868,7 @@ class App1{
           initialise();
         }
       }
+//Syetem.out.println("open end");
     }
 
 //  プロジェクトを貼り付ける
@@ -2994,9 +3042,11 @@ gui.buttonreset();
 
       if(command.equals("COMPILE") ){
           if(compile_ready){
+			  
+//Syetem.out.println("compile start");
+			  
             messagewindow.clearText();
-            DefaultMutableTreeNode cnode = node;
-            treetool.changeNode(treetool.top);
+            messagewindow.setVisible(true);
             new Thread(new Runnable() {
               @Override
 	          public void run() {
@@ -3005,8 +3055,6 @@ gui.buttonreset();
                 compile_ready = true;
 	          }
 	        }).start();
-            treetool.changeNode(cnode);
-            messagewindow.setVisible(true);
 System.gc();
 gui.buttonreset();
           }
@@ -6362,9 +6410,11 @@ gui.buttonreset();
 
 
         if(compile_ready){
+			  
+//Syetem.out.println("compile start");
+			  
           messagewindow.clearText();
-          DefaultMutableTreeNode cnode = node;
-          treetool.changeNode(treetool.top);
+          messagewindow.setVisible(true);
           new Thread(new Runnable() {
             @Override
             public void run() {
@@ -6373,8 +6423,6 @@ gui.buttonreset();
               compile_ready = true;
 	        }
 	      }).start();
-          treetool.changeNode(cnode);
-          messagewindow.setVisible(true);
 System.gc();
 gui.buttonreset();
         }
@@ -10213,8 +10261,6 @@ gui.buttonreset();
         if( ( newnode instanceof Xnode ) && ( !xml.要素の名前( ((Xnode)newnode).element ).equals("xobject") ) ) return;
         if( ( newnode instanceof Anode ) && ( !xml.要素の名前( ((Anode)newnode).element ).equals("aobject") ) ) return;
 
-        restoreProperty();// プロパティを現在の状態にあわせる
-  
         DefaultMutableTreeNode bnode = currentnode; //ひとつ前のノード
         
         if( currentnode instanceof Xnode ){
@@ -10248,15 +10294,6 @@ gui.buttonreset();
         tree.setSelectionPath( new TreePath( currentnode.getPath() ) );
         mae_node = bnode;  //ひとつ前のノードを保存
 
-        // プロパティを更新する
-        Object elem = ((ObjeditNode)currentnode).element;
-        while(true){
-          Object p = xml.子要素(elem, "poperties");
-          if(p != null){ properties = p; break; }
-          if(elem == project) break; // ここが有効になることは多分ない
-          elem = xml.親要素(elem);
-	    }
-        syncProperty(); // 現在の状態を更新したプロパティにあわせる
     }
 
 //  ピン配置を最適化する
