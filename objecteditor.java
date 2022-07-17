@@ -396,6 +396,8 @@ class App1{
     ImportFiles[7]        = "";
     ProgramStartupCode[7] = " _PSTART\nend";
 
+    RunCommand[8] = "";
+
   }//~initProperty(){
 
 //プロパティをセーブする   
@@ -510,6 +512,8 @@ class App1{
     ImportFiles[7] = ((t=xml.属性値( properties, "ImportFiles7" ))==null?"":t);
     ProgramStartupCode[7] = ((t=xml.属性値( properties, "ProgramStartupCode7" ))==null?"":t);
     NativeHelpCommand[7] = ((t=xml.属性値( properties, "NativeHelpCommand7" ))==null?"":t);
+
+    RunCommand[8] = ((t=xml.属性値( properties, "RunCommand8" ))==null?"":t);
 
     if( objecteditor != null ){
 
@@ -672,6 +676,7 @@ class App1{
     xml.属性値をセット( properties, "ProgramStartupCode7", ProgramStartupCode[7] );
     xml.属性値をセット( properties, "NativeHelpCommand7", NativeHelpCommand[7] );
 
+    xml.属性値をセット( properties, "RunCommand8", RunCommand[8] );
   }//~restoreProperty()
 
   // lookandfeelを更新する
@@ -9206,6 +9211,10 @@ gui.buttonreset();
     TextButton     nativehelpcommand7;
     JPanel         properties7;
 
+    JLabel         Lruncommand8;
+    TextButton     runcommand8;
+    JPanel         properties8;
+
     JTabbedPane    tproperties;
     
     JButton        yesbutton;
@@ -9214,7 +9223,8 @@ gui.buttonreset();
     JButton        rstbutton;
 
     JPanel         selectbuttons;
-    
+    JScrollPane    sx,s02,s12,s22,s32,s42,s52,s62,s72,s82;
+
     PropertyWindow(){
 
       setTitle("プロジェクトのプロパティ");
@@ -9347,6 +9357,9 @@ gui.buttonreset();
       Lnativehelpcommand7  = new JLabel("oregengo-Rのヘルプファイルを開くコマンド");
       nativehelpcommand7   = new TextButton(NativeHelpCommand[7]);
 
+      Lruncommand8         = new JLabel("作成したプログラムを起動するコマンド");
+      runcommand8          = new TextButton(RunCommand[8]);
+
       properties = new JPanel();
       properties.setLayout(new BoxLayout( properties, BoxLayout.Y_AXIS) );
       properties.add(viewsourceatcompile);
@@ -9370,7 +9383,7 @@ gui.buttonreset();
       properties.add(htmleditcommand);
       properties.add(Lhelpcommand);
       properties.add(helpcommand);
-      JScrollPane sx = new JScrollPane(properties);
+      sx = new JScrollPane(properties);
 //      sx.setPreferredSize(new Dimension(600,200) );
 
       properties0 = new JPanel();
@@ -9387,7 +9400,7 @@ gui.buttonreset();
       properties0.add(importfiles0);
       properties0.add( Lprogramstartupcode0);
       properties0.add( programstartupcode0);
-      JScrollPane s02 = new JScrollPane(properties0);
+      s02 = new JScrollPane(properties0);
 //      s02.setPreferredSize(new Dimension(600,200) );
 
       properties1 = new JPanel();
@@ -9404,7 +9417,7 @@ gui.buttonreset();
       properties1.add( importfiles1);
       properties1.add( Lprogramstartupcode1);
       properties1.add( programstartupcode1);
-      JScrollPane s12 = new JScrollPane(properties1);
+      s12 = new JScrollPane(properties1);
 //      s12.setPreferredSize(new Dimension(600,200) );
 
       properties2 = new JPanel();
@@ -9421,7 +9434,7 @@ gui.buttonreset();
       properties2.add(importfiles2);
       properties2.add( Lprogramstartupcode2);
       properties2.add( programstartupcode2);
-      JScrollPane s22 = new JScrollPane(properties2);
+      s22 = new JScrollPane(properties2);
 //      s22.setPreferredSize(new Dimension(600,200) );
 
       properties3 = new JPanel();
@@ -9438,7 +9451,7 @@ gui.buttonreset();
       properties3.add( importfiles3);
       properties3.add( Lprogramstartupcode3);
       properties3.add( programstartupcode3);
-      JScrollPane s32 = new JScrollPane(properties3);
+      s32 = new JScrollPane(properties3);
 //      s32.setPreferredSize(new Dimension(600,200) );
 
       properties4 = new JPanel();
@@ -9455,7 +9468,7 @@ gui.buttonreset();
       properties4.add( importfiles4);
       properties4.add( Lprogramstartupcode4);
       properties4.add( programstartupcode4);
-      JScrollPane s42 = new JScrollPane(properties4);
+      s42 = new JScrollPane(properties4);
 //      s42.setPreferredSize(new Dimension(600,160) );
 
       properties5 = new JPanel();
@@ -9474,7 +9487,7 @@ gui.buttonreset();
       properties5.add( importfiles5);
       properties5.add( Lprogramstartupcode5);
       properties5.add( programstartupcode5);
-      JScrollPane s52 = new JScrollPane(properties5);
+      s52 = new JScrollPane(properties5);
 //      s52.setPreferredSize(new Dimension(600,200) );
 
       properties6 = new JPanel();
@@ -9491,7 +9504,7 @@ gui.buttonreset();
       properties6.add( importfiles6);
       properties6.add( Lprogramstartupcode6);
       properties6.add( programstartupcode6);
-      JScrollPane s62 = new JScrollPane(properties6);
+      s62 = new JScrollPane(properties6);
 //      s62.setPreferredSize(new Dimension(600,200) );
 
       properties7 = new JPanel();
@@ -9510,8 +9523,14 @@ gui.buttonreset();
       properties7.add( importfiles7);
       properties7.add( Lprogramstartupcode7);
       properties7.add( programstartupcode7);
-      JScrollPane s72 = new JScrollPane(properties7);
+      s72 = new JScrollPane(properties7);
 //      s72.setPreferredSize(new Dimension(600,200) );
+
+      properties8 = new JPanel();
+      properties8.setLayout(new BoxLayout( properties8, BoxLayout.Y_AXIS) );
+      properties8.add( Lruncommand8);
+      properties8.add( runcommand8);
+      s82 = new JScrollPane(properties8);
 
       yesbutton     = new JButton("OK");;
       yesbutton.setActionCommand("YES");
@@ -9541,6 +9560,7 @@ gui.buttonreset();
       tproperties.addTab("Basic", s52);
       tproperties.addTab("C言語", s62);
       tproperties.addTab("oregengo-R", s72);
+      tproperties.addTab("マルチ言語", s82);
       getContentPane().add(tproperties, BorderLayout.CENTER);
       getContentPane().add(selectbuttons, BorderLayout.SOUTH);
       pack();
@@ -9630,6 +9650,8 @@ gui.buttonreset();
         ProgramStartupCode[7] = programstartupcode7.get_text();
         NativeHelpCommand[7] = nativehelpcommand7.get_text();
 
+        RunCommand[8] = runcommand8.get_text();
+
         restoreProperty();
         setlookandfeel();
 
@@ -9713,6 +9735,8 @@ gui.buttonreset();
       importfiles7.set_text(ImportFiles[7]);
       programstartupcode7.set_text(ProgramStartupCode[7]);
       nativehelpcommand7.set_text(NativeHelpCommand[7]);
+
+      runcommand8.set_text(RunCommand[8]);
 
     }
 
