@@ -5,4 +5,3 @@ javac -d classfiles javatext.java
 echo jar:
 jar cfm  NewApplication.jar NewApplication.mnf -C classfiles .
 echo copy:
-cp NewApprication.jar $1

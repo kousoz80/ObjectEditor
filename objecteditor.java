@@ -1,6 +1,5 @@
-//オブジェクトエディタver1.2.6
-// 変更点：ビルドスクリプトを取り込んだ
-//       マルチ言語に対応
+//オブジェクトエディタver1.2.7
+// 変更点：Javascriptに対応
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
@@ -18,7 +17,7 @@ import javax.imageio.ImageIO;
 
 //アプリケーションのクラス
 class App1{
-  static final String VERSION_STRING =" ObjectEditor version 1.2.6";
+  static final String VERSION_STRING =" ObjectEditor version 1.2.7";
       
 
 // 主体オブジェクト
@@ -72,7 +71,8 @@ class App1{
                                    "basファイル(bas)/bas", 
                                    "実行ファイル(exe)/exe", 
                                    "実行ファイル(efi)/efi", 
-                                   ""
+                                   "",
+                                   "実行ファイル(html)/html", 
   };
 
   String   ProjectFileMode    =    "プロジェクトファイル(prj)/prj";
@@ -86,7 +86,8 @@ class App1{
                                    "Test.bas",
                                    "Test.exe",
                                    "Test.efi",
-                                   ""
+                                   "",
+                                   "Test.html",
   };
 
   String[] AppTypes ={
@@ -98,7 +99,8 @@ class App1{
                                    "(Basicアプリケーション)",
                                    "(C言語 アプリケーション)",
                                    "(oregengo-R言語 アプリケーション)",
-                                   "(マルチ言語アプリケーション)"
+                                   "(マルチ言語アプリケーション)",
+                                   "(Javascriptアプリケーション)",
   };
 
 
@@ -131,15 +133,19 @@ class App1{
   String HelpCommand;
 
 // ここより下はアプリケーションの種類( Javaアプリケーション or アプレット )ごとに存在する
-  int ApplicationType = 0;   //アプリケーションの種類( 0:Javaアプリケーション / 1:アプレット/2: C++コンソール/3:C++ Windows /4:android/5:Basic/6:C言語/7:oregengo-R/8:マルチ言語環境
+  int ApplicationType = 0;   //アプリケーションの種類( 0:Javaアプリケーション / 1:アプレット/2: C++コンソール/3:C++ Windows /4:android/5:Basic/6:C言語/7:oregengo-R/8:マルチ言語環境/9: Javascript 
 
-  String[] CompileCommand     = { "", "", "", "", "", "", "", "","" };
-  String[] RunCommand         = { "", "", "", "", "", "","", "","" };
-  String[] GUIDesignerCommand = { "", "", "", "", "", "","", "","" };
-  String[] ImportFiles        = { "", "", "", "", "", "","",  "","" };
-  String[] ProgramStartupCode = { "", "", "", "", "", "","",  "","" };
-  String[] NativeHelpCommand  = { "", "", "", "", "" , "", "", "",""};
-  String[] IDF_LocalVariable ={ "","","","","","","","","" };
+  String[] CompileCommand     = { "","","","","","","","","","" };
+  String[] RunCommand         = { "","","","","","","","","","" };
+  String[] GUIDesignerCommand = { "","","","","","","","","","" };
+  String[] ImportFiles        = { "","","","","","","","","","" };
+  String[] ProgramStartupCode = { "","","","","","","","","","" };
+  String[] NativeHelpCommand  = { "","","","","","","","","","" };
+  String[] IDF_LocalVariable  = { "","","","","","","","","","" };
+
+  // Javascriptのコンパイル用変数
+  String HtmlBuffer = "";
+
 
   // 共通メソッドを記述
 
@@ -408,17 +414,11 @@ class App1{
 
   // プロパティを現在の状態に反映させる
   public void syncProperty(){
-
-//System.out.println("sync property");
-
     String t;
     if( properties == null ) return;
 
     LookandFeel = xml.属性値( properties, "LookandFeel" );
     if( LookandFeel == null ) LookandFeel =UIManager.getSystemLookAndFeelClassName();
-
-
-//Syetem.out.println("sync property execute");
 
     MainWinx0 = parseInt( xml.属性値( properties, "MainWinx0" ) );
     MainWiny0 = parseInt( xml.属性値( properties, "MainWiny0" ) );
@@ -514,6 +514,13 @@ class App1{
     NativeHelpCommand[7] = ((t=xml.属性値( properties, "NativeHelpCommand7" ))==null?"":t);
 
     RunCommand[8] = ((t=xml.属性値( properties, "RunCommand8" ))==null?"":t);
+
+    CompileCommand[9] = ((t=xml.属性値( properties, "CompileCommand9" ))==null?"":t);
+    RunCommand[9] = ((t=xml.属性値( properties, "RunCommand9" ))==null?"":t);
+    GUIDesignerCommand[9] = ((t=xml.属性値( properties, "GUIDesignerCommand9" ))==null?"":t);
+    ImportFiles[9] = ((t=xml.属性値( properties, "ImportFiles9" ))==null?"":t);
+    ProgramStartupCode[9] = ((t=xml.属性値( properties, "ProgramStartupCode9" ))==null?"":t);
+    NativeHelpCommand[9] = ((t=xml.属性値( properties, "NativeHelpCommand9" ))==null?"":t);
 
     if( objecteditor != null ){
 
@@ -677,40 +684,32 @@ class App1{
     xml.属性値をセット( properties, "NativeHelpCommand7", NativeHelpCommand[7] );
 
     xml.属性値をセット( properties, "RunCommand8", RunCommand[8] );
+
+    xml.属性値をセット( properties, "CompileCommand9", CompileCommand[9] );
+    xml.属性値をセット( properties, "RunCommand9", RunCommand[9] );
+    xml.属性値をセット( properties, "GUIDesignerCommand9", GUIDesignerCommand[9] );
+    xml.属性値をセット( properties, "ImportFiles9", ImportFiles[9] );
+    xml.属性値をセット( properties, "ProgramStartupCode9", ProgramStartupCode[9] );
+    xml.属性値をセット( properties, "NativeHelpCommand9", NativeHelpCommand[9] );
+
   }//~restoreProperty()
 
   // lookandfeelを更新する
   public void setlookandfeel(){
     try{
 
-//Syetem.out.println("set look and feel");
-
       UIManager.setLookAndFeel(LookandFeel);
-//Syetem.out.println("objecteditor");
 	    SwingUtilities.updateComponentTreeUI(objecteditor.gui);
-//Syetem.out.println("stateeditor");
 	    SwingUtilities.updateComponentTreeUI(stateeditor.gui);
-//Syetem.out.println("texteditor");
 	    SwingUtilities.updateComponentTreeUI(texteditor);
-//Syetem.out.println("messagewindow");
 	    SwingUtilities.updateComponentTreeUI(messagewindow);
-//Syetem.out.println("propertywindow");
 	    SwingUtilities.updateComponentTreeUI(propertywindow);
-//Syetem.out.println("filewindow");
 	    SwingUtilities.updateComponentTreeUI(filewindow);
-//Syetem.out.println("initialdialog");
   	    SwingUtilities.updateComponentTreeUI(initialdialog);
-//Syetem.out.println("inputdialog");
   	    SwingUtilities.updateComponentTreeUI(inputdialog);
-//Syetem.out.println("dialog1");
   	    SwingUtilities.updateComponentTreeUI(dialog1);
-//Syetem.out.println("dialog2");
   	    SwingUtilities.updateComponentTreeUI(dialog2);
-//Syetem.out.println("dialog3");
   	    SwingUtilities.updateComponentTreeUI(dialog3);
-
-//Syetem.out.println("set look and feel end");
-
     } catch( Exception ex ) {System.out.println("exception:\n"+ex);}
   }
   
@@ -738,8 +737,6 @@ class App1{
         Process p=null;
         int ExitCode;
         
-//System.out.println("execute: command="+s);
-
         try{
           p = java.lang.Runtime.getRuntime().exec(s);
         } catch( Exception ie ){ reportError(s+"は実行できません\n" ); }
@@ -919,7 +916,7 @@ class App1{
     else return("");
   }
 
-// オブジェクトやピンのフルパス名を返す(Basic, C言語, oregengo-R) 
+// オブジェクトやピンのフルパス名を返す(Basic, C言語, oregengo-R, Javascript) 
   public String getAbsoluteName2( Object elem ){
     String buf =  null;
     if( xml.属性値( xml.親要素( elem ), "レイアウト" ) == null ) buf =  "_"+elem.hashCode();
@@ -935,8 +932,7 @@ class App1{
        }
     }
     else if( typ.equals("operation" ) ){
-       if( buf==null ) buf = xml.属性値( elem, "inpintext" );
-       else  buf = buf + "_" + xml.属性値( elem, "inpintext" ) ;
+       buf = "_"+elem.hashCode()+"_"+xml.属性値( elem, "inpintext" ) ;
     }
     return buf;
   }
@@ -944,8 +940,6 @@ class App1{
 
   // プロジェクトをコンパイルする
   public void compile_project(Object top_element){
-
-//Syetem.out.println("compile project:");
 
     // 現在のプロパティを退避する
     restoreProperty();
@@ -1073,7 +1067,41 @@ class App1{
         s = Xreplace( s, "%AppName%", xml.属性値( top_element, "objectname" ) );
         SourceFile[ApplicationType].Xappend( s );
       } 
+
+      // Javascript
+      else  if( ApplicationType == 9 ){
+        HtmlBuffer = "";
+        StringBuffer clsbuf  = new StringBuffer("");
+        StringBuffer funcbuf = new StringBuffer("");
+        StringBuffer initbuf = new StringBuffer("");
+        compile_javascript( top_element, clsbuf, funcbuf, initbuf, new Vector() );
+        String s = ImportFiles[ApplicationType]
+                 + clsbuf.toString() 
+                 + funcbuf.toString()
+                 + initbuf.toString()
+                 + ProgramStartupCode[ApplicationType];
+        s = Xreplace( s, "%AppName%", xml.属性値( top_element, "objectname" ) );
+
+        // Html文書に変換
+        s = "<!DOCTYPE html>\n"+
+            "<html lang=\"ja\">\n"+
+            "<head>\n"+
+            "<meta charset=\"utf-8\">\n"+
+            "<title>" + xml.属性値( top_element, "objectname" ) + "</title>\n"+
+            "</head>\n"+
+            "<body>\n"+
+            HtmlBuffer+"\n"+
+            "<script>\n"+
+            s+"\n"+
+            "</script>\n"+
+            "</body>\n"+
+            "</html>\n";
+            
+        SourceFile[ApplicationType].Xappend( s );
+      } 
+
       else {}
+
       if(ViewSourceAtCompile){
         execute( JavaViewCommand + " " + SourceFile[ApplicationType].getName(), false );
       }
@@ -1194,7 +1222,6 @@ class App1{
          
       clsbuf.append( codebuf.toString() + "\n}\n" );
     }
-
 
     else if( element_name.equals("aobject") ){
       StringBuffer codebuf = new StringBuffer(""); 
@@ -2031,7 +2058,7 @@ class App1{
       clsbuf.append( "int STATE" + id + ", STATE2" + id + ";\n" );
       list = xml.子要素のリスト( element, "codeclip" );
       for( i = 0; i < list.size(); i++ ){
-        compile_C( list.get(i), codebuf, funcbuf, initbuf, null );
+        compile_C( list.get(i), clsbuf, funcbuf, initbuf, null );
       }
 
       Vector signal2 = new Vector();
@@ -2426,6 +2453,270 @@ class App1{
   }
 
 
+  // Javascriptプログラムを作成する
+  public void compile_javascript( Object element, StringBuffer clsbuf, StringBuffer funcbuf, StringBuffer initbuf, Vector signal ){
+
+    int i, j;
+    Vector list;
+
+    String element_name = xml.要素の名前( element );
+    String comp_name = xml.要素のID( element );
+
+    if( element_name.equals("codeclip") ){
+      String buf = xml.属性値( element, "codetext" ) + "\n";
+      StringTokenizer st = new StringTokenizer( buf, "\n" );
+      while(st.hasMoreTokens()){
+        String lin = st.nextToken();
+
+        // HTML文書の場合はHTMLバッファに追加
+        if(lin.startsWith("//html")){
+          HtmlBuffer = HtmlBuffer + lin.substring(6) +"\n";
+        }
+
+        // それ以外のときはクラスバッファに追加
+        else{
+          clsbuf.append(lin+"\n");
+        }
+      }
+       
+    }
+
+    else if( element_name.equals("xobject") ){
+      StringBuffer codebuf = new StringBuffer(""); 
+      String cls = xml.属性値( element, "objectname" );
+
+      list = xml.子要素のリスト( element, "codeclip" );
+      for( i = 0; i < list.size(); i++ ){
+        compile_javascript( list.get(i), clsbuf, funcbuf, initbuf, null );// codebuf->clsbuf
+      }
+
+      Vector signal2 = new Vector();
+      list = xml.子要素のリスト( element, "relation" );
+      for( i = 0; i < list.size(); i++ ){
+        Object pin1, pin2;
+        String pin1name = xml.属性値( list.get(i), "pin1name" );
+        String pin2name = xml.属性値( list.get(i), "pin2name" );
+
+        if( pin2name.charAt( pin2name.length()-1 ) == ')' ){  // pin2 is pinlabel
+          Object base = xml.子要素( element, getbase( pin2name ) );
+          pin2 = xml.子要素( base, getsignature( pin2name ) );
+        }
+        else{
+          pin2 = xml.子要素( element, pin2name );             // pin2 is pin or operation
+        }
+
+        signal2.add( new StringCouple( pin1name, getAbsoluteName2( pin2 ) ) );
+      }
+        
+      list = xml.子要素のリスト( element, "pin" );
+      for( i = 0; i < list.size(); i++ ){
+        String name = xml.要素のID( list.get(i) );
+        Vector method= new Vector();
+
+        for( j = signal2.size()-1; j >= 0; j-- ){
+          StringCouple k = (StringCouple)( signal2.get(j) );
+          if( name.equals( k.String1 ) ){
+            method.add( k.String2 );
+            signal2.remove( k );
+          }
+        }
+        for( j = signal.size()-1; j >= 0; j-- ){
+          StringCouple k = (StringCouple)( signal.get(j) );
+          if( name.equals( k.String1 ) ){
+            method.add( k.String2 );
+            signal.remove( k );
+          }
+        }
+        compile_javascript( list.get(i), clsbuf, funcbuf, initbuf, method );
+      }
+       
+      list = xml.子要素のリスト( element, "operation" );
+      for( i = 0; i < list.size(); i++ ){
+        String name = xml.要素のID( list.get(i) );
+        Vector method= new Vector();
+
+        for( j = signal2.size()-1; j >= 0; j-- ){
+          StringCouple k = (StringCouple)( signal2.get(j) );
+          if( name.equals( k.String1 ) ){
+            method.add( k.String2 );
+            signal2.remove( k );
+          }
+        }
+        compile_javascript( list.get(i), clsbuf, funcbuf, initbuf, method );
+      }
+
+      list = xml.子要素のリスト( element, "aobject" );
+      for( i = 0; i < list.size(); i++ ){
+        String name = xml.要素のID( list.get(i) );
+        Vector method= new Vector();
+        for( j = signal2.size()-1; j >= 0; j-- ){
+          StringCouple k = (StringCouple)( signal2.get(j) );
+          if( ( k.String1.charAt( k.String1.length()-1 ) == ')' ) && name.equals( getbase( k.String1 ) ) ){
+            method.add( new StringCouple( getsignature( k.String1 ), k.String2 ) );
+            signal2.remove( k );
+          }
+        }
+        compile_javascript( list.get(i), clsbuf, funcbuf, initbuf, method );
+      }
+
+      list = xml.子要素のリスト( element, "xobject" );
+      for( i = 0; i < list.size(); i++ ){
+        String name = xml.要素のID( list.get(i) );
+        Vector method= new Vector();
+        for( j = signal2.size()-1; j >= 0; j-- ){
+          StringCouple k = (StringCouple)( signal2.get(j) );
+          if( ( k.String1.charAt( k.String1.length()-1 ) == ')' ) && name.equals( getbase( k.String1 ) ) ){
+            method.add( new StringCouple( getsignature( k.String1 ), k.String2 ) );
+            signal2.remove( k );
+          }
+        }
+        compile_javascript( list.get(i), clsbuf, funcbuf, initbuf, method );
+      }
+         
+    }
+
+    else if( element_name.equals("aobject") ){
+      StringBuffer codebuf = new StringBuffer(""); 
+      String cls = xml.属性値( element, "objectname" );
+      String id = getAbsoluteName2( element );
+      clsbuf.append( "var STATE" + id + ", STATE2" + id + ";\n" );
+      list = xml.子要素のリスト( element, "codeclip" );
+      for( i = 0; i < list.size(); i++ ){
+        compile_javascript( list.get(i), clsbuf, funcbuf, initbuf, null );
+      }
+
+      Vector signal2 = new Vector();
+      list = xml.子要素のリスト( element, "action" );
+      for( i = 0; i < list.size(); i++ ){
+        Object comp1, comp2;
+        String comp1name = xml.属性値( list.get(i), "comp1name" );
+        String comp2name = xml.属性値( list.get(i), "comp2name" );
+        comp2 = xml.子要素( element, comp2name );
+        signal2.add( new StringCouple( comp1name, getAbsoluteName2(comp2) ) );
+      }
+        
+      list = xml.子要素のリスト( element, "pin" );
+      for( i = 0; i < list.size(); i++ ){
+        String name = xml.要素のID( list.get(i) );
+        Vector method = new Vector();
+
+        for( j = signal2.size()-1; j >= 0; j-- ){
+          StringCouple k = (StringCouple)( signal2.get(j) );
+          if( name.equals( k.String1 ) ){
+            method.add( k.String2 );
+            signal2.remove( k );
+          }
+        }
+        for( j = signal.size()-1; j >= 0; j-- ){
+          StringCouple k = (StringCouple)( signal.get(j) );
+          if( name.equals( k.String1 ) ){
+            method.add( k.String2 );
+            signal.remove( k );
+          }
+        }
+        compile_javascript( list.get(i), clsbuf, funcbuf, initbuf, method );
+      }
+         
+      Vector statemethod = new Vector();
+      list = xml.子要素のリスト( element, "operation" );
+      for( i = 0; i < list.size(); i++ ){
+        Vector method= new Vector();
+        Object op = list.get(i);
+
+        if( parseInt( xml.属性値( op, "inpinlinkcount" ) ) == 0 ){
+          statemethod.add( new StringCouple( xml.属性値( op, "state1" ), getAbsoluteName2( op ) ) );
+        }
+
+        String name = xml.要素のID( op );
+        for( j = signal2.size()-1; j >= 0; j-- ){
+          StringCouple k = (StringCouple)( signal2.get(j) );
+          if( name.equals( k.String1 ) ){
+            method.add( k.String2 );
+            signal2.remove( k );
+          }
+        }
+        compile_javascript( op, clsbuf, funcbuf, initbuf, method );
+      }
+
+      list = xml.子要素のリスト( element, "state" );
+      for( i = 0; i < list.size(); i++ ){
+        compile_javascript( list.get(i), clsbuf, funcbuf, initbuf, statemethod );
+      }
+
+      initbuf.append( "_SINIT" + id +"();\n" );
+    }
+
+    else if( element_name.equals("pin") ){
+      String parent = getAbsoluteName2( xml.親要素( element ) );
+      String path = getAbsoluteName2( element );
+      String signature = getsignature( path );
+      boolean transition = xml.要素の名前( xml.親要素( element ) ).equals("aobject");
+      String buf = "function " + path + "{\n";
+
+      if(transition) buf = buf + "STATE2" + parent + " = STATE" + parent +";\n";
+      for( j = 0; j < signal.size(); j++ ){
+        buf = buf + getbase( (String)( signal.get(j) ) ) + "(" + signature + ");\n";
+      }
+      buf = buf + "}\n";
+      funcbuf.append( buf );
+    }
+
+    else if( element_name.equals("operation" ) ){
+      String parent = getAbsoluteName2( xml.親要素( element ) );
+      String path = getAbsoluteName2( element );
+      String base = getbase( path );
+      String outpin = xml.属性値( element, "outpintext" );
+      String signature = getsignature( outpin );
+      String code = xml.属性値( element, "codetext" );
+
+      boolean transition = xml.要素の名前( xml.親要素( element ) ).equals("aobject");
+      int inpinlinkcount = parseInt( xml.属性値( element, "inpinlinkcount" ) );
+      String buf = "function " + path + "{\n";
+      if( signal.size() > 0 ){
+        buf = buf + getdeclare( outpin );
+      }
+      if( transition && ( inpinlinkcount != 0 ) ){
+         buf = buf +  "if( STATE2" + parent + " != " +
+         xml.子要素( xml.親要素( element ), xml.属性値( element, "state1" ) ).hashCode()
+         + " )  return;\n";
+      }
+      buf = buf + code;
+      for( j = 0; j < signal.size(); j++ ){
+        buf = buf + getbase( (String)( signal.get(j) ) ) + "(" + signature + ");\n";
+      }
+      if(transition){
+        buf = buf + "\n/* "
+        + xml.属性値( xml.子要素( xml.親要素( element ), xml.属性値( element, "state2" ) ), "text" )
+        + " に遷移する */\n"
+		+ " "+ xml.属性値( element, "state2" ) + parent + "();\n";
+      }
+      buf = buf + "}\n";
+      funcbuf.append( buf );
+    }
+
+    else if( element_name.equals("state") ){
+      String parent = getAbsoluteName2( xml.親要素( element ) );
+      String base = getAbsoluteName2( element );
+      String buf = "\n/* " + xml.属性値( element, "text" ) + "*/\nfunction " + base + parent +"(){\n";
+      buf= buf + "STATE" + parent + "=" + element.hashCode() + ";\n";
+      for( j = signal.size()-1; j >= 0; j-- ){
+        StringCouple k = (StringCouple)( signal.get(j) );
+        if( k.String1.equals( comp_name ) ){
+          buf = buf + k.String2 +";\n";
+          signal.remove( k );
+        }
+      }
+      buf = buf + "}\n";
+      funcbuf.append( buf );
+    }
+
+    else{
+      reportError( "can\'t compile for " + element_name + "\n" );
+    }
+
+  }
+
+
   //１対の文字列(コンパイルで検索のときに使う)
   class StringCouple{
     String String1;
@@ -2458,6 +2749,7 @@ class App1{
                       new XFile("test.c"),
                       new XFile("test.r"),
                       new XFile("test"),
+                      new XFile("test.html"),
                     };
 
     ObjectLib =     new XFile[] {
@@ -2470,6 +2762,7 @@ class App1{
                       new XFile("ObjectLib_C"),
                       new XFile("ObjectLib_R"),
                       new XFile("Projects"),
+                      new XFile("ObjectLib_S"),
                     };
 
     CurrentDir   =  new XFile( "." );
@@ -2534,8 +2827,6 @@ class App1{
     // Objecteditorを初期化する
     public void initialise(){
     
-//Syetem.out.println("initialise");
-
       treetool     = new TreeTool( project );
       gui.display.setLeftComponent(treetool);
       treetool.validate();
@@ -2543,8 +2834,6 @@ class App1{
       mae_node = treetool.top;
       Login( treetool.top );
       if( filewindow != null ){
-		  
-//Syetem.out.println("modefy file window");
 		  
         boolean vis = filewindow.isVisible();
         FileWinx0 = filewindow.getLocation().x;
@@ -2555,7 +2844,6 @@ class App1{
         filewindow = new FileWindow();
         filewindow.setVisible( vis );
       }
-//Syetem.out.println("initialise end");
     }
 
     // 新しいpathに内容を変更する
@@ -2565,16 +2853,9 @@ class App1{
       // プロパティを更新する
       Object elem = nod.element;
 
-
-//Syetem.out.println("login");
-//Syetem.out.println("object name="+ xml.属性値( elem, "objectname" ) );
-
       while(true){
         Object p = xml.子要素(elem, "properties");
         if(p != null){
-
-//Syetem.out.println("exist properties");
-
           properties = p;
           break;
         }
@@ -2658,8 +2939,6 @@ class App1{
     public void Logout(){
       int i;
 
-//Syetem.out.println("logout");
-
       restoreProperty();// プロパティを現在の状態にあわせる
 
       MainWinx0 = gui.getLocation().x;
@@ -2697,10 +2976,7 @@ class App1{
         else if( comp[i] instanceof KJgroup )   ( (KJgroup)comp[i] ).Logout();
         else if( comp[i] instanceof ImgIcon )   ( (ImgIcon)comp[i] ).Logout();
       }
-      
-//Syetem.out.println("logout end");
-
- }
+    }
      
     //コンポーネントをすべて削除する
     public void removeallcomponents(){
@@ -2844,7 +3120,6 @@ class App1{
       }
 
       restoreProperty();
-//      properties_bak = null;
       Logout();
       Login( cnode );
     }
@@ -2873,7 +3148,6 @@ class App1{
           initialise();
         }
       }
-//Syetem.out.println("open end");
     }
 
 //  プロジェクトを貼り付ける
@@ -2896,7 +3170,6 @@ class App1{
     private int saveWithDialog(){
       Xnode cnode = node;
       restoreProperty();
-//      properties_bak = null;
       Logout();
       Login( cnode );
       String pname = xml.属性値( project, "objectname" );
@@ -2909,7 +3182,6 @@ class App1{
     private void save(){
       Xnode cnode = node;
       restoreProperty();
-//      properties_bak = null;
       Logout();
       Login( cnode );
       XFileFilter filter = new XFileFilter( ProjectFileMode );
@@ -2922,7 +3194,6 @@ class App1{
       if(retval == JFileChooser.APPROVE_OPTION) {
         cnode = node;
         restoreProperty();
-//        properties_bak = null;
         Logout();
         ProjectFile = new XFile( xchooser.getSelectedFile() );
         saveProject();
@@ -3001,7 +3272,6 @@ gui.buttonreset();
       if(command.equals("SAVEDIRECT")){
       Xnode cnode = node;
       restoreProperty();
-//      properties_bak = null;
       Logout();
       ProjectFile = new XFile( ProjectDir, xml.属性値( project, "objectname" ) + ".prj" );
       saveProject();;
@@ -3047,9 +3317,6 @@ gui.buttonreset();
 
       if(command.equals("COMPILE") ){
           if(compile_ready){
-			  
-//Syetem.out.println("compile start");
-			  
             messagewindow.clearText();
             messagewindow.setVisible(true);
             new Thread(new Runnable() {
@@ -3086,11 +3353,6 @@ System.gc();
 gui.buttonreset();
       }
 
-//      if(command.equals("OPTPIN")){
-//        treetool.optpin();
-//gui.buttonreset();
-//      }
-      
       if(command.equals("BACK")){
 gui.buttonreset();
         treetool.changeNode( mae_node );
@@ -3115,35 +3377,25 @@ gui.buttonreset();
         ApplicationType = mode0;
         newProject();
         syncProperty();
-
-//System.out.println("clear all1:ApplicationType="+ApplicationType);
-
         initialise();
-
         ApplicationType = mode0; // プロジェクト新規作成の際にApplicationTypeが書き換えられてしまうので
-//System.out.println("clear all2:ApplicationType="+ApplicationType);
 
         setlookandfeel();
         gui.resize();
         gui.name.setCaretPosition(0);
         gui.name.moveCaretPosition( gui.name.getText().length() );
         gui.name.requestFocus();
+        gui.setobjectname( xml.属性値( element, "objectname" ) );
       }
       else if( mode == -2 ){
         open();
       }
 System.gc();
-
-//System.out.println("clear all3:ApplicationType="+ApplicationType);
-
     }
 
 
     // マウスで位置データを与える
     public void mousePointed( int xp, int yp ){
-
-
-//System.out.println("mode="+mode);
 
       // create xobject
       if( mode.equals("CRE_XOBJ")){
@@ -3240,16 +3492,10 @@ gui.buttonreset();
 
       // プロジェクトを貼り付ける
       else if( mode.equals("PASTE_PROJ")){
-
-//System.out.println("paste project: ApplicationType="+ApplicationType);
-
         if(ApplicationType == 8){
           paste_project(xp, yp);
         }
         else{
-
-//System.out.println("dailog1.age");
-
           dialog1.age("マルチ言語アプリケーション専用です");
 	    }
         mode = "NOP";
@@ -9215,6 +9461,20 @@ gui.buttonreset();
     TextButton     runcommand8;
     JPanel         properties8;
 
+    JLabel         Lcompilecommand9;
+    TextButton     compilecommand9;
+    JLabel         Lruncommand9;
+    TextButton     runcommand9;
+    JLabel         Lguidesignercommand9;
+    TextButton     guidesignercommand9;
+    JLabel         Limportfiles9;
+    TextButton      importfiles9;
+    JLabel         Lprogramstartupcode9;
+    TextButton      programstartupcode9;
+    JLabel         Lnativehelpcommand9;
+    TextButton     nativehelpcommand9;
+    JPanel         properties9;
+
     JTabbedPane    tproperties;
     
     JButton        yesbutton;
@@ -9223,7 +9483,7 @@ gui.buttonreset();
     JButton        rstbutton;
 
     JPanel         selectbuttons;
-    JScrollPane    sx,s02,s12,s22,s32,s42,s52,s62,s72,s82;
+    JScrollPane    sx,s02,s12,s22,s32,s42,s52,s62,s72,s82,s92;
 
     PropertyWindow(){
 
@@ -9359,6 +9619,19 @@ gui.buttonreset();
 
       Lruncommand8         = new JLabel("作成したプログラムを起動するコマンド");
       runcommand8          = new TextButton(RunCommand[8]);
+
+      Lcompilecommand9     = new JLabel("コンパイラを起動するコマンド");
+      compilecommand9      = new TextButton(CompileCommand[6]);
+      Lruncommand9         = new JLabel("作成したプログラムを起動するコマンド");
+      runcommand9          = new TextButton(RunCommand[6]);
+      Lguidesignercommand9 = new JLabel("GUIデザイナを起動するコマンド");
+      guidesignercommand9  = new TextButton(GUIDesignerCommand[6]);
+      Limportfiles9        = new JLabel("インクルード宣言など");
+      importfiles9         = new TextButton(ImportFiles[6]);
+      Lprogramstartupcode9 = new JLabel("スタートアップコード");
+      programstartupcode9  = new TextButton(ProgramStartupCode[6]);
+      Lnativehelpcommand9  = new JLabel("Javascriptのヘルプファイルを開くコマンド");
+      nativehelpcommand9   = new TextButton(NativeHelpCommand[6]);
 
       properties = new JPanel();
       properties.setLayout(new BoxLayout( properties, BoxLayout.Y_AXIS) );
@@ -9532,6 +9805,23 @@ gui.buttonreset();
       properties8.add( runcommand8);
       s82 = new JScrollPane(properties8);
 
+      properties9 = new JPanel();
+      properties9.setLayout(new BoxLayout( properties9, BoxLayout.Y_AXIS) );
+      properties9.add( Lcompilecommand9);
+      properties9.add( compilecommand9);
+      properties9.add( Lruncommand9);
+      properties9.add( runcommand9);
+      properties9.add( Lguidesignercommand9);
+      properties9.add( guidesignercommand9);
+      properties9.add(Lnativehelpcommand9);
+      properties9.add(nativehelpcommand9);
+      properties9.add( Limportfiles9);
+      properties9.add( importfiles9);
+      properties9.add( Lprogramstartupcode9);
+      properties9.add( programstartupcode9);
+      s92 = new JScrollPane(properties9);
+//      s92.setPreferredSize(new Dimension(600,200) );
+
       yesbutton     = new JButton("OK");;
       yesbutton.setActionCommand("YES");
       yesbutton.addActionListener(this);
@@ -9561,6 +9851,7 @@ gui.buttonreset();
       tproperties.addTab("C言語", s62);
       tproperties.addTab("oregengo-R", s72);
       tproperties.addTab("マルチ言語", s82);
+      tproperties.addTab("Javascript", s92);
       getContentPane().add(tproperties, BorderLayout.CENTER);
       getContentPane().add(selectbuttons, BorderLayout.SOUTH);
       pack();
@@ -9652,6 +9943,13 @@ gui.buttonreset();
 
         RunCommand[8] = runcommand8.get_text();
 
+        CompileCommand[9] = compilecommand9.get_text();
+        RunCommand[9] = runcommand9.get_text();
+        GUIDesignerCommand[9] = guidesignercommand9.get_text();
+        ImportFiles[9] = importfiles9.get_text();
+        ProgramStartupCode[9] = programstartupcode9.get_text();
+        NativeHelpCommand[9] = nativehelpcommand9.get_text();
+
         restoreProperty();
         setlookandfeel();
 
@@ -9737,6 +10035,13 @@ gui.buttonreset();
       nativehelpcommand7.set_text(NativeHelpCommand[7]);
 
       runcommand8.set_text(RunCommand[8]);
+
+      compilecommand6.set_text(CompileCommand[9]);
+      runcommand6.set_text(RunCommand[9]);
+      guidesignercommand6.set_text(GUIDesignerCommand[9]);
+      importfiles6.set_text(ImportFiles[9]);
+      programstartupcode6.set_text(ProgramStartupCode[9]);
+      nativehelpcommand6.set_text(NativeHelpCommand[9]);
 
     }
 
@@ -11450,6 +11755,7 @@ gui.buttonreset();
     JRadioButton creclang;
     JRadioButton creoregengo;
     JRadioButton cremultigengo;
+    JRadioButton crejavascript;
     JRadioButton fileopen;
 
     InitialDialog(){
@@ -11465,6 +11771,7 @@ gui.buttonreset();
       creclang = new JRadioButton("C言語アプリケーションを作成");
       creoregengo = new JRadioButton("oregengo-Rアプリケーションを作成");
       cremultigengo = new JRadioButton("マルチ言語アプリケーションを作成");
+      crejavascript = new JRadioButton("Javascriptアプリケーションを作成");
       fileopen = new JRadioButton("プロジェクトファイルを開く");
       creapplication.setSelected(true);
       creapplet.setSelected(false);
@@ -11475,6 +11782,7 @@ gui.buttonreset();
       creclang.setSelected(false);
       creoregengo.setSelected(false);
       cremultigengo.setSelected(false);
+      crejavascript.setSelected(false);
       fileopen.setSelected(false);
       ButtonGroup g = new ButtonGroup();
       g.add(creapplication);
@@ -11486,6 +11794,7 @@ gui.buttonreset();
       g.add(creclang);
       g.add(creoregengo);
       g.add(cremultigengo);
+      g.add(crejavascript);
       g.add(fileopen);
       creapplication.setSelected( ApplicationType == 0 );
       creapplet.setSelected( ApplicationType == 1 );
@@ -11496,6 +11805,7 @@ gui.buttonreset();
       creclang.setSelected( ApplicationType == 6 );
       creoregengo.setSelected( ApplicationType == 7 );
       cremultigengo.setSelected( ApplicationType == 8 );
+      crejavascript.setSelected( ApplicationType == 9 );
       JPanel p1 = new JPanel( );
       p1.setLayout( new BoxLayout( p1, BoxLayout.Y_AXIS ) ); 
       p1.add( creapplication );
@@ -11507,6 +11817,7 @@ gui.buttonreset();
       p1.add( creclang );
       p1.add( creoregengo );
       p1.add( cremultigengo );
+      p1.add( crejavascript );
       p1.add( fileopen );
       JButton ok = new JButton( "OK" );
       JButton can  = new JButton( "キャンセル"  );
@@ -11537,6 +11848,7 @@ gui.buttonreset();
       creclang.setSelected( ApplicationType == 6 );
       creoregengo.setSelected( ApplicationType == 7 );
       cremultigengo.setSelected( ApplicationType == 8 );
+      crejavascript.setSelected( ApplicationType == 9 );
       fileopen.setSelected(false);
 
       // ウィンドウの中央をもとめる
@@ -11568,6 +11880,7 @@ gui.buttonreset();
         else if( creclang.isSelected() ) mode = 6;
         else if( creoregengo.isSelected() ) mode = 7;
         else if( cremultigengo.isSelected() ) mode = 8;
+        else if( crejavascript.isSelected() ) mode = 9;
         else if( fileopen.isSelected() ) mode = -2;
       } 
       else if( e.getActionCommand().equals( "CAN" ) )mode = -1;
@@ -12182,7 +12495,6 @@ class Nxml{
                           return( ( (NxmlAttribute)( c.get(i) ) ).value );
                         }
                       }
-//System.out.println("属性名:"+属性名+"はnullです");
                       return ( null );
                     }
                     return( null );

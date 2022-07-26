@@ -28,7 +28,7 @@
 <ToolBarVisible>1</ToolBarVisible>
 <ViewSourceAtCompile>0</ViewSourceAtCompile>
 <NoSourceCreate>0</NoSourceCreate>
-<JavaEditCommand>leafpad</JavaEditCommand>
+<JavaEditCommand>geany</JavaEditCommand>
 <JavaViewCommand></JavaViewCommand>
 <HelpCommand>xdg-open ./help/manual.html</HelpCommand>
 <ApplicationType>0</ApplicationType>
@@ -66,7 +66,7 @@ class Starter{
 </ImportFiles0>
 <ProgramStartupCode0> String[] ARGS;
 </ProgramStartupCode0>
-<NativeHelpCommand0></NativeHelpCommand0>
+<NativeHelpCommand0>                                        </NativeHelpCommand0>
 <CompileCommand1></CompileCommand1>
 <RunCommand1></RunCommand1>
 <GUIDesignerCommand1>java -jar guidsin.jar -applet</GUIDesignerCommand1>
@@ -219,41 +219,13 @@ end
 </ProgramStartupCode5>
 <NativeHelpCommand5></NativeHelpCommand5>
 <NoOptimizePin>0</NoOptimizePin>
-<CompileCommand6>./compile_c</CompileCommand6>
-<RunCommand6>./run_c</RunCommand6>
-<GUIDesignerCommand6></GUIDesignerCommand6>
-<ImportFiles6>#include &lt;setjmp.h&gt;
-#include &lt;pthread.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;stdarg.h&gt;
-#include &lt;string.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;sys/stat.h&gt;
-#include &lt;fcntl.h&gt;
-#include &lt;math.h&gt;
-#include &lt;sys/socket.h&gt;
-#include &lt;netinet/in.h&gt;
-#include &lt;arpa/inet.h&gt;
-#include &lt;netdb.h&gt;
-
-#include &lt;X11/Xlib.h&gt;
-#include &lt;X11/Xutil.h&gt;
-#include &lt;X11/Xlocale.h&gt; /* ロケール用ヘッダーファイル */
-#include &lt;X11/xpm.h&gt;
-#include &lt;sys/time.h&gt;
-#include &lt;signal.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;termios.h&gt;
-#include &lt;errno.h&gt;
-</ImportFiles6>
-<ProgramStartupCode6>int ARGC; char** ARGV;
-int main( int argc, char** argv ){
-  ARGC=argc;
-  ARGV=argv;
-  _PSTART();
-}
-</ProgramStartupCode6>
+<CompileCommand6>
+</CompileCommand6>
+<RunCommand6></RunCommand6>
+<GUIDesignerCommand6>java -jar guidsin.jar -javascript
+</GUIDesignerCommand6>
+<ImportFiles6></ImportFiles6>
+<ProgramStartupCode6></ProgramStartupCode6>
 <NativeHelpCommand6></NativeHelpCommand6>
 <IDF_LocalVariable5>\</IDF_LocalVariable5>
 <IDF_LocalVariable7>\</IDF_LocalVariable7>
@@ -263,4 +235,15 @@ int main( int argc, char** argv ){
 <ImportFiles7></ImportFiles7>
 <ProgramStartupCode7></ProgramStartupCode7>
 <NativeHelpCommand7></NativeHelpCommand7>
+<OpenCompileDialog>0</OpenCompileDialog>
+<ScriptExecCommand>bash</ScriptExecCommand>
+<RunCommand8></RunCommand8>
+<CompileCommand9>
+</CompileCommand9>
+<RunCommand9></RunCommand9>
+<GUIDesignerCommand9>java -jat guidsin.jar -javascript
+</GUIDesignerCommand9>
+<ImportFiles9></ImportFiles9>
+<ProgramStartupCode9></ProgramStartupCode9>
+<NativeHelpCommand9></NativeHelpCommand9>
 </プロパティ>

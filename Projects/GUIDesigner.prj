@@ -6,13 +6,13 @@
 <y0>0</y0>
 <width>200</width>
 <height>100</height>
-<ID_maker>2</ID_maker>
+<ID_maker>3</ID_maker>
 <objectname>GUIDesigner</objectname>
 <description>新規のアプリケーション</description>
 <codeclip>
 <ID>_CSTART</ID>
-<x0>10</x0>
-<y0>10</y0>
+<x0>18</x0>
+<y0>42</y0>
 <width>80</width>
 <height>24</height>
 <codetext> String[] ARGS;
@@ -20,8 +20,8 @@
 </codeclip>
 <pin>
 <ID>_PSTART</ID>
-<x0>10</x0>
-<y0>40</y0>
+<x0>18</x0>
+<y0>72</y0>
 <width>55</width>
 <height>24</height>
 <text>Start()</text>
@@ -30,12 +30,12 @@
 </pin>
 <xobject>
 <ID>_X0</ID>
-<x0>141</x0>
-<y0>40</y0>
+<x0>158</x0>
+<y0>72</y0>
 <width>148</width>
 <height>60</height>
 <ID_maker>146</ID_maker>
-<objectname>GUIDesigner11</objectname>
+<objectname>GUIDesigner12</objectname>
 <description>ウィンドウにGUIコンポーネントを貼り付けてレイアウトを決めるためのツール
 レイアウトが決まったらObjectEditor用のファイルを出力する
 
@@ -118,10 +118,11 @@ AppTyp = 0;
 
 
 if(ARGS.length != 0 ){
-  if( ARGS[0].equals( &quot;-java&quot; ) )    AppTyp=0;
-  if( ARGS[0].equals( &quot;-applet&quot; ) )  AppTyp=1;
-  if( ARGS[0].equals( &quot;-cpp&quot; ) )     AppTyp=2;
-  if( ARGS[0].equals( &quot;-android&quot; ) ) AppTyp=3;
+  if( ARGS[0].equals( &quot;-java&quot; ) )       AppTyp=0;
+  if( ARGS[0].equals( &quot;-applet&quot; ) )     AppTyp=1;
+  if( ARGS[0].equals( &quot;-cpp&quot; ) )        AppTyp=2;
+  if( ARGS[0].equals( &quot;-android&quot; ) )    AppTyp=3;
+  if( ARGS[0].equals( &quot;-javascript&quot; ) ) AppTyp=4;
 }
 
 // Look&amp;FeelをMetalに変更する
@@ -64739,7 +64740,7 @@ class XJLabel extends JLabel{    //イメージファイル名を持つJLabel
  boolean is_opaque=true;
  boolean print_created_pin=true;
  boolean print_paint_pin=true;
- String super_class[] = {&quot;JLabel&quot;,&quot;JLabel&quot;,&quot;ELabel&quot;,&quot;TextView&quot;};
+ String super_class[] = {&quot;JLabel&quot;,&quot;JLabel&quot;,&quot;ELabel&quot;,&quot;TextView&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;};
 }
 
 class XJButton extends JButton{//イメージファイル名を持つJButton
@@ -64747,42 +64748,42 @@ class XJButton extends JButton{//イメージファイル名を持つJButton
  boolean is_opaque=true;
  boolean print_created_pin=true;
  boolean print_clicked_pin=true;
- String super_class[] = {&quot;JButton&quot;,&quot;JButton&quot;,&quot;EButton&quot;,&quot;Button&quot;};
+ String super_class[] = {&quot;JButton&quot;,&quot;JButton&quot;,&quot;EButton&quot;,&quot;Button&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;};
 }
 
 class XJCheckBox extends JCheckBox{
  boolean is_opaque=true;
  boolean print_created_pin=true;
  boolean print_check_pin=true;
- String super_class[] = {&quot;JCheckBox&quot;,&quot;JCheckBox&quot;,&quot;ECheckBox&quot;,&quot;CheckBox&quot;};
+ String super_class[] = {&quot;JCheckBox&quot;,&quot;JCheckBox&quot;,&quot;ECheckBox&quot;,&quot;CheckBox&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;};
 }
 
 class XJTextField extends JTextField{
  boolean is_opaque=true;
  boolean print_created_pin=true;
  boolean print_input_pin=true;
- String super_class[] = {&quot;JTextField&quot;,&quot;JTextField&quot;,&quot;ETextField&quot;,&quot;EditText&quot;};
+ String super_class[] = {&quot;JTextField&quot;,&quot;JTextField&quot;,&quot;ETextField&quot;,&quot;EditText&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;};
 }
 
 class XJTextArea extends JTextArea{
  boolean is_opaque=true;
  boolean is_scrollable=true;
  boolean print_created_pin=true;
- String super_class[] = {&quot;JTextArea&quot;,&quot;JTextArea&quot;,&quot;ETextArea&quot;,&quot;EditText&quot;};
+ String super_class[] = {&quot;JTextArea&quot;,&quot;JTextArea&quot;,&quot;ETextArea&quot;,&quot;EditText&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;};
 }
 
 class XJHSlider extends JSlider{
  boolean is_opaque=true;
  boolean print_created_pin=true;
  boolean print_changed_pin=true;
- String super_class[] = {&quot;JSlider&quot;,&quot;JSlider&quot;,&quot;EHScrollBar&quot;,&quot;SeekBar&quot;};
+ String super_class[] = {&quot;JSlider&quot;,&quot;JSlider&quot;,&quot;EHScrollBar&quot;,&quot;SeekBar&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;};
 }
 
 class XJVSlider extends JSlider{
  boolean is_opaque=true;
  boolean print_created_pin=true;
  boolean print_changed_pin=true;
- String super_class[] = {&quot;JSlider&quot;,&quot;JSlider&quot;,&quot;EVScrollBar&quot;,&quot;VSeekBar&quot;};
+ String super_class[] = {&quot;JSlider&quot;,&quot;JSlider&quot;,&quot;EVScrollBar&quot;,&quot;VSeekBar&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;};
 }
 
 class XJList extends JList{
@@ -64790,7 +64791,7 @@ class XJList extends JList{
  boolean is_scrollable=true;
  boolean print_created_pin=true;
  boolean print_selected_pin=true;
- String super_class[] = {&quot;JList&quot;,&quot;JList&quot;,&quot;EList&quot;,&quot;ListView&quot;};
+ String super_class[] = {&quot;JList&quot;,&quot;JList&quot;,&quot;EList&quot;,&quot;ListView&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;};
 }
 </codetext>
 </codeclip>
@@ -65271,7 +65272,7 @@ f=window;
 <y0>322</y0>
 <width>163</width>
 <height>70</height>
-<ID_maker>47</ID_maker>
+<ID_maker>49</ID_maker>
 <objectname>Creater</objectname>
 <description>ObjectEditor用のファイルをつくる</description>
 <action>
@@ -65401,20 +65402,20 @@ f=window;
 </state>
 <state>
 <ID>_S11</ID>
-<x0>351</x0>
-<y0>184</y0>
+<x0>342</x0>
+<y0>210</y0>
 <width>70</width>
 <height>40</height>
-<text>     状態１</text>
+<text>    状態１</text>
 <isinitstate>0</isinitstate>
 </state>
 <state>
 <ID>_S18</ID>
-<x0>351</x0>
-<y0>386</y0>
+<x0>354</x0>
+<y0>379</y0>
 <width>70</width>
 <height>40</height>
-<text>      状態2</text>
+<text>    状態2</text>
 <isinitstate>0</isinitstate>
 </state>
 <operation>
@@ -65423,10 +65424,10 @@ f=window;
 <state2>_SINIT</state2>
 <x0>26</x0>
 <y0>287</y0>
-<width>143</width>
-<height>69</height>
-<inconnectx0>111</inconnectx0>
-<inconnecty0>51</inconnecty0>
+<width>160</width>
+<height>51</height>
+<inconnectx0>100</inconnectx0>
+<inconnecty0>34</inconnecty0>
 <outconnectx0>0</outconnectx0>
 <outconnecty0>0</outconnecty0>
 <inpintext>in()</inpintext>
@@ -65442,6 +65443,10 @@ f=window;
 <inpinlinkcount>0</inpinlinkcount>
 <description></description>
 <codetext>// メニューをセーブする
+
+
+
+
 JMenuBar メニューバー = ウィンドウ.getJMenuBar();
 if( メニューバー != null ){
   int i;
@@ -65470,11 +65475,11 @@ if( メニューバー != null ){
 </codeclip>
 <state>
 <ID>_S26</ID>
-<x0>134</x0>
-<y0>387</y0>
+<x0>136</x0>
+<y0>378</y0>
 <width>70</width>
 <height>40</height>
-<text>      状態3</text>
+<text>    状態3</text>
 <isinitstate>0</isinitstate>
 </state>
 <codeclip>
@@ -65575,14 +65580,14 @@ if( メニューバー != null ){
 <ID>_O40</ID>
 <state1>_S11</state1>
 <state2>_S18</state2>
-<x0>478</x0>
-<y0>150</y0>
+<x0>482</x0>
+<y0>157</y0>
 <width>195</width>
 <height>53</height>
 <inconnectx0>0</inconnectx0>
-<inconnecty0>20</inconnecty0>
-<outconnectx0>0</outconnectx0>
-<outconnecty0>18</outconnecty0>
+<inconnecty0>15</inconnecty0>
+<outconnectx0>17</outconnectx0>
+<outconnecty0>38</outconnecty0>
 <inpintext>in()</inpintext>
 <inpinx0>74</inpinx0>
 <inpiny0>49</inpiny0>
@@ -65597,7 +65602,8 @@ if( メニューバー != null ){
 <description></description>
 <codetext>/* 条件: AppTyp==cpp
 CPP用ファイルを生成する
- */
+*/
+ 
  if( AppTyp!=2 ) return;
 String xml;
 int i = 0;;
@@ -65924,13 +65930,13 @@ f1.Xappend( xml );
 <state1>_S11</state1>
 <state2>_S18</state2>
 <x0>481</x0>
-<y0>262</y0>
+<y0>228</y0>
 <width>197</width>
 <height>51</height>
 <inconnectx0>0</inconnectx0>
-<inconnecty0>16</inconnecty0>
-<outconnectx0>0</outconnectx0>
-<outconnecty0>18</outconnecty0>
+<inconnecty0>8</inconnecty0>
+<outconnectx0>10</outconnectx0>
+<outconnecty0>34</outconnecty0>
 <inpintext>in()</inpintext>
 <inpinx0>74</inpinx0>
 <inpiny0>49</inpiny0>
@@ -66356,14 +66362,14 @@ f1.Xappend( xml );
 <ID>_O42</ID>
 <state1>_S11</state1>
 <state2>_S18</state2>
-<x0>486</x0>
-<y0>373</y0>
+<x0>482</x0>
+<y0>298</y0>
 <width>202</width>
 <height>55</height>
-<inconnectx0>0</inconnectx0>
-<inconnecty0>14</inconnecty0>
+<inconnectx0>2</inconnectx0>
+<inconnecty0>4</inconnecty0>
 <outconnectx0>0</outconnectx0>
-<outconnecty0>30</outconnecty0>
+<outconnecty0>38</outconnecty0>
 <inpintext>in()</inpintext>
 <inpinx0>74</inpinx0>
 <inpiny0>49</inpiny0>
@@ -66379,6 +66385,7 @@ f1.Xappend( xml );
 <codetext>/* 条件: AppTyp==applet
 アプレット用ファイルを生成する
  */
+
  if( AppTyp!=1 ) return;
 String xml;
 int i = 0;;
@@ -66834,12 +66841,12 @@ f1.Xappend( xml );
 <ID>_O45</ID>
 <state1>_S11</state1>
 <state2>_S18</state2>
-<x0>488</x0>
-<y0>463</y0>
-<width>214</width>
-<height>54</height>
+<x0>482</x0>
+<y0>366</y0>
+<width>205</width>
+<height>55</height>
 <inconnectx0>0</inconnectx0>
-<inconnecty0>30</inconnecty0>
+<inconnecty0>5</inconnecty0>
 <outconnectx0>0</outconnectx0>
 <outconnecty0>30</outconnecty0>
 <inpintext>in()</inpintext>
@@ -66857,6 +66864,7 @@ f1.Xappend( xml );
 <codetext>/* 条件: AppTyp==android
 android用ファイルを生成する
  */
+
  if( AppTyp!=3 ) return;
 String xml;
 int i = 0;;
@@ -67243,10 +67251,10 @@ f1.Xappend( xml );
 <state2>_S26</state2>
 <x0>199</x0>
 <y0>287</y0>
-<width>155</width>
-<height>63</height>
-<inconnectx0>132</inconnectx0>
-<inconnecty0>42</inconnecty0>
+<width>157</width>
+<height>61</height>
+<inconnectx0>104</inconnectx0>
+<inconnecty0>51</inconnecty0>
 <outconnectx0>0</outconnectx0>
 <outconnecty0>45</outconnecty0>
 <inpintext>in()</inpintext>
@@ -67263,6 +67271,8 @@ f1.Xappend( xml );
 <description></description>
 <codetext>// エディット画面を
 // セーブする
+
+
 int i, j;
 Container cnt = ウィンドウ.getContentPane();
 
@@ -67492,6 +67502,511 @@ for( i=cnt.getComponentCount()-1,j=0;i&gt;=0;i--){
 }
 </codetext>
 </operation>
+<operation>
+<ID>_O47</ID>
+<state1>_S11</state1>
+<state2>_S18</state2>
+<x0>483</x0>
+<y0>448</y0>
+<width>211</width>
+<height>58</height>
+<inconnectx0>2</inconnectx0>
+<inconnecty0>2</inconnecty0>
+<outconnectx0>0</outconnectx0>
+<outconnecty0>3</outconnecty0>
+<inpintext>in()</inpintext>
+<inpinx0>74</inpinx0>
+<inpiny0>49</inpiny0>
+<inpinwidth>71</inpinwidth>
+<inpinheight>23</inpinheight>
+<outpintext>out()</outpintext>
+<outpinx0>90</outpinx0>
+<outpiny0>40</outpiny0>
+<outpinwidth>40</outpinwidth>
+<outpinheight>20</outpinheight>
+<inpinlinkcount>0</inpinlinkcount>
+<description></description>
+<codetext>/* 条件: AppTyp==javascript
+javascript用ファイルを生成する
+ */
+
+ if( AppTyp!=4 ) return;
+
+
+
+String xml;
+int i = 0;;
+int j = 0;
+
+double scale = Double.parseDouble(xxscale.getText());
+
+Container cnt =ウィンドウ.getContentPane();
+int xxwid = cnt.getWidth();
+int xxhei = cnt.getHeight();
+
+StringBuffer guideclare = new StringBuffer(&quot;&quot;);
+StringBuffer guiconstruct = new StringBuffer(&quot;function Start0(){\n&quot;);
+
+Color col = ((Component)cnt).getBackground();
+int cv = col.getRed()*65536+col.getGreen()*256+col.getBlue();
+
+guideclare.append(&quot;//html&lt;style&gt;\n&quot;);
+guideclare.append(&quot;//html body{\n&quot;);
+guideclare.append(&quot;//html background: #&quot;+hex6(cv)+&quot;;\n&quot;);
+guideclare.append(&quot;//html}\n&quot;);
+guideclare.append(&quot;//html&lt;/style&gt;\n&quot;);
+
+
+xml=           &quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;Shift_JIS\&quot; ?&gt;\n&lt;!-- なんちゃってXML version 0.1( ObjectEditor専用 ) --&gt;\n&quot;;
+xml=xml+&quot;&lt;aobject&gt;\n&lt;ID&gt;GUI&lt;/ID&gt;&lt;x0&gt;100&lt;/x0&gt;&lt;y0&gt;100&lt;/y0&gt;&lt;width&gt;280&lt;/width&gt;&lt;objectname&gt;GUI&lt;/objectname&gt;&lt;description&gt;GUIオブジェクト\n&lt;/description&gt;\n&quot;;
+xml=xml+&quot;&lt;state&gt;&lt;ID&gt;_SINIT&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;40&lt;/y0&gt;&lt;width&gt;70&lt;/width&gt;&lt;height&gt;40&lt;/height&gt;&lt;text&gt;  InitState&lt;/text&gt;&lt;isinitstate&gt;1&lt;/isinitstate&gt;&lt;/state&gt;\n&quot;;
+xml=xml+&quot;&lt;pin&gt;&lt;ID&gt;_Pstart&lt;/ID&gt;&lt;x0&gt;400&lt;/x0&gt;&lt;y0&gt;100&lt;/y0&gt;&lt;width&gt;80&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;Start()&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;36&lt;/py&gt;&lt;/pin&gt;\n&quot;;
+xml=xml+&quot;&lt;action&gt;&lt;ID&gt;_Astart&lt;/ID&gt;&lt;comp1name&gt;_Pstart&lt;/comp1name&gt;&lt;comp2name&gt;_Ocreate&lt;/comp2name&gt;&lt;/action&gt;\n&quot;;
+xml=xml+&quot;&lt;operation&gt;&lt;ID&gt;_Ocreate&lt;/ID&gt;&lt;state1&gt;_SINIT&lt;/state1&gt;&lt;state2&gt;_SINIT&lt;/state2&gt;&lt;x0&gt;220&lt;/x0&gt;&lt;y0&gt;40&lt;/y0&gt;&lt;width&gt;130&lt;/width&gt;&lt;height&gt;64&lt;/height&gt;&quot;;
+xml=xml+&quot;&lt;inconnectx0&gt;0&lt;/inconnectx0&gt;&lt;inconnecty0&gt;30&lt;/inconnecty0&gt;&lt;outconnectx0&gt;0&lt;/outconnectx0&gt;&lt;outconnecty0&gt;30&lt;/outconnecty0&gt;&quot;;
+xml=xml+&quot;&lt;inpintext&gt;in0()&lt;/inpintext&gt;&lt;inpinx0&gt;90&lt;/inpinx0&gt;&lt;inpiny0&gt;43&lt;/inpiny0&gt;&lt;inpinwidth&gt;40&lt;/inpinwidth&gt;&lt;inpinheight&gt;20&lt;/inpinheight&gt;&quot;;
+xml=xml+&quot;&lt;outpintext&gt;out()&lt;/outpintext&gt;&lt;outpinx0&gt;90&lt;/outpinx0&gt;&lt;outpiny0&gt;40&lt;/outpiny0&gt;&lt;outpinwidth&gt;40&lt;/outpinwidth&gt;&lt;outpinheight&gt;20&lt;/outpinheight&gt;&quot;;
+xml=xml+&quot;&lt;inpinlinkcount&gt;1&lt;/inpinlinkcount&gt;&lt;description&gt;GUIを作成する\n&lt;/description&gt;&lt;codetext&gt;Start0();\n\n&lt;/codetext&gt;&lt;/operation&gt;\n&quot;;
+
+
+for( i=cnt.getComponentCount()-1;i&gt;=0;i--){
+
+  if( cnt.getComponent(i) instanceof JLabel ){
+  
+    XJLabel cmp = (XJLabel)( cnt.getComponent(i) );    
+    String name = cmp.getName();
+    if( name == null || name.equals(&quot;&quot;) ) name = &quot;LBL&quot;+ i;
+    Color  fcol = cmp.getForeground();
+    int fv = fcol.getRed()*65536+fcol.getGreen()*256+fcol.getBlue();
+    Color  bcol = cmp.getBackground();
+    int bv = bcol.getRed()*65536+bcol.getGreen()*256+bcol.getBlue();
+    Font f = cmp.getFont();
+    int fs = f.getSize();
+    String txt = cmp.getText();
+    int x0 = cmp.getX();
+    int y0 = cmp.getY();
+    int wid = cmp.getWidth();
+    int hei = cmp.getHeight();
+    int ax = cmp.getHorizontalAlignment();
+    String sax=&quot;&quot;;
+    if( ax == javax.swing.SwingConstants.LEFT )   sax = &quot;left;&quot;;
+    if( ax == javax.swing.SwingConstants.CENTER ) sax = &quot;center;&quot;;
+    if( ax == javax.swing.SwingConstants.RIGHT )  sax = &quot;right;&quot;;
+    int ay = cmp.getVerticalAlignment();
+    String say=&quot;&quot;;
+    if( ay == javax.swing.SwingConstants.TOP )    say = &quot;top;&quot;;
+    if( ay == javax.swing.SwingConstants.CENTER ) say = &quot;middle;&quot;; 
+    if( ay == javax.swing.SwingConstants.BOTTOM ) say = &quot;bottom;&quot;;
+
+    guideclare.append(&quot;//html&lt;div id=\&quot;&quot;+name+&quot;\&quot; class=\&quot;css_&quot;+name+&quot;\&quot;&gt;\n&quot;);
+    guideclare.append(&quot;//html&quot;+txt+&quot;\n&quot;);
+    guideclare.append(&quot;//html&lt;/div&gt;\n&quot;);
+    guideclare.append(&quot;//html&lt;style&gt;\n&quot;);
+    guideclare.append(&quot;//html.css_&quot;+name+&quot;{\n&quot;);
+    guideclare.append(&quot;//html position: absolute;\n&quot;);
+    guideclare.append(&quot;//html left: &quot;+x0+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html top: &quot;+y0+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html width: &quot;+wid+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html height: &quot;+hei+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html background: #&quot;+hex6(bv)+&quot;;\n&quot;);
+    guideclare.append(&quot;//html color: #&quot;+hex6(fv)+&quot;;\n&quot;);
+    guideclare.append(&quot;//html font-size: &quot;+fs+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html text-align: &quot;+sax+&quot;;\n&quot;);
+    guideclare.append(&quot;//html vertical-align: &quot;+say+&quot;;\n&quot;);
+    guideclare.append(&quot;//html}\n&quot;);
+    guideclare.append(&quot;//html&lt;/style&gt;\n&quot;);
+    guideclare.append(&quot;var v&quot;+name+&quot;=document.getElementById(&apos;&quot;+name+&quot;&apos;);\n&quot;);
+
+    if(cmp.print_created_pin){
+      guiconstruct.append( &quot; &quot; + name + &quot;_created(v&quot;+name+&quot;);\n&quot; );
+      xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_P&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_created(t)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
+    }
+
+    if(cmp.print_paint_pin){
+    }
+
+  }
+
+  if( cnt.getComponent(i) instanceof JButton ){
+    XJButton cmp = (XJButton)( cnt.getComponent(i) );    
+    String name = cmp.getName();
+    if( name == null || name.equals(&quot;&quot;) ) name = &quot;BTN&quot;+ i;
+    Color  fcol = cmp.getForeground();
+    int fv = fcol.getRed()*65536+fcol.getGreen()*256+fcol.getBlue();
+    Color  bcol = cmp.getBackground();
+    int bv = bcol.getRed()*65536+bcol.getGreen()*256+bcol.getBlue();
+    Font f = cmp.getFont();
+    int fs = f.getSize();
+    String txt = cmp.getText();
+    int x0 = cmp.getX();
+    int y0 = cmp.getY();
+    int wid = cmp.getWidth();
+    int hei = cmp.getHeight();
+    int ax = cmp.getHorizontalAlignment();
+    String sax=&quot;&quot;;
+    if( ax == javax.swing.SwingConstants.LEFT )   sax = &quot;left;&quot;;
+    if( ax == javax.swing.SwingConstants.CENTER ) sax = &quot;center;&quot;;
+    if( ax == javax.swing.SwingConstants.RIGHT )  sax = &quot;right;&quot;;
+    int ay = cmp.getVerticalAlignment();
+    String say=&quot;&quot;;
+    if( ay == javax.swing.SwingConstants.TOP )    say = &quot;top;&quot;;
+    if( ay == javax.swing.SwingConstants.CENTER ) say = &quot;middle;&quot;; 
+    if( ay == javax.swing.SwingConstants.BOTTOM ) say = &quot;bottom;&quot;;
+
+    guideclare.append(&quot;//html&lt;input type=\&quot;button\&quot; id=\&quot;&quot;+name+&quot;\&quot; value=\&quot;&quot;+txt+&quot;\&quot; class=\&quot;css_&quot;+name+&quot;\&quot;&gt;\n&quot;);
+    guideclare.append(&quot;//html&lt;style&gt;\n&quot;);
+    guideclare.append(&quot;//html.css_&quot;+name+&quot;{\n&quot;);
+    guideclare.append(&quot;//html position: absolute;\n&quot;);
+    guideclare.append(&quot;//html left: &quot;+x0+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html top: &quot;+y0+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html width: &quot;+wid+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html height: &quot;+hei+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html background: #&quot;+hex6(bv)+&quot;;\n&quot;);
+    guideclare.append(&quot;//html color: #&quot;+hex6(fv)+&quot;;\n&quot;);
+    guideclare.append(&quot;//html font-size: &quot;+fs+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html text-align: &quot;+sax+&quot;;\n&quot;);
+    guideclare.append(&quot;//html vertical-align: &quot;+say+&quot;;\n&quot;);
+    guideclare.append(&quot;//html}\n&quot;);
+    guideclare.append(&quot;//html&lt;/style&gt;\n&quot;);
+    guideclare.append(&quot;function &quot;+name+&quot;_click(){\n&quot;);
+    if(cmp.print_clicked_pin){
+      guideclare.append(&quot; &quot;+name+&quot;_clicked();\n&quot;);
+    }
+    guideclare.append(&quot;}\n&quot;);
+    guideclare.append(&quot;var v&quot;+name+&quot;=document.getElementById(&apos;&quot;+name+&quot;&apos;);\n&quot;);
+    guideclare.append(&quot;v&quot;+name+&quot;.onclick=&quot;+name+&quot;_click;\n&quot;);
+
+    if(cmp.print_created_pin){
+      guiconstruct.append( &quot; &quot; + name + &quot;_created(v&quot;+name+&quot;);\n&quot; );
+      xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_P&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_created(t)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
+    }
+
+    if(cmp.print_clicked_pin){
+      xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_PA&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_clicked()&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
+    }
+
+  }
+
+  if( cnt.getComponent(i) instanceof JTextField ){
+    XJTextField cmp= (XJTextField)( cnt.getComponent(i) );    
+
+    String name = cmp.getName();
+    if( name == null || name.equals(&quot;&quot;) ) name = &quot;FLD&quot;+ i;
+    Color  fcol = cmp.getForeground();
+    int fv = fcol.getRed()*65536+fcol.getGreen()*256+fcol.getBlue();
+    Color  bcol = cmp.getBackground();
+    int bv = bcol.getRed()*65536+bcol.getGreen()*256+bcol.getBlue();
+    Font f = cmp.getFont();
+    int fs = f.getSize();
+    String txt = cmp.getText();
+    int x0 = cmp.getX();
+    int y0 = cmp.getY();
+    int wid = cmp.getWidth();
+    int hei = cmp.getHeight();
+
+    guideclare.append(&quot;//html&lt;input type=\&quot;text\&quot; id=\&quot;&quot;+name+&quot;\&quot; value=\&quot;&quot;+txt+&quot;\&quot; class=\&quot;css_&quot;+name+&quot;\&quot;&gt;\n&quot;);
+    guideclare.append(&quot;//html&lt;style&gt;\n&quot;);
+    guideclare.append(&quot;//html.css_&quot;+name+&quot;{\n&quot;);
+    guideclare.append(&quot;//html position: absolute;\n&quot;);
+    guideclare.append(&quot;//html left: &quot;+x0+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html top: &quot;+y0+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html width: &quot;+wid+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html height: &quot;+hei+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html background: #&quot;+hex6(bv)+&quot;;\n&quot;);
+    guideclare.append(&quot;//html color: #&quot;+hex6(fv)+&quot;;\n&quot;);
+    guideclare.append(&quot;//html font-size: &quot;+fs+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html}\n&quot;);
+    guideclare.append(&quot;//html&lt;/style&gt;\n&quot;);
+    guideclare.append(&quot;function &quot;+name+&quot;_input(){\n&quot;);
+    if(cmp.print_input_pin){
+      guideclare.append(&quot; &quot;+name+&quot;_input(v&quot;+name+&quot;.value);\n&quot;);
+    }
+    guideclare.append(&quot;}\n&quot;);
+    guideclare.append(&quot;var v&quot;+name+&quot;=document.getElementById(&apos;&quot;+name+&quot;&apos;);\n&quot;);
+    guideclare.append(&quot;v&quot;+name+&quot;.oninput=&quot;+name+&quot;_input;\n&quot;);
+
+    if(cmp.print_created_pin){
+      guiconstruct.append( &quot; &quot; + name + &quot;_created(v&quot;+name+&quot;);\n&quot; );
+      xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_P&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_created(t)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
+    }
+
+    if(cmp.print_input_pin){
+      xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_PA&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_input(s)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
+    }
+
+  }
+
+  if( cnt.getComponent(i) instanceof JCheckBox ){
+    XJCheckBox cmp= (XJCheckBox)( cnt.getComponent(i) );    
+
+    String name = cmp.getName();
+    if( name == null || name.equals(&quot;&quot;) ) name = &quot;CHK&quot;+ i;
+    Color  fcol = cmp.getForeground();
+    int fv = fcol.getRed()*65536+fcol.getGreen()*256+fcol.getBlue();
+    Color  bcol = cmp.getBackground();
+    int bv = bcol.getRed()*65536+bcol.getGreen()*256+bcol.getBlue();
+    Font f = cmp.getFont();
+    int x0 = cmp.getX();
+    int y0 = cmp.getY();
+    int wid = cmp.getWidth();
+    int hei = cmp.getHeight();
+
+    if(cmp.isSelected()){
+      guideclare.append(&quot;//html&lt;input type=\&quot;checkbox\&quot; id=\&quot;&quot;+name+&quot;\&quot; checked=\&quot;checked\&quot; class=\&quot;css_&quot;+name+&quot;\&quot;&gt;\n&quot;);
+    }
+    else{
+      guideclare.append(&quot;//html&lt;input type=\&quot;checkbox\&quot; id=\&quot;&quot;+name+&quot;\&quot; class=\&quot;css_&quot;+name+&quot;\&quot;&gt;\n&quot;);
+    }
+    guideclare.append(&quot;//html&lt;style&gt;\n&quot;);
+    guideclare.append(&quot;//html.css_&quot;+name+&quot;{\n&quot;);
+    guideclare.append(&quot;//html position: absolute;\n&quot;);
+    guideclare.append(&quot;//html left: &quot;+x0+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html top: &quot;+y0+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html width: &quot;+wid+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html height: &quot;+hei+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html background: #&quot;+hex6(bv)+&quot;;\n&quot;);
+    guideclare.append(&quot;//html color: #&quot;+hex6(fv)+&quot;;\n&quot;);
+    guideclare.append(&quot;//html}\n&quot;);
+    guideclare.append(&quot;//html&lt;/style&gt;\n&quot;);
+    guideclare.append(&quot;function &quot;+name+&quot;_input(){\n&quot;);
+    if(cmp.print_check_pin){
+      guideclare.append(&quot; &quot;+name+&quot;_checked();\n&quot;);
+    }
+    guideclare.append(&quot;}\n&quot;);
+    guideclare.append(&quot;var v&quot;+name+&quot;=document.getElementById(&apos;&quot;+name+&quot;&apos;);\n&quot;);
+    guideclare.append(&quot;v&quot;+name+&quot;.oninput=&quot;+name+&quot;_input;\n&quot;);
+
+    if(cmp.print_created_pin){
+      guiconstruct.append( &quot; &quot; + name + &quot;_created(v&quot;+name+&quot;);\n&quot; );
+      xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_P&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_created(t)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
+    }
+
+    if(cmp.print_check_pin){
+      xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_PA&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_checked()&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
+    }
+
+  }
+
+  if( cnt.getComponent(i) instanceof JTextArea ){
+    XJTextArea cmp= (XJTextArea)( cnt.getComponent(i) );    
+    String name = cmp.getName();
+    if( name == null || name.equals(&quot;&quot;) ) name = &quot;ARA&quot;+ i;
+    Color  fcol = cmp.getForeground();
+    int fv = fcol.getRed()*65536+fcol.getGreen()*256+fcol.getBlue();
+    Color  bcol = cmp.getBackground();
+    int bv = bcol.getRed()*65536+bcol.getGreen()*256+bcol.getBlue();
+    Font f = cmp.getFont();
+    int fs = f.getSize();
+    String txt = cmp.getText();
+    int x0 = cmp.getX();
+    int y0 = cmp.getY();
+    int wid = cmp.getWidth();
+    int hei = cmp.getHeight();
+
+    guideclare.append(&quot;//html&lt;textarea id=\&quot;&quot;+name+&quot;\&quot; class=\&quot;css_&quot;+name+&quot;\&quot;&gt;\n&quot;);
+    guideclare.append(&quot;//html&quot;+txt+&quot;\n&quot;);
+    guideclare.append(&quot;//html&lt;/textarea&gt;\n&quot;);
+    guideclare.append(&quot;//html&lt;style&gt;\n&quot;);
+    guideclare.append(&quot;//html.css_&quot;+name+&quot;{\n&quot;);
+    guideclare.append(&quot;//html position: absolute;\n&quot;);
+    guideclare.append(&quot;//html left: &quot;+x0+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html top: &quot;+y0+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html width: &quot;+wid+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html height: &quot;+hei+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html background: #&quot;+hex6(bv)+&quot;;\n&quot;);
+    guideclare.append(&quot;//html color: #&quot;+hex6(fv)+&quot;;\n&quot;);
+    guideclare.append(&quot;//html font-size: &quot;+fs+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html}\n&quot;);
+    guideclare.append(&quot;//html&lt;/style&gt;\n&quot;);
+    guideclare.append(&quot;var v&quot;+name+&quot;=document.getElementById(&apos;&quot;+name+&quot;&apos;);\n&quot;);
+
+    if(cmp.print_created_pin){
+      guiconstruct.append( &quot; &quot; + name + &quot;_created(v&quot;+name+&quot;);\n&quot; );
+      xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_P&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_created(t)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
+    }
+
+  }
+
+  if( cnt.getComponent(i) instanceof JList ){
+    XJList cmp= (XJList)( cnt.getComponent(i) );    
+    String name = cmp.getName();
+    if( name == null || name.equals(&quot;&quot;) ) name = &quot;LST&quot;+ i;
+    Color  fcol = cmp.getForeground();
+    int fv = fcol.getRed()*65536+fcol.getGreen()*256+fcol.getBlue();
+    Color  bcol = cmp.getBackground();
+    int bv = bcol.getRed()*65536+bcol.getGreen()*256+bcol.getBlue();
+    int x0 = cmp.getX();
+    int y0 = cmp.getY();
+    int wid = cmp.getWidth();
+    int hei = cmp.getHeight();
+
+    guideclare.append(&quot;//html&lt;select id=\&quot;&quot;+name+&quot;\&quot; multiple=\&quot;multiple\&quot; class=\&quot;css_&quot;+name+&quot;\&quot;&gt;\n&quot;);
+    guideclare.append(&quot;//html&lt;/select&gt;\n&quot;);
+    guideclare.append(&quot;//html&lt;style&gt;\n&quot;);
+    guideclare.append(&quot;//html.css_&quot;+name+&quot;{\n&quot;);
+    guideclare.append(&quot;//html position: absolute;\n&quot;);
+    guideclare.append(&quot;//html left: &quot;+x0+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html top: &quot;+y0+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html width: &quot;+wid+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html height: &quot;+hei+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html background: #&quot;+hex6(bv)+&quot;;\n&quot;);
+    guideclare.append(&quot;//html color: #&quot;+hex6(fv)+&quot;;\n&quot;);
+    guideclare.append(&quot;//html}\n&quot;);
+    guideclare.append(&quot;//html&lt;/style&gt;\n&quot;);
+    guideclare.append(&quot;function &quot;+name+&quot;_onchange(){\n&quot;);
+    if(cmp.print_selected_pin){
+      guideclare.append(&quot; &quot;+name+&quot;_change();\n&quot;);
+    }
+    guideclare.append(&quot;}\n&quot;);
+    guideclare.append(&quot;var v&quot;+name+&quot;=document.getElementById(&apos;&quot;+name+&quot;&apos;);\n&quot;);
+    guideclare.append(&quot;v&quot;+name+&quot;.onchange=&quot;+name+&quot;_onchange;\n&quot;);
+
+    if(cmp.print_created_pin){
+      guiconstruct.append( &quot; &quot; + name + &quot;_created(v&quot;+name+&quot;);\n&quot; );
+      xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_P&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_created(t)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
+    }
+
+    if( cmp.print_selected_pin ){
+      xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_PA&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_change()&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
+    }
+
+  }
+
+  if( ( cnt.getComponent(i) instanceof JSlider ) &amp;&amp; ( ((JSlider)(cnt.getComponent(i))).getOrientation() == SwingConstants.HORIZONTAL ) ){
+    XJHSlider cmp= (XJHSlider)( cnt.getComponent(i) );    
+    String name = cmp.getName();
+    if( name == null || name.equals(&quot;&quot;) ) name = &quot;HSL&quot;+ i;
+    Color  fcol = cmp.getForeground();
+    int fv = fcol.getRed()*65536+fcol.getGreen()*256+fcol.getBlue();
+    Color  bcol = cmp.getBackground();
+    int bv = bcol.getRed()*65536+bcol.getGreen()*256+bcol.getBlue();
+    int minval = cmp.getMinimum();
+    int maxval = cmp.getMaximum();
+    int x0 = cmp.getX();
+    int y0 = cmp.getY();
+    int wid = cmp.getWidth();
+    int hei  = cmp.getHeight();
+
+    guideclare.append(&quot;//html&lt;input type=\&quot;range\&quot; id=\&quot;&quot;+name+&quot;\&quot; min=\&quot;&quot;+minval+&quot;\&quot; max=\&quot;&quot;+maxval+&quot;\&quot; class=\&quot;css_&quot;+name+&quot;\&quot;&gt;\n&quot;);
+    guideclare.append(&quot;//html&lt;style&gt;\n&quot;);
+    guideclare.append(&quot;//html.css_&quot;+name+&quot;{\n&quot;);
+    guideclare.append(&quot;//html position: absolute;\n&quot;);
+    guideclare.append(&quot;//html left: &quot;+x0+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html top: &quot;+y0+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html width: &quot;+wid+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html height: &quot;+hei+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html background: #&quot;+hex6(bv)+&quot;;\n&quot;);
+    guideclare.append(&quot;//html color: #&quot;+hex6(fv)+&quot;;\n&quot;);
+    guideclare.append(&quot;//html}\n&quot;);
+    guideclare.append(&quot;//html&lt;/style&gt;\n&quot;);
+    guideclare.append(&quot;var v&quot;+name+&quot;=document.getElementById(&apos;&quot;+name+&quot;&apos;);\n&quot;);
+    guideclare.append(&quot;v&quot;+name+&quot;.oninput=&quot;+name+&quot;_input;\n&quot;);
+    guideclare.append(&quot;function &quot;+name+&quot;_input(){\n&quot;);
+    if(cmp.print_changed_pin){
+      guideclare.append(&quot; &quot;+name+&quot;_changed(v&quot;+name+&quot;.value);\n&quot;);
+    }
+    guideclare.append(&quot;}\n&quot;);
+
+    if(cmp.print_created_pin){
+      guiconstruct.append( &quot; &quot; + name + &quot;_created(v&quot;+name+&quot;);\n&quot; );
+      xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_P&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_created(t)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
+    }
+
+    if(cmp.print_changed_pin){
+      xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_PA&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_changed(v)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
+    }
+
+  }
+
+  if( ( cnt.getComponent(i) instanceof JSlider ) &amp;&amp; ( ((JSlider)(cnt.getComponent(i))).getOrientation() == SwingConstants.VERTICAL ) ){
+    XJVSlider cmp= (XJVSlider)( cnt.getComponent(i) );    
+    String name = cmp.getName();
+    if( name == null || name.equals(&quot;&quot;) ) name = &quot;VSL&quot;+ i;
+    Color  fcol = cmp.getForeground();
+    int fv = fcol.getRed()*65536+fcol.getGreen()*256+fcol.getBlue();
+    Color  bcol = cmp.getBackground();
+    int bv = bcol.getRed()*65536+bcol.getGreen()*256+bcol.getBlue();
+    int minval = cmp.getMinimum();
+    int maxval = cmp.getMaximum();
+    int x0 = cmp.getX();
+    int y0 = cmp.getY();
+    int wid = cmp.getWidth();
+    int hei  = cmp.getHeight();
+    int x1 = x0 + wid/2 - hei/2;
+    int y1 = y0 + hei/2 - wid/2; 
+
+    guideclare.append(&quot;//html&lt;input type=\&quot;range\&quot; id=\&quot;&quot;+name+&quot;\&quot; min=\&quot;&quot;+minval+&quot;\&quot; max=\&quot;&quot;+maxval+&quot;\&quot; class=\&quot;css_&quot;+name+&quot;\&quot;&gt;\n&quot;);
+    guideclare.append(&quot;//html&lt;style&gt;\n&quot;);
+    guideclare.append(&quot;//html.css_&quot;+name+&quot;{\n&quot;);
+    guideclare.append(&quot;//html position: absolute;\n&quot;);
+    guideclare.append(&quot;//html margin-left: 0px;\n&quot;);
+    guideclare.append(&quot;//html margin-top: 0px;\n&quot;);
+    guideclare.append(&quot;//html left: &quot;+x1+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html top: &quot;+y1+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html width: &quot;+hei+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html height: &quot;+wid+&quot;px;\n&quot;);
+    guideclare.append(&quot;//html background: #&quot;+hex6(bv)+&quot;;\n&quot;);
+    guideclare.append(&quot;//html color: #&quot;+hex6(fv)+&quot;;\n&quot;);
+    guideclare.append(&quot;//html transform: rotate(-90deg);\n&quot;);
+    guideclare.append(&quot;//html}\n&quot;);
+    guideclare.append(&quot;//html&lt;/style&gt;\n&quot;);
+    guideclare.append(&quot;var v&quot;+name+&quot;=document.getElementById(&apos;&quot;+name+&quot;&apos;);\n&quot;);
+    guideclare.append(&quot;v&quot;+name+&quot;.oninput=&quot;+name+&quot;_input;\n&quot;);
+    guideclare.append(&quot;function &quot;+name+&quot;_input(){\n&quot;);
+    if(cmp.print_changed_pin){
+      guideclare.append(&quot; &quot;+name+&quot;_changed(v&quot;+name+&quot;.value);\n&quot;);
+    }
+    guideclare.append(&quot;}\n&quot;);
+
+    if(cmp.print_created_pin){
+      guiconstruct.append( &quot; &quot; + name + &quot;_created(v&quot;+name+&quot;);\n&quot; );
+      xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_P&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_created(t)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
+    }
+
+    if(cmp.print_changed_pin){
+      xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_PA&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_changed(v)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
+    }
+
+
+}
+
+}
+
+guideclare.append(guiconstruct.toString()+&quot;\n}\n&quot;);
+String s1 = guideclare.toString();
+String s2 = &quot;&quot;;
+for( int p = 0; p &lt; s1.length(); p++ ){
+  char c = s1.charAt(p);
+  if( c == &apos;&lt;&apos; ) s2 = s2 + &quot;&amp;lt;&quot;;
+  else if( c == &apos;&gt;&apos; ) s2 = s2 + &quot;&amp;gt;&quot;;
+  else if( c == &apos;&amp;&apos; ) s2 = s2 + &quot;&amp;amp;&quot;;
+  else if( c == &apos;\&apos;&apos; ) s2 =s2 + &quot;&amp;apos;&quot;;
+  else if( c == &apos;\&quot;&apos; ) s2 = s2 + &quot;&amp;quot;&quot;;
+  else s2 = s2 + c;
+}
+
+xml = xml + &quot;&lt;codeclip&gt;&lt;ID&gt;_CXSTART&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;0&lt;/y0&gt;&lt;width&gt;300&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;codetext&gt;&quot; + s2 + &quot;&lt;/codetext&gt;&lt;/codeclip&gt;\n&quot;
+          + &quot;&lt;ID_maker&gt;&quot; + (j+20) + &quot;&lt;/ID_maker&gt;&lt;height&gt;&quot; + (18*j+76) + &quot;&lt;/height&gt;&lt;/aobject&gt;\n&quot;;
+
+f1 = new XFile(&quot;GUI.xml&quot;);
+f1.Xdelete();
+f1.Xappend( xml );
+
+</codetext>
+</operation>
+<codeclip>
+<ID>_C48</ID>
+<x0>48</x0>
+<y0>451</y0>
+<width>330</width>
+<height>83</height>
+<codetext>// 整数を6桁の16進数の文字列に変換する
+private String hex6(int i){
+  String s = &quot;000000&quot; + Integer.toHexString(i);
+  return  s.substring(s.length()-6);
+}
+</codetext>
+</codeclip>
 </aobject>
 <aobject>
 <ID>_AX18</ID>
@@ -73196,5 +73711,24 @@ int main( int argc, char** argv ){
 <ImportFiles7></ImportFiles7>
 <ProgramStartupCode7></ProgramStartupCode7>
 <NativeHelpCommand7></NativeHelpCommand7>
+<OpenCompileDialog>0</OpenCompileDialog>
+<ScriptExecCommand></ScriptExecCommand>
+<RunCommand8></RunCommand8>
+<CompileCommand9></CompileCommand9>
+<RunCommand9></RunCommand9>
+<GUIDesignerCommand9></GUIDesignerCommand9>
+<ImportFiles9></ImportFiles9>
+<ProgramStartupCode9></ProgramStartupCode9>
+<NativeHelpCommand9></NativeHelpCommand9>
 </プロパティ>
+<codeclip>
+<ID>_C2</ID>
+<x0>126</x0>
+<y0>20</y0>
+<width>222</width>
+<height>37</height>
+<codetext>//ver 1.2
+// 変更点：Javascriptを追加
+</codetext>
+</codeclip>
 </xobject>
