@@ -2669,17 +2669,12 @@ class App1{
     }
 
     else if( element_name.equals("operation" ) ){
-		
-System.out.println("compile operation");		
-		
       String parent = getAbsoluteName2( xml.親要素( element ) );
       String path = getAbsoluteName2( element );
       String base = getbase( path );
       String outpin = xml.属性値( element, "outpintext" );
       String signature = getsignature( outpin );
       String code = xml.属性値( element, "codetext" );
-
-System.out.println("code:"+code);		
 		
       boolean transition = xml.要素の名前( xml.親要素( element ) ).equals("aobject");
       int inpinlinkcount = parseInt( xml.属性値( element, "inpinlinkcount" ) );
