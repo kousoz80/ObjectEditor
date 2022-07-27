@@ -404,6 +404,13 @@ class App1{
 
     RunCommand[8] = "";
 
+    CompileCommand[9] = "";
+    RunCommand[9] = "";
+    GUIDesignerCommand[9] = "";
+    NativeHelpCommand[9]  = "";
+    ImportFiles[9]        = "";
+    ProgramStartupCode[9] = "";
+
   }//~initProperty(){
 
 //プロパティをセーブする   
@@ -2662,6 +2669,9 @@ class App1{
     }
 
     else if( element_name.equals("operation" ) ){
+		
+System.out.println("compile operation");		
+		
       String parent = getAbsoluteName2( xml.親要素( element ) );
       String path = getAbsoluteName2( element );
       String base = getbase( path );
@@ -2669,6 +2679,8 @@ class App1{
       String signature = getsignature( outpin );
       String code = xml.属性値( element, "codetext" );
 
+System.out.println("code:"+code);		
+		
       boolean transition = xml.要素の名前( xml.親要素( element ) ).equals("aobject");
       int inpinlinkcount = parseInt( xml.属性値( element, "inpinlinkcount" ) );
       String buf = "function " + path + "{\n";
@@ -2793,9 +2805,28 @@ class App1{
     dialog2 = new Dialog2();    
     dialog3 = new Dialog3();  
 
-    if( startfiles.length == 0 ) objecteditor.CommandReceived( "CLRALL" );
+    if( startfiles.length == 0 ){
+      new DelayTimer(1000);
+    }
+		 
   }
 
+
+// 遅延タイマー
+class DelayTimer implements ActionListener{
+  javax.swing.Timer unit;
+ 
+  DelayTimer( int del ){
+   unit = new javax.swing.Timer( del, this );
+   unit.start();
+  }
+
+  public void actionPerformed( ActionEvent e){
+    objecteditor.CommandReceived( "CLRALL" );
+    unit.stop();
+  }
+
+}
    
   //mainメソッド
   public static void main( String[] args ){
@@ -3317,6 +3348,8 @@ gui.buttonreset();
 
       if(command.equals("COMPILE") ){
           if(compile_ready){
+            Xnode cnode = node;
+            Logout();
             messagewindow.clearText();
             messagewindow.setVisible(true);
             new Thread(new Runnable() {
@@ -3327,7 +3360,8 @@ gui.buttonreset();
                 compile_ready = true;
 	          }
 	        }).start();
-System.gc();
+            Login( cnode );
+            System.gc();
 gui.buttonreset();
           }
           else{
@@ -3386,6 +3420,7 @@ gui.buttonreset();
         gui.name.moveCaretPosition( gui.name.getText().length() );
         gui.name.requestFocus();
         gui.setobjectname( xml.属性値( element, "objectname" ) );
+        gui.setdescription( xml.属性値( element, "description" ) );
       }
       else if( mode == -2 ){
         open();
@@ -6658,12 +6693,9 @@ gui.buttonreset();
       }
 
       if(command.equals("COMPILE")){
-
-
         if(compile_ready){
-			  
-//Syetem.out.println("compile start");
-			  
+          Anode cnode = node;
+          Logout();
           messagewindow.clearText();
           messagewindow.setVisible(true);
           new Thread(new Runnable() {
@@ -6674,7 +6706,8 @@ gui.buttonreset();
               compile_ready = true;
 	        }
 	      }).start();
-System.gc();
+          Login(cnode);
+          System.gc();
 gui.buttonreset();
         }
         else{
@@ -10036,12 +10069,12 @@ gui.buttonreset();
 
       runcommand8.set_text(RunCommand[8]);
 
-      compilecommand6.set_text(CompileCommand[9]);
-      runcommand6.set_text(RunCommand[9]);
-      guidesignercommand6.set_text(GUIDesignerCommand[9]);
-      importfiles6.set_text(ImportFiles[9]);
-      programstartupcode6.set_text(ProgramStartupCode[9]);
-      nativehelpcommand6.set_text(NativeHelpCommand[9]);
+      compilecommand9.set_text(CompileCommand[9]);
+      runcommand9.set_text(RunCommand[9]);
+      guidesignercommand9.set_text(GUIDesignerCommand[9]);
+      importfiles9.set_text(ImportFiles[9]);
+      programstartupcode9.set_text(ProgramStartupCode[9]);
+      nativehelpcommand9.set_text(NativeHelpCommand[9]);
 
     }
 

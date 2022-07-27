@@ -31,7 +31,7 @@
 <JavaEditCommand>geany</JavaEditCommand>
 <JavaViewCommand></JavaViewCommand>
 <HelpCommand>xdg-open ./help/manual.html</HelpCommand>
-<ApplicationType>0</ApplicationType>
+<ApplicationType>9</ApplicationType>
 <CompileCommand0>./compile_java</CompileCommand0>
 <RunCommand0>./run_java</RunCommand0>
 <GUIDesignerCommand0>java -jar guidsin.jar -java</GUIDesignerCommand0>
@@ -222,8 +222,7 @@ end
 <CompileCommand6>
 </CompileCommand6>
 <RunCommand6></RunCommand6>
-<GUIDesignerCommand6>java -jar guidsin.jar -javascript
-</GUIDesignerCommand6>
+<GUIDesignerCommand6></GUIDesignerCommand6>
 <ImportFiles6></ImportFiles6>
 <ProgramStartupCode6></ProgramStartupCode6>
 <NativeHelpCommand6></NativeHelpCommand6>
@@ -241,7 +240,7 @@ end
 <CompileCommand9>
 </CompileCommand9>
 <RunCommand9></RunCommand9>
-<GUIDesignerCommand9>java -jat guidsin.jar -javascript
+<GUIDesignerCommand9>java -jar guidsin.jar -javascript
 </GUIDesignerCommand9>
 <ImportFiles9></ImportFiles9>
 <ProgramStartupCode9></ProgramStartupCode9>
