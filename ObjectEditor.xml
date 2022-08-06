@@ -9,7 +9,7 @@
 <MainWinHeight>740</MainWinHeight>
 <MesgWinx0>0</MesgWinx0>
 <MesgWiny0>0</MesgWiny0>
-<MesgWinWidth>1032</MesgWinWidth>
+<MesgWinWidth>1024</MesgWinWidth>
 <MesgWinHeight>745</MesgWinHeight>
 <FileWinx0>36</FileWinx0>
 <FileWiny0>478</FileWiny0>
@@ -31,7 +31,7 @@
 <JavaEditCommand>geany</JavaEditCommand>
 <JavaViewCommand></JavaViewCommand>
 <HelpCommand>xdg-open ./help/manual.html</HelpCommand>
-<ApplicationType>9</ApplicationType>
+<ApplicationType>10</ApplicationType>
 <CompileCommand0>./compile_java</CompileCommand0>
 <RunCommand0>./run_java</RunCommand0>
 <GUIDesignerCommand0>java -jar guidsin.jar -java</GUIDesignerCommand0>
@@ -239,10 +239,27 @@ end
 <RunCommand8></RunCommand8>
 <CompileCommand9>
 </CompileCommand9>
-<RunCommand9></RunCommand9>
+<RunCommand9>xdg-open test.html
+</RunCommand9>
 <GUIDesignerCommand9>java -jar guidsin.jar -javascript
 </GUIDesignerCommand9>
 <ImportFiles9></ImportFiles9>
-<ProgramStartupCode9></ProgramStartupCode9>
+<ProgramStartupCode9>_PSTART();
+</ProgramStartupCode9>
 <NativeHelpCommand9></NativeHelpCommand9>
+<CompileCommand10>#!/bin/sh
+
+iverilog test.v
+
+if [ $? -eq 0 ]; then
+  vvp a.out
+fi
+</CompileCommand10>
+<RunCommand10>#!/bin/sh
+gtkwave wave.vcd
+</RunCommand10>
+<GUIDesignerCommand10></GUIDesignerCommand10>
+<ImportFiles10></ImportFiles10>
+<ProgramStartupCode10></ProgramStartupCode10>
+<NativeHelpCommand10></NativeHelpCommand10>
 </プロパティ>

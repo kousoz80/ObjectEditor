@@ -1,5 +1,5 @@
-//オブジェクトエディタver1.2.7
-// 変更点：Javascriptに対応
+//オブジェクトエディタver1.2.8
+// 変更点：Verilog HDLに対応
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
@@ -17,7 +17,7 @@ import javax.imageio.ImageIO;
 
 //アプリケーションのクラス
 class App1{
-  static final String VERSION_STRING =" ObjectEditor version 1.2.7";
+  static final String VERSION_STRING =" ObjectEditor version 1.2.8";
       
 
 // 主体オブジェクト
@@ -73,6 +73,7 @@ class App1{
                                    "実行ファイル(efi)/efi", 
                                    "",
                                    "実行ファイル(html)/html", 
+                                   "波形ファイル(vcd)/vcd", 
   };
 
   String   ProjectFileMode    =    "プロジェクトファイル(prj)/prj";
@@ -88,6 +89,7 @@ class App1{
                                    "Test.efi",
                                    "",
                                    "Test.html",
+                                   "Test.vcd",
   };
 
   String[] AppTypes ={
@@ -101,6 +103,7 @@ class App1{
                                    "(oregengo-R言語 アプリケーション)",
                                    "(マルチ言語アプリケーション)",
                                    "(Javascriptアプリケーション)",
+                                   "(Verilog HDLアプリケーション)",
   };
 
 
@@ -132,16 +135,27 @@ class App1{
   String HtmlEditCommand;
   String HelpCommand;
 
-// ここより下はアプリケーションの種類( Javaアプリケーション or アプレット )ごとに存在する
-  int ApplicationType = 0;   //アプリケーションの種類( 0:Javaアプリケーション / 1:アプレット/2: C++コンソール/3:C++ Windows /4:android/5:Basic/6:C言語/7:oregengo-R/8:マルチ言語環境/9: Javascript 
+//アプリケーションの種類:
+// 0: Javaアプリケーション
+// 1: Javaアプレット
+// 2: C++コンソール
+// 3: C++ Windows
+// 4: android
+// 5: Basic
+// 6: C言語
+// 7: oregengo-R
+// 8: マルチ言語環境
+// 9: Javascript
+// 10:Verilog HDL 
+  int ApplicationType = 0;
 
-  String[] CompileCommand     = { "","","","","","","","","","" };
-  String[] RunCommand         = { "","","","","","","","","","" };
-  String[] GUIDesignerCommand = { "","","","","","","","","","" };
-  String[] ImportFiles        = { "","","","","","","","","","" };
-  String[] ProgramStartupCode = { "","","","","","","","","","" };
-  String[] NativeHelpCommand  = { "","","","","","","","","","" };
-  String[] IDF_LocalVariable  = { "","","","","","","","","","" };
+  String[] CompileCommand     = { "","","","","","","","","","","" };
+  String[] RunCommand         = { "","","","","","","","","","","" };
+  String[] GUIDesignerCommand = { "","","","","","","","","","","" };
+  String[] ImportFiles        = { "","","","","","","","","","","" };
+  String[] ProgramStartupCode = { "","","","","","","","","","","" };
+  String[] NativeHelpCommand  = { "","","","","","","","","","","" };
+  String[] IDF_LocalVariable  = { "","","","","","","","","","","" };
 
   // Javascriptのコンパイル用変数
   String HtmlBuffer = "";
@@ -411,6 +425,13 @@ class App1{
     ImportFiles[9]        = "";
     ProgramStartupCode[9] = "";
 
+    CompileCommand[10] = "";
+    RunCommand[10] = "";
+    GUIDesignerCommand[10] = "";
+    NativeHelpCommand[10]  = "";
+    ImportFiles[10]        = "";
+    ProgramStartupCode[10] = "";
+
   }//~initProperty(){
 
 //プロパティをセーブする   
@@ -528,6 +549,13 @@ class App1{
     ImportFiles[9] = ((t=xml.属性値( properties, "ImportFiles9" ))==null?"":t);
     ProgramStartupCode[9] = ((t=xml.属性値( properties, "ProgramStartupCode9" ))==null?"":t);
     NativeHelpCommand[9] = ((t=xml.属性値( properties, "NativeHelpCommand9" ))==null?"":t);
+
+    CompileCommand[10] = ((t=xml.属性値( properties, "CompileCommand10" ))==null?"":t);
+    RunCommand[10] = ((t=xml.属性値( properties, "RunCommand10" ))==null?"":t);
+    GUIDesignerCommand[10] = ((t=xml.属性値( properties, "GUIDesignerCommand10" ))==null?"":t);
+    ImportFiles[10] = ((t=xml.属性値( properties, "ImportFiles10" ))==null?"":t);
+    ProgramStartupCode[10] = ((t=xml.属性値( properties, "ProgramStartupCode10" ))==null?"":t);
+    NativeHelpCommand[10] = ((t=xml.属性値( properties, "NativeHelpCommand10" ))==null?"":t);
 
     if( objecteditor != null ){
 
@@ -698,6 +726,13 @@ class App1{
     xml.属性値をセット( properties, "ImportFiles9", ImportFiles[9] );
     xml.属性値をセット( properties, "ProgramStartupCode9", ProgramStartupCode[9] );
     xml.属性値をセット( properties, "NativeHelpCommand9", NativeHelpCommand[9] );
+
+    xml.属性値をセット( properties, "CompileCommand10", CompileCommand[10] );
+    xml.属性値をセット( properties, "RunCommand10", RunCommand[10] );
+    xml.属性値をセット( properties, "GUIDesignerCommand10", GUIDesignerCommand[10] );
+    xml.属性値をセット( properties, "ImportFiles10", ImportFiles[10] );
+    xml.属性値をセット( properties, "ProgramStartupCode10", ProgramStartupCode[10] );
+    xml.属性値をセット( properties, "NativeHelpCommand10", NativeHelpCommand[10] );
 
   }//~restoreProperty()
 
@@ -1104,6 +1139,21 @@ class App1{
             "</body>\n"+
             "</html>\n";
             
+        SourceFile[ApplicationType].Xappend( s );
+      } 
+
+      // Verilog HDL
+      else  if( ApplicationType == 10 ){
+        StringBuffer clsbuf  = new StringBuffer("");
+        StringBuffer funcbuf = new StringBuffer("");
+        StringBuffer initbuf = new StringBuffer("");
+        compile_Verilog_HDL( top_element, clsbuf, funcbuf, initbuf, new Vector() );
+        String s = ImportFiles[ApplicationType]
+                 + clsbuf.toString() 
+                 + initbuf.toString()
+                 + ProgramStartupCode[ApplicationType]
+                 + funcbuf.toString();
+        s = Xreplace( s, "%AppName%", xml.属性値( top_element, "objectname" ) );
         SourceFile[ApplicationType].Xappend( s );
       } 
 
@@ -2724,6 +2774,262 @@ class App1{
   }
 
 
+  // Verilog HDLプログラムを作成する
+  public void compile_Verilog_HDL( Object element, StringBuffer clsbuf, StringBuffer funcbuf, StringBuffer initbuf, Vector signal ){
+    int i, j;
+    Vector list;
+
+    String element_name = xml.要素の名前( element );
+    String comp_name = xml.要素のID( element );
+
+    if( element_name.equals("codeclip") ){
+      String id = getAbsoluteName2( element  );
+      String buf = xml.属性値( element, "codetext" ) + "\n";
+      buf = Xreplace( buf, IDF_LocalVariable[5], id );
+      clsbuf.append( buf );
+    }
+
+    else if( element_name.equals("xobject") ){
+      StringBuffer codebuf = new StringBuffer(""); 
+      String cls = xml.属性値( element, "objectname" );
+//      clsbuf.append( "' xobject " + cls + " {\n" );
+
+      list = xml.子要素のリスト( element, "codeclip" );
+      for( i = 0; i < list.size(); i++ ){
+        compile_Verilog_HDL( list.get(i), clsbuf, funcbuf, initbuf, null );// codebuf->clsbuf
+      }
+
+      Vector signal2 = new Vector();
+      list = xml.子要素のリスト( element, "relation" );
+      for( i = 0; i < list.size(); i++ ){
+        Object pin1, pin2;
+        String pin1name = xml.属性値( list.get(i), "pin1name" );
+        String pin2name = xml.属性値( list.get(i), "pin2name" );
+
+        if( pin2name.charAt( pin2name.length()-1 ) == ')' ){  // pin2 is pinlabel
+          Object base = xml.子要素( element, getbase( pin2name ) );
+          pin2 = xml.子要素( base, getsignature( pin2name ) );
+        }
+        else{
+          pin2 = xml.子要素( element, pin2name );             // pin2 is pin or operation
+        }
+
+        signal2.add( new StringCouple( pin1name, getAbsoluteName2( pin2 ) ) );
+      }
+        
+      list = xml.子要素のリスト( element, "pin" );
+      for( i = 0; i < list.size(); i++ ){
+        String name = xml.要素のID( list.get(i) );
+        Vector method= new Vector();
+
+        for( j = signal2.size()-1; j >= 0; j-- ){
+          StringCouple k = (StringCouple)( signal2.get(j) );
+          if( name.equals( k.String1 ) ){
+            method.add( k.String2 );
+            signal2.remove( k );
+          }
+        }
+        for( j = signal.size()-1; j >= 0; j-- ){
+          StringCouple k = (StringCouple)( signal.get(j) );
+          if( name.equals( k.String1 ) ){
+            method.add( k.String2 );
+            signal.remove( k );
+          }
+        }
+        compile_Verilog_HDL( list.get(i), clsbuf, funcbuf, initbuf, method );
+      }
+       
+      list = xml.子要素のリスト( element, "operation" );
+      for( i = 0; i < list.size(); i++ ){
+        String name = xml.要素のID( list.get(i) );
+        Vector method= new Vector();
+
+        for( j = signal2.size()-1; j >= 0; j-- ){
+          StringCouple k = (StringCouple)( signal2.get(j) );
+          if( name.equals( k.String1 ) ){
+            method.add( k.String2 );
+            signal2.remove( k );
+          }
+        }
+        compile_Verilog_HDL( list.get(i), clsbuf, funcbuf, initbuf, method );
+      }
+
+      list = xml.子要素のリスト( element, "aobject" );
+      for( i = 0; i < list.size(); i++ ){
+        String name = xml.要素のID( list.get(i) );
+        Vector method= new Vector();
+        for( j = signal2.size()-1; j >= 0; j-- ){
+          StringCouple k = (StringCouple)( signal2.get(j) );
+          if( ( k.String1.charAt( k.String1.length()-1 ) == ')' ) && name.equals( getbase( k.String1 ) ) ){
+            method.add( new StringCouple( getsignature( k.String1 ), k.String2 ) );
+            signal2.remove( k );
+          }
+        }
+        compile_Verilog_HDL( list.get(i), clsbuf, funcbuf, initbuf, method );
+      }
+
+      list = xml.子要素のリスト( element, "xobject" );
+      for( i = 0; i < list.size(); i++ ){
+        String name = xml.要素のID( list.get(i) );
+        Vector method= new Vector();
+        for( j = signal2.size()-1; j >= 0; j-- ){
+          StringCouple k = (StringCouple)( signal2.get(j) );
+          if( ( k.String1.charAt( k.String1.length()-1 ) == ')' ) && name.equals( getbase( k.String1 ) ) ){
+            method.add( new StringCouple( getsignature( k.String1 ), k.String2 ) );
+            signal2.remove( k );
+          }
+        }
+        compile_Verilog_HDL( list.get(i), clsbuf, funcbuf, initbuf, method );
+      }
+         
+    }
+
+    else if( element_name.equals("aobject") ){
+      StringBuffer codebuf = new StringBuffer(""); 
+      String cls = xml.属性値( element, "objectname" );
+      list = xml.子要素のリスト( element, "codeclip" );
+      for( i = 0; i < list.size(); i++ ){
+        compile_Verilog_HDL( list.get(i), codebuf, funcbuf, initbuf, null );
+      }
+
+      Vector signal2 = new Vector();
+      list = xml.子要素のリスト( element, "action" );
+      for( i = 0; i < list.size(); i++ ){
+        Object comp1, comp2;
+        String comp1name = xml.属性値( list.get(i), "comp1name" );
+        String comp2name = xml.属性値( list.get(i), "comp2name" );
+        comp2 = xml.子要素( element, comp2name );
+        signal2.add( new StringCouple( comp1name, getAbsoluteName2(comp2) ) );
+      }
+        
+      list = xml.子要素のリスト( element, "pin" );
+      for( i = 0; i < list.size(); i++ ){
+        String name = xml.要素のID( list.get(i) );
+        Vector method = new Vector();
+
+        for( j = signal2.size()-1; j >= 0; j-- ){
+          StringCouple k = (StringCouple)( signal2.get(j) );
+          if( name.equals( k.String1 ) ){
+            method.add( k.String2 );
+            signal2.remove( k );
+          }
+        }
+        for( j = signal.size()-1; j >= 0; j-- ){
+          StringCouple k = (StringCouple)( signal.get(j) );
+          if( name.equals( k.String1 ) ){
+            method.add( k.String2 );
+            signal.remove( k );
+          }
+        }
+        compile_Verilog_HDL( list.get(i), clsbuf, funcbuf, initbuf, method );
+      }
+         
+      Vector statemethod = new Vector();
+      list = xml.子要素のリスト( element, "operation" );
+      for( i = 0; i < list.size(); i++ ){
+        Vector method= new Vector();
+        Object op = list.get(i);
+
+        if( parseInt( xml.属性値( op, "inpinlinkcount" ) ) == 0 ){
+          statemethod.add( new StringCouple( xml.属性値( op, "state1" ), getAbsoluteName2( op ) ) );
+        }
+
+        String name = xml.要素のID( op );
+        for( j = signal2.size()-1; j >= 0; j-- ){
+          StringCouple k = (StringCouple)( signal2.get(j) );
+          if( name.equals( k.String1 ) ){
+            method.add( k.String2 );
+            signal2.remove( k );
+          }
+        }
+        compile_Verilog_HDL( op, clsbuf, funcbuf, initbuf, method );
+      }
+
+      list = xml.子要素のリスト( element, "state" );
+      for( i = 0; i < list.size(); i++ ){
+        compile_Verilog_HDL( list.get(i), clsbuf, funcbuf, initbuf, statemethod );
+      }
+
+//      initbuf.append( "gosub @_SINIT"+getAbsoluteName2( element ) +"\n" );
+    }
+
+    else if( element_name.equals("pin") ){
+      String parent = getAbsoluteName2( xml.親要素( element ) );
+      String path = getAbsoluteName2( element );
+      String base = getbase( path );
+      String signature = getsignature( path );
+      boolean transition = xml.要素の名前( xml.親要素( element ) ).equals("aobject");
+      String buf = "@"+base +":\n";
+      if(transition) buf =buf + "STATE2" + parent + "=STATE" + parent +"\n";
+      for( j = 0; j < signal.size(); j++ ){
+        StringTokenizer tk1 = new StringTokenizer( signature, ","  );
+        StringTokenizer tk2 = new StringTokenizer( getsignature( (String)( signal.get(j) ) ), ","  );
+        String base2 = getbase( (String)( signal.get(j) ) );
+        while( tk1.hasMoreTokens() &&  tk2.hasMoreTokens() ){
+          buf = buf + Xreplace( tk2.nextToken(), IDF_LocalVariable[5], base2 ) +"="+ Xreplace( tk1.nextToken(), IDF_LocalVariable[5], base ) +"\n";
+	    }
+        buf = buf + "gosub @"+ base2+"\n";
+      }
+      buf = buf + "return\n";
+//      funcbuf.append( buf );
+    }
+
+    else if( element_name.equals("operation" ) ){
+      String parent = getAbsoluteName2( xml.親要素( element ) );
+      String path = getAbsoluteName2( element );
+      String base = getbase( path );
+      String outpin = xml.属性値( element, "outpintext" );
+      String signature = getsignature( outpin );
+      String code = xml.属性値( element, "codetext" );
+
+      boolean transition = xml.要素の名前( xml.親要素( element ) ).equals("aobject");
+      int inpinlinkcount = parseInt( xml.属性値( element, "inpinlinkcount" ) );
+      String buf = "@"+base +":\n";
+      if( transition && ( inpinlinkcount != 0 ) ){
+         buf = buf +  "if  STATE2" + parent + "<>" +
+         xml.子要素( xml.親要素( element ), xml.属性値( element, "state1" ) ).hashCode()
+         + " then  return\n";
+      }
+      buf = buf + code;
+      for( j = 0; j < signal.size(); j++ ){
+        StringTokenizer tk1 = new StringTokenizer( signature, ","  );
+        StringTokenizer tk2 = new StringTokenizer( getsignature( (String)( signal.get(j) ) ), ","  );
+        String base2 = getbase( (String)( signal.get(j) ) );
+        while( tk1.hasMoreTokens() ){
+          buf = buf + Xreplace( tk2.nextToken(), IDF_LocalVariable[5], base2 ) +"="+ Xreplace( tk1.nextToken(), IDF_LocalVariable[5], base ) +"\n";
+	    }
+        buf = buf + "gosub @"+ base2+"\n";
+      }
+      if(transition)  buf = buf + "gosub @"+ xml.属性値( element, "state2" ) + parent + "\n";
+      buf = buf + "return\n";
+      buf = Xreplace( buf, IDF_LocalVariable[5], base );
+
+//      funcbuf.append( buf );
+    }
+
+    else if( element_name.equals("state") ){
+      String parent = getAbsoluteName2( xml.親要素( element ) );
+      String base = getAbsoluteName2( element );
+      String buf = "@"+base + parent +":\n";
+      buf= buf + "STATE" + parent + "=" + element.hashCode() + "\n";
+      for( j = signal.size()-1; j >= 0; j-- ){
+        StringCouple k = (StringCouple)( signal.get(j) );
+        if( k.String1.equals( comp_name ) ){
+          buf = buf + "gosub @"+ getbase( k.String2 ) +"\n";
+          signal.remove( k );
+        }
+      }
+      buf = buf + "return\n";
+//      funcbuf.append( buf );
+    }
+
+    else{
+      reportError( "can\'t compile for " + element_name + "\n" );
+    }
+
+  }
+
+
   //１対の文字列(コンパイルで検索のときに使う)
   class StringCouple{
     String String1;
@@ -2757,6 +3063,7 @@ class App1{
                       new XFile("test.r"),
                       new XFile("test"),
                       new XFile("test.html"),
+                      new XFile("test.v"),
                     };
 
     ObjectLib =     new XFile[] {
@@ -2770,6 +3077,7 @@ class App1{
                       new XFile("ObjectLib_R"),
                       new XFile("Projects"),
                       new XFile("ObjectLib_S"),
+                      new XFile("ObjectLib_V"),
                     };
 
     CurrentDir   =  new XFile( "." );
@@ -9503,6 +9811,20 @@ gui.buttonreset();
     TextButton     nativehelpcommand9;
     JPanel         properties9;
 
+    JLabel         Lcompilecommand10;
+    TextButton     compilecommand10;
+    JLabel         Lruncommand10;
+    TextButton     runcommand10;
+    JLabel         Lguidesignercommand10;
+    TextButton     guidesignercommand10;
+    JLabel         Limportfiles10;
+    TextButton      importfiles10;
+    JLabel         Lprogramstartupcode10;
+    TextButton      programstartupcode10;
+    JLabel         Lnativehelpcommand10;
+    TextButton     nativehelpcommand10;
+    JPanel         properties10;
+
     JTabbedPane    tproperties;
     
     JButton        yesbutton;
@@ -9511,7 +9833,7 @@ gui.buttonreset();
     JButton        rstbutton;
 
     JPanel         selectbuttons;
-    JScrollPane    sx,s02,s12,s22,s32,s42,s52,s62,s72,s82,s92;
+    JScrollPane    sx,s02,s12,s22,s32,s42,s52,s62,s72,s82,s92,s102;
 
     PropertyWindow(){
 
@@ -9649,17 +9971,30 @@ gui.buttonreset();
       runcommand8          = new TextButton(RunCommand[8]);
 
       Lcompilecommand9     = new JLabel("コンパイラを起動するコマンド");
-      compilecommand9      = new TextButton(CompileCommand[6]);
+      compilecommand9      = new TextButton(CompileCommand[9]);
       Lruncommand9         = new JLabel("作成したプログラムを起動するコマンド");
-      runcommand9          = new TextButton(RunCommand[6]);
+      runcommand9          = new TextButton(RunCommand[9]);
       Lguidesignercommand9 = new JLabel("GUIデザイナを起動するコマンド");
-      guidesignercommand9  = new TextButton(GUIDesignerCommand[6]);
+      guidesignercommand9  = new TextButton(GUIDesignerCommand[9]);
       Limportfiles9        = new JLabel("インクルード宣言など");
-      importfiles9         = new TextButton(ImportFiles[6]);
+      importfiles9         = new TextButton(ImportFiles[9]);
       Lprogramstartupcode9 = new JLabel("スタートアップコード");
-      programstartupcode9  = new TextButton(ProgramStartupCode[6]);
+      programstartupcode9  = new TextButton(ProgramStartupCode[9]);
       Lnativehelpcommand9  = new JLabel("Javascriptのヘルプファイルを開くコマンド");
-      nativehelpcommand9   = new TextButton(NativeHelpCommand[6]);
+      nativehelpcommand9   = new TextButton(NativeHelpCommand[9]);
+
+      Lcompilecommand10     = new JLabel("コンパイラを起動するコマンド");
+      compilecommand10      = new TextButton(CompileCommand[10]);
+      Lruncommand10         = new JLabel("作成したプログラムを起動するコマンド");
+      runcommand10          = new TextButton(RunCommand[10]);
+      Lguidesignercommand10 = new JLabel("GUIデザイナを起動するコマンド");
+      guidesignercommand10  = new TextButton(GUIDesignerCommand[10]);
+      Limportfiles10        = new JLabel("インクルード宣言など");
+      importfiles10         = new TextButton(ImportFiles[10]);
+      Lprogramstartupcode10 = new JLabel("スタートアップコード");
+      programstartupcode10  = new TextButton(ProgramStartupCode[10]);
+      Lnativehelpcommand10  = new JLabel("Verolog HDLのヘルプファイルを開くコマンド");
+      nativehelpcommand10   = new TextButton(NativeHelpCommand[10]);
 
       properties = new JPanel();
       properties.setLayout(new BoxLayout( properties, BoxLayout.Y_AXIS) );
@@ -9850,6 +10185,23 @@ gui.buttonreset();
       s92 = new JScrollPane(properties9);
 //      s92.setPreferredSize(new Dimension(600,200) );
 
+      properties10 = new JPanel();
+      properties10.setLayout(new BoxLayout( properties10, BoxLayout.Y_AXIS) );
+      properties10.add( Lcompilecommand10);
+      properties10.add( compilecommand10);
+      properties10.add( Lruncommand10);
+      properties10.add( runcommand10);
+      properties10.add( Lguidesignercommand10);
+      properties10.add( guidesignercommand10);
+      properties10.add(Lnativehelpcommand10);
+      properties10.add(nativehelpcommand10);
+      properties10.add( Limportfiles10);
+      properties10.add( importfiles10);
+      properties10.add( Lprogramstartupcode10);
+      properties10.add( programstartupcode10);
+      s102 = new JScrollPane(properties10);
+//      s102.setPreferredSize(new Dimension(600,200) );
+
       yesbutton     = new JButton("OK");;
       yesbutton.setActionCommand("YES");
       yesbutton.addActionListener(this);
@@ -9880,6 +10232,7 @@ gui.buttonreset();
       tproperties.addTab("oregengo-R", s72);
       tproperties.addTab("マルチ言語", s82);
       tproperties.addTab("Javascript", s92);
+      tproperties.addTab("Verilog HDL", s102);
       getContentPane().add(tproperties, BorderLayout.CENTER);
       getContentPane().add(selectbuttons, BorderLayout.SOUTH);
       pack();
@@ -9978,6 +10331,13 @@ gui.buttonreset();
         ProgramStartupCode[9] = programstartupcode9.get_text();
         NativeHelpCommand[9] = nativehelpcommand9.get_text();
 
+        CompileCommand[10] = compilecommand10.get_text();
+        RunCommand[10] = runcommand10.get_text();
+        GUIDesignerCommand[10] = guidesignercommand10.get_text();
+        ImportFiles[10] = importfiles10.get_text();
+        ProgramStartupCode[10] = programstartupcode10.get_text();
+        NativeHelpCommand[10] = nativehelpcommand10.get_text();
+
         restoreProperty();
         setlookandfeel();
 
@@ -10070,6 +10430,13 @@ gui.buttonreset();
       importfiles9.set_text(ImportFiles[9]);
       programstartupcode9.set_text(ProgramStartupCode[9]);
       nativehelpcommand9.set_text(NativeHelpCommand[9]);
+
+      compilecommand10.set_text(CompileCommand[10]);
+      runcommand10.set_text(RunCommand[10]);
+      guidesignercommand10.set_text(GUIDesignerCommand[10]);
+      importfiles10.set_text(ImportFiles[10]);
+      programstartupcode10.set_text(ProgramStartupCode[10]);
+      nativehelpcommand10.set_text(NativeHelpCommand[10]);
 
     }
 
@@ -11784,6 +12151,7 @@ gui.buttonreset();
     JRadioButton creoregengo;
     JRadioButton cremultigengo;
     JRadioButton crejavascript;
+    JRadioButton creveriloghdl;
     JRadioButton fileopen;
 
     InitialDialog(){
@@ -11800,6 +12168,7 @@ gui.buttonreset();
       creoregengo = new JRadioButton("oregengo-Rアプリケーションを作成");
       cremultigengo = new JRadioButton("マルチ言語アプリケーションを作成");
       crejavascript = new JRadioButton("Javascriptアプリケーションを作成");
+      creveriloghdl = new JRadioButton("Verilog HDLアプリケーションを作成");
       fileopen = new JRadioButton("プロジェクトファイルを開く");
       creapplication.setSelected(true);
       creapplet.setSelected(false);
@@ -11811,8 +12180,10 @@ gui.buttonreset();
       creoregengo.setSelected(false);
       cremultigengo.setSelected(false);
       crejavascript.setSelected(false);
+      creveriloghdl.setSelected(false);
       fileopen.setSelected(false);
       ButtonGroup g = new ButtonGroup();
+      g.add(cremultigengo);
       g.add(creapplication);
       g.add(creapplet);
       g.add(crecppcon);
@@ -11821,8 +12192,8 @@ gui.buttonreset();
       g.add(crebasic);
       g.add(creclang);
       g.add(creoregengo);
-      g.add(cremultigengo);
       g.add(crejavascript);
+      g.add(creveriloghdl);
       g.add(fileopen);
       creapplication.setSelected( ApplicationType == 0 );
       creapplet.setSelected( ApplicationType == 1 );
@@ -11834,8 +12205,10 @@ gui.buttonreset();
       creoregengo.setSelected( ApplicationType == 7 );
       cremultigengo.setSelected( ApplicationType == 8 );
       crejavascript.setSelected( ApplicationType == 9 );
+      creveriloghdl.setSelected( ApplicationType == 10 );
       JPanel p1 = new JPanel( );
       p1.setLayout( new BoxLayout( p1, BoxLayout.Y_AXIS ) ); 
+      p1.add( cremultigengo );
       p1.add( creapplication );
       p1.add( creapplet );
       p1.add( crecppcon );
@@ -11844,8 +12217,8 @@ gui.buttonreset();
       p1.add( crebasic );
       p1.add( creclang );
       p1.add( creoregengo );
-      p1.add( cremultigengo );
       p1.add( crejavascript );
+      p1.add( creveriloghdl );
       p1.add( fileopen );
       JButton ok = new JButton( "OK" );
       JButton can  = new JButton( "キャンセル"  );
@@ -11877,6 +12250,7 @@ gui.buttonreset();
       creoregengo.setSelected( ApplicationType == 7 );
       cremultigengo.setSelected( ApplicationType == 8 );
       crejavascript.setSelected( ApplicationType == 9 );
+      creveriloghdl.setSelected( ApplicationType == 10 );
       fileopen.setSelected(false);
 
       // ウィンドウの中央をもとめる
@@ -11909,6 +12283,7 @@ gui.buttonreset();
         else if( creoregengo.isSelected() ) mode = 7;
         else if( cremultigengo.isSelected() ) mode = 8;
         else if( crejavascript.isSelected() ) mode = 9;
+        else if( creveriloghdl.isSelected() ) mode = 10;
         else if( fileopen.isSelected() ) mode = -2;
       } 
       else if( e.getActionCommand().equals( "CAN" ) )mode = -1;
