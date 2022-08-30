@@ -3580,8 +3580,7 @@ class DelayTimer implements ActionListener{
       if(command.equals("RIGHTALL"))   treetool.rightALL();
 
       if(command.equals("FILEWIN")){
-		filewindow.chdir();
-        filewindow.setVisible(true);
+		filewindow.xshow();
 gui.buttonreset();
       }
 
@@ -6992,8 +6991,7 @@ gui.buttonreset();
       if(command.equals("RIGHTALL"))   treetool.rightALL();
 
       if(command.equals("FILEWIN")){
-	   filewindow.chdir();
-       filewindow.setVisible(true);
+	   filewindow.xshow();
 gui.buttonreset();
       }
 
@@ -10724,9 +10722,10 @@ gui.buttonreset();
   
     }//~ImageFileView
 
-    // カレントディレクトリを変更する
-    public void chdir(){
-		chooser.setCurrentDirectory(ObjectLib[ApplicationType]);
+    // 表示する
+    public void xshow(){
+	  chooser.setCurrentDirectory(ObjectLib[ApplicationType]);
+      setVisible(true);
 	}
 
   }//~FileWindow
