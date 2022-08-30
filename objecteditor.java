@@ -12685,14 +12685,14 @@ class XFile extends File{
   
   // XMLドキュメントかどうか判断する
   public boolean isxml(){
-    String s;
+    String s = "";
     if( !this.isFile() ) return( false );
     try{
     BufferedReader din = new BufferedReader( new FileReader( this ) );
     s = din.readLine();
     din.close();
     } catch( IOException ie ){ return( false ); }
-    return( s.equals( "<?xml version=\"1.0\" encoding=\"Shift_JIS\" ?>" ) );
+    return( "<?xml version=\"1.0\" encoding=\"Shift_JIS\" ?>".equals( s ) );
   }
 
   // XMLドキュメントのタイプを返す
