@@ -1166,7 +1166,7 @@ class App1{
       if( cf.isDirectory() ) cf.Xdelete();
       cf.mkdir();
       String cmd = Xreplace( CompileCommand[ApplicationType], "$1", target );
-      messagewindow.execcommand("コンパイルします．\n", "\nコンパイルできません\n", cmd);
+      messagewindow.execcommand("コンパイルします．\n", "\nコンパイルできません\n", cmd, true);
     }
 
     // 退避したプロパティを元に戻す
@@ -3673,7 +3673,7 @@ gui.buttonreset();
       }
       
       if(command.equals("RUN")){
-        messagewindow.execcommand("実行します\n", "\n実行できません\n", RunCommand[ApplicationType]);
+        messagewindow.execcommand("実行します\n", "\n実行できません\n", RunCommand[ApplicationType], true);
 gui.buttonreset();
 
       }
@@ -7019,7 +7019,7 @@ gui.buttonreset();
       }
       
       if(command.equals("RUN")){
-        messagewindow.execcommand("実行します\n", "\n実行できません\n", RunCommand[ApplicationType]);
+        messagewindow.execcommand("実行します\n", "\n実行できません\n", RunCommand[ApplicationType], true);
 gui.buttonreset();
       }
       
@@ -10500,7 +10500,7 @@ gui.buttonreset();
     public void actionPerformed(ActionEvent e ){
       String cmd = e.getActionCommand();
       if( cmd.equals("EXEC") ){
-        execcommand("コマンドを実行します\n", "コマンドを実行できません\n", cmdent.getText() );
+        execcommand("コマンドを実行します\n", "コマンドを実行できません\n", cmdent.getText(), false );
       }
       
       else if( cmd.equals("CLEAR") ){
@@ -10529,30 +10529,25 @@ gui.buttonreset();
       text.setText("");
     }
     
-    public void execcommand( String smsg, String emsg, String cmd ){
-      new Thread(new Runnable() {
-        @Override
-          public void run() {
-            Process p=null;
-            setVisible(true);
-            txtappend( smsg );
-            try{
-              if("".equals(ScriptExecCommand)){
-                p = java.lang.Runtime.getRuntime().exec( cmd );
-	          }
-              else{
-                if(FTmpTextFile.isFile() || FTmpTextFile.isDirectory() ) FTmpTextFile.Xdelete();
-                FTmpTextFile.Xappend(cmd);
-                p = java.lang.Runtime.getRuntime().exec(ScriptExecCommand+" "+TmpTextFile);
-	          }
-              IOPipe pip1 = new IOPipe( p.getErrorStream() );
-              IOPipe pip2 = new IOPipe( p.getInputStream() );
-              pip1.start(); 
-              pip2.start(); 
-              int ret = p.waitFor();
-            } catch( Exception ie ){ messagewindow.txtappend( ie+"\n"+emsg ); }
-	      }
-	  }).start();
+    public void execcommand( String smsg, String emsg, String cmd, boolean block ){
+      Process p=null;
+      setVisible(true);
+      txtappend( smsg );
+      try{
+        if("".equals(ScriptExecCommand)){
+          p = java.lang.Runtime.getRuntime().exec( cmd );
+        }
+        else{
+          if(FTmpTextFile.isFile() || FTmpTextFile.isDirectory() ) FTmpTextFile.Xdelete();
+          FTmpTextFile.Xappend(cmd);
+          p = java.lang.Runtime.getRuntime().exec(ScriptExecCommand+" "+TmpTextFile);
+        }
+        IOPipe pip1 = new IOPipe( p.getErrorStream() );
+        IOPipe pip2 = new IOPipe( p.getInputStream() );
+        pip1.start(); 
+        pip2.start(); 
+        if(block)  p.waitFor();
+      } catch( Exception ie ){ messagewindow.txtappend( ie+"\n"+emsg ); }
     }
 
     // I/O Pipe
