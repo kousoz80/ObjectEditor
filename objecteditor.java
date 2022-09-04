@@ -1,5 +1,5 @@
-//オブジェクトエディタver1.2.8
-// 変更点：Verilog HDLに対応
+//オブジェクトエディタver1.2.9
+// 変更点: 2022/09/04 メッセージウィンドウの不具合を修正
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
@@ -6991,7 +6991,7 @@ gui.buttonreset();
       if(command.equals("RIGHTALL"))   treetool.rightALL();
 
       if(command.equals("FILEWIN")){
-	   filewindow.xshow();
+	    filewindow.xshow();
 gui.buttonreset();
       }
 
@@ -10530,24 +10530,29 @@ gui.buttonreset();
     }
     
     public void execcommand( String smsg, String emsg, String cmd ){
-      Process p=null;
-      setVisible(true);
-      txtappend( smsg );
-      try{
-        if("".equals(ScriptExecCommand)){
-          p = java.lang.Runtime.getRuntime().exec( cmd );
-	    }
-        else{
-          if(FTmpTextFile.isFile() || FTmpTextFile.isDirectory() ) FTmpTextFile.Xdelete();
-          FTmpTextFile.Xappend(cmd);
-          p = java.lang.Runtime.getRuntime().exec(ScriptExecCommand+" "+TmpTextFile);
-	    }
-        IOPipe pip1 = new IOPipe( p.getErrorStream() );
-        IOPipe pip2 = new IOPipe( p.getInputStream() );
-        pip1.start(); 
-        pip2.start(); 
-        int ret = p.waitFor();
-      } catch( Exception ie ){ messagewindow.txtappend( ie+"\n"+emsg ); }
+      new Thread(new Runnable() {
+        @Override
+          public void run() {
+            Process p=null;
+            setVisible(true);
+            txtappend( smsg );
+            try{
+              if("".equals(ScriptExecCommand)){
+                p = java.lang.Runtime.getRuntime().exec( cmd );
+	          }
+              else{
+                if(FTmpTextFile.isFile() || FTmpTextFile.isDirectory() ) FTmpTextFile.Xdelete();
+                FTmpTextFile.Xappend(cmd);
+                p = java.lang.Runtime.getRuntime().exec(ScriptExecCommand+" "+TmpTextFile);
+	          }
+              IOPipe pip1 = new IOPipe( p.getErrorStream() );
+              IOPipe pip2 = new IOPipe( p.getInputStream() );
+              pip1.start(); 
+              pip2.start(); 
+              int ret = p.waitFor();
+            } catch( Exception ie ){ messagewindow.txtappend( ie+"\n"+emsg ); }
+	      }
+	  }).start();
     }
 
     // I/O Pipe
