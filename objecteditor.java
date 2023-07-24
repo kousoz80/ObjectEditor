@@ -6688,7 +6688,7 @@ namebutton.setToolTipText( getFirstLine( description ) );
         }
         super.paintComponent(g);
         g.drawRect( 0, 0, width-1, height-1 );
-        if( image != null )  g.drawImage(image, 10, 20, width, height, null );
+        if( image != null )  g.drawImage(image, 10, 20, width-10, height-20, null );
       }
 
       // action event (エディタを起動して画像を編集する)
