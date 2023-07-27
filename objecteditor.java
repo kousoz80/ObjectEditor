@@ -10730,6 +10730,7 @@ gui.buttonreset();
   class PropertyWindow extends JFrame implements ActionListener {
 
     int i;
+
     JCheckBox      viewsourceatcompile;
     JCheckBox      opencompiledialog;
     JCheckBox      nooptimizepin;
@@ -10911,7 +10912,7 @@ gui.buttonreset();
 
       setTitle("プロジェクトのプロパティ");
 
-      JTabbedPane tproperties = new JTabbedPane();
+      tproperties = new JTabbedPane();
 
       viewsourceatcompile  = new JCheckBox("コンパイル時にソースファイルを開く",ViewSourceAtCompile);
       opencompiledialog    = new JCheckBox("コンパイル時にファイル選択ダイアログを開く",OpenCompileDialog);
@@ -11314,6 +11315,9 @@ gui.buttonreset();
     public void age(){
       recall();
       setVisible( true );
+      try{
+        tproperties.setSelectedIndex(ApplicationType+1);
+      }catch(Exception e){tproperties.setSelectedIndex(0);}
     }
     
     public void actionPerformed(ActionEvent e ){
