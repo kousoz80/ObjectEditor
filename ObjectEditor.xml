@@ -31,7 +31,7 @@
 <JavaEditCommand>geany</JavaEditCommand>
 <JavaViewCommand></JavaViewCommand>
 <HelpCommand>xdg-open ./help/manual.html</HelpCommand>
-<ApplicationType>10</ApplicationType>
+<ApplicationType>0</ApplicationType>
 <CompileCommand0>./compile_java</CompileCommand0>
 <RunCommand0>./run_java</RunCommand0>
 <GUIDesignerCommand0>java -jar guidsin.jar -java</GUIDesignerCommand0>
@@ -262,4 +262,5 @@ gtkwave wave.vcd
 <ImportFiles10></ImportFiles10>
 <ProgramStartupCode10></ProgramStartupCode10>
 <NativeHelpCommand10></NativeHelpCommand10>
+<BinEditCommand>mp -x</BinEditCommand>
 </プロパティ>

@@ -1,5 +1,5 @@
-//オブジェクトエディタver1.3.0
-// 変更点: 2023/07/22 テキスト・画像ファイルコンポーネントを追加
+//オブジェクトエディタver1.3.1
+// 変更点: 2023/08/20 バイナリファイルコンポーネントを追加
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
@@ -48,6 +48,8 @@ class App1{
   XFile  FTmpTextFile = new XFile(TmpTextFile);
   String  TmpImageFile = "tmp"+((int)(Math.random() * (double)0x7fffffff))+".jpg";
   XFile    FTmpImageFile = new XFile(TmpImageFile);
+  String  TmpBinFile = "tmp"+((int)(Math.random() * (double)0x7fffffff))+".bin";
+  XFile    FTmpBinFile = new XFile(TmpBinFile);
   XFile   SetupFile;
   XFile   ProjectFile;
                                                             // 設定ファイル
@@ -131,6 +133,7 @@ class App1{
   String JavaEditCommand;
   String ScriptExecCommand;
   String ImageEditCommand;
+  String BinEditCommand;
   String JavaViewCommand;
   String HtmlEditCommand;
   String HelpCommand;
@@ -478,6 +481,7 @@ class App1{
     JavaEditCommand = ((t=xml.属性値( properties, "JavaEditCommand" ))==null?"":t);
     ScriptExecCommand = ((t=xml.属性値( properties, "ScriptExecCommand" ))==null?"":t);
     ImageEditCommand = ((t=xml.属性値( properties, "ImageEditCommand" ))==null?"":t);
+    BinEditCommand = ((t=xml.属性値( properties, "BinEditCommand" ))==null?"":t);
     JavaViewCommand = ((t=xml.属性値( properties, "JavaViewCommand" ))==null?"":t);
     HtmlEditCommand = ((t=xml.属性値( properties, "HtmlEditCommand" ))==null?"":t);
     HelpCommand = ((t=xml.属性値( properties, "HelpCommand" ))==null?"":t);
@@ -655,6 +659,7 @@ class App1{
     xml.属性値をセット( properties, "JavaEditCommand", JavaEditCommand );
     xml.属性値をセット( properties, "ScriptExecCommand", ScriptExecCommand );
     xml.属性値をセット( properties, "ImageEditCommand", ImageEditCommand );
+    xml.属性値をセット( properties, "BinEditCommand", BinEditCommand );
     xml.属性値をセット( properties, "JavaViewCommand", JavaViewCommand );
     xml.属性値をセット( properties, "HtmlEditCommand", HtmlEditCommand );
     xml.属性値をセット( properties, "HelpCommand", HelpCommand );
@@ -760,6 +765,7 @@ class App1{
   public void exitProgram(){
     FTmpTextFile.Xdelete();
     FTmpImageFile.Xdelete();
+    FTmpBinFile.Xdelete();
     System.exit(0);
   }
   
@@ -1196,6 +1202,10 @@ class App1{
       save_xml_image(element);
     }
 
+    else if( element_name.equals("binfile") ){
+      save_xml_bin(element);
+    }
+
     else if( element_name.equals("xobject") ){
       StringBuffer codebuf = new StringBuffer(""); 
       String cls = xml.属性値( element, "objectname" );
@@ -1212,6 +1222,11 @@ class App1{
       }
 
       list = xml.子要素のリスト( element, "imagefile" );
+      for( i = 0; i < list.size(); i++ ){
+        compile_CPP( list.get(i), clsbuf, funcbuf, initbuf, null );
+      }
+
+      list = xml.子要素のリスト( element, "binfile" );
       for( i = 0; i < list.size(); i++ ){
         compile_CPP( list.get(i), clsbuf, funcbuf, initbuf, null );
       }
@@ -1316,6 +1331,11 @@ class App1{
       }
 
       list = xml.子要素のリスト( element, "imagefile" );
+      for( i = 0; i < list.size(); i++ ){
+        compile_CPP( list.get(i), clsbuf, funcbuf, initbuf, null );
+      }
+
+      list = xml.子要素のリスト( element, "binfile" );
       for( i = 0; i < list.size(); i++ ){
         compile_CPP( list.get(i), clsbuf, funcbuf, initbuf, null );
       }
@@ -1503,6 +1523,11 @@ class App1{
         javatext.append( compile_JAVA( list.get(i), false, null ) );
       }
 
+      list = xml.子要素のリスト( element, "binfile" );
+      for( i = 0; i < list.size(); i++ ){
+        javatext.append( compile_JAVA( list.get(i), false, null ) );
+      }
+
       Vector signal2 = new Vector();
       list = xml.子要素のリスト( element, "relation" );
       for( i = 0; i < list.size(); i++ ){
@@ -1636,6 +1661,11 @@ class App1{
         javatext.append( compile_JAVA( list.get(i), false, null ) );
       }
 
+      list = xml.子要素のリスト( element, "binfile" );
+      for( i = 0; i < list.size(); i++ ){
+        javatext.append( compile_JAVA( list.get(i), false, null ) );
+      }
+
       Vector signal2 = new Vector();
       list = xml.子要素のリスト( element, "action" );
       for( i = 0; i < list.size(); i++ ){
@@ -1717,6 +1747,10 @@ class App1{
 
     else if( element_name.equals("imagefile") ){
       save_xml_image(element);
+    }
+
+    else if( element_name.equals("binfile") ){
+      save_xml_bin(element);
     }
 
     else if( element_name.equals("pin") ){
@@ -1830,6 +1864,10 @@ class App1{
       save_xml_image(element);
     }
 
+    else if( element_name.equals("binfile") ){
+      save_xml_bin(element);
+    }
+
     else if( element_name.equals("xobject") ){
       StringBuffer codebuf = new StringBuffer(""); 
       String cls = xml.属性値( element, "objectname" );
@@ -1846,6 +1884,11 @@ class App1{
       }
 
       list = xml.子要素のリスト( element, "imagefile" );
+      for( i = 0; i < list.size(); i++ ){
+        compile_BASIC( list.get(i), clsbuf, funcbuf, initbuf, null );// codebuf->clsbuf
+      }
+
+      list = xml.子要素のリスト( element, "binfile" );
       for( i = 0; i < list.size(); i++ ){
         compile_BASIC( list.get(i), clsbuf, funcbuf, initbuf, null );// codebuf->clsbuf
       }
@@ -1949,6 +1992,11 @@ class App1{
       }
 
       list = xml.子要素のリスト( element, "imagefile" );
+      for( i = 0; i < list.size(); i++ ){
+        compile_BASIC( list.get(i), codebuf, funcbuf, initbuf, null );
+      }
+
+      list = xml.子要素のリスト( element, "binfile" );
       for( i = 0; i < list.size(); i++ ){
         compile_BASIC( list.get(i), codebuf, funcbuf, initbuf, null );
       }
@@ -2114,6 +2162,10 @@ class App1{
       save_xml_image(element);
     }
 
+    else if( element_name.equals("binfile") ){
+      save_xml_bin(element);
+    }
+
     else if( element_name.equals("xobject") ){
       StringBuffer codebuf = new StringBuffer(""); 
       String cls = xml.属性値( element, "objectname" );
@@ -2130,6 +2182,11 @@ class App1{
       }
 
       list = xml.子要素のリスト( element, "imagefile" );
+      for( i = 0; i < list.size(); i++ ){
+        compile_C( list.get(i), clsbuf, funcbuf, initbuf, null );// codebuf->clsbuf
+      }
+
+      list = xml.子要素のリスト( element, "binfile" );
       for( i = 0; i < list.size(); i++ ){
         compile_C( list.get(i), clsbuf, funcbuf, initbuf, null );// codebuf->clsbuf
       }
@@ -2235,6 +2292,11 @@ class App1{
       }
 
       list = xml.子要素のリスト( element, "imagefile" );
+      for( i = 0; i < list.size(); i++ ){
+        compile_C( list.get(i), clsbuf, funcbuf, initbuf, null );
+      }
+
+      list = xml.子要素のリスト( element, "binfile" );
       for( i = 0; i < list.size(); i++ ){
         compile_C( list.get(i), clsbuf, funcbuf, initbuf, null );
       }
@@ -2399,6 +2461,10 @@ class App1{
       save_xml_image(element);
     }
 
+    else if( element_name.equals("binfile") ){
+      save_xml_bin(element);
+    }
+
     else if( element_name.equals("xobject") ){
       StringBuffer codebuf = new StringBuffer(""); 
       String cls = xml.属性値( element, "objectname" );
@@ -2414,6 +2480,11 @@ class App1{
       }
 
       list = xml.子要素のリスト( element, "imagefile" );
+      for( i = 0; i < list.size(); i++ ){
+        compile_oregengo_R( list.get(i), clsbuf, funcbuf, initbuf, null );
+      }
+
+      list = xml.子要素のリスト( element, "binfile" );
       for( i = 0; i < list.size(); i++ ){
         compile_oregengo_R( list.get(i), clsbuf, funcbuf, initbuf, null );
       }
@@ -2519,6 +2590,11 @@ class App1{
       }
 
       list = xml.子要素のリスト( element, "imagefile" );
+      for( i = 0; i < list.size(); i++ ){
+        compile_oregengo_R( list.get(i), clsbuf, funcbuf, initbuf, null );
+      }
+
+      list = xml.子要素のリスト( element, "binfile" );
       for( i = 0; i < list.size(); i++ ){
         compile_oregengo_R( list.get(i), clsbuf, funcbuf, initbuf, null );
       }
@@ -2699,6 +2775,10 @@ class App1{
       save_xml_image(element);
     }
 
+    else if( element_name.equals("binfile") ){
+      save_xml_bin(element);
+    }
+
     else if( element_name.equals("xobject") ){
       StringBuffer codebuf = new StringBuffer(""); 
       String cls = xml.属性値( element, "objectname" );
@@ -2714,6 +2794,11 @@ class App1{
       }
 
       list = xml.子要素のリスト( element, "imagefile" );
+      for( i = 0; i < list.size(); i++ ){
+        compile_javascript( list.get(i), clsbuf, funcbuf, initbuf, null );// codebuf->clsbuf
+      }
+
+      list = xml.子要素のリスト( element, "binfile" );
       for( i = 0; i < list.size(); i++ ){
         compile_javascript( list.get(i), clsbuf, funcbuf, initbuf, null );// codebuf->clsbuf
       }
@@ -2819,6 +2904,11 @@ class App1{
       }
 
       list = xml.子要素のリスト( element, "imagefile" );
+      for( i = 0; i < list.size(); i++ ){
+        compile_javascript( list.get(i), clsbuf, funcbuf, initbuf, null );
+      }
+
+      list = xml.子要素のリスト( element, "binfile" );
       for( i = 0; i < list.size(); i++ ){
         compile_javascript( list.get(i), clsbuf, funcbuf, initbuf, null );
       }
@@ -2980,6 +3070,10 @@ class App1{
       save_xml_image(element);
     }
 
+    else if( element_name.equals("binfile") ){
+      save_xml_bin(element);
+    }
+
     else if( element_name.equals("xobject") ){
       StringBuffer codebuf = new StringBuffer(""); 
       String cls = xml.属性値( element, "objectname" );
@@ -2996,6 +3090,11 @@ class App1{
       }
 
       list = xml.子要素のリスト( element, "imagefile" );
+      for( i = 0; i < list.size(); i++ ){
+        compile_Verilog_HDL( list.get(i), clsbuf, funcbuf, initbuf, null );// codebuf->clsbuf
+      }
+
+      list = xml.子要素のリスト( element, "binfile" );
       for( i = 0; i < list.size(); i++ ){
         compile_Verilog_HDL( list.get(i), clsbuf, funcbuf, initbuf, null );// codebuf->clsbuf
       }
@@ -3099,6 +3198,11 @@ class App1{
       }
 
       list = xml.子要素のリスト( element, "imagefile" );
+      for( i = 0; i < list.size(); i++ ){
+        compile_Verilog_HDL( list.get(i), codebuf, funcbuf, initbuf, null );
+      }
+
+      list = xml.子要素のリスト( element, "binfile" );
       for( i = 0; i < list.size(); i++ ){
         compile_Verilog_HDL( list.get(i), codebuf, funcbuf, initbuf, null );
       }
@@ -3452,6 +3556,10 @@ class DelayTimer implements ActionListener{
       v = xml.子要素のリスト( element, "imagefile" );
       for( i = 0; i < v.size(); i++ ) gui.addcomponent( new imagefile( v.get(i) ) );
        
+      // binfile
+      v = xml.子要素のリスト( element, "binfile" );
+      for( i = 0; i < v.size(); i++ ) gui.addcomponent( new binfile( v.get(i) ) );
+       
       // kjgroup
       v = xml.子要素のリスト( element, "KJgroup" );
       for( i = 0; i < v.size(); i++ ){
@@ -3528,6 +3636,7 @@ class DelayTimer implements ActionListener{
         else if( comp[i] instanceof codeclip )  ( (codeclip)comp[i] ).Logout();
         else if( comp[i] instanceof textfile )  ( (textfile)comp[i] ).Logout();
         else if( comp[i] instanceof imagefile ) ( (imagefile)comp[i] ).Logout();
+        else if( comp[i] instanceof binfile )   ( (binfile)comp[i] ).Logout();
         else if( comp[i] instanceof KJgroup )   ( (KJgroup)comp[i] ).Logout();
         else if( comp[i] instanceof ImgIcon )   ( (ImgIcon)comp[i] ).Logout();
       }
@@ -3549,6 +3658,7 @@ class DelayTimer implements ActionListener{
       else if( comp instanceof codeclip )  { ( (codeclip) comp).suicide();   }
       else if( comp instanceof textfile )  { ( (textfile) comp).suicide();   }
       else if( comp instanceof imagefile )  { ( (imagefile) comp).suicide();   }
+      else if( comp instanceof binfile )  { ( (binfile) comp).suicide();   }
       else if( comp instanceof KJgroup )   { ( (KJgroup) comp).suicide();    }
       else if( comp instanceof ImgIcon )   { ( (ImgIcon) comp).suicide();    }
       else if( comp instanceof pinlabel )  { ( (pinlabel) comp).suicide();   }
@@ -3671,6 +3781,12 @@ class DelayTimer implements ActionListener{
 
       else if( xml.要素の名前( clipboad ).equals("imagefile") ){
         Object txt = xml.新しい要素( element, clipboad, "_J"+ID_maker++);
+        xml.属性値をセット( txt, "x0", "" + xp );
+        xml.属性値をセット( txt, "y0", "" + yp );
+      }
+
+      else if( xml.要素の名前( clipboad ).equals("binfile") ){
+        Object txt = xml.新しい要素( element, clipboad, "_B"+ID_maker++);
         xml.属性値をセット( txt, "x0", "" + xp );
         xml.属性値をセット( txt, "y0", "" + yp );
       }
@@ -3800,6 +3916,7 @@ class DelayTimer implements ActionListener{
       if(command.equals("CRE_CODE"))   mode = command;
       if(command.equals("CRE_TEXT"))   mode = command;
       if(command.equals("CRE_IMG"))    mode = command;
+      if(command.equals("CRE_BIN"))    mode = command;
       if(command.equals("CRE_KJG"))    mode = command;
       if(command.equals("CRE_ICO"))    mode = command;
       if(command.equals("CUT"))        mode = command;
@@ -4033,6 +4150,13 @@ gui.buttonreset();
 gui.buttonreset();
       }
   
+      // create binfile
+      else if( mode.equals("CRE_BIN")){
+        gui.addcomponent( new binfile( xml.新しい要素(element, "binfile", "_B"+ID_maker++ ), "", xp, yp ) );
+        mode = "NOP";
+gui.buttonreset();
+      }
+  
       // create kjgroup
       else if( mode.equals("CRE_KJG")){
         KJgroup gr = new KJgroup( xml.新しい要素( element, "KJgroup", "_G"+ID_maker ), "Group"  + ID_maker, xp, yp );
@@ -4188,6 +4312,10 @@ gui.buttonreset();
           ((imagefile)comp1).save();
           clipboad = xml.新しい要素( xml.ルート要素(), ((imagefile)comp1).element, "clipboad" );
         }
+        else if( comp1 instanceof binfile ){
+          ((binfile)comp1).save();
+          clipboad = xml.新しい要素( xml.ルート要素(), ((binfile)comp1).element, "clipboad" );
+        }
         else if( comp1 instanceof KJgroup ){
           ((KJgroup)comp1).save();
           clipboad = xml.新しい要素( xml.ルート要素(), ((KJgroup)comp1).element, "clipboad" );
@@ -4231,6 +4359,10 @@ gui.buttonreset();
         else if( comp1 instanceof imagefile ){
           ((imagefile)comp1).save();
           clipboad = xml.新しい要素( xml.ルート要素(), ((imagefile)comp1).element, "clipboad" );
+        }
+        else if( comp1 instanceof binfile ){
+          ((binfile)comp1).save();
+          clipboad = xml.新しい要素( xml.ルート要素(), ((binfile)comp1).element, "clipboad" );
         }
         else if( comp1 instanceof KJgroup ){
           ((KJgroup)comp1).save();
@@ -4355,6 +4487,7 @@ gui.buttonreset();
               JMenuItem kjgroup;
               JMenuItem textfile;
               JMenuItem imagefile;
+              JMenuItem binfile;
 
               JMenuItem guidsin;
               JMenuItem proj;
@@ -4573,6 +4706,12 @@ gui.buttonreset();
         imagefile.setActionCommand("CRE_IMG");
         imagefile.addActionListener(this);
         toolmenu.add(imagefile);
+
+        binfile = new JMenuItem("バイナリファイル(B)", KeyEvent.VK_B);
+        binfile.setFont( font );
+        binfile.setActionCommand("CRE_BIN");
+        binfile.addActionListener(this);
+        toolmenu.add(binfile);
 
         kjgroup = new JMenuItem("グループ(G)", KeyEvent.VK_G);
         kjgroup.setFont( font );
@@ -6768,6 +6907,218 @@ namebutton.setToolTipText( getFirstLine( description ) );
     }//~imagefile
 
 
+    // binfile
+    class binfile extends JPanel implements MouseMotionListener, MouseListener, ActionListener{
+      boolean exist;
+      Object element;
+      int x0, y0, x1, y1, x2, y2;
+      int width, height;
+      int mode;
+      Graphics grp;
+      byte[] bin;
+
+      JButton openWindow;
+      JTextField fpath;
+      JTextArea  text;
+      
+      // 新規作成(ファイルも一緒に生成する)
+      binfile( Object elem, String str, int x, int y ){
+        exist = true;
+        element = elem;
+        bin = null;
+        setName( xml.要素のID( element ) );
+        x0 = x;
+        y0 = y;
+        width = 100;
+        height = 40;
+        setLayout( null );
+        openWindow = new JButton();
+        openWindow.setAlignmentX( JComponent.LEFT_ALIGNMENT );
+        add(openWindow);
+        openWindow.setBackground( Color.green );
+        openWindow.addActionListener(this);
+        fpath = new JTextField("");
+        fpath.setBorder( new LineBorder(Color.gray) );
+        add(fpath);
+        text = new JTextArea("     \"BINARY FILE\"\n");
+        for(int i = 0; i < 128; i++ ) text.append("10101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010\n");
+        text.setForeground(Color.black);
+        text.setBorder( new LineBorder(Color.gray) );
+//        text.setEnabled(false);
+        text.setEditable(false);
+        add(text);
+        addMouseMotionListener(this);            //マウスリスナーを設定
+        addMouseListener(this);                  //マウスリスナーを設定
+        save();
+        setBounds( x0, y0, width, height );
+        setBackground( Color.white );
+        openWindow.setBounds( 0, 0, 10, height );
+        fpath.setBounds( 10, 0, width-20, 20 );
+        text.setBounds( 10, 20, width-20, height-20 );
+        mode = 1;
+      }
+
+
+      // Loginモードで生成(ファイルの情報をもとに生成)
+      binfile( Object elem ){
+        exist = true;
+        element = elem;
+        setName( xml.要素のID( element ) );
+        setLayout( null );
+        openWindow = new JButton( );
+        openWindow.setAlignmentX( JComponent.LEFT_ALIGNMENT );
+        add(openWindow);
+        openWindow.setBackground( Color.green );
+        openWindow.addActionListener(this);
+        fpath = new JTextField("  ");
+        fpath.setBorder( new LineBorder(Color.gray) );
+        add(fpath);
+        text = new JTextArea("     \"BINARY FILE\"\n");
+        for(int i = 0; i < 128; i++ ) text.append("10101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010\n");
+        text.setForeground(Color.black);
+        text.setBorder( new LineBorder(Color.gray) );
+//        text.setEnabled(false);
+        text.setEditable(false);
+        add(text);
+        addMouseMotionListener(this);            //マウスリスナーを設定
+        addMouseListener(this);                  //マウスリスナーを設定
+        load();
+        setBounds( x0, y0, width, height );
+        setBackground( Color.white );
+        openWindow.setBounds( 0, 0, 10, height );
+        fpath.setBounds( 10, 0, width-20, 20 );
+        text.setBounds( 10, 20, width-20, height-20 );
+        mode = 1;
+      }
+
+      //削除(ファイルごと削除)
+      public void suicide(){
+        if( exist ){
+          xml.要素を削除( element );
+          exist = false;
+          if( getParent() != null ) getParent().remove(this);
+        }
+        element = null;
+      }
+
+      // Logout(内容をファイルにセーブして消去)
+      public void Logout(){
+        if( exist ){
+          save();
+          exist = false;
+          if( getParent() != null ) getParent().remove(this);
+        }
+        element = null;
+      }
+
+      // 内容をロード
+      public void load(){
+        x0 = parseInt( xml.属性値( element, "x0" ) );
+        y0 = parseInt( xml.属性値( element, "y0" ) );
+        width = parseInt( xml.属性値( element, "width" ) );
+        height = parseInt( xml.属性値( element, "height" ) );
+        bin = text2bin(xml.属性値( element, "bin" ));
+        fpath.setText( xml.属性値( element, "fpath" ) );
+      }
+
+      // 内容をセーブ
+      public void save(){
+        xml.属性値をセット( element, "x0", "" + x0 );
+        xml.属性値をセット( element, "y0", "" + y0 );
+        xml.属性値をセット( element, "width", "" + width );
+        xml.属性値をセット( element, "height", "" + height );
+        xml.属性値をセット( element, "bin", bin2text(bin) );
+        xml.属性値をセット( element, "fpath", fpath.getText() );
+      }
+
+      //コンポーネント描画
+      public void paintComponent(Graphics g){    
+        if( mode == 1 ){
+          setBounds( x0, y0, width, height );
+          openWindow.setBounds( 0, 0, 10, height );
+          fpath.setBounds( 10, 0, width-20, 20 );
+          text.setBounds( 10, 20, width-20, height-20 );
+          mode = 2;
+        }
+        super.paintComponent(g);
+        g.drawRect( 0, 0, width - 1, height - 1 );
+      }
+
+      // action event (エディタを起動してバイナリファイルを編集する)
+      public void actionPerformed(ActionEvent e ){
+        try{
+          FileOutputStream outfile = new FileOutputStream(FTmpBinFile);
+          if(bin != null){
+            outfile.write(bin);    
+            outfile.flush();
+          }
+          outfile.close();
+          execute( BinEditCommand+" "+TmpBinFile, true );
+          long len = FTmpBinFile.length();
+          bin = new byte[(int)len];
+          FileInputStream infile = new FileInputStream(FTmpBinFile);
+          infile.read(bin);
+	      infile.close();
+	    } catch(Exception ee){ ee.printStackTrace();}
+        filewindow.setVisible( filewindow.isVisible() );
+        gui.resize();
+      }
+
+      //mouse event
+      public void mousePressed(MouseEvent e) {
+        if( mode == 2 ){
+          grp = getParent().getGraphics();
+          x2 = e.getX();
+          y2 = e.getY();
+          if( x2 > width-10 && y2 > height-10 ) mode = 3; else mode = 4;
+//          setSize(1,1);
+           grp.setXORMode(Color.white);
+          grp.drawRect( x0+1, y0+1, width-2, height-2 );
+          grp.setPaintMode();
+       }
+      }
+
+      public void mouseDragged(MouseEvent e){ //ドラッグした時の処理
+          grp.setXORMode(Color.white);
+          grp.drawRect( x0+1, y0+1, width-2, height-2 );
+        x1 = e.getX();
+        y1 = e.getY();
+        if( mode == 3 ){
+            width =  x1 + 5;
+            if( width < 30 ) width = 30;
+            height = y1 + 5;
+            if( height < 20 ) height = 20;
+        }
+        else if( mode == 4){
+          x0 += x1 - x2;
+          if( x0 < 0) x0 = 0;
+          y0 += y1 - y2;
+          if(y0 < 0 ) y0 = 0;
+        }
+        x2 = x1;
+        y2 = y1;
+          grp.drawRect( x0+1, y0+1, width-2, height-2 );
+          grp.setPaintMode();
+      }
+
+      public void mouseReleased(MouseEvent e){
+        setBounds( x0, y0, width, height );
+        openWindow.setBounds( 0, 0, 10, height );
+        fpath.setBounds( 10, 0, width-20, 20 );
+        text.setBounds( 10, 20, width-20, height-20 );
+        mode = 2;
+        gui.resize();
+        repaint();
+      }
+
+      public void mouseClicked(MouseEvent e) { componentClicked( this, e ); }
+      public void mouseMoved(MouseEvent e)   {   }
+      public void mouseEntered(MouseEvent e) {   }
+      public void mouseExited(MouseEvent e)  {   }
+    
+    }//~binfile
+
+
     // relation
     class relation extends JPanel implements ComponentListener, MouseListener{
       boolean exist;
@@ -7403,6 +7754,10 @@ namebutton.setToolTipText( getFirstLine( description ) );
       v = xml.子要素のリスト( element, "imagefile" );
       for( i = 0; i < v.size(); i++ ) gui.addcomponent( new imagefile( v.get(i) ) );
 
+      // binfile
+      v = xml.子要素のリスト( element, "binfile" );
+      for( i = 0; i < v.size(); i++ ) gui.addcomponent( new binfile( v.get(i) ) );
+
       // ImgIcon
       v = xml.子要素のリスト( element, "ImgIcon" );
       for( i = 0; i < v.size(); i++ ) gui.addcomponent( new ImgIcon( v.get(i) ) );
@@ -7482,6 +7837,7 @@ gui.buttonreset();
         else if( comp[i] instanceof codeclip  ) ( (codeclip)comp[i] ).save();
         else if( comp[i] instanceof textfile  ) ( (textfile)comp[i] ).save();
         else if( comp[i] instanceof imagefile  ) ( (imagefile)comp[i] ).save();
+        else if( comp[i] instanceof binfile  )   ( (binfile)comp[i] ).save();
         else if( comp[i] instanceof ImgIcon  ) ( (ImgIcon)comp[i] ).save();
       }
       gui.clear();
@@ -7506,6 +7862,7 @@ gui.buttonreset();
       if( comp instanceof codeclip )  { ((codeclip)comp).suicide(); }
       if( comp instanceof textfile )  { ((textfile)comp).suicide(); }
       if( comp instanceof imagefile )  { ((imagefile)comp).suicide(); }
+      if( comp instanceof binfile )    { ((binfile)comp).suicide(); }
       if( comp instanceof ImgIcon )  { ((ImgIcon)comp).suicide(); }
     }
 
@@ -7596,6 +7953,12 @@ gui.buttonreset();
         xml.属性値をセット( txt, "y0", "" + yp );
       }
 
+      else if( xml.要素の名前( clipboad ).equals("binfile") ){
+        Object txt = xml.新しい要素( element, clipboad, "_B"+ID_maker++);
+        xml.属性値をセット( txt, "x0", "" + xp );
+        xml.属性値をセット( txt, "y0", "" + yp );
+      }
+
       else if( xml.要素の名前( clipboad ).equals("ImgIcon") ){
         Object ic = xml.新しい要素( element, clipboad, "_I"+ID_maker++);
         xml.属性値をセット( ic, "x0", "" + xp );
@@ -7646,6 +8009,7 @@ gui.buttonreset();
       if(command.equals("CRE_CODE"))   mode = command;
       if(command.equals("CRE_TEXT"))   mode = command;
       if(command.equals("CRE_IMG"))    mode = command;
+      if(command.equals("CRE_BIN"))    mode = command;
       if(command.equals("CRE_ICO"))    mode = command;
       if(command.equals("DEL_OBJ"))    mode = command;
       if(command.equals("CUT"))        mode = command;
@@ -7916,6 +8280,13 @@ gui.buttonreset();
 gui.buttonreset();
       }
   
+      // create binfile
+      else if( mode.equals("CRE_BIN")){
+        gui.addcomponent( new binfile( xml.新しい要素(element, "binfile", "_B"+ID_maker++ ), "", xp, yp ) );
+        mode = "NOP";
+gui.buttonreset();
+      }
+  
       // create icon
       else if( mode.equals("CRE_ICO")){
         gui.addcomponent( new ImgIcon( xml.新しい要素(element, "ImgIcon", "_I"+ID_maker++ ), xp, yp ) );
@@ -8040,6 +8411,10 @@ gui.buttonreset();
             ((imagefile)comp1).save();
              clipboad = xml.新しい要素( xml.ルート要素(), ((imagefile)comp1).element, "clipboad" );
           }
+          else if( comp1 instanceof binfile ) {
+            ((binfile)comp1).save();
+             clipboad = xml.新しい要素( xml.ルート要素(), ((binfile)comp1).element, "clipboad" );
+          }
           else if( comp1 instanceof ImgIcon ) {
             ((ImgIcon)comp1).save();
              clipboad = xml.新しい要素( xml.ルート要素(), ((ImgIcon)comp1).element, "clipboad" );
@@ -8077,6 +8452,10 @@ gui.buttonreset();
           else if( comp1 instanceof imagefile ) {
             ((imagefile)comp1).save();
              clipboad = xml.新しい要素( xml.ルート要素(), ((imagefile)comp1).element, "clipboad" );
+          }
+          else if( comp1 instanceof binfile ) {
+            ((binfile)comp1).save();
+             clipboad = xml.新しい要素( xml.ルート要素(), ((binfile)comp1).element, "clipboad" );
           }
           else if( comp1 instanceof ImgIcon ) {
             ((ImgIcon)comp1).save();
@@ -8148,6 +8527,7 @@ gui.buttonreset();
               JMenuItem codeclip;
               JMenuItem textfile;
               JMenuItem imagefile;
+              JMenuItem binfile;
               JMenuItem guidsin;
 
           JMenu editmenu;
@@ -8349,6 +8729,12 @@ gui.buttonreset();
         imagefile.setActionCommand("CRE_IMG");
         imagefile.addActionListener(this);
         toolmenu.add(imagefile);
+
+        binfile = new JMenuItem("バイナリファイル(B)", KeyEvent.VK_B);
+        binfile.setFont( font );
+        binfile.setActionCommand("CRE_BIN");
+        binfile.addActionListener(this);
+        toolmenu.add(binfile);
 
         toolmenu.addSeparator();
      
@@ -10388,6 +10774,216 @@ gui.buttonreset();
     }//~imagefile
 
 
+    // binfile
+    class binfile extends JPanel implements MouseMotionListener, MouseListener, ActionListener{
+      boolean exist;
+      Object element;
+      int x0, y0, x1, y1, x2, y2;
+      int width, height;
+      int mode;
+      Graphics grp;
+      byte[] bin;
+
+      JButton openWindow;
+      JTextField fpath;
+      JTextArea  text;
+      
+      // 新規作成(ファイルも一緒に生成する)
+      binfile( Object elem, String str, int x, int y ){
+        exist = true;
+        element = elem;
+        bin = null;
+        setName( xml.要素のID( element ) );
+        x0 = x;
+        y0 = y;
+        width = 100;
+        height = 40;
+        setLayout( null );
+        openWindow = new JButton();
+        openWindow.setAlignmentX( JComponent.LEFT_ALIGNMENT );
+        add(openWindow);
+        openWindow.setBackground( Color.green );
+        openWindow.addActionListener(this);
+        fpath = new JTextField("");
+        fpath.setBorder( new LineBorder(Color.gray) );
+        add(fpath);
+        text = new JTextArea("\"BINARY FILE\"\n");
+        for(int i = 0; i < 128; i++ ) text.append("10101010101010101010101010101010101010101010101010\n10101010101010101010101010101010101010101010101010\n10101010101010101010101010101010101010101010101010\n101010101010101010101010101010101\n");
+        text.setForeground(Color.black);
+        text.setBorder( new LineBorder(Color.gray) );
+        text.setEnabled(false);
+        add(text);
+        addMouseMotionListener(this);            //マウスリスナーを設定
+        addMouseListener(this);                  //マウスリスナーを設定
+        save();
+        setBounds( x0, y0, width, height );
+        setBackground( Color.white );
+        openWindow.setBounds( 0, 0, 10, height );
+        fpath.setBounds( 10, 0, width-20, 20 );
+        text.setBounds( 10, 20, width-20, height-20 );
+        mode = 1;
+      }
+
+
+      // Loginモードで生成(ファイルの情報をもとに生成)
+      binfile( Object elem ){
+        exist = true;
+        element = elem;
+        setName( xml.要素のID( element ) );
+        setLayout( null );
+        openWindow = new JButton( );
+        openWindow.setAlignmentX( JComponent.LEFT_ALIGNMENT );
+        add(openWindow);
+        openWindow.setBackground( Color.green );
+        openWindow.addActionListener(this);
+        fpath = new JTextField("  ");
+        fpath.setBorder( new LineBorder(Color.gray) );
+        add(fpath);
+        text = new JTextArea("\"BINARY FILE\"\n");
+        for(int i = 0; i < 128; i++ ) text.append("10101010101010101010101010101010101010101010101010\n10101010101010101010101010101010101010101010101010\n10101010101010101010101010101010101010101010101010\n101010101010101010101010101010101\n");
+        text.setForeground(Color.black);
+        text.setBorder( new LineBorder(Color.gray) );
+        text.setEnabled(false);
+        add(text);
+        addMouseMotionListener(this);            //マウスリスナーを設定
+        addMouseListener(this);                  //マウスリスナーを設定
+        load();
+        setBounds( x0, y0, width, height );
+        setBackground( Color.white );
+        openWindow.setBounds( 0, 0, 10, height );
+        fpath.setBounds( 10, 0, width-20, 20 );
+        text.setBounds( 10, 20, width-20, height-20 );
+        mode = 1;
+      }
+
+      //削除(ファイルごと削除)
+      public void suicide(){
+        if( exist ){
+          xml.要素を削除( element );
+          exist = false;
+          if( getParent() != null ) getParent().remove(this);
+        }
+        element = null;
+      }
+
+      // Logout(内容をファイルにセーブして消去)
+      public void Logout(){
+        if( exist ){
+          save();
+          exist = false;
+          if( getParent() != null ) getParent().remove(this);
+        }
+        element = null;
+      }
+
+      // 内容をロード
+      public void load(){
+        x0 = parseInt( xml.属性値( element, "x0" ) );
+        y0 = parseInt( xml.属性値( element, "y0" ) );
+        width = parseInt( xml.属性値( element, "width" ) );
+        height = parseInt( xml.属性値( element, "height" ) );
+        bin = text2bin(xml.属性値( element, "text" ));
+        fpath.setText( xml.属性値( element, "fpath" ) );
+      }
+
+      // 内容をセーブ
+      public void save(){
+        xml.属性値をセット( element, "x0", "" + x0 );
+        xml.属性値をセット( element, "y0", "" + y0 );
+        xml.属性値をセット( element, "width", "" + width );
+        xml.属性値をセット( element, "height", "" + height );
+        xml.属性値をセット( element, "text", bin2text(bin) );
+        xml.属性値をセット( element, "fpath", fpath.getText() );
+      }
+
+      //コンポーネント描画
+      public void paintComponent(Graphics g){    
+        if( mode == 1 ){
+          setBounds( x0, y0, width, height );
+          openWindow.setBounds( 0, 0, 10, height );
+          fpath.setBounds( 10, 0, width-20, 20 );
+          text.setBounds( 10, 20, width-20, height-20 );
+          mode = 2;
+        }
+        super.paintComponent(g);
+        g.drawRect( 0, 0, width - 1, height - 1 );
+      }
+
+      // action event (エディタを起動してバイナリファイルを編集する)
+      public void actionPerformed(ActionEvent e ){
+        try{
+          FileOutputStream outfile = new FileOutputStream(FTmpBinFile);
+          if(bin != null){
+            outfile.write(bin);    
+            outfile.flush();
+          }
+          outfile.close();
+          execute( BinEditCommand+" "+TmpBinFile, true );
+          long len = FTmpBinFile.length();
+          bin = new byte[(int)len];
+          FileInputStream infile = new FileInputStream(FTmpBinFile);
+          infile.read(bin);
+	      infile.close();
+	    } catch(Exception ee){ ee.printStackTrace();}
+        filewindow.setVisible( filewindow.isVisible() );
+        gui.resize();
+      }
+
+      //mouse event
+      public void mousePressed(MouseEvent e) {
+        if( mode == 2 ){
+          grp = getParent().getGraphics();
+          x2 = e.getX();
+          y2 = e.getY();
+          if( x2 > width-10 && y2 > height-10 ) mode = 3; else mode = 4;
+//          setSize(1,1);
+           grp.setXORMode(Color.white);
+          grp.drawRect( x0+1, y0+1, width-2, height-2 );
+          grp.setPaintMode();
+       }
+      }
+
+      public void mouseDragged(MouseEvent e){ //ドラッグした時の処理
+          grp.setXORMode(Color.white);
+          grp.drawRect( x0+1, y0+1, width-2, height-2 );
+        x1 = e.getX();
+        y1 = e.getY();
+        if( mode == 3 ){
+            width =  x1 + 5;
+            if( width < 30 ) width = 30;
+            height = y1 + 5;
+            if( height < 20 ) height = 20;
+        }
+        else if( mode == 4){
+          x0 += x1 - x2;
+          if( x0 < 0) x0 = 0;
+          y0 += y1 - y2;
+          if(y0 < 0 ) y0 = 0;
+        }
+        x2 = x1;
+        y2 = y1;
+          grp.drawRect( x0+1, y0+1, width-2, height-2 );
+          grp.setPaintMode();
+      }
+
+      public void mouseReleased(MouseEvent e){
+        setBounds( x0, y0, width, height );
+        openWindow.setBounds( 0, 0, 10, height );
+        fpath.setBounds( 10, 0, width-20, 20 );
+        text.setBounds( 10, 20, width-20, height-20 );
+        mode = 2;
+        gui.resize();
+        repaint();
+      }
+
+      public void mouseClicked(MouseEvent e) { componentClicked( this ); }
+      public void mouseMoved(MouseEvent e)   {   }
+      public void mouseEntered(MouseEvent e) {   }
+      public void mouseExited(MouseEvent e)  {   }
+    
+    }//~binfile
+
+
     //画像アイコン
     class ImgIcon extends JPanel implements MouseMotionListener, MouseListener {
 
@@ -10742,6 +11338,8 @@ gui.buttonreset();
     JTextField     script_exec_command;
     JLabel         Limgeditcommand;
     JTextField     imgeditcommand;
+    JLabel         Lbineditcommand;
+    JTextField     bineditcommand;
     JLabel         Ljavaviewcommand;
     JTextField     javaviewcommand;
     JLabel         Lhtmleditcommand;
@@ -10923,6 +11521,8 @@ gui.buttonreset();
       script_exec_command  = new JTextField(ScriptExecCommand);
       Limgeditcommand     = new JLabel("アイコンを編集するコマンド");
       imgeditcommand      = new JTextField(ImageEditCommand);
+      Lbineditcommand     = new JLabel("バイナリファイルを編集するコマンド");
+      bineditcommand      = new JTextField(BinEditCommand);
       Ljavaviewcommand     = new JLabel("コンパイル時にソースファイルを開くコマンド");
       javaviewcommand      = new JTextField(JavaViewCommand);
       Lhtmleditcommand     = new JLabel("アプレットのhtml文書を編集するコマンド");
@@ -11086,6 +11686,8 @@ gui.buttonreset();
       properties.add(script_exec_command);
       properties.add(Limgeditcommand);
       properties.add(imgeditcommand);
+      properties.add(Lbineditcommand);
+      properties.add(bineditcommand);
       properties.add(Ljavaviewcommand);
       properties.add(javaviewcommand);
       properties.add(Lhtmleditcommand);
@@ -11335,6 +11937,7 @@ gui.buttonreset();
         JavaEditCommand = javaeditcommand.getText();
         ScriptExecCommand = script_exec_command.getText();
         ImageEditCommand = imgeditcommand.getText();
+        BinEditCommand = bineditcommand.getText();
         JavaViewCommand = javaviewcommand.getText();
         HtmlEditCommand = htmleditcommand.getText();
         HelpCommand = helpcommand.getText();
@@ -11434,6 +12037,7 @@ gui.buttonreset();
       javaeditcommand.setText(JavaEditCommand);
       script_exec_command.setText(ScriptExecCommand);
       imgeditcommand.setText(ImageEditCommand);
+      bineditcommand.setText(BinEditCommand);
       javaviewcommand.setText(JavaViewCommand);
       htmleditcommand.setText(HtmlEditCommand);
       helpcommand.setText(HelpCommand);
@@ -12258,6 +12862,7 @@ gui.buttonreset();
           cname.equals( "codeclip" ) ||
           cname.equals( "textfile" ) ||
           cname.equals( "imagefile" ) ||
+          cname.equals( "binfile" ) ||
           cname.equals( "ImgIcon" ) ||
           cname.equals( "KJgroup" ) ){
             Object c = comps.get(j);
@@ -12435,6 +13040,7 @@ gui.buttonreset();
           cname.equals( "codeclip" ) ||
           cname.equals( "textfile" ) ||
           cname.equals( "imagefile" ) ||
+          cname.equals( "binfile" ) ||
           cname.equals( "KJgroup" ) ) {
             Object c = incomps.get(j);
             int x =  parseInt( xml.属性値( c, "x0" ) );
@@ -12452,6 +13058,7 @@ gui.buttonreset();
           cname.equals( "codeclip" ) ||
           cname.equals( "textfile" ) ||
           cname.equals( "imagefile" ) ||
+          cname.equals( "binfile" ) ||
           cname.equals( "KJgroup" ) ) {
             Object c = incomps.get(j);
             xml.属性値をセット( c, "x0", "" + ( parseInt( xml.属性値( c, "x0" ) ) - ox + 20 ) );
@@ -12527,6 +13134,7 @@ gui.buttonreset();
           cname.equals( "codeclip" ) ||
           cname.equals( "textfile" ) ||
           cname.equals( "imagefile" ) ||
+          cname.equals( "binfile" ) ||
           cname.equals( "ImgIcon" ) ||
           cname.equals( "KJgroup" ) ) {
             Object c = xcomps.get(j);
@@ -12569,6 +13177,7 @@ gui.buttonreset();
           cname.equals( "codeclip" ) ||
           cname.equals( "textfile" ) ||
           cname.equals( "imagefile" ) ||
+          cname.equals( "binfile" ) ||
           cname.equals( "ImgIcon" ) ||
           cname.equals( "KJgroup" ) ) {
             Object c = comps.get(j);
@@ -12590,6 +13199,7 @@ gui.buttonreset();
           cname.equals( "codeclip" ) ||
           cname.equals( "textfile" ) ||
           cname.equals( "imagefile" ) ||
+          cname.equals( "binfile" ) ||
           cname.equals( "ImgIcon" ) ||
           cname.equals( "KJgroup" ) ) {
             Object c1 = xcomps.get(j);
@@ -12687,6 +13297,7 @@ gui.buttonreset();
           cname.equals( "codeclip" ) ||
           cname.equals( "textfile" ) ||
           cname.equals( "imagefile" ) ||
+          cname.equals( "binfile" ) ||
           cname.equals( "ImgIcon" ) ||
           cname.equals( "KJgroup" ) ) {
             Object c = comps.get(j);
@@ -12704,6 +13315,7 @@ gui.buttonreset();
             cname.equals( "codeclip" ) ||
             cname.equals( "textfile" ) ||
             cname.equals( "imagefile" ) ||
+            cname.equals( "binfile" ) ||
             cname.equals( "ImgIcon" ) ||
             cname.equals( "KJgroup" ) ) {
               Object c = comps.get(j);
@@ -12728,6 +13340,7 @@ gui.buttonreset();
           cname.equals( "ImgIcon" ) ||
           cname.equals( "textfile" ) ||
           cname.equals( "imagefile" ) ||
+          cname.equals( "binfile" ) ||
           cname.equals( "codeclip" ) ){
             Object c = comps.get(j);
             int y =  parseInt( xml.属性値( c, "y0" ) );
@@ -12743,6 +13356,7 @@ gui.buttonreset();
             cname.equals( "ImgIcon" ) ||
             cname.equals( "textfile" ) ||
             cname.equals( "imagefile" ) ||
+            cname.equals( "binfile" ) ||
             cname.equals( "codeclip" ) ) {
               Object c = comps.get(j);
               xml.属性値をセット( c, "y0", "" + ( parseInt( xml.属性値( c, "y0" ) ) - MoveStep ) );
@@ -12771,6 +13385,7 @@ gui.buttonreset();
           cname.equals( "codeclip" ) ||
           cname.equals( "textfile" ) ||
           cname.equals( "imagefile" ) ||
+          cname.equals( "binfile" ) ||
           cname.equals( "ImgIcon" ) ||
           cname.equals( "KJgroup" ) ) {
             Object c = comps.get(j);
@@ -12793,6 +13408,7 @@ gui.buttonreset();
           cname.equals( "ImgIcon" ) ||
           cname.equals( "textfile" ) ||
           cname.equals( "imagefile" ) ||
+          cname.equals( "binfile" ) ||
           cname.equals( "codeclip" )){
             Object c = comps.get(j);
             xml.属性値をセット( c, "y0", "" + ( parseInt( xml.属性値( c, "y0" ) ) + MoveStep ) );
@@ -12821,6 +13437,7 @@ gui.buttonreset();
           cname.equals( "codeclip" ) ||
           cname.equals( "textfile" ) ||
           cname.equals( "imagefile" ) ||
+          cname.equals( "binfile" ) ||
           cname.equals( "ImgIcon" ) ||
           cname.equals( "KJgroup" ) ) {
             Object c = comps.get(j);
@@ -12838,6 +13455,7 @@ gui.buttonreset();
             cname.equals( "codeclip" ) ||
             cname.equals( "textfile" ) ||
             cname.equals( "imagefile" ) ||
+            cname.equals( "binfile" ) ||
             cname.equals( "ImgIcon" ) ||
             cname.equals( "KJgroup" ) ) {
               Object c = comps.get(j);
@@ -12862,6 +13480,7 @@ gui.buttonreset();
           cname.equals( "ImgIcon" ) ||
           cname.equals( "textfile" ) ||
           cname.equals( "imagefile" ) ||
+          cname.equals( "binfile" ) ||
           cname.equals( "codeclip" )){
             Object c = comps.get(j);
             int x =  parseInt( xml.属性値( c, "x0" ) );
@@ -12877,6 +13496,7 @@ gui.buttonreset();
             cname.equals( "ImgIcon" ) ||
             cname.equals( "textfile" ) ||
             cname.equals( "imagefile" ) ||
+            cname.equals( "binfile" ) ||
             cname.equals( "codeclip" )){
               Object c = comps.get(j);
               xml.属性値をセット( c, "x0", "" + ( parseInt( xml.属性値( c, "x0" ) ) - MoveStep ) );
@@ -12905,6 +13525,7 @@ gui.buttonreset();
           cname.equals( "codeclip" ) ||
           cname.equals( "textfile" ) ||
           cname.equals( "imagefile" ) ||
+          cname.equals( "binfile" ) ||
           cname.equals( "ImgIcon" ) ||
           cname.equals( "KJgroup" ) ) {
             Object c = comps.get(j);
@@ -12927,6 +13548,7 @@ gui.buttonreset();
           cname.equals( "ImgIcon" ) ||
           cname.equals( "textfile" ) ||
           cname.equals( "imagefile" ) ||
+          cname.equals( "binfile" ) ||
           cname.equals( "codeclip" )){
             Object c = comps.get(j);
             xml.属性値をセット( c, "x0", "" + ( parseInt( xml.属性値( c, "x0" ) ) + MoveStep ) );
@@ -13637,6 +14259,21 @@ gui.buttonreset();
         return new String(tbyte);
       }
   
+      // 画像からバイト列を生成
+      public String bin2text( byte[] sbyte ){
+        int i, j;
+        if(sbyte == null) return "";
+        int n = sbyte.length;
+        if( n == 0 ) return "";
+        byte[] tbyte = new byte[ n * 2 + n / 32 ];
+        for( i = j = 0; i < n; i++ ){
+          tbyte[j++] = (byte)(((int)sbyte[i] & 0x0f) + (int)'a' ); 
+          tbyte[j++] = (byte)((((int)sbyte[i] >> 4) & 0x0f) + (int)'a' ); 
+          if( (i&31)==31 ) tbyte[j++] = (byte)'\n';
+        }
+        return new String(tbyte);
+      }
+  
       // テキストから画像を生成
       public BufferedImage text2image( String txt ){
          BufferedImage img = null;
@@ -13657,6 +14294,22 @@ gui.buttonreset();
         return img;
       }
   
+      // テキストからバイト列を生成
+      public byte[] text2bin( String txt ){
+         int i =0,j =0;
+         if( txt == null || txt.equals("") ) return null;
+		 byte[] sbyte = txt.getBytes();
+         int nn = sbyte.length;
+         if( nn == 0 ) return null;
+         int n = nn * 32 / 65;
+		 byte[] tbyte = new byte[ n ];
+		 for( i = j = 0; i < n; i++ ){
+           tbyte[i] = (byte)( ((int)sbyte[j++]-(int)'a') | (((int)sbyte[j++]-(int)'a')<<4) );
+           if( sbyte[j] == (byte)'\n' ) j++;
+         }
+        return tbyte;
+      }
+  
       // 画像を保存する
       public void save_xml_image( Object element ){
         try{
@@ -13667,6 +14320,17 @@ gui.buttonreset();
         }catch(Exception e){}
       }
 
+      // バイナリファイルを保存する
+      public void save_xml_bin( Object element ){
+        try{
+          String fname = xml.属性値( element, "fpath" );		  
+          byte[] bin = text2bin( xml.属性値( element, "bin" ) );
+          FileOutputStream fout = new FileOutputStream(fname);
+          fout.write(bin);
+          fout.flush();
+          fout.close();
+        }catch(Exception e){}
+      }
 }//~App1
 
 
