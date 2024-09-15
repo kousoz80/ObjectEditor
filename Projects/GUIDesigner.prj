@@ -38354,9 +38354,10 @@ c=(Component)b;
 <outpinwidth>40</outpinwidth>
 <outpinheight>20</outpinheight>
 <inpinlinkcount>1</inpinlinkcount>
-<description>プロパティを
-取得する</description>
-<codetext>cnt = (Container)c;
+<description></description>
+<codetext>// プロパティを
+// 取得する
+cnt = (Container)c;
 </codetext>
 </operation>
 <pin>
@@ -38397,9 +38398,10 @@ c=(Component)b;
 <outpinwidth>96</outpinwidth>
 <outpinheight>20</outpinheight>
 <inpinlinkcount>1</inpinlinkcount>
-<description>プロパティを
-出力する</description>
-<codetext>c=cnt;
+<description></description>
+<codetext>// プロパティを
+// 出力する
+c=cnt;
 </codetext>
 </operation>
 <pin>
@@ -66960,9 +66962,9 @@ for( i=cnt.getComponentCount()-1;i&gt;=0;i--){
 
     }
 
-    if(lbl.super_class[AppTyp].equals(&quot;SurfaceView&quot;)){ 
+    else{ 
       String name = lbl.getName();
-      if( name == null || name.equals(&quot;&quot;) ) name = &quot;SUR&quot;+ i;
+      if( name == null || name.equals(&quot;&quot;) ) name = &quot;XLBL&quot;+ i;
 
       int x0 = lbl.getX();
       int y0 = lbl.getY();
@@ -66978,9 +66980,8 @@ for( i=cnt.getComponentCount()-1;i&gt;=0;i--){
       guiconstruct.append( &quot; I&quot; + name + &quot; = new &quot; + name + &quot;();\n&quot; );
       guiconstruct.append( &quot; I&quot; + name  + &quot;.setLayoutParams( new AbsoluteLayout.LayoutParams( (int)(scale*&quot; + wid + &quot;),(int)(scale*&quot; + hei + &quot;),(int)(scale*&quot; + x0 + &quot;),(int)(scale*&quot; + y0 +&quot;)));\n&quot; );
       guiconstruct.append( &quot; layout.addView( I&quot; + name + &quot; );\n&quot; );
-      if( lbl.print_created_pin)  xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_P&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_created(SurfaceView s)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
+      if( lbl.print_created_pin)  xml = xml + &quot;&lt;pin&gt;&lt;ID&gt;_P&quot; + name + &quot;&lt;/ID&gt;&lt;x0&gt;0&lt;/x0&gt;&lt;y0&gt;&quot; + (j*28+110) + &quot;&lt;/y0&gt;&lt;width&gt;200&lt;/width&gt;&lt;height&gt;26&lt;/height&gt;&lt;text&gt;&quot; + name + &quot;_created(&quot; + lbl.super_class[AppTyp] + &quot; l)&lt;/text&gt;&lt;px&gt;0&lt;/px&gt;&lt;py&gt;&quot; + ((j++)*18+72) + &quot;&lt;/py&gt;&lt;/pin&gt;\n&quot;;
     }
-
   }
 
   if( cnt.getComponent(i) instanceof JButton ){
@@ -73720,6 +73721,13 @@ int main( int argc, char** argv ){
 <ImportFiles9></ImportFiles9>
 <ProgramStartupCode9></ProgramStartupCode9>
 <NativeHelpCommand9></NativeHelpCommand9>
+<BinEditCommand></BinEditCommand>
+<CompileCommand10></CompileCommand10>
+<RunCommand10></RunCommand10>
+<GUIDesignerCommand10></GUIDesignerCommand10>
+<ImportFiles10></ImportFiles10>
+<ProgramStartupCode10></ProgramStartupCode10>
+<NativeHelpCommand10></NativeHelpCommand10>
 </プロパティ>
 <codeclip>
 <ID>_C2</ID>
